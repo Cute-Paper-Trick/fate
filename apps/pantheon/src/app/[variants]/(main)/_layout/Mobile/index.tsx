@@ -1,5 +1,5 @@
 import { PropsWithChildren, memo } from 'react';
-import { Flexbox } from 'react-layout-kit/lib/Flexbox';
+import { Flexbox } from 'react-layout-kit';
 
 const Layout = memo<PropsWithChildren>(({ children }) => {
   return (

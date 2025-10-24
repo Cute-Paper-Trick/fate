@@ -22,6 +22,7 @@
     "nuqs": "^2.7.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hotkeys-hook": "^5.2.1",
     "react-layout-kit": "^2.0.0",
     "react-scan": "^0.4.3",
     "resolve-accept-language": "^3.1.13",
