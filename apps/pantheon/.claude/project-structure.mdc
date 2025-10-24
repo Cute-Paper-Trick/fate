@@ -1,0 +1,234 @@
+---
+description: Pantheon 项目结构和开发规范
+globs: ["apps/pantheon/**/*"]
+alwaysApply: false
+---
+
+# Pantheon 项目结构
+
+Pantheon 是 Fate monorepo 中的主要 Next.js 15 应用，采用 App Router 架构。
+
+## 技术栈
+
+- Next.js 15.5.6 (使用 Turbopack)
+- React 19.1.0
+- TypeScript 5
+- Ant Design 5.27.6 + antd-style
+- @lobehub/ui 组件库
+- Sentry 错误监控
+- Tolgee 国际化
+- React Query (TanStack Query)
+
+## 项目结构
+
+```
+apps/pantheon/
+├── src/
+│   ├── app/                      # Next.js App Router
+│   │   ├── [variants]/          # 动态路由变体 (locale__isMobile__theme)
+│   │   │   ├── layout.tsx       # 主应用布局（包含 GlobalProvider、AuthProvider）
+│   │   │   ├── (main)/          # 主应用路由组
+│   │   │   │   ├── _layout/     # 响应式布局组件
+│   │   │   │   │   ├── Desktop/ # 桌面端布局
+│   │   │   │   │   └── Mobile/  # 移动端布局
+│   │   │   │   ├── layout.tsx   # 主应用子布局
+│   │   │   │   └── page.tsx     # 首页
+│   │   │   └── (auth)/          # 认证路由组（变体内）
+│   │   │       ├── layout.tsx   # 认证布局
+│   │   │       └── login/       # 登录页（变体内）
+│   │   ├── login/               # 登录页（独立，不含变体）
+│   │   ├── register/            # 注册页（独立，不含变体）
+│   │   ├── global-error.tsx     # 全局错误处理
+│   │   ├── globals.css          # 全局样式
+│   │   └── manifest.ts          # PWA manifest
+│   ├── components/              # 通用组件
+│   │   └── server/              # 服务器组件
+│   ├── layout/                  # 布局 Provider 组件
+│   │   ├── GlobalProvider/      # 全局 Provider (React Query, Theme 等)
+│   │   └── AuthProvider/        # 认证 Provider
+│   │       └── BetterAuth/      # Better Auth 配置
+│   ├── libs/                    # 第三方库封装
+│   │   └── tolgee/              # Tolgee 国际化配置
+│   ├── locales/                 # 国际化资源
+│   │   └── resources.ts         # 语言资源定义
+│   ├── utils/                   # 工具函数
+│   │   ├── locale.ts            # 语言解析工具
+│   │   └── server/              # 服务端专用工具
+│   │       └── routeVariants.ts # 路由变体处理
+│   ├── const/                   # 常量定义
+│   │   ├── locale.ts            # 语言常量
+│   │   └── theme.ts             # 主题常量
+│   ├── envs/                    # 环境变量配置 (@t3-oss/env-nextjs)
+│   │   └── app.ts               # 应用环境变量
+│   ├── config/                  # 配置文件
+│   ├── types/                   # TypeScript 类型定义
+│   │   └── next.ts              # Next.js 相关类型
+│   ├── styles/                  # 样式文件
+│   └── middleware.ts            # Next.js 中间件（路由变体处理）
+├── public/                      # 静态资源
+├── certificates/                # SSL 证书（开发环境 HTTPS）
+├── .claude/                     # Claude AI 规则
+│   ├── project-structure.mdc    # 项目结构说明
+│   └── rules/                   # 规则文件
+│       ├── cursor-ux.mdc        # Cursor IDE 输出优化
+│       └── route-variants.mdc   # 路由变体系统说明
+├── .vscode/                     # VS Code 配置
+├── next.config.ts               # Next.js 配置（含 Sentry）
+├── tsconfig.json                # TypeScript 配置
+├── eslint.config.mjs            # ESLint 配置
+└── package.json                 # 包依赖和脚本
+```
+
+## 核心架构
+
+### 路由变体系统
+
+Pantheon 使用自定义的路由变体系统来统一处理多语言、主题和设备类型。
+
+- 变体格式: `[locale]__[isMobile]__[theme]`（如 `zh-CN__0__dark`）
+- 中间件自动解析用户偏好并重写 URL
+- 详细说明见: `.claude/rules/route-variants.mdc`
+
+### 环境变量管理
+
+使用 `@t3-oss/env-nextjs` 进行类型安全的环境变量管理：
+
+- 配置位置: `src/envs/app.ts`
+- 使用 Zod 进行验证
+- 区分 server/client/shared 环境变量
+
+示例:
+```typescript
+export const appEnv = createEnv({
+  server: {
+    MIDDLEWARE_REWRITE_THROUGH_LOCAL: z.boolean().default(true),
+  },
+  runtimeEnv: {
+    MIDDLEWARE_REWRITE_THROUGH_LOCAL: process.env.MIDDLEWARE_REWRITE_THROUGH_LOCAL === '1',
+  },
+});
+```
+
+### 国际化 (i18n)
+
+- 使用 Tolgee 进行国际化管理
+- 配置位置: `src/libs/tolgee/`
+- 资源文件: `src/locales/resources.ts`
+- 常量定义: `src/const/locale.ts`
+
+### 主题系统
+
+- 基于 antd-style 的主题系统
+- 支持 light/dark 模式
+- 常量定义: `src/const/theme.ts`
+- 通过路由变体和 Cookie 持久化主题偏好
+
+### 认证系统
+
+- 使用 Better Auth (配置在 `src/layout/AuthProvider/BetterAuth/`)
+- 登录页面: `src/app/login/`
+- 注册页面: `src/app/register/`
+
+### 错误监控
+
+- Sentry 集成 (配置在 `next.config.ts`)
+- 隧道路由: `/monitoring`
+- 自动上传 source maps (生产环境)
+
+## 开发规范
+
+### 路径别名
+
+使用 `@/` 别名指向 `src/` 目录：
+
+```typescript
+import { appEnv } from '@/envs/app';
+import { Locales } from '@/locales/resources';
+```
+
+### 组件组织
+
+- Server Components: `src/components/server/`
+- Client Components: `src/components/`
+- 布局组件: `src/layout/`
+- 页面布局: `src/app/[variants]/(main)/_layout/`
+
+### 路由组
+
+使用 Next.js 路由组 `()` 组织路由：
+
+- `(main)`: 主应用路由
+- `(auth)`: 认证相关路由
+
+### 工具函数
+
+- 通用工具: `src/utils/`
+- 服务端专用: `src/utils/server/`
+
+### TypeScript
+
+- 严格模式启用
+- 类型定义放在 `src/types/`
+- 使用 `next-env.d.ts` 自动生成类型
+
+### 代码质量
+
+- ESLint: `@lobehub/lint` 配置
+- Prettier: 代码格式化
+- Stylelint: 样式检查
+
+## 开发命令
+
+```bash
+# 开发服务器 (端口 5090)
+pnpm dev
+
+# 构建生产版本
+pnpm build
+
+# 启动生产服务器
+pnpm start
+
+# 代码检查
+pnpm lint
+```
+
+## 最佳实践
+
+### 获取路由变体
+
+使用 `RouteVariants` 工具类获取用户偏好：
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+const locale = await RouteVariants.getLocale(props);
+const isMobile = await RouteVariants.getIsMobile(props);
+```
+
+详细 API 和用法见: `.claude/rules/route-variants.mdc`
+
+### 添加新环境变量
+
+1. 在 `src/envs/app.ts` 中定义变量和验证规则
+2. 在 `runtimeEnv` 中映射 `process.env`
+3. 通过 `appEnv` 对象访问
+
+### 新增语言支持
+
+1. 在 `src/locales/resources.ts` 中添加语言资源
+2. 更新 `src/const/locale.ts` 中的语言列表
+3. 在 Tolgee 平台添加翻译
+
+### 布局适配
+
+- 桌面端布局: `src/app/[variants]/(main)/_layout/Desktop/`
+- 移动端布局: `src/app/[variants]/(main)/_layout/Mobile/`
+- 通过 `isMobile` 变体自动切换
+
+## 注意事项
+
+- 所有面向用户的路由都应在 `[variants]` 目录下
+- 中间件配置 (`middleware.ts`) 需要正确设置 matcher 以排除静态资源
+- 环境变量必须通过 `@t3-oss/env-nextjs` 访问，不要直接使用 `process.env`
+- 组件默认为 Server Component，需要客户端交互时添加 `'use client'`

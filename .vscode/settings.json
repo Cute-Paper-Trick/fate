@@ -1,0 +1,6 @@
+{
+  "prettier.requireConfig": true,
+  "prettier.resolveGlobalModules": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

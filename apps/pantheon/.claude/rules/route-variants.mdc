@@ -1,0 +1,466 @@
+---
+description: Pantheon 路由变体系统设计与使用规范
+globs: ["apps/pantheon/src/middleware.ts", "apps/pantheon/src/utils/server/routeVariants.ts", "apps/pantheon/src/app/[variants]/**/*"]
+alwaysApply: false
+---
+
+# 路由变体系统 (Route Variants)
+
+Pantheon 使用自定义的路由变体系统来处理多语言、主题和设备类型的统一管理，通过 URL 路径编码用户偏好。
+
+## 核心概念
+
+### 变体格式
+
+路由变体使用紧凑的字符串格式编码三个维度的用户偏好：
+
+```
+[locale]__[isMobile]__[theme]
+```
+
+- `locale`: 语言代码（如 `zh-CN`, `en-US`）
+- `isMobile`: 设备类型（`0` = 桌面端，`1` = 移动端）
+- `theme`: 主题模式（`light`, `dark`）
+- 分隔符: 双下划线 `__`
+
+**示例**:
+- `zh-CN__0__dark` - 简体中文、桌面端、深色主题
+- `en-US__1__light` - 英文、移动端、浅色主题
+- `ja-JP__0__light` - 日文、桌面端、浅色主题
+
+### 变体接口
+
+```typescript
+interface IRouteVariants {
+  locale: Locales;        // 语言（zh-CN, en-US, ja-JP 等）
+  isMobile: boolean;      // 是否移动端
+  theme: ThemeAppearance; // 主题（light, dark）
+}
+```
+
+### 默认配置
+
+```typescript
+const DEFAULT_VARIANTS: IRouteVariants = {
+  locale: 'zh-CN',  // 默认简体中文
+  isMobile: false,  // 默认桌面端
+  theme: 'light',   // 默认浅色主题
+};
+```
+
+## 架构设计
+
+### URL 重写流程
+
+```
+用户访问 URL          中间件处理              实际路由
+─────────────        ─────────────          ─────────────
+/                 →  解析用户偏好  →        /zh-CN__0__dark
+/settings         →  添加变体前缀  →        /zh-CN__0__dark/settings
+/profile          →  添加变体前缀  →        /zh-CN__1__light/profile
+```
+
+### 中间件职责
+
+`src/middleware.ts` 负责：
+
+1. **解析用户偏好**（按优先级）:
+   - URL 参数 `?hl=zh-CN`（最高优先级）
+   - Cookie 中的语言和主题设置
+   - 浏览器 `Accept-Language` 头（回退选项）
+
+2. **检测设备类型**:
+   - 使用 `ua-parser-js` 解析 User-Agent
+   - 判断是否为移动设备
+
+3. **URL 重写**:
+   - 将变体前缀添加到路径
+   - 使用 `NextResponse.rewrite()` 透明重写
+
+### 核心 API
+
+`src/utils/server/routeVariants.ts` 提供的工具类：
+
+```typescript
+class RouteVariants {
+  // 序列化：对象 → 字符串
+  static serializeVariants(variants: IRouteVariants): string
+
+  // 反序列化：字符串 → 对象
+  static deserializeVariants(serialized: string): IRouteVariants
+
+  // 从 Next.js props 获取完整变体
+  static getVariantsFromProps(props: DynamicLayoutProps): Promise<IRouteVariants>
+
+  // 仅获取语言
+  static getLocale(props: DynamicLayoutProps): Promise<Locales>
+
+  // 仅获取设备类型
+  static getIsMobile(props: DynamicLayoutProps): Promise<boolean>
+
+  // 创建变体对象（支持部分覆盖默认值）
+  static createVariants(options?: Partial<IRouteVariants>): IRouteVariants
+}
+```
+
+## 使用指南
+
+### 在布局或页面中获取变体
+
+#### 获取完整变体信息
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+export default async function Layout(props: DynamicLayoutProps) {
+  const { locale, isMobile, theme } = await RouteVariants.getVariantsFromProps(props);
+
+  return (
+    <div data-theme={theme} data-mobile={isMobile}>
+      {/* 根据变体渲染内容 */}
+    </div>
+  );
+}
+```
+
+#### 仅获取语言
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+export default async function Page(props: DynamicLayoutProps) {
+  const locale = await RouteVariants.getLocale(props);
+
+  // 加载对应语言的内容
+  const content = await loadContent(locale);
+
+  return <div>{content}</div>;
+}
+```
+
+#### 仅获取设备类型
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+export default async function Layout(props: DynamicLayoutProps) {
+  const isMobile = await RouteVariants.getIsMobile(props);
+
+  // 根据设备类型选择布局
+  return isMobile ? <MobileLayout /> : <DesktopLayout />;
+}
+```
+
+### 创建和序列化变体
+
+#### 创建自定义变体
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+// 创建完整变体
+const variants = RouteVariants.createVariants({
+  locale: 'en-US',
+  isMobile: false,
+  theme: 'dark',
+});
+
+// 部分覆盖（其他使用默认值）
+const variants = RouteVariants.createVariants({
+  locale: 'ja-JP',
+  // isMobile: false (默认)
+  // theme: 'light' (默认)
+});
+```
+
+#### 序列化变体
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+const variants = {
+  locale: 'zh-CN',
+  isMobile: true,
+  theme: 'dark',
+};
+
+const serialized = RouteVariants.serializeVariants(variants);
+// 结果: "zh-CN__1__dark"
+
+// 可用于构建 URL
+const url = `/${serialized}/settings`;
+// 结果: "/zh-CN__1__dark/settings"
+```
+
+#### 反序列化变体
+
+```typescript
+import { RouteVariants } from '@/utils/server/routeVariants';
+
+const serialized = "en-US__0__light";
+const variants = RouteVariants.deserializeVariants(serialized);
+
+// 结果:
+// {
+//   locale: 'en-US',
+//   isMobile: false,
+//   theme: 'light'
+// }
+```
+
+### 在客户端组件中使用
+
+客户端组件无法直接访问 `params`，需要通过 props 传递：
+
+```typescript
+// app/[variants]/layout.tsx (Server Component)
+import { RouteVariants } from '@/utils/server/routeVariants';
+import ClientComponent from './ClientComponent';
+
+export default async function Layout(props: DynamicLayoutProps) {
+  const variants = await RouteVariants.getVariantsFromProps(props);
+
+  return <ClientComponent variants={variants} />;
+}
+
+// ClientComponent.tsx (Client Component)
+'use client';
+
+import { IRouteVariants } from '@/utils/server/routeVariants';
+
+interface Props {
+  variants: IRouteVariants;
+}
+
+export default function ClientComponent({ variants }: Props) {
+  const { locale, isMobile, theme } = variants;
+
+  return <div>Current locale: {locale}</div>;
+}
+```
+
+## 中间件配置
+
+### 用户偏好解析优先级
+
+```typescript
+// 1. URL 参数（最高优先级）
+const explicitLocale = url.searchParams.get('hl'); // ?hl=zh-CN
+
+// 2. Cookie
+const cookieLocale = request.cookies.get(APP_LOCALE_COOKIE)?.value;
+const cookieTheme = request.cookies.get(APP_THEME_APPEARANCE)?.value;
+
+// 3. 浏览器语言（回退）
+const browserLanguage = parseBrowserLanguage(request.headers);
+
+// 最终选择
+const locale = explicitLocale || cookieLocale || browserLanguage;
+```
+
+### 设备检测
+
+```typescript
+import { UAParser } from 'ua-parser-js';
+
+const ua = request.headers.get('user-agent');
+const device = new UAParser(ua || '').getDevice();
+const isMobile = device.type === 'mobile';
+```
+
+### 中间件匹配规则
+
+```typescript
+export const config = {
+  matcher: [
+    '/',
+    // 排除以下路径:
+    // - /api/* (API 路由)
+    // - /_next/static/* (静态文件)
+    // - /_next/image/* (图片优化)
+    // - /favicon.ico (图标)
+    // - /monitoring (Sentry 隧道)
+    // - /manifest.webmanifest (PWA manifest)
+  ],
+};
+```
+
+## 路由结构
+
+所有面向用户的路由都应该放在 `[variants]` 目录下：
+
+```
+src/app/
+├── [variants]/              # 动态变体路由
+│   ├── (main)/             # 主应用路由组
+│   │   ├── _layout/        # 布局组件
+│   │   │   ├── Desktop/    # 桌面端布局
+│   │   │   └── Mobile/     # 移动端布局
+│   │   ├── layout.tsx      # 主布局
+│   │   ├── page.tsx        # 首页
+│   │   └── settings/       # 设置页面
+│   └── (auth)/             # 认证路由组
+│       ├── layout.tsx
+│       └── ...
+├── login/                  # 登录页（独立于变体）
+├── register/               # 注册页（独立于变体）
+└── layout.tsx              # 根布局
+```
+
+## 最佳实践
+
+### DO - 推荐做法
+
+- 使用 `RouteVariants` 工具类的静态方法获取变体
+- 在服务端组件中直接获取变体，避免不必要的传递
+- 需要修改变体时，使用 Cookie 而非直接修改 URL
+- 添加新的变体维度时，更新 `IRouteVariants` 接口和序列化逻辑
+
+### DON'T - 避免做法
+
+- 不要手动解析 `params.variants` 字符串
+- 不要在客户端组件中尝试读取 `params`（需通过 props 传递）
+- 不要硬编码变体字符串（使用 `serializeVariants`）
+- 不要在 URL 中直接暴露完整的变体字符串给用户（中间件自动处理）
+
+## 扩展指南
+
+### 添加新的变体维度
+
+如需添加新的变体维度（如 `fontSize`），按以下步骤操作：
+
+1. **更新接口**:
+```typescript
+export interface IRouteVariants {
+  locale: Locales;
+  isMobile: boolean;
+  theme: ThemeAppearance;
+  fontSize: 'small' | 'medium' | 'large'; // 新增
+}
+```
+
+2. **更新序列化逻辑**:
+```typescript
+static serializeVariants = (variants: IRouteVariants): string => {
+  return [
+    variants.locale,
+    Number(variants.isMobile),
+    variants.theme,
+    variants.fontSize, // 新增
+  ].join(SPLITTER);
+};
+```
+
+3. **更新反序列化逻辑**:
+```typescript
+static deserializeVariants = (serialized: string): IRouteVariants => {
+  const [locale, isMobile, theme, fontSize] = serialized.split(SPLITTER);
+
+  return {
+    locale: this.isValidLocale(locale) ? locale : DEFAULT_VARIANTS.locale,
+    isMobile: isMobile === '1',
+    theme: this.isValidTheme(theme) ? theme : DEFAULT_VARIANTS.theme,
+    fontSize: this.isValidFontSize(fontSize) ? fontSize : DEFAULT_VARIANTS.fontSize,
+  };
+};
+```
+
+4. **更新中间件**:
+```typescript
+const getFontSize = (request: NextRequest) => {
+  return request.cookies.get('fontSize')?.value || 'medium';
+};
+```
+
+5. **更新默认配置**:
+```typescript
+export const DEFAULT_VARIANTS: IRouteVariants = {
+  locale: 'zh-CN',
+  isMobile: false,
+  theme: 'light',
+  fontSize: 'medium', // 新增
+};
+```
+
+## 相关常量
+
+### 语言常量
+
+定义在 `src/const/locale.ts`:
+```typescript
+export const DEFAULT_LANG = 'zh-CN';
+export const APP_LOCALE_COOKIE = 'app_locale';
+```
+
+### 主题常量
+
+定义在 `src/const/theme.ts`:
+```typescript
+export const APP_THEME_APPEARANCE = 'app_theme';
+```
+
+## 环境变量
+
+### MIDDLEWARE_REWRITE_THROUGH_LOCAL
+
+控制中间件重写方式：
+
+- `true`: 重写为完整 URL (`http://localhost:3000/zh-CN__0__dark`)
+- `false`: 重写为相对路径 (`/zh-CN__0__dark`)
+
+配置位置: `src/envs/app.ts`
+
+```typescript
+export const appEnv = createEnv({
+  server: {
+    MIDDLEWARE_REWRITE_THROUGH_LOCAL: z.boolean().default(true),
+  },
+  runtimeEnv: {
+    MIDDLEWARE_REWRITE_THROUGH_LOCAL: process.env.MIDDLEWARE_REWRITE_THROUGH_LOCAL === '1',
+  },
+});
+```
+
+## 调试
+
+### 启用调试日志
+
+使用 `debug` 包查看中间件执行日志：
+
+```bash
+DEBUG=middleware:* pnpm dev
+```
+
+日志输出示例：
+```
+middleware:default Processing request: GET http://localhost:5090/
+middleware:default User preferences: {
+  locale: 'zh-CN',
+  theme: 'dark',
+  deviceType: 'mobile',
+  browserLanguage: 'zh-CN',
+  hasCookies: { locale: true, theme: true }
+}
+middleware:default Serialized route variant: zh-CN__1__dark
+middleware:default URL rewrite: {
+  originalPathname: '/',
+  nextPathname: '/zh-CN__1__dark',
+  nextURL: '/zh-CN__1__dark',
+  isLocalRewrite: true
+}
+```
+
+## 性能考虑
+
+- 变体序列化/反序列化是轻量级操作
+- 中间件在每个请求时执行，需保持高效
+- 设备检测使用缓存的 UA Parser 实例
+- Cookie 读取比解析 Accept-Language 更快
+
+## 注意事项
+
+- 路由变体仅在服务端可用（Next.js Server Components）
+- 修改变体需要更新 Cookie 并刷新页面
+- 变体字符串不应直接暴露给终端用户（用于内部路由）
+- 确保所有变体维度都有有效的默认值
+- 验证函数应处理无效输入并回退到默认值
