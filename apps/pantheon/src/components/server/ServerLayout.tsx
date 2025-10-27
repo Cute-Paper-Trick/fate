@@ -36,12 +36,7 @@ const ServerLayout =
 
     const isMobile = await RouteVariants.getIsMobile(props);
 
-    return (
-      <>
-        <p>ServerLayout</p>
-        {isMobile ? <Mobile {...(res as T)} /> : <Desktop {...(res as T)} />}
-      </>
-    );
+    return <>{isMobile ? <Mobile {...(res as T)} /> : <Desktop {...(res as T)} />}</>;
   };
 
 export default ServerLayout;

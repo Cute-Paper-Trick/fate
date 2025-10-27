@@ -30,9 +30,7 @@ const RootLayout = async ({ children, params }: RootLayoutProps) => {
       </head>
       <body>
         <NuqsAdapter>
-          <p>RootLayout(app/[variants])</p>
           <GlobalProvider>
-            <p>{t('hello')}</p>
             {/* <AuthProvider> */}
             {children}
             {/* </AuthProvider> */}

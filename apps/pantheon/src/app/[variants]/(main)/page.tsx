@@ -37,7 +37,6 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <p>{t('app_name')}</p>
       <main className={styles.main}>
         <div className={styles.header}>
           <h1>欢迎回来, {session.user.name || session.user.email}!</h1>
