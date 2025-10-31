@@ -7,7 +7,7 @@ import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
 import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors/systemStatus';
+import { systemStatusSelectors } from '@/store/global/selectors';
 
 const AppNavigationDrawer = dynamic(() => import('./AppNavigationDrawer'), {
   ssr: false,

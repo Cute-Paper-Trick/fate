@@ -1,4 +1,4 @@
-import { Avatar, Header, Menu } from '@lobehub/ui';
+import { Header, Menu } from '@lobehub/ui';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -6,6 +6,7 @@ import Cerberus from '@/components/brand/Cerberus';
 import Pantheon from '@/components/brand/Pantheon';
 
 import BurgerButton from '../../../features/BurgerButton';
+import Avatar from './Avatar';
 
 const Nav = memo(() => {
   const menu = (
@@ -19,12 +20,6 @@ const Nav = memo(() => {
     />
   );
 
-  const actions = (
-    <>
-      <Avatar avatar="💩" />
-    </>
-  );
-
   const left = (
     <Flexbox as={'section'} horizontal align="center" gap={8}>
       <BurgerButton />
@@ -34,8 +29,8 @@ const Nav = memo(() => {
 
   return (
     <>
-      <Header actions={actions} logo={left} />
-      <Header actions={actions} logo={<Cerberus type={'combine'} />} nav={menu} />
+      <Header actions={<Avatar />} logo={left} />
+      <Header actions={<Avatar />} logo={<Cerberus type={'combine'} />} nav={menu} />
     </>
   );
 });

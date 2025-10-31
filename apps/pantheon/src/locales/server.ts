@@ -3,22 +3,20 @@
 import { createServerInstance, detectLanguageFromHeaders } from '@tolgee/react/server';
 import { cookies, headers } from 'next/headers';
 
-import { DEFAULT_LANG } from '@/const/locale';
+import { APP_LOCALE_COOKIE, DEFAULT_LANG } from '@/const/locale';
 
 import { ALL_LANGUAGES, createTolgee } from './tolgee';
 
-const LANGUAGE_COOKIE = 'NEXT_LOCALE';
-
 export async function setLanguage(locale: string) {
   const cookieStore = await cookies();
-  cookieStore.set(LANGUAGE_COOKIE, locale, {
+  cookieStore.set(APP_LOCALE_COOKIE, locale, {
     maxAge: 1000 * 60 * 60 * 24 * 365, // one year in milisecods
   });
 }
 
 export async function getLanguage() {
   const cookieStore = await cookies();
-  const locale = cookieStore.get(LANGUAGE_COOKIE)?.value;
+  const locale = cookieStore.get(APP_LOCALE_COOKIE)?.value;
   if (locale && ALL_LANGUAGES.includes(locale)) {
     return locale;
   }

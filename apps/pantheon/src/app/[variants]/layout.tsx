@@ -2,7 +2,6 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactNode } from 'react';
 
 import GlobalProvider from '@/layout/GlobalProvider';
-import { getTranslate } from '@/locales/server';
 import { DynamicLayoutProps } from '@/types/next';
 import { RouteVariants } from '@/utils/server/routeVariants';
 
@@ -17,9 +16,9 @@ const RootLayout = async ({ children, params }: RootLayoutProps) => {
   const { locale, isMobile, theme, primaryColor, neutralColor } =
     RouteVariants.deserializeVariants(variants);
 
-  const direction = 'ltr';
+  console.log('>>>>>>>>', locale, isMobile, theme);
 
-  const t = await getTranslate();
+  const direction = 'ltr';
 
   return (
     <html dir={direction} lang={locale}>

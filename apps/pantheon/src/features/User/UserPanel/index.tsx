@@ -1,3 +1,5 @@
+'use client';
+
 import { Popover } from 'antd';
 import { PropsWithChildren, memo, useState } from 'react';
 
@@ -9,7 +11,7 @@ const UserPanel = memo<PropsWithChildren>(({ children }) => {
   return (
     <Popover
       arrow={false}
-      placement="topRight"
+      placement="bottomRight"
       open={open}
       onOpenChange={setOpen}
       styles={{

@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors/systemStatus';
+import { systemStatusSelectors } from '@/store/global/selectors';
 
 import NavCategory from './NavCategory';
 

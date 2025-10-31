@@ -1,7 +1,12 @@
+import { ThemeMode } from 'antd-style';
+
+import { LocaleMode } from '@/types/locale';
 import { AsyncLocalStorage } from '@/utils/localStorage';
 
 export interface SystemStatus {
   showAppPanel: boolean;
+  language?: LocaleMode;
+  themeMode?: ThemeMode;
 }
 
 export const INITIAL_STATUS = {

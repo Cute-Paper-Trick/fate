@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { memo } from 'react';
 
+import '@/styles/globals.css';
+
 export interface AppThemeProps {
   children?: React.ReactNode;
 }
