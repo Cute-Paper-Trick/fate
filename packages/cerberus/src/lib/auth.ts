@@ -14,6 +14,9 @@ import { authEnv } from "@/envs/auth";
 import { db } from "./db";
 
 export const auth = betterAuth({
+  advanced: {
+    cookiePrefix: 'fate'
+  },
   baseURL: authEnv.BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: "pg",

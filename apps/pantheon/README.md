@@ -41,8 +41,9 @@ src/app
 
 # check
 
-- [ ] publicRoutes protectedRoutes AdminRoutes
-- [ ] login logout redirect
+- [x] publicRoutes protectedRoutes AdminRoutes
+- [ ] login redirect
+- [ ] logout redirect
 - [ ] navigate
 - [ ] i18n
 - [ ] session management
