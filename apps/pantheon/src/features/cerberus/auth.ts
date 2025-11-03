@@ -16,7 +16,7 @@ import { authEnv } from '@/envs/cerberus';
 import { db } from './db';
 
 export const auth = betterAuth({
-  // baseURL: authEnv.BETTER_AUTH_URL,
+  baseURL: authEnv.NEXT_PUBLIC_BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: 'pg',
     usePlural: true,
@@ -25,10 +25,10 @@ export const auth = betterAuth({
     cookiePrefix: 'fate',
     crossSubDomainCookies: {
       enabled: true,
-      domains: ['localhost'],
+      domains: ['.vercel.app', '.chieh.ren', 'localhost'],
     },
   },
-  trustedOrigins: ['http://localhost:5090'],
+  trustedOrigins: [authEnv.APP_URL, 'http://localhost:5090'],
   emailAndPassword: {
     enabled: true,
   },
@@ -46,8 +46,8 @@ export const auth = betterAuth({
     nextCookies(),
     jwt({
       jwt: {
-        issuer: 'http://localhost:5090',
-        audience: 'http://localhost:5090',
+        issuer: authEnv.APP_URL,
+        audience: authEnv.APP_URL,
       },
     }),
     apiKey({

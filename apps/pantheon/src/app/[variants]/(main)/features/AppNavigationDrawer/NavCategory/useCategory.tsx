@@ -49,7 +49,7 @@ export const useCategory = ({ mobile }: UseCategoryOptions = {}) => {
           label: t('funcs.settings'),
         },
       ].filter(Boolean) as MenuProps['items'],
-    [t],
+    [t, iconSize, isAdmin],
   );
 
   return cateItems;
