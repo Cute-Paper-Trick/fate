@@ -58,15 +58,7 @@ export const createAuthSlice: StateCreator<
       const { data } = await authClient.getSession();
 
       if (data?.session && data?.user) {
-        const fateUser: FateUser = {
-          id: data.user.id,
-          username: data.user.name,
-          email: data.user.email,
-          avatar: data.user.image || undefined,
-          nickname: data.user.name,
-        };
-
-        set({ isSignedIn: true, user: fateUser, session: data.session });
+        set({ isSignedIn: true, user: data.user, session: data });
       } else {
         set({ isSignedIn: false, user: undefined, session: null });
       }

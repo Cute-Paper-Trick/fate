@@ -7,10 +7,10 @@ import { RouteVariants } from '@/utils/server/routeVariants';
 
 interface RootLayoutProps extends DynamicLayoutProps {
   children: ReactNode;
-  modal: ReactNode;
+  modal?: ReactNode;
 }
 
-const RootLayout = async ({ children, params }: RootLayoutProps) => {
+const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
   const { variants } = await params;
 
   const { locale, isMobile, theme, primaryColor, neutralColor } =
@@ -32,6 +32,7 @@ const RootLayout = async ({ children, params }: RootLayoutProps) => {
           <GlobalProvider>
             {/* <AuthProvider> */}
             {children}
+            {modal}
             {/* </AuthProvider> */}
           </GlobalProvider>
           {/* <Analytics /> */}

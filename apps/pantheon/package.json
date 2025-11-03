@@ -59,6 +59,7 @@
     "@lobehub/lint": "^1.26.2",
     "@redux-devtools/extension": "^3.3.0",
     "@types/debug": "^4.1.12",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

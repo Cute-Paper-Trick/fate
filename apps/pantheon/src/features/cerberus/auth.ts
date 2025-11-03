@@ -16,7 +16,7 @@ import { authEnv } from '@/envs/cerberus';
 import { db } from './db';
 
 export const auth = betterAuth({
-  baseURL: authEnv.BETTER_AUTH_URL,
+  // baseURL: authEnv.BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: 'pg',
     usePlural: true,
