@@ -11,12 +11,13 @@ import UserUpdater from './UserUpdater';
 
 function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-
   return (
     <AuthUIProvider
       authClient={authClient}
       navigate={router.push}
       replace={router.replace}
+      signUp={false}
+      credentials={{ username: true, rememberMe: true }}
       onSessionChange={() => {
         // Clear router cache (protected routes)
         router.refresh();

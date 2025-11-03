@@ -1,3 +1,5 @@
+APP_URL=http://localhost:5090
+
 SENTRY_AUTH_TOKEN=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
 
 # OAuth Providers (Optional)

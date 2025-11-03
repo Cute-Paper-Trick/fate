@@ -16,7 +16,7 @@ import { authEnv } from '@/envs/cerberus';
 import { db } from './db';
 
 export const auth = betterAuth({
-  baseURL: authEnv.NEXT_PUBLIC_BETTER_AUTH_URL,
+  baseURL: `${authEnv.APP_URL}/api/auth`,
   database: drizzleAdapter(db, {
     provider: 'pg',
     usePlural: true,
@@ -28,7 +28,12 @@ export const auth = betterAuth({
       domains: ['.vercel.app', '.chieh.ren', 'localhost'],
     },
   },
-  trustedOrigins: [authEnv.APP_URL, 'http://localhost:5090'],
+  trustedOrigins: [
+    authEnv.APP_URL,
+    'http://localhost:5090',
+    'http://localhost:3000',
+    'https://fate-pantheon.chieh.ren',
+  ],
   emailAndPassword: {
     enabled: true,
   },

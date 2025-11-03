@@ -2,10 +2,21 @@ import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  crossOrigin: 'anonymous',
   experimental: {
     authInterrupts: true,
   },
   serverExternalPackages: ['require-in-the-middle'],
+  // async rewrites() {
+  //   const rewrites = [];
+  //   // 开发环境：代理外部 API（如模型服务）
+  //   rewrites.push({
+  //     source: '/external/:path*',
+  //     destination: `${'http://192.168.124.10:8002'}/:path*`,
+  //   });
+
+  //   return rewrites;
+  // },
 };
 
 const withSentry = withSentryConfig(nextConfig, {

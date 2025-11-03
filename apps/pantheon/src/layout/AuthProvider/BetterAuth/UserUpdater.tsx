@@ -5,12 +5,9 @@ import { createStoreUpdater } from 'zustand-utils';
 
 import { useSession } from '@/features/cerberus/client';
 import { useUserStore } from '@/store/user';
-import { FateUser } from '@/types/user';
 
 const UserUpdater = () => {
   const { data: session, isPending: isLoading } = useSession();
-
-  console.log('>>>>>>>>>', session);
 
   const isSignedIn = (!!session && !!session.user) || false;
 
