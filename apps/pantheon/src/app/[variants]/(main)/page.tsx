@@ -3,8 +3,11 @@
 import { useEffect } from 'react';
 
 import { authClient, useSession } from '@/features/cerberus/client';
+// import { $api } from '@/lib/api';
+import { paths } from '@/types/api/schema';
 
 export default function Home() {
+  // const { data } = $api.useQuery('post', '/api/model/list', {});
   useEffect(() => {
     const fetchToken = async () => {
       const token = await authClient.token();
@@ -16,6 +19,8 @@ export default function Home() {
           Authorization: `Bearer ${token.data?.token}`,
         },
       });
+      const data: paths['/api/model/list']['post']['responses']['200']['content']['application/json'] =
+        await res.json();
 
       console.log(res);
     };
