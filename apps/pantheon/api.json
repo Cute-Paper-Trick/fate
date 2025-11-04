@@ -1,0 +1,4812 @@
+{
+  "components": {
+    "schemas": {
+      "v1.AccountAvatarReq": {
+        "properties": {
+          "file": {
+            "format": "binary",
+            "type": "string"
+          }
+        },
+        "required": ["file"],
+        "type": "object"
+      },
+      "v1.AccountAvatarRes": {
+        "properties": {
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["avatar"],
+        "type": "object"
+      },
+      "v1.AccountChangeNicknameReq": {
+        "properties": {
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["nickname"],
+        "type": "object"
+      },
+      "v1.AccountChangeNicknameRes": {
+        "properties": {
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["nickname"],
+        "type": "object"
+      },
+      "v1.AccountChangePasswordReq": {
+        "properties": {
+          "old_password": {
+            "format": "string",
+            "type": "string"
+          },
+          "new_password": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["old_password", "new_password"],
+        "type": "object"
+      },
+      "v1.AccountChangePasswordRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountDeviceListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountDeviceListRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.DeviceInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.DeviceInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.DeviceInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "device": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "device", "created_at"],
+        "type": "object"
+      },
+      "v1.AccountGetPermissionsReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountGetPermissionsRes": {
+        "properties": {
+          "permissions": {
+            "format": "[]consts.PermissionType",
+            "items": {
+              "enum": [
+                "account/*",
+                "customer/*",
+                "fee_config/*",
+                "fee_detail/*",
+                "product/forbid",
+                "product/hts_code_to_name",
+                "product/match",
+                "product/name_to_hts_code",
+                "product/optimize",
+                "recharge_admin/*",
+                "role/*",
+                "system/*",
+                "task/*",
+                "user/*"
+              ],
+              "format": "consts.PermissionType",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["permissions"],
+        "type": "object"
+      },
+      "v1.AccountInfoReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountInfoRes": {
+        "properties": {
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "token": {
+            "format": "string",
+            "type": "string"
+          },
+          "expire_in": {
+            "format": "int",
+            "type": "integer"
+          },
+          "is_manager": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "change_password": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "tag": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account",
+          "nickname",
+          "user_id",
+          "token",
+          "expire_in",
+          "is_manager",
+          "change_password",
+          "tag"
+        ],
+        "type": "object"
+      },
+      "v1.AccountLoginReq": {
+        "properties": {
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "password": {
+            "format": "string",
+            "type": "string"
+          },
+          "device": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["account", "password", "device"],
+        "type": "object"
+      },
+      "v1.AccountLoginRes": {
+        "properties": {
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "token": {
+            "format": "string",
+            "type": "string"
+          },
+          "expire_in": {
+            "format": "int",
+            "type": "integer"
+          },
+          "is_manager": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "change_password": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "tag": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account",
+          "nickname",
+          "user_id",
+          "token",
+          "expire_in",
+          "is_manager",
+          "change_password",
+          "tag"
+        ],
+        "type": "object"
+      },
+      "v1.AccountLogoutReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountLogoutRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountProfileReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountProfileRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          },
+          "register_time": {
+            "format": "string",
+            "type": "string"
+          },
+          "last_login_time": {
+            "format": "string",
+            "type": "string"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/v1.Stats",
+            "description": ""
+          },
+          "change_password": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "tag": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "account",
+          "nickname",
+          "avatar",
+          "register_time",
+          "last_login_time",
+          "stats",
+          "change_password",
+          "tag"
+        ],
+        "type": "object"
+      },
+      "v1.Stats": {
+        "properties": {
+          "topic_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "replay_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["topic_count", "replay_count", "like_count"],
+        "type": "object"
+      },
+      "v1.AccountTopicListReq": {
+        "properties": {
+          "status": {
+            "format": "consts.TopicStatus",
+            "type": "string"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.AccountTopicListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.TopicInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TopicInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.TopicInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "reply_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "content",
+          "status",
+          "created_at",
+          "updated_at",
+          "reply_count",
+          "like_count"
+        ],
+        "type": "object"
+      },
+      "v1.ChatCompletionsReq": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "messages": {
+            "format": "[]*v1.MessageInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.MessageInfo",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "message": {
+            "$ref": "#/components/schemas/v1.MessageInfo",
+            "description": ""
+          },
+          "temperature": {
+            "format": "float64",
+            "type": "number"
+          },
+          "maxTokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "search_model": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "image_model": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["messages"],
+        "type": "object"
+      },
+      "v1.MessageInfo": {
+        "properties": {
+          "role": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["role", "content"],
+        "type": "object"
+      },
+      "v1.ChatCompletionsRes": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "object": {
+            "format": "string",
+            "type": "string"
+          },
+          "created": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "system_fingerprint": {
+            "format": "string",
+            "type": "string"
+          },
+          "choices": {
+            "format": "[]*v1.ChoicesInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ChoicesInfo",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "usage": {
+            "$ref": "#/components/schemas/v1.UsageInfo",
+            "description": ""
+          }
+        },
+        "required": ["id", "object", "created", "model", "system_fingerprint", "choices", "usage"],
+        "type": "object"
+      },
+      "v1.ChoicesInfo": {
+        "properties": {
+          "index": {
+            "format": "int",
+            "type": "integer"
+          },
+          "message": {
+            "$ref": "#/components/schemas/v1.MessageInfo",
+            "description": ""
+          },
+          "logprobs": {
+            "format": "string",
+            "type": "string"
+          },
+          "finish_reason": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["index", "message", "logprobs", "finish_reason"],
+        "type": "object"
+      },
+      "v1.UsageInfo": {
+        "properties": {
+          "prompt_tokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "completion_tokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "total_tokens": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["prompt_tokens", "completion_tokens", "total_tokens"],
+        "type": "object"
+      },
+      "v1.ChatImageLimitStatusReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChatImageLimitStatusRes": {
+        "properties": {
+          "status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["status"],
+        "type": "object"
+      },
+      "v1.ChatListReq": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          },
+          "reference_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["session_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.ChatListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "reference_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.MessageHistoryInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.MessageHistoryInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "reference_id", "list"],
+        "type": "object"
+      },
+      "v1.MessageHistoryInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "index": {
+            "format": "int",
+            "type": "integer"
+          },
+          "message": {
+            "$ref": "#/components/schemas/v1.MessageInfo",
+            "description": ""
+          },
+          "status": {
+            "format": "string",
+            "type": "string"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "chat_time": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "index", "message", "status", "model", "chat_time"],
+        "type": "object"
+      },
+      "v1.ChatSearchLimitStatusReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChatSearchLimitStatusRes": {
+        "properties": {
+          "status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["status"],
+        "type": "object"
+      },
+      "v1.ChatStopReq": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id"],
+        "type": "object"
+      },
+      "v1.ChatStopRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChatSynchronizeTokenReq": {
+        "properties": {
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "usage": {
+            "format": "[]*v1.Usage",
+            "items": {
+              "$ref": "#/components/schemas/v1.Usage",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["usage"],
+        "type": "object"
+      },
+      "v1.Usage": {
+        "properties": {
+          "prompt_tokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "completion_tokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "total_tokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "api_key_used": {
+            "format": "string",
+            "type": "string"
+          },
+          "action": {
+            "format": "string",
+            "type": "string"
+          },
+          "search_platform": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1.ChatSynchronizeTokenRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChatTokenLimitStatusReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChatTokenLimitStatusRes": {
+        "properties": {
+          "status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["status"],
+        "type": "object"
+      },
+      "v1.CommentLikeLikeReq": {
+        "properties": {
+          "comment_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["comment_id"],
+        "type": "object"
+      },
+      "v1.CommentLikeLikeRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.TopicCommentSubInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.TopicCommentSubInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "task_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "task_title": {
+            "format": "string",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "account_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "material": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/v1.CommentExtra",
+            "description": ""
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.CommentExtraAccount",
+            "description": ""
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "task_id",
+          "task_title",
+          "topic_id",
+          "root_comment_id",
+          "comment_id",
+          "account_id",
+          "content",
+          "material",
+          "created_at",
+          "account",
+          "nickname",
+          "extra",
+          "extra_account",
+          "avatar"
+        ],
+        "type": "object"
+      },
+      "v1.CommentExtra": {
+        "properties": {
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["like_count"],
+        "type": "object"
+      },
+      "v1.CommentExtraAccount": {
+        "properties": {
+          "like_status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["like_status"],
+        "type": "object"
+      },
+      "v1.CommentLikeUnLikeReq": {
+        "properties": {
+          "comment_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["comment_id"],
+        "type": "object"
+      },
+      "v1.CommentLikeUnLikeRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.TopicCommentSubInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.CommonAddUserReq": {
+        "properties": {
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "password": {
+            "format": "string",
+            "type": "string"
+          },
+          "email": {
+            "format": "string",
+            "type": "string"
+          },
+          "phone": {
+            "format": "string",
+            "type": "string"
+          },
+          "code": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["name", "password", "email", "phone", "code"],
+        "type": "object"
+      },
+      "v1.CommonAddUserRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CommonBatchAddUserReq": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_list": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["code", "user_list"],
+        "type": "object"
+      },
+      "v1.CommonBatchAddUserRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CommonResetDeviceReq": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_list": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["code", "user_list"],
+        "type": "object"
+      },
+      "v1.CommonResetDeviceRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CommonResetPasswordReq": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_list": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["code", "user_list"],
+        "type": "object"
+      },
+      "v1.CommonResetPasswordRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CommonSignStsReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CommonSignStsRes": {
+        "properties": {
+          "accessKeyId": {
+            "description": "AccessKeyId",
+            "format": "string",
+            "type": "string"
+          },
+          "accessKeySecret": {
+            "description": "AccessKeySecret",
+            "format": "string",
+            "type": "string"
+          },
+          "stsToken": {
+            "description": "STS临时凭证",
+            "format": "string",
+            "type": "string"
+          },
+          "expiration": {
+            "description": "凭证过期时间",
+            "format": "string",
+            "type": "string"
+          },
+          "bucket": {
+            "description": "存储桶名称",
+            "format": "string",
+            "type": "string"
+          },
+          "region": {
+            "description": "地域",
+            "format": "string",
+            "type": "string"
+          },
+          "secure": {
+            "description": "是否使用HTTPS",
+            "format": "bool",
+            "type": "boolean"
+          },
+          "OSSRegionEndPoint": {
+            "description": "存储服务的访问域名",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessKeyId",
+          "accessKeySecret",
+          "stsToken",
+          "expiration",
+          "bucket",
+          "region",
+          "secure",
+          "OSSRegionEndPoint"
+        ],
+        "type": "object"
+      },
+      "v1.CommonUploadReq": {
+        "properties": {
+          "files": {
+            "items": {
+              "format": "binary",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["files"],
+        "type": "object"
+      },
+      "v1.CommonUploadRes": {
+        "properties": {
+          "filename": {
+            "format": "*[]string",
+            "items": {
+              "format": "[]string",
+              "items": {
+                "format": "string",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["filename"],
+        "type": "object"
+      },
+      "v1.GuideListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.GuideListRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.GuideInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.GuideInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.GuideInfo": {
+        "properties": {
+          "step": {
+            "format": "int",
+            "type": "integer"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["step", "name", "content"],
+        "type": "object"
+      },
+      "v1.GuideReportReq": {
+        "properties": {
+          "step": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["step"],
+        "type": "object"
+      },
+      "v1.GuideReportRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ModelListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ModelListRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.ModelInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ModelInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.ModelInfo": {
+        "properties": {
+          "platform_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "platform": {
+            "format": "string",
+            "type": "string"
+          },
+          "model_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "platform_status": {
+            "format": "string",
+            "type": "string"
+          },
+          "platform_description": {
+            "format": "string",
+            "type": "string"
+          },
+          "series": {
+            "format": "string",
+            "type": "string"
+          },
+          "tag": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "platform_id",
+          "platform",
+          "model_id",
+          "model",
+          "platform_status",
+          "platform_description",
+          "series",
+          "tag"
+        ],
+        "type": "object"
+      },
+      "v1.ModelToolsSearchReq": {
+        "properties": {
+          "query": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["query"],
+        "type": "object"
+      },
+      "v1.ModelToolsSearchRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.ResultInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ResultInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.ResultInfo": {
+        "properties": {
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "url": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "parsed_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "engines": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "score": {
+            "format": "float64",
+            "type": "number"
+          },
+          "category": {
+            "format": "string",
+            "type": "string"
+          },
+          "published_date": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url",
+          "content",
+          "parsed_url",
+          "engines",
+          "score",
+          "category",
+          "published_date"
+        ],
+        "type": "object"
+      },
+      "v1.NotificationListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "type": {
+            "format": "consts.NotificationType",
+            "type": "string"
+          },
+          "status": {
+            "format": "consts.NotificationStatus",
+            "type": "string"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.NotificationListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "unread_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.NotificationInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.NotificationInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "unread_count", "list"],
+        "type": "object"
+      },
+      "v1.NotificationInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "format": "consts.NotificationType",
+            "type": "string"
+          },
+          "related_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "consts.NotificationStatus",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "from_user": {
+            "$ref": "#/components/schemas/v1.AccountInfo",
+            "description": ""
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "related_id",
+          "title",
+          "content",
+          "status",
+          "created_at",
+          "from_user"
+        ],
+        "type": "object"
+      },
+      "v1.AccountInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "nickname", "avatar"],
+        "type": "object"
+      },
+      "v1.NotificationMarkReadReq": {
+        "properties": {
+          "notification_id_list": {
+            "format": "[]int64",
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "mark_all": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["notification_id_list", "mark_all"],
+        "type": "object"
+      },
+      "v1.NotificationMarkReadRes": {
+        "properties": {
+          "read_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "unread_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["read_count", "unread_count"],
+        "type": "object"
+      },
+      "v1.OuterAccountExistReq": {
+        "properties": {
+          "account": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["account"],
+        "type": "object"
+      },
+      "v1.OuterAccountExistRes": {
+        "properties": {
+          "is_exist": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["is_exist"],
+        "type": "object"
+      },
+      "v1.OuterExportReq": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["code"],
+        "type": "object"
+      },
+      "v1.OuterExportRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.PointsCreateLevelTypeReq": {
+        "properties": {
+          "level": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "levelUpPoints": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "v1.PointsCreateLevelTypeRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.PointsCreatePointDetailReq": {
+        "properties": {
+          "type": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "accountId": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "v1.PointsCreatePointDetailRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.PointsCreatePointTypeReq": {
+        "properties": {
+          "type": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "value": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "remarks": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1.PointsCreatePointTypeRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.PointsFindAccountPointAndLevelReq": {
+        "properties": {
+          "accountId": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "v1.PointsFindAccountPointAndLevelRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "accountId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "totalPoints": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "level": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "createdAt": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "accountId", "totalPoints", "level", "createdAt"],
+        "type": "object"
+      },
+      "v1.PointsFindLevelTypeListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.PointsFindLevelTypeListRes": {
+        "properties": {
+          "List": {
+            "format": "[]*v1.PointsFindLevelTypeListItem",
+            "items": {
+              "$ref": "#/components/schemas/v1.PointsFindLevelTypeListItem",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["List"],
+        "type": "object"
+      },
+      "v1.PointsFindLevelTypeListItem": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "level": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "levelUpPoints": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "createdAt": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "level", "levelUpPoints", "createdAt"],
+        "type": "object"
+      },
+      "v1.PointsFindPointDetailListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.PointsFindPointDetailListRes": {
+        "properties": {
+          "List": {
+            "format": "[]*v1.PointsFindPointDetailListItem",
+            "items": {
+              "$ref": "#/components/schemas/v1.PointsFindPointDetailListItem",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["List"],
+        "type": "object"
+      },
+      "v1.PointsFindPointDetailListItem": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "value": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "accountId": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "createdAt": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "type", "value", "accountId", "createdAt"],
+        "type": "object"
+      },
+      "v1.PointsFindPointTypeListReq": {
+        "properties": {
+          "type": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "value": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "remarks": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1.PointsFindPointTypeListRes": {
+        "properties": {
+          "List": {
+            "format": "[]*v1.PointsFindPointTypeListItem",
+            "items": {
+              "$ref": "#/components/schemas/v1.PointsFindPointTypeListItem",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["List"],
+        "type": "object"
+      },
+      "v1.PointsFindPointTypeListItem": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "value": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "remarks": {
+            "format": "string",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "type", "value", "remarks", "createdAt"],
+        "type": "object"
+      },
+      "v1.SessionCreateReq": {
+        "properties": {
+          "name": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1.SessionCreateRes": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id"],
+        "type": "object"
+      },
+      "v1.SessionDeleteReq": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id"],
+        "type": "object"
+      },
+      "v1.SessionDeleteRes": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id"],
+        "type": "object"
+      },
+      "v1.SessionDetailReq": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id"],
+        "type": "object"
+      },
+      "v1.SessionDetailRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.SessionInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.SessionInfo": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "last_chat_time": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id", "name", "created_at", "last_chat_time"],
+        "type": "object"
+      },
+      "v1.SessionListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.SessionListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.SessionInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.SessionInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.SessionRenameReq": {
+        "properties": {
+          "session_id": {
+            "format": "string",
+            "type": "string"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["session_id", "name"],
+        "type": "object"
+      },
+      "v1.SessionRenameRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskListRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.TaskInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TaskInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.TaskInfo": {
+        "properties": {
+          "index": {
+            "format": "int",
+            "type": "integer"
+          },
+          "parent_index": {
+            "format": "string",
+            "type": "string"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "category": {
+            "format": "string",
+            "type": "string"
+          },
+          "jump": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "material": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "index",
+          "parent_index",
+          "title",
+          "category",
+          "jump",
+          "description",
+          "material"
+        ],
+        "type": "object"
+      },
+      "v1.TaskTopicAddReq": {
+        "properties": {
+          "task_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "consts.TopicStatus",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["content"],
+        "type": "object"
+      },
+      "v1.TaskTopicAddRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TaskTopicDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TaskTopicDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskTopicDetailReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TaskTopicDetailRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.TaskTopicInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.TaskTopicInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "task_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "account_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/v1.TaskTopicExtra",
+            "description": ""
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.TaskTopicExtraAccount",
+            "description": ""
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "task_id",
+          "account_id",
+          "title",
+          "content",
+          "created_at",
+          "account",
+          "extra",
+          "extra_account",
+          "avatar"
+        ],
+        "type": "object"
+      },
+      "v1.TaskTopicExtra": {
+        "properties": {
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "comment_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["like_count", "comment_count"],
+        "type": "object"
+      },
+      "v1.TaskTopicExtraAccount": {
+        "properties": {
+          "like_status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["like_status"],
+        "type": "object"
+      },
+      "v1.TaskTopicEditReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "consts.TopicStatus",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TaskTopicEditRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskTopicListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.TaskTopicListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.TaskTopicInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TaskTopicInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.TaskUserCompleteCheckReq": {
+        "properties": {
+          "task_index_list": {
+            "format": "[]int",
+            "items": {
+              "format": "int",
+              "type": "integer"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["task_index_list"],
+        "type": "object"
+      },
+      "v1.TaskUserCompleteCheckRes": {
+        "properties": {
+          "completed": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["completed"],
+        "type": "object"
+      },
+      "v1.TaskUserDoneReq": {
+        "properties": {
+          "task_index": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["task_index"],
+        "type": "object"
+      },
+      "v1.TaskUserDoneRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskUserListReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskUserListRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.TaskUserInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TaskUserInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.TaskUserInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "index": {
+            "format": "int",
+            "type": "integer"
+          },
+          "parent_index": {
+            "format": "string",
+            "type": "string"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "category": {
+            "enum": ["stage_four", "stage_one", "stage_three", "stage_two"],
+            "format": "consts.TaskCategory",
+            "type": "string"
+          },
+          "jump": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "material": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "index",
+          "parent_index",
+          "title",
+          "category",
+          "jump",
+          "description",
+          "material",
+          "status"
+        ],
+        "type": "object"
+      },
+      "v1.TaskUserUndoneReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TaskUserUndoneRes": {
+        "properties": {
+          "task_index": {
+            "format": "int",
+            "type": "integer"
+          },
+          "status": {
+            "format": "string",
+            "type": "string"
+          },
+          "material": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["task_index", "status", "material"],
+        "type": "object"
+      },
+      "v1.TopicCommentAddReq": {
+        "properties": {
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "material": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["topic_id", "root_comment_id", "comment_id", "content"],
+        "type": "object"
+      },
+      "v1.TopicCommentAddRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TopicCommentListReq": {
+        "properties": {
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["topic_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.TopicCommentListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.TopicCommentInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TopicCommentInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.TopicCommentInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "task_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "task_title": {
+            "format": "string",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "account_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "material": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/v1.CommentExtra",
+            "description": ""
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.CommentExtraAccount",
+            "description": ""
+          },
+          "sub_list": {
+            "format": "[]*v1.TopicCommentSubInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TopicCommentSubInfo",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "task_id",
+          "task_title",
+          "topic_id",
+          "root_comment_id",
+          "comment_id",
+          "account_id",
+          "content",
+          "material",
+          "created_at",
+          "account",
+          "nickname",
+          "extra",
+          "extra_account",
+          "sub_list",
+          "avatar"
+        ],
+        "type": "object"
+      },
+      "v1.TopicCommentSubListReq": {
+        "properties": {
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_comment_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["topic_id", "root_comment_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.TopicCommentSubListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.TopicCommentSubInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TopicCommentSubInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.TopicLikeLikeReq": {
+        "properties": {
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["topic_id"],
+        "type": "object"
+      },
+      "v1.TopicLikeLikeRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.TaskTopicInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.TopicLikeUnLikeReq": {
+        "properties": {
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["topic_id"],
+        "type": "object"
+      },
+      "v1.TopicLikeUnLikeRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.TaskTopicInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.TrainCreateReq": {
+        "properties": {
+          "train_type": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["train_type"],
+        "type": "object"
+      },
+      "v1.TrainCreateRes": {
+        "properties": {
+          "train_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["train_id"],
+        "type": "object"
+      },
+      "v1.TrainDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TrainDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.TrainDetailReq": {
+        "properties": {
+          "train_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["train_id"],
+        "type": "object"
+      },
+      "v1.TrainDetailRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.TrainInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.TrainInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "train_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "account_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "train_attribute_epochs": {
+            "format": "int",
+            "type": "integer"
+          },
+          "train_attribute_batch_size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "train_attribute_learning_rate": {
+            "format": "float64",
+            "type": "number"
+          },
+          "train_type": {
+            "enum": ["audio", "image", "pose"],
+            "format": "consts.TrainType",
+            "type": "string"
+          },
+          "train_status": {
+            "format": "string",
+            "type": "string"
+          },
+          "train_model": {
+            "format": "string",
+            "type": "string"
+          },
+          "bin_path": {
+            "format": "string",
+            "type": "string"
+          },
+          "json_path": {
+            "format": "string",
+            "type": "string"
+          },
+          "file_dir": {
+            "format": "string",
+            "type": "string"
+          },
+          "train_structure": {
+            "format": "string",
+            "type": "string"
+          },
+          "k-value": {
+            "format": "int",
+            "type": "integer"
+          },
+          "filter_coefficients": {
+            "format": "float64",
+            "type": "number"
+          },
+          "distance_threshold": {
+            "format": "float64",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "train_name",
+          "account_id",
+          "train_attribute_epochs",
+          "train_attribute_batch_size",
+          "train_attribute_learning_rate",
+          "train_type",
+          "train_status",
+          "train_model",
+          "bin_path",
+          "json_path",
+          "file_dir",
+          "train_structure",
+          "k-value",
+          "filter_coefficients",
+          "distance_threshold"
+        ],
+        "type": "object"
+      },
+      "v1.TrainListReq": {
+        "properties": {
+          "train_type": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["train_type"],
+        "type": "object"
+      },
+      "v1.TrainListRes": {
+        "properties": {
+          "list": {
+            "format": "[]*v1.TrainInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.TrainInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["list"],
+        "type": "object"
+      },
+      "v1.TrainResultReq": {
+        "properties": {
+          "train_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["train_id"],
+        "type": "object"
+      },
+      "v1.TrainResultRes": {
+        "properties": {
+          "train_status": {
+            "format": "string",
+            "type": "string"
+          },
+          "result_status": {
+            "format": "string",
+            "type": "string"
+          },
+          "train_model": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["train_status", "result_status", "train_model"],
+        "type": "object"
+      },
+      "v1.TrainSaveReq": {
+        "properties": {
+          "train_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "train_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "epochs": {
+            "format": "int",
+            "type": "integer"
+          },
+          "batch_size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "learning_rate": {
+            "format": "float64",
+            "type": "number"
+          },
+          "file_dir": {
+            "format": "string",
+            "type": "string"
+          },
+          "train_structure": {
+            "format": "string",
+            "type": "string"
+          },
+          "bin_path": {
+            "format": "string",
+            "type": "string"
+          },
+          "json_path": {
+            "format": "string",
+            "type": "string"
+          },
+          "k-value": {
+            "format": "int",
+            "type": "integer"
+          },
+          "filter_coefficients": {
+            "format": "float64",
+            "type": "number"
+          },
+          "distance_threshold": {
+            "format": "float64",
+            "type": "number"
+          },
+          "train_type": {
+            "enum": ["audio", "image", "pose"],
+            "format": "consts.TrainType",
+            "type": "string"
+          }
+        },
+        "required": ["file_dir", "train_structure", "train_type"],
+        "type": "object"
+      },
+      "v1.TrainSaveRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.UserPurchaseDetailReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.UserPurchaseDetailRes": {
+        "properties": {
+          "token_count": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "search_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "image_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["token_count", "search_count", "image_count"],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/account/avatar": {
+      "post": {
+        "operationId": "account_avatar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountAvatarReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountAvatarRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "上传头像",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/change_nickname": {
+      "post": {
+        "operationId": "account_change_nickname",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountChangeNicknameReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountChangeNicknameRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "修改昵称",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/change_password": {
+      "post": {
+        "operationId": "account_change_password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountChangePasswordReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountChangePasswordRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "修改密码",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/device_list": {
+      "post": {
+        "operationId": "account_device_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountDeviceListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountDeviceListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "用户设备列表",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/get_permissions": {
+      "get": {
+        "operationId": "account_get_permissions",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountGetPermissionsRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取账号权限",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/info": {
+      "get": {
+        "operationId": "account_info",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountInfoRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取当前登录用户信息",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/login": {
+      "post": {
+        "operationId": "account_login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountLoginReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountLoginRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "登录",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/logout": {
+      "post": {
+        "operationId": "account_logout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountLogoutReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountLogoutRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "登出",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/profile": {
+      "post": {
+        "operationId": "account_profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountProfileReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountProfileRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取用户详细信息",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/topic_list": {
+      "post": {
+        "operationId": "account_topic_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountTopicListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountTopicListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "我的主题列表",
+        "tags": ["account"]
+      }
+    },
+    "/api/chat/completions": {
+      "post": {
+        "operationId": "chat_completions",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatCompletionsReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatCompletionsRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "对话",
+        "tags": ["chat"]
+      }
+    },
+    "/api/chat/image_limit_status": {
+      "post": {
+        "operationId": "chat_image_limit_status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatImageLimitStatusReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatImageLimitStatusRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "检测当天能否生成图片状态",
+        "tags": ["chat"]
+      }
+    },
+    "/api/chat/list": {
+      "post": {
+        "operationId": "chat_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "对话历史",
+        "tags": ["chat"]
+      }
+    },
+    "/api/chat/search_limit_status": {
+      "post": {
+        "operationId": "chat_search_limit_status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatSearchLimitStatusReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatSearchLimitStatusRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "检测当天能否使用搜索状态",
+        "tags": ["chat"]
+      }
+    },
+    "/api/chat/stop": {
+      "post": {
+        "operationId": "chat_stop",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatStopReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatStopRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "对话停止",
+        "tags": ["chat"]
+      }
+    },
+    "/api/chat/synchronize_token": {
+      "post": {
+        "operationId": "chat_synchronize_token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatSynchronizeTokenReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatSynchronizeTokenRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "同步token使用量",
+        "tags": ["chat"]
+      }
+    },
+    "/api/chat/token_limit_status": {
+      "post": {
+        "operationId": "chat_token_limit_status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChatTokenLimitStatusReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChatTokenLimitStatusRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "检测当月能否使用token状态",
+        "tags": ["chat"]
+      }
+    },
+    "/api/comment_like/like": {
+      "post": {
+        "operationId": "comment_like_like",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommentLikeLikeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentLikeLikeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题点赞",
+        "tags": ["comment_like"]
+      }
+    },
+    "/api/comment_like/unlike": {
+      "post": {
+        "operationId": "comment_like_unlike",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommentLikeUnLikeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentLikeUnLikeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题取消点赞",
+        "tags": ["comment_like"]
+      }
+    },
+    "/api/common/add_user": {
+      "post": {
+        "operationId": "common_add_user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommonAddUserReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommonAddUserRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "添加用户内部使用",
+        "tags": ["common"]
+      }
+    },
+    "/api/common/batch_add_user": {
+      "post": {
+        "operationId": "common_batch_add_user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommonBatchAddUserReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommonBatchAddUserRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "批量添加用户内部使用",
+        "tags": ["common"]
+      }
+    },
+    "/api/common/reset_device": {
+      "post": {
+        "operationId": "common_reset_device",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommonResetDeviceReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommonResetDeviceRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "重置用户设备内部使用",
+        "tags": ["common"]
+      }
+    },
+    "/api/common/reset_password": {
+      "post": {
+        "operationId": "common_reset_password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommonResetPasswordReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommonResetPasswordRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "重置用户密码内部使用",
+        "tags": ["common"]
+      }
+    },
+    "/api/common/sign_sts": {
+      "post": {
+        "operationId": "common_sign_sts",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommonSignStsReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommonSignStsRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取STS临时凭证",
+        "tags": ["common"]
+      }
+    },
+    "/api/common/upload": {
+      "post": {
+        "operationId": "common_upload",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommonUploadReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommonUploadRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "上传文件",
+        "tags": ["common"]
+      }
+    },
+    "/api/guide/list": {
+      "post": {
+        "operationId": "guide_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.GuideListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.GuideListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "列表",
+        "tags": ["guide"]
+      }
+    },
+    "/api/guide/report": {
+      "post": {
+        "operationId": "guide_report",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.GuideReportReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.GuideReportRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "更新状态",
+        "tags": ["guide"]
+      }
+    },
+    "/api/model/list": {
+      "post": {
+        "operationId": "model_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ModelListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ModelListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "模型列表",
+        "tags": ["model"]
+      }
+    },
+    "/api/model_tools/search": {
+      "post": {
+        "operationId": "model_tools_search",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ModelToolsSearchReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ModelToolsSearchRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "搜索",
+        "tags": ["model_tools"]
+      }
+    },
+    "/api/notification/list": {
+      "post": {
+        "operationId": "notification_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.NotificationListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.NotificationListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "通知列表",
+        "tags": ["notification"]
+      }
+    },
+    "/api/notification/mark_read": {
+      "post": {
+        "operationId": "notification_mark_read",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.NotificationMarkReadReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.NotificationMarkReadRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "标记通知已读",
+        "tags": ["notification"]
+      }
+    },
+    "/api/outer/account_exist": {
+      "post": {
+        "operationId": "outer_account_exist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.OuterAccountExistReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.OuterAccountExistRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "检查用户是否存在",
+        "tags": ["outer"]
+      }
+    },
+    "/api/outer/export": {
+      "post": {
+        "operationId": "outer_export",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.OuterExportReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.OuterExportRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "对话历史导出",
+        "tags": ["outer"]
+      }
+    },
+    "/api/points/createLevelType": {
+      "post": {
+        "operationId": "points_createLevelType",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsCreateLevelTypeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsCreateLevelTypeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建等级类型",
+        "tags": ["points"]
+      }
+    },
+    "/api/points/createPointDetail": {
+      "post": {
+        "operationId": "points_createPointDetail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsCreatePointDetailReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsCreatePointDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "新增积分",
+        "tags": ["points"]
+      }
+    },
+    "/api/points/createPointType": {
+      "post": {
+        "operationId": "points_createPointType",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsCreatePointTypeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsCreatePointTypeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建积分类型",
+        "tags": ["points"]
+      }
+    },
+    "/api/points/findAccountPointAndLevel": {
+      "post": {
+        "operationId": "points_findAccountPointAndLevel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsFindAccountPointAndLevelReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsFindAccountPointAndLevelRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "查询账户积分等级详情",
+        "tags": ["points"]
+      }
+    },
+    "/api/points/findLevelTypeList": {
+      "post": {
+        "operationId": "points_findLevelTypeList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsFindLevelTypeListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsFindLevelTypeListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "查询等级类型列表",
+        "tags": ["points"]
+      }
+    },
+    "/api/points/findPointDetailList": {
+      "post": {
+        "operationId": "points_findPointDetailList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsFindPointDetailListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsFindPointDetailListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "查询积分明细列表",
+        "tags": ["points"]
+      }
+    },
+    "/api/points/findPointTypeList": {
+      "post": {
+        "operationId": "points_findPointTypeList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.PointsFindPointTypeListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.PointsFindPointTypeListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "查找积分类型",
+        "tags": ["points"]
+      }
+    },
+    "/api/session/create": {
+      "post": {
+        "operationId": "session_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.SessionCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.SessionCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建会话",
+        "tags": ["session"]
+      }
+    },
+    "/api/session/delete": {
+      "post": {
+        "operationId": "session_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.SessionDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.SessionDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除会话",
+        "tags": ["session"]
+      }
+    },
+    "/api/session/detail": {
+      "post": {
+        "operationId": "session_detail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.SessionDetailReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.SessionDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取会话详情",
+        "tags": ["session"]
+      }
+    },
+    "/api/session/list": {
+      "post": {
+        "operationId": "session_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.SessionListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.SessionListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取会话列表",
+        "tags": ["session"]
+      }
+    },
+    "/api/session/rename": {
+      "post": {
+        "operationId": "session_rename",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.SessionRenameReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.SessionRenameRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "修改会话名称",
+        "tags": ["session"]
+      }
+    },
+    "/api/task/list": {
+      "post": {
+        "operationId": "task_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "任务列表",
+        "tags": ["task"]
+      }
+    },
+    "/api/task_topic/add": {
+      "post": {
+        "operationId": "task_topic_add",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskTopicAddReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskTopicAddRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "发布主题",
+        "tags": ["task_topic"]
+      }
+    },
+    "/api/task_topic/delete": {
+      "post": {
+        "operationId": "task_topic_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskTopicDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskTopicDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除主题",
+        "tags": ["task_topic"]
+      }
+    },
+    "/api/task_topic/detail": {
+      "post": {
+        "operationId": "task_topic_detail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskTopicDetailReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskTopicDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题详情",
+        "tags": ["task_topic"]
+      }
+    },
+    "/api/task_topic/edit": {
+      "post": {
+        "operationId": "task_topic_edit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskTopicEditReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskTopicEditRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "编辑主题",
+        "tags": ["task_topic"]
+      }
+    },
+    "/api/task_topic/list": {
+      "post": {
+        "operationId": "task_topic_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskTopicListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskTopicListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题列表",
+        "tags": ["task_topic"]
+      }
+    },
+    "/api/task_user/complete_check": {
+      "post": {
+        "operationId": "task_user_complete_check",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskUserCompleteCheckReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskUserCompleteCheckRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "任务完成检查",
+        "tags": ["task_user"]
+      }
+    },
+    "/api/task_user/done": {
+      "post": {
+        "operationId": "task_user_done",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskUserDoneReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskUserDoneRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "将任务设置为完成状态",
+        "tags": ["task_user"]
+      }
+    },
+    "/api/task_user/list": {
+      "post": {
+        "operationId": "task_user_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskUserListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskUserListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "我的任务列表",
+        "tags": ["task_user"]
+      }
+    },
+    "/api/task_user/undone": {
+      "post": {
+        "operationId": "task_user_undone",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TaskUserUndoneReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TaskUserUndoneRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "未做的任务",
+        "tags": ["task_user"]
+      }
+    },
+    "/api/topic_comment/add": {
+      "post": {
+        "operationId": "topic_comment_add",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TopicCommentAddReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TopicCommentAddRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "发布主题评论",
+        "tags": ["topic_comment"]
+      }
+    },
+    "/api/topic_comment/list": {
+      "post": {
+        "operationId": "topic_comment_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TopicCommentListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TopicCommentListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题评论列表",
+        "tags": ["topic_comment"]
+      }
+    },
+    "/api/topic_comment/sub_list": {
+      "post": {
+        "operationId": "topic_comment_sub_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TopicCommentSubListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TopicCommentSubListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题子评论列表",
+        "tags": ["topic_comment"]
+      }
+    },
+    "/api/topic_like/like": {
+      "post": {
+        "operationId": "topic_like_like",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TopicLikeLikeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TopicLikeLikeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题点赞",
+        "tags": ["topic_like"]
+      }
+    },
+    "/api/topic_like/unlike": {
+      "post": {
+        "operationId": "topic_like_unlike",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TopicLikeUnLikeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TopicLikeUnLikeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "主题取消点赞",
+        "tags": ["topic_like"]
+      }
+    },
+    "/api/train/create": {
+      "post": {
+        "operationId": "train_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TrainCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TrainCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建训练",
+        "tags": ["train"]
+      }
+    },
+    "/api/train/delete": {
+      "post": {
+        "operationId": "train_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TrainDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TrainDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "我的模型删除",
+        "tags": ["train"]
+      }
+    },
+    "/api/train/detail": {
+      "post": {
+        "operationId": "train_detail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TrainDetailReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TrainDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "训练详情",
+        "tags": ["train"]
+      }
+    },
+    "/api/train/list": {
+      "post": {
+        "operationId": "train_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TrainListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TrainListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "我的模型列表",
+        "tags": ["train"]
+      }
+    },
+    "/api/train/result": {
+      "post": {
+        "operationId": "train_result",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TrainResultReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TrainResultRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "查询训练结果",
+        "tags": ["train"]
+      }
+    },
+    "/api/train/save": {
+      "post": {
+        "operationId": "train_save",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TrainSaveReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TrainSaveRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "保存训练模型",
+        "tags": ["train"]
+      }
+    },
+    "/api/user_purchase/detail": {
+      "post": {
+        "operationId": "user_purchase_detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.UserPurchaseDetailReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.UserPurchaseDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取用户购买详情",
+        "tags": ["user_purchase"]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
