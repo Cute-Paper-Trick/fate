@@ -1,2 +1,2 @@
-npm run type-check
-npx --no-install lint-staged
+pnpm -F pantheon type-check
+pnpm -F pantheon exec lint-staged
