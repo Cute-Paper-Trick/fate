@@ -1,0 +1,1 @@
+{"properties":{"read_count":{"format":"int","type":"integer"},"unread_count":{"format":"int","type":"integer"}},"required":["read_count","unread_count"],"type":"object","x-readme-ref-name":"v1.NotificationMarkReadRes"}

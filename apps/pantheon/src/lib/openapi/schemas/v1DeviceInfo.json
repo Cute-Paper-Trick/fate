@@ -1,0 +1,1 @@
+{"properties":{"id":{"format":"int64","type":"integer"},"device":{"format":"string","type":"string"},"created_at":{"format":"string","type":"string"}},"required":["id","device","created_at"],"type":"object","x-readme-ref-name":"v1.DeviceInfo"}

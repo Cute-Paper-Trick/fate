@@ -1,0 +1,1 @@
+{"properties":{"page":{"format":"int","type":"integer"},"size":{"format":"int","type":"integer"},"type":{"format":"consts.NotificationType","type":"string"},"status":{"format":"consts.NotificationStatus","type":"string"}},"required":["page","size"],"type":"object","x-readme-ref-name":"v1.NotificationListReq"}

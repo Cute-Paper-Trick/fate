@@ -1,0 +1,2 @@
+export type { TopicLikeLike200, TopicLikeLikeMutationRequest, TopicLikeLikeMutationResponse, TopicLikeLikeMutation } from "./TopicLikeLike";
+export type { TopicLikeUnlike200, TopicLikeUnlikeMutationRequest, TopicLikeUnlikeMutationResponse, TopicLikeUnlikeMutation } from "./TopicLikeUnlike";

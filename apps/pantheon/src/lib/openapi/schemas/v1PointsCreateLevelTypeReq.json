@@ -1,0 +1,1 @@
+{"properties":{"level":{"format":"int64","type":"integer"},"levelUpPoints":{"format":"int64","type":"integer"}},"type":"object","x-readme-ref-name":"v1.PointsCreateLevelTypeReq"}

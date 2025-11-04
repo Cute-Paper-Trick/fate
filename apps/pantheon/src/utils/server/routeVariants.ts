@@ -35,7 +35,7 @@ export class RouteVariants {
 
   static deserializeVariants = (serialized: string): IRouteVariants => {
     try {
-      const [locale, isMobile, theme] = serialized.split(SPLITTER);
+      const [locale, isMobile, theme] = serialized.split(SPLITTER) as [string, string, string];
 
       // 验证并返回变体
       return {

@@ -1,0 +1,1 @@
+{"properties":{"session_id":{"format":"string","type":"string"},"name":{"format":"string","type":"string"},"created_at":{"format":"string","type":"string"},"last_chat_time":{"format":"string","type":"string"}},"required":["session_id","name","created_at","last_chat_time"],"type":"object","x-readme-ref-name":"v1.SessionInfo"}

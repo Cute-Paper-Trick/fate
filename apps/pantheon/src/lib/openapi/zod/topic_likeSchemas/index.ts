@@ -1,0 +1,2 @@
+export { topicLikeLike200Schema, topicLikeLikeMutationRequestSchema, topicLikeLikeMutationResponseSchema } from "./topicLikeLikeSchema";
+export { topicLikeUnlike200Schema, topicLikeUnlikeMutationRequestSchema, topicLikeUnlikeMutationResponseSchema } from "./topicLikeUnlikeSchema";

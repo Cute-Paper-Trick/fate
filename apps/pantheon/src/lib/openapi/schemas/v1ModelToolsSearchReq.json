@@ -1,0 +1,1 @@
+{"properties":{"query":{"format":"string","type":"string"}},"required":["query"],"type":"object","x-readme-ref-name":"v1.ModelToolsSearchReq"}

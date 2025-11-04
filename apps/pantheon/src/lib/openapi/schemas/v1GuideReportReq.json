@@ -1,0 +1,1 @@
+{"properties":{"step":{"format":"int","type":"integer"}},"required":["step"],"type":"object","x-readme-ref-name":"v1.GuideReportReq"}

@@ -2,25 +2,23 @@
 
 import { useEffect } from 'react';
 
-import { authClient, useSession } from '@/features/cerberus/client';
-// import { $api } from '@/lib/api';
-import { paths } from '@/types/api/schema';
+import { authClient } from '@/features/cerberus/client';
 
 export default function Home() {
   // const { data } = $api.useQuery('post', '/api/model/list', {});
+
   useEffect(() => {
     const fetchToken = async () => {
       const token = await authClient.token();
       console.log('Auth Token:', token);
 
       const res = await fetch('https://dev-daily-backend.goood.space/api/model/list', {
-        method: 'POST',
         headers: {
           Authorization: `Bearer ${token.data?.token}`,
         },
+        method: 'POST',
       });
-      const data: paths['/api/model/list']['post']['responses']['200']['content']['application/json'] =
-        await res.json();
+      await res.json();
 
       console.log(res);
     };

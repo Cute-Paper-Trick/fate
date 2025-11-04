@@ -1,0 +1,1 @@
+{"properties":{"code":{"format":"string","type":"string"}},"required":["code"],"type":"object","x-readme-ref-name":"v1.OuterExportReq"}

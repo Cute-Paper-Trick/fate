@@ -1,0 +1,2 @@
+export type { CommentLikeLike200, CommentLikeLikeMutationRequest, CommentLikeLikeMutationResponse, CommentLikeLikeMutation } from "./CommentLikeLike";
+export type { CommentLikeUnlike200, CommentLikeUnlikeMutationRequest, CommentLikeUnlikeMutationResponse, CommentLikeUnlikeMutation } from "./CommentLikeUnlike";

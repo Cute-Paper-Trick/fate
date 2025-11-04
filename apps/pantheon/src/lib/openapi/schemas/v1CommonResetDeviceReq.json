@@ -1,0 +1,1 @@
+{"properties":{"code":{"format":"string","type":"string"},"user_list":{"format":"[]string","items":{"format":"string","type":"string"},"type":"array"}},"required":["code","user_list"],"type":"object","x-readme-ref-name":"v1.CommonResetDeviceReq"}

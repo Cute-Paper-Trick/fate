@@ -1,0 +1,1 @@
+{"properties":{"prompt_tokens":{"format":"int","type":"integer"},"completion_tokens":{"format":"int","type":"integer"},"total_tokens":{"format":"int","type":"integer"}},"required":["prompt_tokens","completion_tokens","total_tokens"],"type":"object","x-readme-ref-name":"v1.UsageInfo"}

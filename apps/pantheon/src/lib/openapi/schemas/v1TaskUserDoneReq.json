@@ -1,0 +1,1 @@
+{"properties":{"task_index":{"format":"int","type":"integer"}},"required":["task_index"],"type":"object","x-readme-ref-name":"v1.TaskUserDoneReq"}

@@ -1,0 +1,1 @@
+{"properties":{"prompt_tokens":{"format":"int","type":"integer"},"completion_tokens":{"format":"int","type":"integer"},"total_tokens":{"format":"int","type":"integer"},"api_key_used":{"format":"string","type":"string"},"action":{"format":"string","type":"string"},"search_platform":{"format":"string","type":"string"}},"type":"object","x-readme-ref-name":"v1.Usage"}

@@ -1,0 +1,1 @@
+{"properties":{"topic_count":{"format":"int","type":"integer"},"replay_count":{"format":"int","type":"integer"},"like_count":{"format":"int","type":"integer"}},"required":["topic_count","replay_count","like_count"],"type":"object","x-readme-ref-name":"v1.Stats"}

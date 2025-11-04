@@ -1,0 +1,1 @@
+{"properties":{"account":{"format":"string","type":"string"}},"required":["account"],"type":"object","x-readme-ref-name":"v1.OuterAccountExistReq"}

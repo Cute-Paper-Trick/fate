@@ -1,0 +1,1 @@
+{"properties":{"token_count":{"format":"int64","type":"integer"},"search_count":{"format":"int","type":"integer"},"image_count":{"format":"int","type":"integer"}},"required":["token_count","search_count","image_count"],"type":"object","x-readme-ref-name":"v1.UserPurchaseDetailRes"}

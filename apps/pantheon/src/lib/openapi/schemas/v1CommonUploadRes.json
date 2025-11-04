@@ -1,0 +1,1 @@
+{"properties":{"filename":{"format":"*[]string","items":{"format":"[]string","items":{"format":"string","type":"string"},"type":"array"},"type":"array"}},"required":["filename"],"type":"object","x-readme-ref-name":"v1.CommonUploadRes"}

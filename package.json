@@ -2,8 +2,44 @@
   "name": "fate",
   "version": "0.1.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky",
+    "type-check": "pnpm -F pantheon type-check"
+  },
+  "lint-staged": {
+    "apps/pantheon/**/*.md": [
+      "pnpm -F pantheon exec remark --silent --output --",
+      "pnpm -F pantheon exec prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "apps/pantheon/**/*.mdx": [
+      "pnpm -F pantheon exec remark -r ./apps/pantheon/.remarkrc.mdx.js --silent --output --",
+      "pnpm -F pantheon exec eslint --quiet --fix"
+    ],
+    "apps/pantheon/**/*.json": [
+      "pnpm -F pantheon exec prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "apps/pantheon/**/*.{mjs,cjs}": [
+      "pnpm -F pantheon exec prettier --write",
+      "pnpm -F pantheon exec eslint --fix"
+    ],
+    "apps/pantheon/**/*.{js,jsx}": [
+      "pnpm -F pantheon exec prettier --write",
+      "pnpm -F pantheon exec stylelint --fix",
+      "pnpm -F pantheon exec eslint --fix"
+    ],
+    "apps/pantheon/**/*.{ts,tsx}": [
+      "pnpm -F pantheon exec prettier --parser=typescript --write",
+      "pnpm -F pantheon exec stylelint --fix",
+      "pnpm -F pantheon exec eslint --fix"
+    ]
+  },
   "devDependencies": {
+    "eslint": "^9",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "remark": "^15.0.1",
+    "stylelint": "^16.25.0",
     "typescript": "^5"
   },
   "dependencies": {}

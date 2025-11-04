@@ -1,0 +1,1 @@
+{"properties":{"page":{"format":"int","type":"integer"},"size":{"format":"int","type":"integer"}},"required":["page","size"],"type":"object","x-readme-ref-name":"v1.TaskTopicListReq"}

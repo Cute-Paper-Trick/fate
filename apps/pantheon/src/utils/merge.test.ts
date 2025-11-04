@@ -209,7 +209,7 @@ describe('mergeArrayById', () => {
 
       const result = mergeArrayById(defaultItems, userItems);
 
-      expect(result[0].config).toEqual({
+      expect(result[0]?.config).toEqual({
         deep: {
           value: 200,
           keep: true,

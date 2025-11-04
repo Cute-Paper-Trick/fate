@@ -1,0 +1,1 @@
+{"properties":{"type":{"format":"int64","type":"integer"},"value":{"format":"int64","type":"integer"},"remarks":{"format":"string","type":"string"}},"type":"object","x-readme-ref-name":"v1.PointsFindPointTypeListReq"}

@@ -1,0 +1,1 @@
+{"properties":{"id":{"format":"int64","type":"integer"},"type":{"format":"int64","type":"integer"},"value":{"format":"int64","type":"integer"},"remarks":{"format":"string","type":"string"},"createdAt":{"format":"string","type":"string"}},"required":["id","type","value","remarks","createdAt"],"type":"object","x-readme-ref-name":"v1.PointsFindPointTypeListItem"}

@@ -1,0 +1,1 @@
+{"properties":{"notification_id_list":{"format":"[]int64","items":{"format":"int64","type":"integer"},"type":"array"},"mark_all":{"format":"bool","type":"boolean"}},"required":["notification_id_list","mark_all"],"type":"object","x-readme-ref-name":"v1.NotificationMarkReadReq"}

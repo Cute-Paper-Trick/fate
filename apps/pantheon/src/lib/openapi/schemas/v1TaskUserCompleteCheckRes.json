@@ -1,0 +1,1 @@
+{"properties":{"completed":{"format":"bool","type":"boolean"}},"required":["completed"],"type":"object","x-readme-ref-name":"v1.TaskUserCompleteCheckRes"}

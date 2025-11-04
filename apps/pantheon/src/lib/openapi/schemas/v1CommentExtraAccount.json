@@ -1,0 +1,1 @@
+{"properties":{"like_status":{"format":"bool","type":"boolean"}},"required":["like_status"],"type":"object","x-readme-ref-name":"v1.CommentExtraAccount"}

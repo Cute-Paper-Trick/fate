@@ -1,0 +1,2 @@
+export { commentLikeLike200Schema, commentLikeLikeMutationRequestSchema, commentLikeLikeMutationResponseSchema } from "./commentLikeLikeSchema";
+export { commentLikeUnlike200Schema, commentLikeUnlikeMutationRequestSchema, commentLikeUnlikeMutationResponseSchema } from "./commentLikeUnlikeSchema";

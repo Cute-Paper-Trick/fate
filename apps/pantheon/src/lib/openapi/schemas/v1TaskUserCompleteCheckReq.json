@@ -1,0 +1,1 @@
+{"properties":{"task_index_list":{"format":"[]int","items":{"format":"int","type":"integer"},"type":"array"}},"required":["task_index_list"],"type":"object","x-readme-ref-name":"v1.TaskUserCompleteCheckReq"}

@@ -1,0 +1,1 @@
+{"properties":{"train_status":{"format":"string","type":"string"},"result_status":{"format":"string","type":"string"},"train_model":{"format":"string","type":"string"}},"required":["train_status","result_status","train_model"],"type":"object","x-readme-ref-name":"v1.TrainResultRes"}

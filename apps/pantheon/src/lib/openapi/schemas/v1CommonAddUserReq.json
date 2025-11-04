@@ -1,0 +1,1 @@
+{"properties":{"name":{"format":"string","type":"string"},"password":{"format":"string","type":"string"},"email":{"format":"string","type":"string"},"phone":{"format":"string","type":"string"},"code":{"format":"string","type":"string"}},"required":["name","password","email","phone","code"],"type":"object","x-readme-ref-name":"v1.CommonAddUserReq"}

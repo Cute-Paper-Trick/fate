@@ -1,0 +1,1 @@
+{"properties":{"topic_id":{"format":"int64","type":"integer"},"page":{"format":"int","type":"integer"},"size":{"format":"int","type":"integer"}},"required":["topic_id","page","size"],"type":"object","x-readme-ref-name":"v1.TopicCommentListReq"}

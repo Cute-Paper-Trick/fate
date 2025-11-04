@@ -1,0 +1,1 @@
+{"properties":{"account":{"format":"string","type":"string"},"password":{"format":"string","type":"string"},"device":{"format":"string","type":"string"}},"required":["account","password","device"],"type":"object","x-readme-ref-name":"v1.AccountLoginReq"}
