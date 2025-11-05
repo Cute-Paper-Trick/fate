@@ -1,4 +1,8 @@
+'use client';
+
 import { Header, Menu } from '@lobehub/ui';
+import { useTranslate } from '@tolgee/react';
+import Link from 'next/link';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -7,21 +11,29 @@ import Pantheon from '@/components/brand/Pantheon';
 
 import BurgerButton from '../../../features/BurgerButton';
 import Avatar from './Avatar';
+import CHeader from './Header';
 
 const Nav = memo(() => {
+  const { t } = useTranslate('common');
+
   const menu = (
     <Menu
-      mode="horizontal"
       items={[
-        { key: '1', label: 'Menu Item 1' },
-        { key: '2', label: 'Menu Item 2' },
-        { key: '3', label: 'Menu Item 3' },
+        { key: 'chat', label: <Link href="/chat">{t('page.chat')}</Link> },
+        {
+          key: 'talk',
+          label: <Link href="/talk">{t('page.talk')}</Link>,
+          onClick: () => console.log('click talk'),
+        },
+        { key: 'lab', label: <Link href="/lab">{t('page.lab')}</Link> },
+        { key: 'task', label: <Link href="/task">{t('page.task')}</Link> },
       ]}
+      mode="horizontal"
     />
   );
 
   const left = (
-    <Flexbox as={'section'} horizontal align="center" gap={8}>
+    <Flexbox align="center" as={'section'} gap={8} horizontal>
       <BurgerButton />
       <Pantheon type={'combine'} />
     </Flexbox>
@@ -29,8 +41,10 @@ const Nav = memo(() => {
 
   return (
     <>
+      <CHeader logo={<Pantheon type={'combine'} />}>HEADER</CHeader>
       <Header actions={<Avatar />} logo={left} />
       <Header actions={<Avatar />} logo={<Cerberus type={'combine'} />} nav={menu} />
+      <Flexbox align="center" as="section" />
     </>
   );
 });

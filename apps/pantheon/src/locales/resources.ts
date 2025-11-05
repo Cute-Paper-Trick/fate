@@ -61,7 +61,7 @@ export const localeOptions: LocaleOptions = [
   {
     label: '繁體中文',
     value: 'zh-TW',
-  }
+  },
 ] as LocaleOptions;
 
 export const supportLocales: string[] = [...locales, 'en', 'zh'];

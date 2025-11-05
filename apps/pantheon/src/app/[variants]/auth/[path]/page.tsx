@@ -1,7 +1,7 @@
 import { AuthView } from '@daveyplate/better-auth-ui';
 import { authViewPaths } from '@daveyplate/better-auth-ui/server';
 
-import SignInPage from '@/components/auth/SignInPage';
+// import SignInPage from '@/components/auth/SignInPage';
 
 export const dynamicParams = false;
 

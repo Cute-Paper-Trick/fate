@@ -1,12 +1,10 @@
 'use client';
 
 import { useTranslate } from '@tolgee/react';
-import { Button, Form, Input, Modal } from 'antd';
-import { message } from 'antd';
+import { Button, Form, Input, Modal, message } from 'antd';
 import { useState } from 'react';
 
 import { authClient } from '@/features/cerberus/client';
-import { useUserStore } from '@/store/user';
 
 interface LoginModalProps {
   open: boolean;
@@ -16,7 +14,6 @@ interface LoginModalProps {
 const LoginModal = ({ open, onClose }: LoginModalProps) => {
   const { t } = useTranslate('auth');
   const [loading, setLoading] = useState(false);
-  const login = useUserStore((s) => s.login);
 
   const [form] = Form.useForm();
 
@@ -24,7 +21,7 @@ const LoginModal = ({ open, onClose }: LoginModalProps) => {
     setLoading(true);
     try {
       // await login(values.email, values.password);
-      const res = await authClient.signIn.email({
+      await authClient.signIn.email({
         email: values.email,
         password: values.password,
       });
@@ -40,40 +37,49 @@ const LoginModal = ({ open, onClose }: LoginModalProps) => {
   };
 
   return (
-    <Modal title={t('login')} open={open} onCancel={onClose} footer={null} destroyOnClose>
+    <Modal destroyOnClose footer={null} onCancel={onClose} open={open} title={t('login')}>
       <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleSubmit}
         autoComplete="off"
+        form={form}
         initialValues={{
           email: 'test@test.test',
           password: '12345678',
         }}
+        layout="vertical"
+        onFinish={handleSubmit}
       >
         <Form.Item
-          name="email"
           label={t('email') || 'Email'}
+          name="email"
           rules={[
-            { required: true, message: t('emailRequired') || 'Please input your email!' },
-            { type: 'email', message: t('emailInvalid') || 'Please input a valid email!' },
+            {
+              required: true,
+              message: t('emailRequired') || 'Please input your email!',
+            },
+            {
+              type: 'email',
+              message: t('emailInvalid') || 'Please input a valid email!',
+            },
           ]}
         >
           <Input placeholder={t('emailPlaceholder') || 'Enter your email'} />
         </Form.Item>
 
         <Form.Item
-          name="password"
           label={t('password') || 'Password'}
+          name="password"
           rules={[
-            { required: true, message: t('passwordRequired') || 'Please input your password!' },
+            {
+              required: true,
+              message: t('passwordRequired') || 'Please input your password!',
+            },
           ]}
         >
           <Input.Password placeholder={t('passwordPlaceholder') || 'Enter your password'} />
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading} block>
+          <Button block htmlType="submit" loading={loading} type="primary">
             {t('login')}
           </Button>
         </Form.Item>

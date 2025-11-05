@@ -1,6 +1,7 @@
 import { defineConfig } from '@kubb/core';
+// import { pluginReactQuery } from '@kubb/plugin-react-query';
+import { pluginClient } from '@kubb/plugin-client';
 import { pluginOas } from '@kubb/plugin-oas';
-import { pluginReactQuery } from '@kubb/plugin-react-query';
 import { pluginTs } from '@kubb/plugin-ts';
 import { pluginZod } from '@kubb/plugin-zod';
 
@@ -52,34 +53,53 @@ export default defineConfig({
       typed: true,
       unknownType: 'unknown',
     }),
-    pluginReactQuery({
-      client: {
-        dataReturnType: 'data',
+    pluginClient({
+      output: {
+        path: 'clients/axios',
+        barrelType: 'named',
+        banner: '/* eslint-disable no-alert, no-console */',
       },
       group: {
-        name: ({ group }) => `${group}Hooks`,
+        name: ({ group }) => `${group}Service`,
         type: 'tag',
       },
-      mutation: {
-        methods: ['put', 'patch', 'delete'],
-      },
-      output: {
-        banner: '/* eslint-disable @typescript-eslint/no-explicit-any */',
-        path: 'hooks',
-      },
-      override: [
-        {
-          options: {
-            mutation: false,
-          },
-          pattern: /list/,
-          type: 'operationId',
-        },
-      ],
-      query: {
-        methods: ['get', 'post'],
-      },
+      // transformers: {
+      //   name: (name) => `${name}Client`,
+      // },
+      operations: true,
+      parser: 'client',
+      // pathParamsType: 'object',
+      dataReturnType: 'data',
+      client: 'axios',
     }),
+    // pluginReactQuery({
+    //   client: {
+    //     dataReturnType: 'data',
+    //   },
+    //   group: {
+    //     name: ({ group }) => `${group}Hooks`,
+    //     type: 'tag',
+    //   },
+    //   mutation: {
+    //     methods: ['put', 'patch', 'delete'],
+    //   },
+    //   output: {
+    //     banner: '/* eslint-disable @typescript-eslint/no-explicit-any */',
+    //     path: 'hooks',
+    //   },
+    //   override: [
+    //     {
+    //       options: {
+    //         mutation: false,
+    //       },
+    //       pattern: /list/,
+    //       type: 'operationId',
+    //     },
+    //   ],
+    //   query: {
+    //     methods: ['get', 'post'],
+    //   },
+    // }),
   ],
   root: '.',
 });

@@ -34,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "@lobehub/lint": "^1.26.2",
     "eslint": "^9",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
@@ -41,6 +42,5 @@
     "remark": "^15.0.1",
     "stylelint": "^16.25.0",
     "typescript": "^5"
-  },
-  "dependencies": {}
+  }
 }

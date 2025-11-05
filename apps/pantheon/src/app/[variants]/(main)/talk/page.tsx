@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslate } from '@tolgee/react';
 import { Avatar, Button, Card, Input, List, Space } from 'antd';
 import { Send, User } from 'lucide-react';
 import { useState } from 'react';
@@ -19,24 +18,24 @@ const initialMessages: Message[] = [
     id: '1',
     content: 'Hello! How can I assist you today?',
     sender: 'assistant',
-    timestamp: new Date(Date.now() - 60000),
+    timestamp: new Date(Date.now() - 60_000),
   },
   {
     id: '2',
     content: 'I need help with my project.',
     sender: 'user',
-    timestamp: new Date(Date.now() - 30000),
+    timestamp: new Date(Date.now() - 30_000),
   },
   {
     id: '3',
-    content: 'I\'d be happy to help! Could you please provide more details about your project?',
+    content: "I'd be happy to help! Could you please provide more details about your project?",
     sender: 'assistant',
-    timestamp: new Date(Date.now() - 10000),
+    timestamp: new Date(Date.now() - 10_000),
   },
 ];
 
 export default function TalkPage() {
-  const { t } = useTranslate();
+  // const { t } = useTranslate();
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [inputValue, setInputValue] = useState('');
 
@@ -68,7 +67,15 @@ export default function TalkPage() {
     <div style={{ padding: '24px', background: '#f0f2f5', minHeight: '100vh' }}>
       <h1 style={{ marginBottom: '24px' }}>Talk - AI Chat Assistant</h1>
 
-      <Card style={{ maxWidth: '900px', margin: '0 auto', height: 'calc(100vh - 150px)', display: 'flex', flexDirection: 'column' }}>
+      <Card
+        style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+          height: 'calc(100vh - 150px)',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <div style={{ flex: 1, overflowY: 'auto', marginBottom: '16px' }}>
           <List
             dataSource={messages}
@@ -121,22 +128,22 @@ export default function TalkPage() {
         <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '16px' }}>
           <Space.Compact style={{ width: '100%' }}>
             <TextArea
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Type your message here..."
               autoSize={{ minRows: 1, maxRows: 4 }}
+              onChange={(e) => setInputValue(e.target.value)}
               onPressEnter={(e) => {
                 if (!e.shiftKey) {
                   e.preventDefault();
                   handleSend();
                 }
               }}
+              placeholder="Type your message here..."
+              value={inputValue}
             />
             <Button
-              type="primary"
               icon={<Send size={16} />}
               onClick={handleSend}
               style={{ height: 'auto' }}
+              type="primary"
             >
               Send
             </Button>

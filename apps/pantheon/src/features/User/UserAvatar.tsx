@@ -24,7 +24,7 @@ const useStyles = createStyles(({ css, token }) => ({
       width: 25%;
       height: 100%;
 
-      background: rgba(255, 255, 255, 50%);
+      background: rgb(255 255 255 / 50%);
 
       transition: all 200ms ease-out 0s;
     }

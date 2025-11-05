@@ -13,10 +13,13 @@ interface RootLayoutProps extends DynamicLayoutProps {
 const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
   const { variants } = await params;
 
-  const { locale, isMobile, theme, primaryColor, neutralColor } =
-    RouteVariants.deserializeVariants(variants);
-
-  console.log('>>>>>>>>', locale, isMobile, theme);
+  const {
+    locale,
+    // isMobile,
+    //  theme,
+    //  primaryColor,
+    //  neutralColor
+  } = RouteVariants.deserializeVariants(variants);
 
   const direction = 'ltr';
 
@@ -24,6 +27,7 @@ const RootLayout = async ({ children, params, modal }: RootLayoutProps) => {
     <html dir={direction} lang={locale}>
       <head>
         {process.env.ENABLE_REACT_SCAN === '1' && (
+          // eslint-disable-next-line @next/next/no-sync-scripts
           <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
         )}
       </head>

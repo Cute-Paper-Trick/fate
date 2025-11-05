@@ -12,7 +12,15 @@ type Logo3dProps = Omit<ImgProps & ImageProps, 'width' | 'height' | 'src'> & {
 
 const Logo3d = memo<Logo3dProps>(({ size = '1em', style, alt = 'LobeHub', ...rest }) => {
   return (
-    <Image alt={alt} height={size} src={'pantheon.png'} style={style} width={size} {...rest} />
+    <Image
+      alt={alt}
+      height={size}
+      preview={false}
+      src={'pantheon.png'}
+      style={style}
+      width={size}
+      {...rest}
+    />
   );
 });
 

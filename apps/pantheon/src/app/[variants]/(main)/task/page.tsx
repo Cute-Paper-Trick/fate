@@ -1,7 +1,6 @@
 'use client';
 
 import { useClerk } from '@clerk/nextjs';
-import { useTranslate } from '@tolgee/react';
 import { Button, Card, Checkbox, Input, List, Modal, Progress, Space, Tag } from 'antd';
 import { Clock, Edit, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
@@ -60,21 +59,24 @@ const initialTasks: Task[] = [
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {
-    case 'high':
+    case 'high': {
       return 'red';
-    case 'medium':
+    }
+    case 'medium': {
       return 'orange';
-    case 'low':
+    }
+    case 'low': {
       return 'green';
-    default:
+    }
+    default: {
       return 'default';
+    }
   }
 };
 
 export default function TaskPage() {
   const { openSignIn } = useClerk();
 
-  const { t } = useTranslate();
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -123,7 +125,7 @@ export default function TaskPage() {
         }}
       >
         <h1 style={{ margin: 0 }}>Task Management</h1>
-        <Button type="primary" icon={<Plus size={16} />} onClick={() => setIsModalVisible(true)}>
+        <Button icon={<Plus size={16} />} onClick={() => setIsModalVisible(true)} type="primary">
           Add Task
         </Button>
       </div>
@@ -141,20 +143,20 @@ export default function TaskPage() {
         </div>
       </Card>
 
-      <Card title="Active Tasks" style={{ marginBottom: '24px' }}>
+      <Card style={{ marginBottom: '24px' }} title="Active Tasks">
         <List
           dataSource={activeTasks}
           locale={{ emptyText: 'No active tasks' }}
           renderItem={(task) => (
             <List.Item
               actions={[
-                <Button type="text" icon={<Edit size={16} />} key="edit" />,
+                <Button icon={<Edit size={16} />} key="edit" type="text" />,
                 <Button
-                  type="text"
                   danger
                   icon={<Trash2 size={16} />}
-                  onClick={() => handleDeleteTask(task.id)}
                   key="delete"
+                  onClick={() => handleDeleteTask(task.id)}
+                  type="text"
                 />,
               ]}
             >
@@ -162,22 +164,27 @@ export default function TaskPage() {
                 avatar={
                   <Checkbox checked={task.completed} onChange={() => handleToggleTask(task.id)} />
                 }
-                title={
-                  <Space>
-                    {task.title}
-                    <Tag color={getPriorityColor(task.priority)}>{task.priority.toUpperCase()}</Tag>
-                  </Space>
-                }
                 description={
                   <Space direction="vertical" size="small">
                     <div>{task.description}</div>
                     {task.dueDate && (
                       <div
-                        style={{ color: '#999', display: 'flex', alignItems: 'center', gap: '4px' }}
+                        style={{
+                          color: '#999',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                        }}
                       >
                         <Clock size={14} /> Due: {task.dueDate}
                       </div>
                     )}
+                  </Space>
+                }
+                title={
+                  <Space>
+                    {task.title}
+                    <Tag color={getPriorityColor(task.priority)}>{task.priority.toUpperCase()}</Tag>
                   </Space>
                 }
               />
@@ -194,17 +201,22 @@ export default function TaskPage() {
             <List.Item
               actions={[
                 <Button
-                  type="text"
                   danger
                   icon={<Trash2 size={16} />}
-                  onClick={() => handleDeleteTask(task.id)}
                   key="delete"
+                  onClick={() => handleDeleteTask(task.id)}
+                  type="text"
                 />,
               ]}
             >
               <List.Item.Meta
                 avatar={
                   <Checkbox checked={task.completed} onChange={() => handleToggleTask(task.id)} />
+                }
+                description={
+                  <span style={{ textDecoration: 'line-through', color: '#999' }}>
+                    {task.description}
+                  </span>
                 }
                 title={
                   <Space>
@@ -214,11 +226,6 @@ export default function TaskPage() {
                     <Tag color={getPriorityColor(task.priority)}>{task.priority.toUpperCase()}</Tag>
                   </Space>
                 }
-                description={
-                  <span style={{ textDecoration: 'line-through', color: '#999' }}>
-                    {task.description}
-                  </span>
-                }
               />
             </List.Item>
           )}
@@ -226,21 +233,21 @@ export default function TaskPage() {
       </Card>
 
       <Modal
-        title="Add New Task"
-        open={isModalVisible}
-        onOk={handleAddTask}
+        cancelText="Cancel"
+        okText="Add"
         onCancel={() => {
           setIsModalVisible(false);
           setNewTaskTitle('');
         }}
-        okText="Add"
-        cancelText="Cancel"
+        onOk={handleAddTask}
+        open={isModalVisible}
+        title="Add New Task"
       >
         <Input
-          placeholder="Enter task title"
-          value={newTaskTitle}
           onChange={(e) => setNewTaskTitle(e.target.value)}
           onPressEnter={handleAddTask}
+          placeholder="Enter task title"
+          value={newTaskTitle}
         />
       </Modal>
     </div>

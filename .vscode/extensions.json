@@ -1,5 +1,9 @@
 {
   "recommendations": [
-    "nuxt.mdc"
+    "nuxt.mdc",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "unifiedjs.vscode-remark"
   ]
 }

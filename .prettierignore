@@ -64,4 +64,4 @@ Dockerfile*
 # generated
 src/lib/openapi/*
 **/*.generated.*
-**/drizzle/**/*
+apps/pantheon/drizzle/**/*
