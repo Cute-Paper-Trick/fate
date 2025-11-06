@@ -25,14 +25,13 @@ export const auth = betterAuth({
     cookiePrefix: 'fate',
     crossSubDomainCookies: {
       enabled: true,
-      domains: ['.vercel.app', '.chieh.ren', 'localhost'],
+      domains: ['.vercel.app', '.chieh.ren', 'localhost', '.goood.space'],
     },
   },
   trustedOrigins: [
     authEnv.APP_URL,
     'http://localhost:5090',
-    'http://localhost:3000',
-    'https://fate-pantheon.chieh.ren',
+    'https://dev-daily-backend.goood.space',
   ],
   emailAndPassword: {
     enabled: true,

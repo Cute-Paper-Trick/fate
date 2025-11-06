@@ -4,7 +4,7 @@ import nextTs from 'eslint-config-next/typescript';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import perfectionist from 'eslint-plugin-perfectionist';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import unusedImports from 'eslint-plugin-unused-imports';
+// import unusedImports from 'eslint-plugin-unused-imports';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 
@@ -120,24 +120,24 @@ const eslintConfig = defineConfig([
   },
   eslintConfigPrettier,
   // Unused imports plugin
-  {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    plugins: {
-      'unused-imports': unusedImports,
-    },
-    rules: {
-      'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': [
-        'warn',
-        {
-          vars: 'all',
-          varsIgnorePattern: '^_',
-          args: 'after-used',
-          argsIgnorePattern: '^_',
-        },
-      ],
-    },
-  },
+  // {
+  //   files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+  //   plugins: {
+  //     'unused-imports': unusedImports,
+  //   },
+  //   rules: {
+  //     'unused-imports/no-unused-imports': 'error',
+  //     'unused-imports/no-unused-vars': [
+  //       'warn',
+  //       {
+  //         vars: 'all',
+  //         varsIgnorePattern: '^_',
+  //         args: 'after-used',
+  //         argsIgnorePattern: '^_',
+  //       },
+  //     ],
+  //   },
+  // },
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     rules: {
@@ -232,7 +232,7 @@ const eslintConfig = defineConfig([
   },
   // Generated files - less strict rules
   {
-    files: ['src/lib/openapi/**/*', '**/*.generated.*'],
+    files: ['src/lib/http/generated/**/*', '**/*.generated.*'],
     rules: {
       '@typescript-eslint/no-explicit-any': 0,
       '@typescript-eslint/ban-types': 0,
@@ -247,7 +247,7 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
-    'src/lib/openapi/*',
+    'src/lib/blueprint/generated/*',
     '**/*.generated.*',
   ]),
 ]);

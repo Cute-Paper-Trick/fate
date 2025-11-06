@@ -1,5 +1,6 @@
 import { withSentryConfig } from '@sentry/nextjs';
-import type { NextConfig } from 'next';
+import { NextConfig } from 'next';
+import { Rewrite } from 'next/dist/lib/load-custom-routes';
 
 const nextConfig: NextConfig = {
   crossOrigin: 'anonymous',
@@ -7,16 +8,16 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
   },
   serverExternalPackages: ['require-in-the-middle'],
-  // async rewrites() {
-  //   const rewrites = [];
-  //   // 开发环境：代理外部 API（如模型服务）
-  //   rewrites.push({
-  //     source: '/external/:path*',
-  //     destination: `${'http://192.168.124.10:8002'}/:path*`,
-  //   });
+  async rewrites() {
+    const rewrites: Rewrite[] = [
+      {
+        source: '/external/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/:path*`,
+      },
+    ];
 
-  //   return rewrites;
-  // },
+    return rewrites;
+  },
 };
 
 const withSentry = withSentryConfig(nextConfig, {

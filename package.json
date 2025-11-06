@@ -34,7 +34,6 @@
     ]
   },
   "devDependencies": {
-    "@lobehub/lint": "^1.26.2",
     "eslint": "^9",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
