@@ -22,6 +22,7 @@ export const auth = betterAuth({
     usePlural: true,
   }),
   advanced: {
+    useSecureCookies: true,
     cookiePrefix: 'fate',
     crossSubDomainCookies: {
       enabled: true,
