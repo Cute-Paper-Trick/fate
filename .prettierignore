@@ -34,7 +34,7 @@ __snapshots__
 # production
 dist
 es
-lib
+# lib
 logs
 
 # umi

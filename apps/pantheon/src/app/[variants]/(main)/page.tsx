@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@lobehub/ui';
+import { Spin } from 'antd';
 
 import { useAccountChangeNickname } from '@/lib/http';
 import { templateSelectors } from '@/store/template/selectors';
@@ -13,27 +14,35 @@ export default function Home() {
 
   const { data: templateList, isLoading } = useTemplateList({});
 
-  const changeNickName = useAccountChangeNickname();
+  const changeNickName = useAccountChangeNickname({
+    mutation: {
+      onMutate: (_, context) => {
+        context.client.invalidateQueries({ queryKey: ['task'] });
+      },
+    },
+  });
 
   console.log('templateList', templateList, isLoading);
   console.log('templating', templating);
   console.log('simpleValue', simpleValue);
 
   return (
-    <main className="container mx-auto flex flex-col gap-4 p-6">
-      <h1 className="font-bold text-2xl">Hello, world.</h1>
-      <Button
-        loading={changeNickName.isPending}
-        onClick={() =>
-          changeNickName.mutate({
-            data: {
-              nickname: '',
-            },
-          })
-        }
-      >
-        更新昵称
-      </Button>
-    </main>
+    <Spin spinning={isLoading}>
+      <main className="container mx-auto flex flex-col gap-4 p-6">
+        <h1 className="font-bold text-2xl">Hello, world.</h1>
+        <Button
+          loading={changeNickName.isPending}
+          onClick={() =>
+            changeNickName.mutate({
+              data: {
+                nickname: '',
+              },
+            })
+          }
+        >
+          更新昵称
+        </Button>
+      </main>
+    </Spin>
   );
 }

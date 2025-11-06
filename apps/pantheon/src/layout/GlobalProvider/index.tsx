@@ -4,18 +4,18 @@ import AppTheme from './AppTheme';
 import Locale from './Locale';
 import QueryProvider from './Query';
 
-interface GlobalLayoutProps extends React.PropsWithChildren {}
+type GlobalLayoutProps = React.PropsWithChildren;
 
-const GlobalLayout = ({ children, ...rest }: GlobalLayoutProps) => {
+const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
     <AnalyticsProvider>
-      <AuthProvider>
-        <Locale defaultLang={'zh'}>
+      <Locale defaultLang={'zh'}>
+        <AuthProvider>
           <AppTheme>
             <QueryProvider>{children}</QueryProvider>
           </AppTheme>
-        </Locale>
-      </AuthProvider>
+        </AuthProvider>
+      </Locale>
     </AnalyticsProvider>
   );
 };

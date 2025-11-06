@@ -1,3 +1,5 @@
+declare module '*.css';
+
 interface Window {
   /** Ant-design-vue message instance */
   $message?: import('antd/es/message/interface').MessageInstance;

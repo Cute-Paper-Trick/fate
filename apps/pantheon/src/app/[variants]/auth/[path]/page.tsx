@@ -1,5 +1,6 @@
 import { AuthView } from '@daveyplate/better-auth-ui';
 import { authViewPaths } from '@daveyplate/better-auth-ui/server';
+import { Flexbox } from 'react-layout-kit';
 
 // import SignInPage from '@/components/auth/SignInPage';
 
@@ -12,18 +13,9 @@ export function generateStaticParams() {
 export default async function AuthPage({ params }: { params: Promise<{ path: string }> }) {
   const { path } = await params;
 
-  // Use custom sign-in page
-  // if (path === 'sign-in') {
-  //   return <SignInPage />;
-  // }
-
-  // For other auth paths, you can add more custom pages or use default
   return (
-    <main className="container flex grow flex-col items-center justify-center self-center p-4 md:p-6">
-      <div className="text-center">
-        <p className="text-gray-500">Auth page: {path}</p>
-      </div>
+    <Flexbox align="center" height="100vh" justify="center" width="100vw">
       <AuthView path={path} />
-    </main>
+    </Flexbox>
   );
 }

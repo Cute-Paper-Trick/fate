@@ -11,7 +11,7 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
   return (
     <HotkeysProvider>
       <TitleBar />
-      <Flexbox horizontal height={'100%'} width="100%" style={{ position: 'relative' }}>
+      <Flexbox height={'100%'} horizontal style={{ position: 'relative' }} width="100%">
         {children}
       </Flexbox>
       <Suspense>{/* <RegisterHotkeys /> */}</Suspense>

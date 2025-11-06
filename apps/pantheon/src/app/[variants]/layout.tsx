@@ -2,6 +2,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactNode } from 'react';
 
 import GlobalProvider from '@/layout/GlobalProvider';
+import '@/styles/globals.css';
 import { DynamicLayoutProps } from '@/types/next';
 import { RouteVariants } from '@/utils/server/routeVariants';
 

@@ -12,6 +12,7 @@ import {
 } from 'better-auth/plugins';
 
 import { authEnv } from '@/envs/cerberus';
+import { sendResetPasswordEmail } from '@/lib/email';
 
 import { db } from './db';
 
@@ -34,8 +35,23 @@ export const auth = betterAuth({
     'http://localhost:5090',
     'https://dev-daily-backend.goood.space',
   ],
+  // emailVerification: {
+  //   sendVerificationEmail: async ({ user, url }) => {
+  //     await sendEmail({
+  //       to: user.email,
+  //       subject: "Verify your email address",
+  //       text: `Click the link to verify your email: ${url}`,
+  //     });
+  //   },
+  //   sendOnSignIn: true,
+  // },
   emailAndPassword: {
+    // requireEmailVerification: true,
     enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      console.log('Sending reset password email to:', user.email, 'with url:', url);
+      await sendResetPasswordEmail(user.email, url);
+    },
   },
   session: {
     expiresIn: 60 * 60 * 24 * 7,
