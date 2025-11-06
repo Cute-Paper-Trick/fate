@@ -4,7 +4,7 @@ import { Flexbox } from 'react-layout-kit';
 
 // import SignInPage from '@/components/auth/SignInPage';
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 export function generateStaticParams() {
   return Object.values(authViewPaths).map((path) => ({ path }));

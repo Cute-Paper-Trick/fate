@@ -36,6 +36,7 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^6.1.0",
     "@clerk/nextjs": "^6.34.1",
     "@daveyplate/better-auth-ui": "^3.2.7",
     "@lobehub/ui": "^2.13.4",
