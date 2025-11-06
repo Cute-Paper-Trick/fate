@@ -1,0 +1,63 @@
+.briefUseBtn{
+    height: auto;
+    .top{
+      display: flex;
+      justify-content: center;
+      .title{
+        text-align: center;
+        .text{
+          font-weight: 700;
+          font-size: 2.25rem;
+          line-height: 2.5rem;
+          margin-bottom: 0.5rem;
+          color: #1f2937;
+        }
+        .des{
+          font-size: 1.125rem;
+          line-height: 1.75rem;
+          color: #6b7280;
+        }
+      }
+    }
+    .card{
+      padding: 1.5rem;
+      margin-top: 48px;
+      background-color: #fff;
+      border-radius: 6px;
+      .cardTitle{
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: #111827;
+        margin-bottom: 1.2rem;
+        svg{
+          font-size: 2rem;
+          color: #4f46e5;
+          margin-right: 0.5rem;
+        }
+      }
+      .cardDes{
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+      }
+    }
+    .button {
+      position: relative;
+      display: inline-block;
+      width: 180px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 100px;
+      color: rgba(197, 210, 255, 1);
+      border: 1px solid;
+      background: linear-gradient(180deg, rgba(0, 85, 255, 0) 27.27%, rgba(0, 136, 255, 0.2) 100%);
+      font-size: 16px;
+    }
+  }

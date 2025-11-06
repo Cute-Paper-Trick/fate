@@ -1,0 +1,110 @@
+.example {
+  margin-top: 48px;
+  position: relative;
+
+  .title {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 64px;
+    padding: 2rem;
+    cursor: pointer;
+
+    .cardTitle {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      font-weight: 600;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      svg {
+        font-size: 1.5rem;
+        color: #4f46e5;
+        margin-right: 0.75rem;
+      }
+    }
+
+    .cardContent {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+      display: flex;
+
+      .flow {
+        margin-left: 40px;
+        :global(.ant-steps) {
+          height: 100%;
+          justify-content: space-between;
+        }
+
+        :global(.ant-steps-icon) {
+          color: #fff;
+        }
+
+        :global(.ant-steps-item-container) {
+          justify-self: center;
+          justify-items: center;
+          display: flex;
+        }
+
+        :global(.ant-steps-item-icon) {
+          background-color: #4f46e5;
+          border-color: #4f46e5;
+          font-weight: 700;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 20px;
+          align-self: center;
+          min-width: 40px;
+        }
+
+        :global(.ant-steps-item-content) {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        :global(.ant-steps-item-tail) {
+          inset-inline-start: 20px;
+          top: 24px;
+        }
+
+        :global(.ant-steps-item) {
+          display: flex;
+        }
+
+        :global(.ant-steps-item-title) {
+          color: #1f2937 !important;
+          line-height: normal;
+          font-weight: 600;
+        }
+
+        :global(.ant-steps-item-description) {
+          color: #6b7280 !important;
+          padding-bottom: 0;
+        }
+      }
+
+      .image {
+        img {
+          object-fit: cover;
+          height: 256px;
+          width: 600px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}

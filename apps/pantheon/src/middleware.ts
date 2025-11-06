@@ -92,6 +92,7 @@ export const config = {
     '/lab(.*)',
     '/talk(.*)',
     '/task(.*)',
+    '/brief-introduct(.*)'
   ],
   // matcher: [
   //   /*
