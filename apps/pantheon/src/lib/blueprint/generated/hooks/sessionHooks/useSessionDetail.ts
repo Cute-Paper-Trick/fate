@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { SessionDetailMutationRequest, SessionDetailMutationResponse } from "../../types/sessionTypes/SessionDetail";
+import type { SessionDetailQueryResponse, SessionDetailQueryParams } from "../../types/sessionTypes/SessionDetail";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { sessionDetail } from "../../clients/axios/sessionService/sessionDetail";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const sessionDetailMutationKey = () => [{ url: '/api/session/detail' }] as const
+export const sessionDetailQueryKey = (params: SessionDetailQueryParams) => [{ url: '/api/session/detail' }, ...(params ? [params] : [])] as const
 
-export type SessionDetailMutationKey = ReturnType<typeof sessionDetailMutationKey>
+export type SessionDetailQueryKey = ReturnType<typeof sessionDetailQueryKey>
 
-export function sessionDetailMutationOptions(config: Partial<RequestConfig<SessionDetailMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = sessionDetailMutationKey()
-  return mutationOptions<SessionDetailMutationResponse, ResponseErrorConfig<Error>, {data: SessionDetailMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return sessionDetail(data, config)
-    },
+export function sessionDetailQueryOptions(params: SessionDetailQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = sessionDetailQueryKey(params)
+  return queryOptions<SessionDetailQueryResponse, ResponseErrorConfig<Error>, SessionDetailQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return sessionDetail(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function sessionDetailMutationOptions(config: Partial<RequestConfig<Sessi
  * @summary 获取会话详情
  * {@link /api/session/detail}
  */
-export function useSessionDetail<TContext>(options: 
+export function useSessionDetail<TData = SessionDetailQueryResponse, TQueryData = SessionDetailQueryResponse, TQueryKey extends QueryKey = SessionDetailQueryKey>(params: SessionDetailQueryParams, options: 
 {
-  mutation?: UseMutationOptions<SessionDetailMutationResponse, ResponseErrorConfig<Error>, {data: SessionDetailMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<SessionDetailMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<SessionDetailQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? sessionDetailMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? sessionDetailQueryKey(params)
 
-  const baseOptions = sessionDetailMutationOptions(config) as UseMutationOptions<SessionDetailMutationResponse, ResponseErrorConfig<Error>, {data: SessionDetailMutationRequest}, TContext>
+  const query = useQuery({
+   ...sessionDetailQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<SessionDetailMutationResponse, ResponseErrorConfig<Error>, {data: SessionDetailMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<SessionDetailMutationResponse, ResponseErrorConfig<Error>, {data: SessionDetailMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

@@ -1,2 +1,2 @@
-export { guideList200Schema, guideListMutationRequestSchema, guideListMutationResponseSchema } from "./guideListSchema";
+export { guideList200Schema, guideListQueryResponseSchema } from "./guideListSchema";
 export { guideReport200Schema, guideReportMutationRequestSchema, guideReportMutationResponseSchema } from "./guideReportSchema";

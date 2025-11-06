@@ -1,10 +1,14 @@
 export type { TaskTopicAddMutationKey } from "./useTaskTopicAdd";
 export type { TaskTopicDeleteMutationKey } from "./useTaskTopicDelete";
-export type { TaskTopicDetailMutationKey } from "./useTaskTopicDetail";
+export type { TaskTopicDetailQueryKey } from "./useTaskTopicDetail";
+export type { TaskTopicDetailSuspenseQueryKey } from "./useTaskTopicDetailSuspense";
 export type { TaskTopicEditMutationKey } from "./useTaskTopicEdit";
-export type { TaskTopicListMutationKey } from "./useTaskTopicList";
+export type { TaskTopicListQueryKey } from "./useTaskTopicList";
+export type { TaskTopicListSuspenseQueryKey } from "./useTaskTopicListSuspense";
 export { taskTopicAddMutationKey, taskTopicAddMutationOptions, useTaskTopicAdd } from "./useTaskTopicAdd";
 export { taskTopicDeleteMutationKey, taskTopicDeleteMutationOptions, useTaskTopicDelete } from "./useTaskTopicDelete";
-export { taskTopicDetailMutationKey, taskTopicDetailMutationOptions, useTaskTopicDetail } from "./useTaskTopicDetail";
+export { taskTopicDetailQueryKey, taskTopicDetailQueryOptions, useTaskTopicDetail } from "./useTaskTopicDetail";
+export { taskTopicDetailSuspenseQueryKey, taskTopicDetailSuspenseQueryOptions, useTaskTopicDetailSuspense } from "./useTaskTopicDetailSuspense";
 export { taskTopicEditMutationKey, taskTopicEditMutationOptions, useTaskTopicEdit } from "./useTaskTopicEdit";
-export { taskTopicListMutationKey, taskTopicListMutationOptions, useTaskTopicList } from "./useTaskTopicList";
+export { taskTopicListQueryKey, taskTopicListQueryOptions, useTaskTopicList } from "./useTaskTopicList";
+export { taskTopicListSuspenseQueryKey, taskTopicListSuspenseQueryOptions, useTaskTopicListSuspense } from "./useTaskTopicListSuspense";

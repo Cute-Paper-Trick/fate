@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1TaskUserCompleteCheckReq } from "../v1/TaskUserCompleteCheckReq";
 import type { V1TaskUserCompleteCheckRes } from "../v1/TaskUserCompleteCheckRes";
+
+export type TaskUserCompleteCheckQueryParams = {
+    /**
+     * @type array, []int
+    */
+    task_index_list: number[];
+};
 
 export type TaskUserCompleteCheck200 = V1TaskUserCompleteCheckRes;
 
-export type TaskUserCompleteCheckMutationRequest = V1TaskUserCompleteCheckReq;
+export type TaskUserCompleteCheckQueryResponse = TaskUserCompleteCheck200;
 
-export type TaskUserCompleteCheckMutationResponse = TaskUserCompleteCheck200;
-
-export type TaskUserCompleteCheckMutation = {
+export type TaskUserCompleteCheckQuery = {
     Response: TaskUserCompleteCheck200;
-    Request: TaskUserCompleteCheckMutationRequest;
+    QueryParams: TaskUserCompleteCheckQueryParams;
     Errors: any;
 };

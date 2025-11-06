@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskUserListMutationRequest, TaskUserListMutationResponse } from "../../../types/task_userTypes/TaskUserList";
+import type { TaskUserListQueryResponse } from "../../../types/task_userTypes/TaskUserList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTaskUserListUrl() {
-  const res = { method: 'POST', url: `/api/task_user/list` as const }  
+  const res = { method: 'GET', url: `/api/task_user/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTaskUserListUrl() {
  * @summary 我的任务列表
  * {@link /api/task_user/list}
  */
-export async function taskUserList(data?: TaskUserListMutationRequest, config: Partial<RequestConfig<TaskUserListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function taskUserList(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TaskUserListMutationResponse, ResponseErrorConfig<Error>, TaskUserListMutationRequest>({ method : "POST", url : getTaskUserListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TaskUserListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTaskUserListUrl().url.toString(), ... requestConfig })  
   return res.data
 }

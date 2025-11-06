@@ -4,13 +4,14 @@
 * Do not edit manually.
 */
 
-import type { TaskTopicDetail200, TaskTopicDetailMutationRequest, TaskTopicDetailMutationResponse } from "../../types/task_topicTypes/TaskTopicDetail";
-import { v1TaskTopicDetailReqSchema } from "../v1/taskTopicDetailReqSchema";
+import type { TaskTopicDetailQueryParams, TaskTopicDetail200, TaskTopicDetailQueryResponse } from "../../types/task_topicTypes/TaskTopicDetail";
 import { v1TaskTopicDetailResSchema } from "../v1/taskTopicDetailResSchema";
 import { z } from "zod/v4";
 
+export const taskTopicDetailQueryParamsSchema = z.object({
+    "id": z.coerce.number().int()
+    }) as unknown as z.ZodType<TaskTopicDetailQueryParams>
+
 export const taskTopicDetail200Schema = v1TaskTopicDetailResSchema as unknown as z.ZodType<TaskTopicDetail200>
 
-export const taskTopicDetailMutationRequestSchema = v1TaskTopicDetailReqSchema as unknown as z.ZodType<TaskTopicDetailMutationRequest>
-
-export const taskTopicDetailMutationResponseSchema = taskTopicDetail200Schema as unknown as z.ZodType<TaskTopicDetailMutationResponse>
+export const taskTopicDetailQueryResponseSchema = taskTopicDetail200Schema as unknown as z.ZodType<TaskTopicDetailQueryResponse>

@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1UserPurchaseDetailReq } from "../v1/UserPurchaseDetailReq";
 import type { V1UserPurchaseDetailRes } from "../v1/UserPurchaseDetailRes";
 
 export type UserPurchaseDetail200 = V1UserPurchaseDetailRes;
 
-export type UserPurchaseDetailMutationRequest = V1UserPurchaseDetailReq;
+export type UserPurchaseDetailQueryResponse = UserPurchaseDetail200;
 
-export type UserPurchaseDetailMutationResponse = UserPurchaseDetail200;
-
-export type UserPurchaseDetailMutation = {
+export type UserPurchaseDetailQuery = {
     Response: UserPurchaseDetail200;
-    Request: UserPurchaseDetailMutationRequest;
     Errors: any;
 };

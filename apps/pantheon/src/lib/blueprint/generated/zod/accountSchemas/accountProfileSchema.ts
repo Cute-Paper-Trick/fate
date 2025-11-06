@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { AccountProfile200, AccountProfileMutationRequest, AccountProfileMutationResponse } from "../../types/accountTypes/AccountProfile";
-import { v1AccountProfileReqSchema } from "../v1/accountProfileReqSchema";
+import type { AccountProfile200, AccountProfileQueryResponse } from "../../types/accountTypes/AccountProfile";
 import { v1AccountProfileResSchema } from "../v1/accountProfileResSchema";
 import { z } from "zod/v4";
 
 export const accountProfile200Schema = v1AccountProfileResSchema as unknown as z.ZodType<AccountProfile200>
 
-export const accountProfileMutationRequestSchema = v1AccountProfileReqSchema as unknown as z.ZodType<AccountProfileMutationRequest>
-
-export const accountProfileMutationResponseSchema = accountProfile200Schema as unknown as z.ZodType<AccountProfileMutationResponse>
+export const accountProfileQueryResponseSchema = accountProfile200Schema as unknown as z.ZodType<AccountProfileQueryResponse>

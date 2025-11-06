@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { UserPurchaseDetailMutationRequest, UserPurchaseDetailMutationResponse } from "../../../types/user_purchaseTypes/UserPurchaseDetail";
+import type { UserPurchaseDetailQueryResponse } from "../../../types/user_purchaseTypes/UserPurchaseDetail";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getUserPurchaseDetailUrl() {
-  const res = { method: 'POST', url: `/api/user_purchase/detail` as const }  
+  const res = { method: 'GET', url: `/api/user_purchase/detail` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getUserPurchaseDetailUrl() {
  * @summary 获取用户购买详情
  * {@link /api/user_purchase/detail}
  */
-export async function userPurchaseDetail(data?: UserPurchaseDetailMutationRequest, config: Partial<RequestConfig<UserPurchaseDetailMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function userPurchaseDetail(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<UserPurchaseDetailMutationResponse, ResponseErrorConfig<Error>, UserPurchaseDetailMutationRequest>({ method : "POST", url : getUserPurchaseDetailUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<UserPurchaseDetailQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getUserPurchaseDetailUrl().url.toString(), ... requestConfig })  
   return res.data
 }

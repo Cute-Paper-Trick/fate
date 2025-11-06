@@ -20,7 +20,7 @@ export const operations = {
   },
   "account_device_list": {
     "path": "/api/account/device_list",
-    "method": "post"
+    "method": "get"
   },
   "account_get_permissions": {
     "path": "/api/account/get_permissions",
@@ -40,11 +40,11 @@ export const operations = {
   },
   "account_profile": {
     "path": "/api/account/profile",
-    "method": "post"
+    "method": "get"
   },
   "account_topic_list": {
     "path": "/api/account/topic_list",
-    "method": "post"
+    "method": "get"
   },
   "chat_completions": {
     "path": "/api/chat/completions",
@@ -100,7 +100,7 @@ export const operations = {
   },
   "common_sign_sts": {
     "path": "/api/common/sign_sts",
-    "method": "post"
+    "method": "get"
   },
   "common_upload": {
     "path": "/api/common/upload",
@@ -108,7 +108,7 @@ export const operations = {
   },
   "guide_list": {
     "path": "/api/guide/list",
-    "method": "post"
+    "method": "get"
   },
   "guide_report": {
     "path": "/api/guide/report",
@@ -116,15 +116,15 @@ export const operations = {
   },
   "model_list": {
     "path": "/api/model/list",
-    "method": "post"
+    "method": "get"
   },
   "model_tools_search": {
     "path": "/api/model_tools/search",
-    "method": "post"
+    "method": "get"
   },
   "notification_list": {
     "path": "/api/notification/list",
-    "method": "post"
+    "method": "get"
   },
   "notification_mark_read": {
     "path": "/api/notification/mark_read",
@@ -152,15 +152,15 @@ export const operations = {
   },
   "points_findAccountPointAndLevel": {
     "path": "/api/points/findAccountPointAndLevel",
-    "method": "post"
+    "method": "get"
   },
   "points_findLevelTypeList": {
     "path": "/api/points/findLevelTypeList",
-    "method": "post"
+    "method": "get"
   },
   "points_findPointDetailList": {
     "path": "/api/points/findPointDetailList",
-    "method": "post"
+    "method": "get"
   },
   "points_findPointTypeList": {
     "path": "/api/points/findPointTypeList",
@@ -176,11 +176,11 @@ export const operations = {
   },
   "session_detail": {
     "path": "/api/session/detail",
-    "method": "post"
+    "method": "get"
   },
   "session_list": {
     "path": "/api/session/list",
-    "method": "post"
+    "method": "get"
   },
   "session_rename": {
     "path": "/api/session/rename",
@@ -188,7 +188,7 @@ export const operations = {
   },
   "task_list": {
     "path": "/api/task/list",
-    "method": "post"
+    "method": "get"
   },
   "task_topic_add": {
     "path": "/api/task_topic/add",
@@ -200,7 +200,7 @@ export const operations = {
   },
   "task_topic_detail": {
     "path": "/api/task_topic/detail",
-    "method": "post"
+    "method": "get"
   },
   "task_topic_edit": {
     "path": "/api/task_topic/edit",
@@ -208,11 +208,11 @@ export const operations = {
   },
   "task_topic_list": {
     "path": "/api/task_topic/list",
-    "method": "post"
+    "method": "get"
   },
   "task_user_complete_check": {
     "path": "/api/task_user/complete_check",
-    "method": "post"
+    "method": "get"
   },
   "task_user_done": {
     "path": "/api/task_user/done",
@@ -220,11 +220,11 @@ export const operations = {
   },
   "task_user_list": {
     "path": "/api/task_user/list",
-    "method": "post"
+    "method": "get"
   },
   "task_user_undone": {
     "path": "/api/task_user/undone",
-    "method": "post"
+    "method": "get"
   },
   "topic_comment_add": {
     "path": "/api/topic_comment/add",
@@ -232,11 +232,11 @@ export const operations = {
   },
   "topic_comment_list": {
     "path": "/api/topic_comment/list",
-    "method": "post"
+    "method": "get"
   },
   "topic_comment_sub_list": {
     "path": "/api/topic_comment/sub_list",
-    "method": "post"
+    "method": "get"
   },
   "topic_like_like": {
     "path": "/api/topic_like/like",
@@ -256,15 +256,15 @@ export const operations = {
   },
   "train_detail": {
     "path": "/api/train/detail",
-    "method": "post"
+    "method": "get"
   },
   "train_list": {
     "path": "/api/train/list",
-    "method": "post"
+    "method": "get"
   },
   "train_result": {
     "path": "/api/train/result",
-    "method": "post"
+    "method": "get"
   },
   "train_save": {
     "path": "/api/train/save",
@@ -272,6 +272,6 @@ export const operations = {
   },
   "user_purchase_detail": {
     "path": "/api/user_purchase/detail",
-    "method": "post"
+    "method": "get"
   }
 }

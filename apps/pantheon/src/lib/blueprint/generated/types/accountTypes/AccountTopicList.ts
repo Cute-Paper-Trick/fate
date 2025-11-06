@@ -4,17 +4,29 @@
 * Do not edit manually.
 */
 
-import type { V1AccountTopicListReq } from "../v1/AccountTopicListReq";
 import type { V1AccountTopicListRes } from "../v1/AccountTopicListRes";
+
+export type AccountTopicListQueryParams = {
+    /**
+     * @type string | undefined, consts.TopicStatus
+    */
+    status?: string | undefined;
+    /**
+     * @type integer, int
+    */
+    page: number;
+    /**
+     * @type integer, int
+    */
+    size: number;
+};
 
 export type AccountTopicList200 = V1AccountTopicListRes;
 
-export type AccountTopicListMutationRequest = V1AccountTopicListReq;
+export type AccountTopicListQueryResponse = AccountTopicList200;
 
-export type AccountTopicListMutationResponse = AccountTopicList200;
-
-export type AccountTopicListMutation = {
+export type AccountTopicListQuery = {
     Response: AccountTopicList200;
-    Request: AccountTopicListMutationRequest;
+    QueryParams: AccountTopicListQueryParams;
     Errors: any;
 };

@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1AccountDeviceListReq } from "../v1/AccountDeviceListReq";
 import type { V1AccountDeviceListRes } from "../v1/AccountDeviceListRes";
 
 export type AccountDeviceList200 = V1AccountDeviceListRes;
 
-export type AccountDeviceListMutationRequest = V1AccountDeviceListReq;
+export type AccountDeviceListQueryResponse = AccountDeviceList200;
 
-export type AccountDeviceListMutationResponse = AccountDeviceList200;
-
-export type AccountDeviceListMutation = {
+export type AccountDeviceListQuery = {
     Response: AccountDeviceList200;
-    Request: AccountDeviceListMutationRequest;
     Errors: any;
 };

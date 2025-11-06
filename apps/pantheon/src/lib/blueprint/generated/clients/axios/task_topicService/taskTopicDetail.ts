@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskTopicDetailMutationRequest, TaskTopicDetailMutationResponse } from "../../../types/task_topicTypes/TaskTopicDetail";
+import type { TaskTopicDetailQueryResponse, TaskTopicDetailQueryParams } from "../../../types/task_topicTypes/TaskTopicDetail";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTaskTopicDetailUrl() {
-  const res = { method: 'POST', url: `/api/task_topic/detail` as const }  
+  const res = { method: 'GET', url: `/api/task_topic/detail` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTaskTopicDetailUrl() {
  * @summary 主题详情
  * {@link /api/task_topic/detail}
  */
-export async function taskTopicDetail(data: TaskTopicDetailMutationRequest, config: Partial<RequestConfig<TaskTopicDetailMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function taskTopicDetail(params: TaskTopicDetailQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TaskTopicDetailMutationResponse, ResponseErrorConfig<Error>, TaskTopicDetailMutationRequest>({ method : "POST", url : getTaskTopicDetailUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TaskTopicDetailQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTaskTopicDetailUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

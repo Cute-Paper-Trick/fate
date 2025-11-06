@@ -1,1 +1,1 @@
-export type { UserPurchaseDetail200, UserPurchaseDetailMutationRequest, UserPurchaseDetailMutationResponse, UserPurchaseDetailMutation } from "./UserPurchaseDetail";
+export type { UserPurchaseDetail200, UserPurchaseDetailQueryResponse, UserPurchaseDetailQuery } from "./UserPurchaseDetail";

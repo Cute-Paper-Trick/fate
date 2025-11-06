@@ -4,13 +4,16 @@
 * Do not edit manually.
 */
 
-import type { TopicCommentList200, TopicCommentListMutationRequest, TopicCommentListMutationResponse } from "../../types/topic_commentTypes/TopicCommentList";
-import { v1TopicCommentListReqSchema } from "../v1/topicCommentListReqSchema";
+import type { TopicCommentListQueryParams, TopicCommentList200, TopicCommentListQueryResponse } from "../../types/topic_commentTypes/TopicCommentList";
 import { v1TopicCommentListResSchema } from "../v1/topicCommentListResSchema";
 import { z } from "zod/v4";
 
+export const topicCommentListQueryParamsSchema = z.object({
+    "topic_id": z.coerce.number().int(),
+"page": z.coerce.number().int(),
+"size": z.coerce.number().int()
+    }) as unknown as z.ZodType<TopicCommentListQueryParams>
+
 export const topicCommentList200Schema = v1TopicCommentListResSchema as unknown as z.ZodType<TopicCommentList200>
 
-export const topicCommentListMutationRequestSchema = v1TopicCommentListReqSchema as unknown as z.ZodType<TopicCommentListMutationRequest>
-
-export const topicCommentListMutationResponseSchema = topicCommentList200Schema as unknown as z.ZodType<TopicCommentListMutationResponse>
+export const topicCommentListQueryResponseSchema = topicCommentList200Schema as unknown as z.ZodType<TopicCommentListQueryResponse>

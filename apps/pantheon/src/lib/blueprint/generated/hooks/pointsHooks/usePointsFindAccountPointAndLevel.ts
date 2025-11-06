@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { PointsFindAccountPointAndLevelMutationRequest, PointsFindAccountPointAndLevelMutationResponse } from "../../types/pointsTypes/PointsFindAccountPointAndLevel";
+import type { PointsFindAccountPointAndLevelQueryResponse, PointsFindAccountPointAndLevelQueryParams } from "../../types/pointsTypes/PointsFindAccountPointAndLevel";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { pointsFindAccountPointAndLevel } from "../../clients/axios/pointsService/pointsFindAccountPointAndLevel";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const pointsFindAccountPointAndLevelMutationKey = () => [{ url: '/api/points/findAccountPointAndLevel' }] as const
+export const pointsFindAccountPointAndLevelQueryKey = (params?: PointsFindAccountPointAndLevelQueryParams) => [{ url: '/api/points/findAccountPointAndLevel' }, ...(params ? [params] : [])] as const
 
-export type PointsFindAccountPointAndLevelMutationKey = ReturnType<typeof pointsFindAccountPointAndLevelMutationKey>
+export type PointsFindAccountPointAndLevelQueryKey = ReturnType<typeof pointsFindAccountPointAndLevelQueryKey>
 
-export function pointsFindAccountPointAndLevelMutationOptions(config: Partial<RequestConfig<PointsFindAccountPointAndLevelMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = pointsFindAccountPointAndLevelMutationKey()
-  return mutationOptions<PointsFindAccountPointAndLevelMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindAccountPointAndLevelMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return pointsFindAccountPointAndLevel(data, config)
-    },
+export function pointsFindAccountPointAndLevelQueryOptions(params?: PointsFindAccountPointAndLevelQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = pointsFindAccountPointAndLevelQueryKey(params)
+  return queryOptions<PointsFindAccountPointAndLevelQueryResponse, ResponseErrorConfig<Error>, PointsFindAccountPointAndLevelQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return pointsFindAccountPointAndLevel(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function pointsFindAccountPointAndLevelMutationOptions(config: Partial<Re
  * @summary 查询账户积分等级详情
  * {@link /api/points/findAccountPointAndLevel}
  */
-export function usePointsFindAccountPointAndLevel<TContext>(options: 
+export function usePointsFindAccountPointAndLevel<TData = PointsFindAccountPointAndLevelQueryResponse, TQueryData = PointsFindAccountPointAndLevelQueryResponse, TQueryKey extends QueryKey = PointsFindAccountPointAndLevelQueryKey>(params?: PointsFindAccountPointAndLevelQueryParams, options: 
 {
-  mutation?: UseMutationOptions<PointsFindAccountPointAndLevelMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindAccountPointAndLevelMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<PointsFindAccountPointAndLevelMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<PointsFindAccountPointAndLevelQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? pointsFindAccountPointAndLevelMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? pointsFindAccountPointAndLevelQueryKey(params)
 
-  const baseOptions = pointsFindAccountPointAndLevelMutationOptions(config) as UseMutationOptions<PointsFindAccountPointAndLevelMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindAccountPointAndLevelMutationRequest}, TContext>
+  const query = useQuery({
+   ...pointsFindAccountPointAndLevelQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<PointsFindAccountPointAndLevelMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindAccountPointAndLevelMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<PointsFindAccountPointAndLevelMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindAccountPointAndLevelMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

@@ -1,10 +1,14 @@
 export type { SessionCreateMutationKey } from "./useSessionCreate";
 export type { SessionDeleteMutationKey } from "./useSessionDelete";
-export type { SessionDetailMutationKey } from "./useSessionDetail";
-export type { SessionListMutationKey } from "./useSessionList";
+export type { SessionDetailQueryKey } from "./useSessionDetail";
+export type { SessionDetailSuspenseQueryKey } from "./useSessionDetailSuspense";
+export type { SessionListQueryKey } from "./useSessionList";
+export type { SessionListSuspenseQueryKey } from "./useSessionListSuspense";
 export type { SessionRenameMutationKey } from "./useSessionRename";
 export { sessionCreateMutationKey, sessionCreateMutationOptions, useSessionCreate } from "./useSessionCreate";
 export { sessionDeleteMutationKey, sessionDeleteMutationOptions, useSessionDelete } from "./useSessionDelete";
-export { sessionDetailMutationKey, sessionDetailMutationOptions, useSessionDetail } from "./useSessionDetail";
-export { sessionListMutationKey, sessionListMutationOptions, useSessionList } from "./useSessionList";
+export { sessionDetailQueryKey, sessionDetailQueryOptions, useSessionDetail } from "./useSessionDetail";
+export { sessionDetailSuspenseQueryKey, sessionDetailSuspenseQueryOptions, useSessionDetailSuspense } from "./useSessionDetailSuspense";
+export { sessionListQueryKey, sessionListQueryOptions, useSessionList } from "./useSessionList";
+export { sessionListSuspenseQueryKey, sessionListSuspenseQueryOptions, useSessionListSuspense } from "./useSessionListSuspense";
 export { sessionRenameMutationKey, sessionRenameMutationOptions, useSessionRename } from "./useSessionRename";

@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { CommonSignStsMutationRequest, CommonSignStsMutationResponse } from "../../types/commonTypes/CommonSignSts";
+import type { CommonSignStsQueryResponse } from "../../types/commonTypes/CommonSignSts";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { commonSignSts } from "../../clients/axios/commonService/commonSignSts";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const commonSignStsMutationKey = () => [{ url: '/api/common/sign_sts' }] as const
+export const commonSignStsQueryKey = () => [{ url: '/api/common/sign_sts' }] as const
 
-export type CommonSignStsMutationKey = ReturnType<typeof commonSignStsMutationKey>
+export type CommonSignStsQueryKey = ReturnType<typeof commonSignStsQueryKey>
 
-export function commonSignStsMutationOptions(config: Partial<RequestConfig<CommonSignStsMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = commonSignStsMutationKey()
-  return mutationOptions<CommonSignStsMutationResponse, ResponseErrorConfig<Error>, {data?: CommonSignStsMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return commonSignSts(data, config)
-    },
+export function commonSignStsQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = commonSignStsQueryKey()
+  return queryOptions<CommonSignStsQueryResponse, ResponseErrorConfig<Error>, CommonSignStsQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return commonSignSts(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function commonSignStsMutationOptions(config: Partial<RequestConfig<Commo
  * @summary 获取STS临时凭证
  * {@link /api/common/sign_sts}
  */
-export function useCommonSignSts<TContext>(options: 
+export function useCommonSignSts<TData = CommonSignStsQueryResponse, TQueryData = CommonSignStsQueryResponse, TQueryKey extends QueryKey = CommonSignStsQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<CommonSignStsMutationResponse, ResponseErrorConfig<Error>, {data?: CommonSignStsMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<CommonSignStsMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<CommonSignStsQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? commonSignStsMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? commonSignStsQueryKey()
 
-  const baseOptions = commonSignStsMutationOptions(config) as UseMutationOptions<CommonSignStsMutationResponse, ResponseErrorConfig<Error>, {data?: CommonSignStsMutationRequest}, TContext>
+  const query = useQuery({
+   ...commonSignStsQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<CommonSignStsMutationResponse, ResponseErrorConfig<Error>, {data?: CommonSignStsMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<CommonSignStsMutationResponse, ResponseErrorConfig<Error>, {data?: CommonSignStsMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { UserPurchaseDetailMutationRequest, UserPurchaseDetailMutationResponse } from "../../types/user_purchaseTypes/UserPurchaseDetail";
+import type { UserPurchaseDetailQueryResponse } from "../../types/user_purchaseTypes/UserPurchaseDetail";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { userPurchaseDetail } from "../../clients/axios/user_purchaseService/userPurchaseDetail";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const userPurchaseDetailMutationKey = () => [{ url: '/api/user_purchase/detail' }] as const
+export const userPurchaseDetailQueryKey = () => [{ url: '/api/user_purchase/detail' }] as const
 
-export type UserPurchaseDetailMutationKey = ReturnType<typeof userPurchaseDetailMutationKey>
+export type UserPurchaseDetailQueryKey = ReturnType<typeof userPurchaseDetailQueryKey>
 
-export function userPurchaseDetailMutationOptions(config: Partial<RequestConfig<UserPurchaseDetailMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = userPurchaseDetailMutationKey()
-  return mutationOptions<UserPurchaseDetailMutationResponse, ResponseErrorConfig<Error>, {data?: UserPurchaseDetailMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return userPurchaseDetail(data, config)
-    },
+export function userPurchaseDetailQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = userPurchaseDetailQueryKey()
+  return queryOptions<UserPurchaseDetailQueryResponse, ResponseErrorConfig<Error>, UserPurchaseDetailQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return userPurchaseDetail(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function userPurchaseDetailMutationOptions(config: Partial<RequestConfig<
  * @summary 获取用户购买详情
  * {@link /api/user_purchase/detail}
  */
-export function useUserPurchaseDetail<TContext>(options: 
+export function useUserPurchaseDetail<TData = UserPurchaseDetailQueryResponse, TQueryData = UserPurchaseDetailQueryResponse, TQueryKey extends QueryKey = UserPurchaseDetailQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<UserPurchaseDetailMutationResponse, ResponseErrorConfig<Error>, {data?: UserPurchaseDetailMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<UserPurchaseDetailMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<UserPurchaseDetailQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? userPurchaseDetailMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? userPurchaseDetailQueryKey()
 
-  const baseOptions = userPurchaseDetailMutationOptions(config) as UseMutationOptions<UserPurchaseDetailMutationResponse, ResponseErrorConfig<Error>, {data?: UserPurchaseDetailMutationRequest}, TContext>
+  const query = useQuery({
+   ...userPurchaseDetailQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<UserPurchaseDetailMutationResponse, ResponseErrorConfig<Error>, {data?: UserPurchaseDetailMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<UserPurchaseDetailMutationResponse, ResponseErrorConfig<Error>, {data?: UserPurchaseDetailMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

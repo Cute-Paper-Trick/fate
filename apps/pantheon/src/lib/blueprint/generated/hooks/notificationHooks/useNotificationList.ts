@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { NotificationListMutationRequest, NotificationListMutationResponse } from "../../types/notificationTypes/NotificationList";
+import type { NotificationListQueryResponse, NotificationListQueryParams } from "../../types/notificationTypes/NotificationList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { notificationList } from "../../clients/axios/notificationService/notificationList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const notificationListMutationKey = () => [{ url: '/api/notification/list' }] as const
+export const notificationListQueryKey = (params: NotificationListQueryParams) => [{ url: '/api/notification/list' }, ...(params ? [params] : [])] as const
 
-export type NotificationListMutationKey = ReturnType<typeof notificationListMutationKey>
+export type NotificationListQueryKey = ReturnType<typeof notificationListQueryKey>
 
-export function notificationListMutationOptions(config: Partial<RequestConfig<NotificationListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = notificationListMutationKey()
-  return mutationOptions<NotificationListMutationResponse, ResponseErrorConfig<Error>, {data: NotificationListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return notificationList(data, config)
-    },
+export function notificationListQueryOptions(params: NotificationListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = notificationListQueryKey(params)
+  return queryOptions<NotificationListQueryResponse, ResponseErrorConfig<Error>, NotificationListQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return notificationList(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function notificationListMutationOptions(config: Partial<RequestConfig<No
  * @summary 通知列表
  * {@link /api/notification/list}
  */
-export function useNotificationList<TContext>(options: 
+export function useNotificationList<TData = NotificationListQueryResponse, TQueryData = NotificationListQueryResponse, TQueryKey extends QueryKey = NotificationListQueryKey>(params: NotificationListQueryParams, options: 
 {
-  mutation?: UseMutationOptions<NotificationListMutationResponse, ResponseErrorConfig<Error>, {data: NotificationListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<NotificationListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<NotificationListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? notificationListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? notificationListQueryKey(params)
 
-  const baseOptions = notificationListMutationOptions(config) as UseMutationOptions<NotificationListMutationResponse, ResponseErrorConfig<Error>, {data: NotificationListMutationRequest}, TContext>
+  const query = useQuery({
+   ...notificationListQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<NotificationListMutationResponse, ResponseErrorConfig<Error>, {data: NotificationListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<NotificationListMutationResponse, ResponseErrorConfig<Error>, {data: NotificationListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

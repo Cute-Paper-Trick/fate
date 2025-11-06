@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1PointsFindLevelTypeListReq } from "../v1/PointsFindLevelTypeListReq";
 import type { V1PointsFindLevelTypeListRes } from "../v1/PointsFindLevelTypeListRes";
 
 export type PointsFindLevelTypeList200 = V1PointsFindLevelTypeListRes;
 
-export type PointsFindLevelTypeListMutationRequest = V1PointsFindLevelTypeListReq;
+export type PointsFindLevelTypeListQueryResponse = PointsFindLevelTypeList200;
 
-export type PointsFindLevelTypeListMutationResponse = PointsFindLevelTypeList200;
-
-export type PointsFindLevelTypeListMutation = {
+export type PointsFindLevelTypeListQuery = {
     Response: PointsFindLevelTypeList200;
-    Request: PointsFindLevelTypeListMutationRequest;
     Errors: any;
 };

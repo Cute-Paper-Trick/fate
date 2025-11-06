@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TrainListMutationRequest, TrainListMutationResponse } from "../../types/trainTypes/TrainList";
+import type { TrainListQueryResponse, TrainListQueryParams } from "../../types/trainTypes/TrainList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { trainList } from "../../clients/axios/trainService/trainList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const trainListMutationKey = () => [{ url: '/api/train/list' }] as const
+export const trainListQueryKey = (params: TrainListQueryParams) => [{ url: '/api/train/list' }, ...(params ? [params] : [])] as const
 
-export type TrainListMutationKey = ReturnType<typeof trainListMutationKey>
+export type TrainListQueryKey = ReturnType<typeof trainListQueryKey>
 
-export function trainListMutationOptions(config: Partial<RequestConfig<TrainListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = trainListMutationKey()
-  return mutationOptions<TrainListMutationResponse, ResponseErrorConfig<Error>, {data: TrainListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return trainList(data, config)
-    },
+export function trainListQueryOptions(params: TrainListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = trainListQueryKey(params)
+  return queryOptions<TrainListQueryResponse, ResponseErrorConfig<Error>, TrainListQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return trainList(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function trainListMutationOptions(config: Partial<RequestConfig<TrainList
  * @summary 我的模型列表
  * {@link /api/train/list}
  */
-export function useTrainList<TContext>(options: 
+export function useTrainList<TData = TrainListQueryResponse, TQueryData = TrainListQueryResponse, TQueryKey extends QueryKey = TrainListQueryKey>(params: TrainListQueryParams, options: 
 {
-  mutation?: UseMutationOptions<TrainListMutationResponse, ResponseErrorConfig<Error>, {data: TrainListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TrainListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TrainListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? trainListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? trainListQueryKey(params)
 
-  const baseOptions = trainListMutationOptions(config) as UseMutationOptions<TrainListMutationResponse, ResponseErrorConfig<Error>, {data: TrainListMutationRequest}, TContext>
+  const query = useQuery({
+   ...trainListQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TrainListMutationResponse, ResponseErrorConfig<Error>, {data: TrainListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TrainListMutationResponse, ResponseErrorConfig<Error>, {data: TrainListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

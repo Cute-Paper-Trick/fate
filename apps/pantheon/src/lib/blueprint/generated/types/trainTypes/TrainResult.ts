@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1TrainResultReq } from "../v1/TrainResultReq";
 import type { V1TrainResultRes } from "../v1/TrainResultRes";
+
+export type TrainResultQueryParams = {
+    /**
+     * @type integer, int64
+    */
+    train_id: number;
+};
 
 export type TrainResult200 = V1TrainResultRes;
 
-export type TrainResultMutationRequest = V1TrainResultReq;
+export type TrainResultQueryResponse = TrainResult200;
 
-export type TrainResultMutationResponse = TrainResult200;
-
-export type TrainResultMutation = {
+export type TrainResultQuery = {
     Response: TrainResult200;
-    Request: TrainResultMutationRequest;
+    QueryParams: TrainResultQueryParams;
     Errors: any;
 };

@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1PointsFindPointDetailListReq } from "../v1/PointsFindPointDetailListReq";
 import type { V1PointsFindPointDetailListRes } from "../v1/PointsFindPointDetailListRes";
 
 export type PointsFindPointDetailList200 = V1PointsFindPointDetailListRes;
 
-export type PointsFindPointDetailListMutationRequest = V1PointsFindPointDetailListReq;
+export type PointsFindPointDetailListQueryResponse = PointsFindPointDetailList200;
 
-export type PointsFindPointDetailListMutationResponse = PointsFindPointDetailList200;
-
-export type PointsFindPointDetailListMutation = {
+export type PointsFindPointDetailListQuery = {
     Response: PointsFindPointDetailList200;
-    Request: PointsFindPointDetailListMutationRequest;
     Errors: any;
 };

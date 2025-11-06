@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { AccountDeviceListMutationRequest, AccountDeviceListMutationResponse } from "../../types/accountTypes/AccountDeviceList";
+import type { AccountDeviceListQueryResponse } from "../../types/accountTypes/AccountDeviceList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { accountDeviceList } from "../../clients/axios/accountService/accountDeviceList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const accountDeviceListMutationKey = () => [{ url: '/api/account/device_list' }] as const
+export const accountDeviceListQueryKey = () => [{ url: '/api/account/device_list' }] as const
 
-export type AccountDeviceListMutationKey = ReturnType<typeof accountDeviceListMutationKey>
+export type AccountDeviceListQueryKey = ReturnType<typeof accountDeviceListQueryKey>
 
-export function accountDeviceListMutationOptions(config: Partial<RequestConfig<AccountDeviceListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = accountDeviceListMutationKey()
-  return mutationOptions<AccountDeviceListMutationResponse, ResponseErrorConfig<Error>, {data?: AccountDeviceListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return accountDeviceList(data, config)
-    },
+export function accountDeviceListQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = accountDeviceListQueryKey()
+  return queryOptions<AccountDeviceListQueryResponse, ResponseErrorConfig<Error>, AccountDeviceListQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return accountDeviceList(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function accountDeviceListMutationOptions(config: Partial<RequestConfig<A
  * @summary 用户设备列表
  * {@link /api/account/device_list}
  */
-export function useAccountDeviceList<TContext>(options: 
+export function useAccountDeviceList<TData = AccountDeviceListQueryResponse, TQueryData = AccountDeviceListQueryResponse, TQueryKey extends QueryKey = AccountDeviceListQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<AccountDeviceListMutationResponse, ResponseErrorConfig<Error>, {data?: AccountDeviceListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<AccountDeviceListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<AccountDeviceListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? accountDeviceListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? accountDeviceListQueryKey()
 
-  const baseOptions = accountDeviceListMutationOptions(config) as UseMutationOptions<AccountDeviceListMutationResponse, ResponseErrorConfig<Error>, {data?: AccountDeviceListMutationRequest}, TContext>
+  const query = useQuery({
+   ...accountDeviceListQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<AccountDeviceListMutationResponse, ResponseErrorConfig<Error>, {data?: AccountDeviceListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<AccountDeviceListMutationResponse, ResponseErrorConfig<Error>, {data?: AccountDeviceListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

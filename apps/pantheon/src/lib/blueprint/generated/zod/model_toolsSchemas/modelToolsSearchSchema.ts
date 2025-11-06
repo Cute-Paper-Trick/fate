@@ -4,13 +4,14 @@
 * Do not edit manually.
 */
 
-import type { ModelToolsSearch200, ModelToolsSearchMutationRequest, ModelToolsSearchMutationResponse } from "../../types/model_toolsTypes/ModelToolsSearch";
-import { v1ModelToolsSearchReqSchema } from "../v1/modelToolsSearchReqSchema";
+import type { ModelToolsSearchQueryParams, ModelToolsSearch200, ModelToolsSearchQueryResponse } from "../../types/model_toolsTypes/ModelToolsSearch";
 import { v1ModelToolsSearchResSchema } from "../v1/modelToolsSearchResSchema";
 import { z } from "zod/v4";
 
+export const modelToolsSearchQueryParamsSchema = z.object({
+    "query": z.string()
+    }) as unknown as z.ZodType<ModelToolsSearchQueryParams>
+
 export const modelToolsSearch200Schema = v1ModelToolsSearchResSchema as unknown as z.ZodType<ModelToolsSearch200>
 
-export const modelToolsSearchMutationRequestSchema = v1ModelToolsSearchReqSchema as unknown as z.ZodType<ModelToolsSearchMutationRequest>
-
-export const modelToolsSearchMutationResponseSchema = modelToolsSearch200Schema as unknown as z.ZodType<ModelToolsSearchMutationResponse>
+export const modelToolsSearchQueryResponseSchema = modelToolsSearch200Schema as unknown as z.ZodType<ModelToolsSearchQueryResponse>

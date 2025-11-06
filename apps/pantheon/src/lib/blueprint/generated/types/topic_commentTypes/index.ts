@@ -1,3 +1,3 @@
 export type { TopicCommentAdd200, TopicCommentAddMutationRequest, TopicCommentAddMutationResponse, TopicCommentAddMutation } from "./TopicCommentAdd";
-export type { TopicCommentList200, TopicCommentListMutationRequest, TopicCommentListMutationResponse, TopicCommentListMutation } from "./TopicCommentList";
-export type { TopicCommentSubList200, TopicCommentSubListMutationRequest, TopicCommentSubListMutationResponse, TopicCommentSubListMutation } from "./TopicCommentSubList";
+export type { TopicCommentListQueryParams, TopicCommentList200, TopicCommentListQueryResponse, TopicCommentListQuery } from "./TopicCommentList";
+export type { TopicCommentSubListQueryParams, TopicCommentSubList200, TopicCommentSubListQueryResponse, TopicCommentSubListQuery } from "./TopicCommentSubList";

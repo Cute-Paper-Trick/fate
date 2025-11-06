@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { PointsFindAccountPointAndLevelMutationRequest, PointsFindAccountPointAndLevelMutationResponse } from "../../../types/pointsTypes/PointsFindAccountPointAndLevel";
+import type { PointsFindAccountPointAndLevelQueryResponse, PointsFindAccountPointAndLevelQueryParams } from "../../../types/pointsTypes/PointsFindAccountPointAndLevel";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getPointsFindAccountPointAndLevelUrl() {
-  const res = { method: 'POST', url: `/api/points/findAccountPointAndLevel` as const }  
+  const res = { method: 'GET', url: `/api/points/findAccountPointAndLevel` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getPointsFindAccountPointAndLevelUrl() {
  * @summary 查询账户积分等级详情
  * {@link /api/points/findAccountPointAndLevel}
  */
-export async function pointsFindAccountPointAndLevel(data?: PointsFindAccountPointAndLevelMutationRequest, config: Partial<RequestConfig<PointsFindAccountPointAndLevelMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function pointsFindAccountPointAndLevel(params?: PointsFindAccountPointAndLevelQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<PointsFindAccountPointAndLevelMutationResponse, ResponseErrorConfig<Error>, PointsFindAccountPointAndLevelMutationRequest>({ method : "POST", url : getPointsFindAccountPointAndLevelUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<PointsFindAccountPointAndLevelQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getPointsFindAccountPointAndLevelUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { AccountProfileMutationRequest, AccountProfileMutationResponse } from "../../../types/accountTypes/AccountProfile";
+import type { AccountProfileQueryResponse } from "../../../types/accountTypes/AccountProfile";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getAccountProfileUrl() {
-  const res = { method: 'POST', url: `/api/account/profile` as const }  
+  const res = { method: 'GET', url: `/api/account/profile` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getAccountProfileUrl() {
  * @summary 获取用户详细信息
  * {@link /api/account/profile}
  */
-export async function accountProfile(data?: AccountProfileMutationRequest, config: Partial<RequestConfig<AccountProfileMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function accountProfile(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<AccountProfileMutationResponse, ResponseErrorConfig<Error>, AccountProfileMutationRequest>({ method : "POST", url : getAccountProfileUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<AccountProfileQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getAccountProfileUrl().url.toString(), ... requestConfig })  
   return res.data
 }

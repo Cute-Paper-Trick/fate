@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { AccountDeviceList200, AccountDeviceListMutationRequest, AccountDeviceListMutationResponse } from "../../types/accountTypes/AccountDeviceList";
-import { v1AccountDeviceListReqSchema } from "../v1/accountDeviceListReqSchema";
+import type { AccountDeviceList200, AccountDeviceListQueryResponse } from "../../types/accountTypes/AccountDeviceList";
 import { v1AccountDeviceListResSchema } from "../v1/accountDeviceListResSchema";
 import { z } from "zod/v4";
 
 export const accountDeviceList200Schema = v1AccountDeviceListResSchema as unknown as z.ZodType<AccountDeviceList200>
 
-export const accountDeviceListMutationRequestSchema = v1AccountDeviceListReqSchema as unknown as z.ZodType<AccountDeviceListMutationRequest>
-
-export const accountDeviceListMutationResponseSchema = accountDeviceList200Schema as unknown as z.ZodType<AccountDeviceListMutationResponse>
+export const accountDeviceListQueryResponseSchema = accountDeviceList200Schema as unknown as z.ZodType<AccountDeviceListQueryResponse>

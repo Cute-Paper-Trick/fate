@@ -26,12 +26,12 @@
     ],
     "**/*.{js,jsx}": [
       "prettier --write",
-      "stylelint --fix",
+      "stylelint --fix --allow-empty-input",
       "eslint --fix"
     ],
     "**/*.{ts,tsx}": [
       "prettier --parser=typescript --write",
-      "stylelint --fix",
+      "stylelint --fix --allow-empty-input",
       "eslint --fix"
     ]
   },

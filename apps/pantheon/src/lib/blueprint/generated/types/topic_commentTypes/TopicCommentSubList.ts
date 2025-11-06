@@ -4,17 +4,33 @@
 * Do not edit manually.
 */
 
-import type { V1TopicCommentSubListReq } from "../v1/TopicCommentSubListReq";
 import type { V1TopicCommentSubListRes } from "../v1/TopicCommentSubListRes";
+
+export type TopicCommentSubListQueryParams = {
+    /**
+     * @type integer, int64
+    */
+    topic_id: number;
+    /**
+     * @type integer, int64
+    */
+    root_comment_id: number;
+    /**
+     * @type integer, int
+    */
+    page: number;
+    /**
+     * @type integer, int
+    */
+    size: number;
+};
 
 export type TopicCommentSubList200 = V1TopicCommentSubListRes;
 
-export type TopicCommentSubListMutationRequest = V1TopicCommentSubListReq;
+export type TopicCommentSubListQueryResponse = TopicCommentSubList200;
 
-export type TopicCommentSubListMutationResponse = TopicCommentSubList200;
-
-export type TopicCommentSubListMutation = {
+export type TopicCommentSubListQuery = {
     Response: TopicCommentSubList200;
-    Request: TopicCommentSubListMutationRequest;
+    QueryParams: TopicCommentSubListQueryParams;
     Errors: any;
 };

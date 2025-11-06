@@ -4,13 +4,14 @@
 * Do not edit manually.
 */
 
-import type { TrainDetail200, TrainDetailMutationRequest, TrainDetailMutationResponse } from "../../types/trainTypes/TrainDetail";
-import { v1TrainDetailReqSchema } from "../v1/trainDetailReqSchema";
+import type { TrainDetailQueryParams, TrainDetail200, TrainDetailQueryResponse } from "../../types/trainTypes/TrainDetail";
 import { v1TrainDetailResSchema } from "../v1/trainDetailResSchema";
 import { z } from "zod/v4";
 
+export const trainDetailQueryParamsSchema = z.object({
+    "train_id": z.coerce.number().int()
+    }) as unknown as z.ZodType<TrainDetailQueryParams>
+
 export const trainDetail200Schema = v1TrainDetailResSchema as unknown as z.ZodType<TrainDetail200>
 
-export const trainDetailMutationRequestSchema = v1TrainDetailReqSchema as unknown as z.ZodType<TrainDetailMutationRequest>
-
-export const trainDetailMutationResponseSchema = trainDetail200Schema as unknown as z.ZodType<TrainDetailMutationResponse>
+export const trainDetailQueryResponseSchema = trainDetail200Schema as unknown as z.ZodType<TrainDetailQueryResponse>

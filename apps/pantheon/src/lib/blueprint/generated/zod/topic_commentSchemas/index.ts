@@ -1,3 +1,3 @@
 export { topicCommentAdd200Schema, topicCommentAddMutationRequestSchema, topicCommentAddMutationResponseSchema } from "./topicCommentAddSchema";
-export { topicCommentList200Schema, topicCommentListMutationRequestSchema, topicCommentListMutationResponseSchema } from "./topicCommentListSchema";
-export { topicCommentSubList200Schema, topicCommentSubListMutationRequestSchema, topicCommentSubListMutationResponseSchema } from "./topicCommentSubListSchema";
+export { topicCommentListQueryParamsSchema, topicCommentList200Schema, topicCommentListQueryResponseSchema } from "./topicCommentListSchema";
+export { topicCommentSubListQueryParamsSchema, topicCommentSubList200Schema, topicCommentSubListQueryResponseSchema } from "./topicCommentSubListSchema";

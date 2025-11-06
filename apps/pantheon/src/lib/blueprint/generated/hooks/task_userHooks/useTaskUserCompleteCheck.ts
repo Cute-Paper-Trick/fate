@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskUserCompleteCheckMutationRequest, TaskUserCompleteCheckMutationResponse } from "../../types/task_userTypes/TaskUserCompleteCheck";
+import type { TaskUserCompleteCheckQueryResponse, TaskUserCompleteCheckQueryParams } from "../../types/task_userTypes/TaskUserCompleteCheck";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { taskUserCompleteCheck } from "../../clients/axios/task_userService/taskUserCompleteCheck";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const taskUserCompleteCheckMutationKey = () => [{ url: '/api/task_user/complete_check' }] as const
+export const taskUserCompleteCheckQueryKey = (params: TaskUserCompleteCheckQueryParams) => [{ url: '/api/task_user/complete_check' }, ...(params ? [params] : [])] as const
 
-export type TaskUserCompleteCheckMutationKey = ReturnType<typeof taskUserCompleteCheckMutationKey>
+export type TaskUserCompleteCheckQueryKey = ReturnType<typeof taskUserCompleteCheckQueryKey>
 
-export function taskUserCompleteCheckMutationOptions(config: Partial<RequestConfig<TaskUserCompleteCheckMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = taskUserCompleteCheckMutationKey()
-  return mutationOptions<TaskUserCompleteCheckMutationResponse, ResponseErrorConfig<Error>, {data: TaskUserCompleteCheckMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return taskUserCompleteCheck(data, config)
-    },
+export function taskUserCompleteCheckQueryOptions(params: TaskUserCompleteCheckQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = taskUserCompleteCheckQueryKey(params)
+  return queryOptions<TaskUserCompleteCheckQueryResponse, ResponseErrorConfig<Error>, TaskUserCompleteCheckQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return taskUserCompleteCheck(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function taskUserCompleteCheckMutationOptions(config: Partial<RequestConf
  * @summary 任务完成检查
  * {@link /api/task_user/complete_check}
  */
-export function useTaskUserCompleteCheck<TContext>(options: 
+export function useTaskUserCompleteCheck<TData = TaskUserCompleteCheckQueryResponse, TQueryData = TaskUserCompleteCheckQueryResponse, TQueryKey extends QueryKey = TaskUserCompleteCheckQueryKey>(params: TaskUserCompleteCheckQueryParams, options: 
 {
-  mutation?: UseMutationOptions<TaskUserCompleteCheckMutationResponse, ResponseErrorConfig<Error>, {data: TaskUserCompleteCheckMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TaskUserCompleteCheckMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TaskUserCompleteCheckQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? taskUserCompleteCheckMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? taskUserCompleteCheckQueryKey(params)
 
-  const baseOptions = taskUserCompleteCheckMutationOptions(config) as UseMutationOptions<TaskUserCompleteCheckMutationResponse, ResponseErrorConfig<Error>, {data: TaskUserCompleteCheckMutationRequest}, TContext>
+  const query = useQuery({
+   ...taskUserCompleteCheckQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TaskUserCompleteCheckMutationResponse, ResponseErrorConfig<Error>, {data: TaskUserCompleteCheckMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TaskUserCompleteCheckMutationResponse, ResponseErrorConfig<Error>, {data: TaskUserCompleteCheckMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

@@ -2863,18 +2863,8 @@
       }
     },
     "/api/account/device_list": {
-      "post": {
+      "get": {
         "operationId": "account_device_list",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.AccountDeviceListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -2994,18 +2984,8 @@
       }
     },
     "/api/account/profile": {
-      "post": {
+      "get": {
         "operationId": "account_profile",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.AccountProfileReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -3024,19 +3004,36 @@
       }
     },
     "/api/account/topic_list": {
-      "post": {
+      "get": {
         "operationId": "account_topic_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.AccountTopicListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "format": "consts.TopicStatus",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3455,18 +3452,8 @@
       }
     },
     "/api/common/sign_sts": {
-      "post": {
+      "get": {
         "operationId": "common_sign_sts",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.CommonSignStsReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -3516,18 +3503,8 @@
       }
     },
     "/api/guide/list": {
-      "post": {
+      "get": {
         "operationId": "guide_list",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.GuideListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -3577,18 +3554,8 @@
       }
     },
     "/api/model/list": {
-      "post": {
+      "get": {
         "operationId": "model_list",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.ModelListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -3607,19 +3574,19 @@
       }
     },
     "/api/model_tools/search": {
-      "post": {
+      "get": {
         "operationId": "model_tools_search",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.ModelToolsSearchReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "schema": {
+              "format": "string",
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3638,19 +3605,44 @@
       }
     },
     "/api/notification/list": {
-      "post": {
+      "get": {
         "operationId": "notification_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.NotificationListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "format": "consts.NotificationType",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "format": "consts.NotificationStatus",
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3852,18 +3844,18 @@
       }
     },
     "/api/points/findAccountPointAndLevel": {
-      "post": {
+      "get": {
         "operationId": "points_findAccountPointAndLevel",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.PointsFindAccountPointAndLevelReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "accountId",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3882,18 +3874,8 @@
       }
     },
     "/api/points/findLevelTypeList": {
-      "post": {
+      "get": {
         "operationId": "points_findLevelTypeList",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.PointsFindLevelTypeListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -3912,18 +3894,8 @@
       }
     },
     "/api/points/findPointDetailList": {
-      "post": {
+      "get": {
         "operationId": "points_findPointDetailList",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.PointsFindPointDetailListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -4033,19 +4005,19 @@
       }
     },
     "/api/session/detail": {
-      "post": {
+      "get": {
         "operationId": "session_detail",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.SessionDetailReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "string",
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4064,19 +4036,28 @@
       }
     },
     "/api/session/list": {
-      "post": {
+      "get": {
         "operationId": "session_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.SessionListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4126,18 +4107,8 @@
       }
     },
     "/api/task/list": {
-      "post": {
+      "get": {
         "operationId": "task_list",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TaskListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -4218,19 +4189,19 @@
       }
     },
     "/api/task_topic/detail": {
-      "post": {
+      "get": {
         "operationId": "task_topic_detail",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TaskTopicDetailReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4280,19 +4251,28 @@
       }
     },
     "/api/task_topic/list": {
-      "post": {
+      "get": {
         "operationId": "task_topic_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TaskTopicListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4311,19 +4291,23 @@
       }
     },
     "/api/task_user/complete_check": {
-      "post": {
+      "get": {
         "operationId": "task_user_complete_check",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TaskUserCompleteCheckReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "task_index_list",
+            "required": true,
+            "schema": {
+              "format": "[]int",
+              "items": {
+                "format": "int",
+                "type": "integer"
+              },
+              "type": "array"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4373,18 +4357,8 @@
       }
     },
     "/api/task_user/list": {
-      "post": {
+      "get": {
         "operationId": "task_user_list",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TaskUserListReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -4403,18 +4377,8 @@
       }
     },
     "/api/task_user/undone": {
-      "post": {
+      "get": {
         "operationId": "task_user_undone",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TaskUserUndoneReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -4464,19 +4428,37 @@
       }
     },
     "/api/topic_comment/list": {
-      "post": {
+      "get": {
         "operationId": "topic_comment_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TopicCommentListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4495,19 +4477,46 @@
       }
     },
     "/api/topic_comment/sub_list": {
-      "post": {
+      "get": {
         "operationId": "topic_comment_sub_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TopicCommentSubListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "root_comment_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4650,19 +4659,19 @@
       }
     },
     "/api/train/detail": {
-      "post": {
+      "get": {
         "operationId": "train_detail",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TrainDetailReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "train_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4681,19 +4690,19 @@
       }
     },
     "/api/train/list": {
-      "post": {
+      "get": {
         "operationId": "train_list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TrainListReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "train_type",
+            "required": true,
+            "schema": {
+              "format": "string",
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4712,19 +4721,19 @@
       }
     },
     "/api/train/result": {
-      "post": {
+      "get": {
         "operationId": "train_result",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.TrainResultReq",
-                "description": ""
-              }
+        "parameters": [
+          {
+            "in": "query",
+            "name": "train_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4774,18 +4783,8 @@
       }
     },
     "/api/user_purchase/detail": {
-      "post": {
+      "get": {
         "operationId": "user_purchase_detail",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.UserPurchaseDetailReq",
-                "description": ""
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {

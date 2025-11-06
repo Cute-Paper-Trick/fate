@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { SessionDetailMutationRequest, SessionDetailMutationResponse } from "../../../types/sessionTypes/SessionDetail";
+import type { SessionDetailQueryResponse, SessionDetailQueryParams } from "../../../types/sessionTypes/SessionDetail";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getSessionDetailUrl() {
-  const res = { method: 'POST', url: `/api/session/detail` as const }  
+  const res = { method: 'GET', url: `/api/session/detail` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getSessionDetailUrl() {
  * @summary 获取会话详情
  * {@link /api/session/detail}
  */
-export async function sessionDetail(data: SessionDetailMutationRequest, config: Partial<RequestConfig<SessionDetailMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function sessionDetail(params: SessionDetailQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<SessionDetailMutationResponse, ResponseErrorConfig<Error>, SessionDetailMutationRequest>({ method : "POST", url : getSessionDetailUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<SessionDetailQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getSessionDetailUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

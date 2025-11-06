@@ -1,1 +1,1 @@
-export { modelList200Schema, modelListMutationRequestSchema, modelListMutationResponseSchema } from "./modelListSchema";
+export { modelList200Schema, modelListQueryResponseSchema } from "./modelListSchema";

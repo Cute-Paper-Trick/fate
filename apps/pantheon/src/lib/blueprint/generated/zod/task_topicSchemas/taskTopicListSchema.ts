@@ -4,13 +4,15 @@
 * Do not edit manually.
 */
 
-import type { TaskTopicList200, TaskTopicListMutationRequest, TaskTopicListMutationResponse } from "../../types/task_topicTypes/TaskTopicList";
-import { v1TaskTopicListReqSchema } from "../v1/taskTopicListReqSchema";
+import type { TaskTopicListQueryParams, TaskTopicList200, TaskTopicListQueryResponse } from "../../types/task_topicTypes/TaskTopicList";
 import { v1TaskTopicListResSchema } from "../v1/taskTopicListResSchema";
 import { z } from "zod/v4";
 
+export const taskTopicListQueryParamsSchema = z.object({
+    "page": z.coerce.number().int(),
+"size": z.coerce.number().int()
+    }) as unknown as z.ZodType<TaskTopicListQueryParams>
+
 export const taskTopicList200Schema = v1TaskTopicListResSchema as unknown as z.ZodType<TaskTopicList200>
 
-export const taskTopicListMutationRequestSchema = v1TaskTopicListReqSchema as unknown as z.ZodType<TaskTopicListMutationRequest>
-
-export const taskTopicListMutationResponseSchema = taskTopicList200Schema as unknown as z.ZodType<TaskTopicListMutationResponse>
+export const taskTopicListQueryResponseSchema = taskTopicList200Schema as unknown as z.ZodType<TaskTopicListQueryResponse>

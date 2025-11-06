@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { PointsFindPointDetailListMutationRequest, PointsFindPointDetailListMutationResponse } from "../../types/pointsTypes/PointsFindPointDetailList";
+import type { PointsFindPointDetailListQueryResponse } from "../../types/pointsTypes/PointsFindPointDetailList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { pointsFindPointDetailList } from "../../clients/axios/pointsService/pointsFindPointDetailList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const pointsFindPointDetailListMutationKey = () => [{ url: '/api/points/findPointDetailList' }] as const
+export const pointsFindPointDetailListQueryKey = () => [{ url: '/api/points/findPointDetailList' }] as const
 
-export type PointsFindPointDetailListMutationKey = ReturnType<typeof pointsFindPointDetailListMutationKey>
+export type PointsFindPointDetailListQueryKey = ReturnType<typeof pointsFindPointDetailListQueryKey>
 
-export function pointsFindPointDetailListMutationOptions(config: Partial<RequestConfig<PointsFindPointDetailListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = pointsFindPointDetailListMutationKey()
-  return mutationOptions<PointsFindPointDetailListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindPointDetailListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return pointsFindPointDetailList(data, config)
-    },
+export function pointsFindPointDetailListQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = pointsFindPointDetailListQueryKey()
+  return queryOptions<PointsFindPointDetailListQueryResponse, ResponseErrorConfig<Error>, PointsFindPointDetailListQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return pointsFindPointDetailList(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function pointsFindPointDetailListMutationOptions(config: Partial<Request
  * @summary 查询积分明细列表
  * {@link /api/points/findPointDetailList}
  */
-export function usePointsFindPointDetailList<TContext>(options: 
+export function usePointsFindPointDetailList<TData = PointsFindPointDetailListQueryResponse, TQueryData = PointsFindPointDetailListQueryResponse, TQueryKey extends QueryKey = PointsFindPointDetailListQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<PointsFindPointDetailListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindPointDetailListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<PointsFindPointDetailListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<PointsFindPointDetailListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? pointsFindPointDetailListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? pointsFindPointDetailListQueryKey()
 
-  const baseOptions = pointsFindPointDetailListMutationOptions(config) as UseMutationOptions<PointsFindPointDetailListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindPointDetailListMutationRequest}, TContext>
+  const query = useQuery({
+   ...pointsFindPointDetailListQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<PointsFindPointDetailListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindPointDetailListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<PointsFindPointDetailListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindPointDetailListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

@@ -1,2 +1,2 @@
-export type { NotificationList200, NotificationListMutationRequest, NotificationListMutationResponse, NotificationListMutation } from "./NotificationList";
+export type { NotificationListQueryParams, NotificationList200, NotificationListQueryResponse, NotificationListQuery } from "./NotificationList";
 export type { NotificationMarkRead200, NotificationMarkReadMutationRequest, NotificationMarkReadMutationResponse, NotificationMarkReadMutation } from "./NotificationMarkRead";

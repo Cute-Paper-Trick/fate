@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { TaskList200, TaskListMutationRequest, TaskListMutationResponse } from "../../types/taskTypes/TaskList";
-import { v1TaskListReqSchema } from "../v1/taskListReqSchema";
+import type { TaskList200, TaskListQueryResponse } from "../../types/taskTypes/TaskList";
 import { v1TaskListResSchema } from "../v1/taskListResSchema";
 import { z } from "zod/v4";
 
 export const taskList200Schema = v1TaskListResSchema as unknown as z.ZodType<TaskList200>
 
-export const taskListMutationRequestSchema = v1TaskListReqSchema as unknown as z.ZodType<TaskListMutationRequest>
-
-export const taskListMutationResponseSchema = taskList200Schema as unknown as z.ZodType<TaskListMutationResponse>
+export const taskListQueryResponseSchema = taskList200Schema as unknown as z.ZodType<TaskListQueryResponse>

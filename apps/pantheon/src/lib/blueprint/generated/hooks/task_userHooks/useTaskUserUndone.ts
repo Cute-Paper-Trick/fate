@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskUserUndoneMutationRequest, TaskUserUndoneMutationResponse } from "../../types/task_userTypes/TaskUserUndone";
+import type { TaskUserUndoneQueryResponse } from "../../types/task_userTypes/TaskUserUndone";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { taskUserUndone } from "../../clients/axios/task_userService/taskUserUndone";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const taskUserUndoneMutationKey = () => [{ url: '/api/task_user/undone' }] as const
+export const taskUserUndoneQueryKey = () => [{ url: '/api/task_user/undone' }] as const
 
-export type TaskUserUndoneMutationKey = ReturnType<typeof taskUserUndoneMutationKey>
+export type TaskUserUndoneQueryKey = ReturnType<typeof taskUserUndoneQueryKey>
 
-export function taskUserUndoneMutationOptions(config: Partial<RequestConfig<TaskUserUndoneMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = taskUserUndoneMutationKey()
-  return mutationOptions<TaskUserUndoneMutationResponse, ResponseErrorConfig<Error>, {data?: TaskUserUndoneMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return taskUserUndone(data, config)
-    },
+export function taskUserUndoneQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = taskUserUndoneQueryKey()
+  return queryOptions<TaskUserUndoneQueryResponse, ResponseErrorConfig<Error>, TaskUserUndoneQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return taskUserUndone(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function taskUserUndoneMutationOptions(config: Partial<RequestConfig<Task
  * @summary 未做的任务
  * {@link /api/task_user/undone}
  */
-export function useTaskUserUndone<TContext>(options: 
+export function useTaskUserUndone<TData = TaskUserUndoneQueryResponse, TQueryData = TaskUserUndoneQueryResponse, TQueryKey extends QueryKey = TaskUserUndoneQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<TaskUserUndoneMutationResponse, ResponseErrorConfig<Error>, {data?: TaskUserUndoneMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TaskUserUndoneMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TaskUserUndoneQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? taskUserUndoneMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? taskUserUndoneQueryKey()
 
-  const baseOptions = taskUserUndoneMutationOptions(config) as UseMutationOptions<TaskUserUndoneMutationResponse, ResponseErrorConfig<Error>, {data?: TaskUserUndoneMutationRequest}, TContext>
+  const query = useQuery({
+   ...taskUserUndoneQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TaskUserUndoneMutationResponse, ResponseErrorConfig<Error>, {data?: TaskUserUndoneMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TaskUserUndoneMutationResponse, ResponseErrorConfig<Error>, {data?: TaskUserUndoneMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

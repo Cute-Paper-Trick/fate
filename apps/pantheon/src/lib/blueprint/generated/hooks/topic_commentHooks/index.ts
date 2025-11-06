@@ -1,6 +1,10 @@
 export type { TopicCommentAddMutationKey } from "./useTopicCommentAdd";
-export type { TopicCommentListMutationKey } from "./useTopicCommentList";
-export type { TopicCommentSubListMutationKey } from "./useTopicCommentSubList";
+export type { TopicCommentListQueryKey } from "./useTopicCommentList";
+export type { TopicCommentListSuspenseQueryKey } from "./useTopicCommentListSuspense";
+export type { TopicCommentSubListQueryKey } from "./useTopicCommentSubList";
+export type { TopicCommentSubListSuspenseQueryKey } from "./useTopicCommentSubListSuspense";
 export { topicCommentAddMutationKey, topicCommentAddMutationOptions, useTopicCommentAdd } from "./useTopicCommentAdd";
-export { topicCommentListMutationKey, topicCommentListMutationOptions, useTopicCommentList } from "./useTopicCommentList";
-export { topicCommentSubListMutationKey, topicCommentSubListMutationOptions, useTopicCommentSubList } from "./useTopicCommentSubList";
+export { topicCommentListQueryKey, topicCommentListQueryOptions, useTopicCommentList } from "./useTopicCommentList";
+export { topicCommentListSuspenseQueryKey, topicCommentListSuspenseQueryOptions, useTopicCommentListSuspense } from "./useTopicCommentListSuspense";
+export { topicCommentSubListQueryKey, topicCommentSubListQueryOptions, useTopicCommentSubList } from "./useTopicCommentSubList";
+export { topicCommentSubListSuspenseQueryKey, topicCommentSubListSuspenseQueryOptions, useTopicCommentSubListSuspense } from "./useTopicCommentSubListSuspense";

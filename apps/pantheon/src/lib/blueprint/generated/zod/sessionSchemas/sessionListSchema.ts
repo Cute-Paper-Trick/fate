@@ -4,13 +4,15 @@
 * Do not edit manually.
 */
 
-import type { SessionList200, SessionListMutationRequest, SessionListMutationResponse } from "../../types/sessionTypes/SessionList";
-import { v1SessionListReqSchema } from "../v1/sessionListReqSchema";
+import type { SessionListQueryParams, SessionList200, SessionListQueryResponse } from "../../types/sessionTypes/SessionList";
 import { v1SessionListResSchema } from "../v1/sessionListResSchema";
 import { z } from "zod/v4";
 
+export const sessionListQueryParamsSchema = z.object({
+    "page": z.coerce.number().int(),
+"size": z.coerce.number().int()
+    }) as unknown as z.ZodType<SessionListQueryParams>
+
 export const sessionList200Schema = v1SessionListResSchema as unknown as z.ZodType<SessionList200>
 
-export const sessionListMutationRequestSchema = v1SessionListReqSchema as unknown as z.ZodType<SessionListMutationRequest>
-
-export const sessionListMutationResponseSchema = sessionList200Schema as unknown as z.ZodType<SessionListMutationResponse>
+export const sessionListQueryResponseSchema = sessionList200Schema as unknown as z.ZodType<SessionListQueryResponse>

@@ -4,13 +4,14 @@
 * Do not edit manually.
 */
 
-import type { SessionDetail200, SessionDetailMutationRequest, SessionDetailMutationResponse } from "../../types/sessionTypes/SessionDetail";
-import { v1SessionDetailReqSchema } from "../v1/sessionDetailReqSchema";
+import type { SessionDetailQueryParams, SessionDetail200, SessionDetailQueryResponse } from "../../types/sessionTypes/SessionDetail";
 import { v1SessionDetailResSchema } from "../v1/sessionDetailResSchema";
 import { z } from "zod/v4";
 
+export const sessionDetailQueryParamsSchema = z.object({
+    "session_id": z.string()
+    }) as unknown as z.ZodType<SessionDetailQueryParams>
+
 export const sessionDetail200Schema = v1SessionDetailResSchema as unknown as z.ZodType<SessionDetail200>
 
-export const sessionDetailMutationRequestSchema = v1SessionDetailReqSchema as unknown as z.ZodType<SessionDetailMutationRequest>
-
-export const sessionDetailMutationResponseSchema = sessionDetail200Schema as unknown as z.ZodType<SessionDetailMutationResponse>
+export const sessionDetailQueryResponseSchema = sessionDetail200Schema as unknown as z.ZodType<SessionDetailQueryResponse>

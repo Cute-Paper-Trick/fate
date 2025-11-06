@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TrainResultMutationRequest, TrainResultMutationResponse } from "../../../types/trainTypes/TrainResult";
+import type { TrainResultQueryResponse, TrainResultQueryParams } from "../../../types/trainTypes/TrainResult";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTrainResultUrl() {
-  const res = { method: 'POST', url: `/api/train/result` as const }  
+  const res = { method: 'GET', url: `/api/train/result` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTrainResultUrl() {
  * @summary 查询训练结果
  * {@link /api/train/result}
  */
-export async function trainResult(data: TrainResultMutationRequest, config: Partial<RequestConfig<TrainResultMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function trainResult(params: TrainResultQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TrainResultMutationResponse, ResponseErrorConfig<Error>, TrainResultMutationRequest>({ method : "POST", url : getTrainResultUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TrainResultQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTrainResultUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

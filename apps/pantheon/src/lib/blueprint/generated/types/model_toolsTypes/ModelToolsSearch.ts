@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1ModelToolsSearchReq } from "../v1/ModelToolsSearchReq";
 import type { V1ModelToolsSearchRes } from "../v1/ModelToolsSearchRes";
+
+export type ModelToolsSearchQueryParams = {
+    /**
+     * @type string, string
+    */
+    query: string;
+};
 
 export type ModelToolsSearch200 = V1ModelToolsSearchRes;
 
-export type ModelToolsSearchMutationRequest = V1ModelToolsSearchReq;
+export type ModelToolsSearchQueryResponse = ModelToolsSearch200;
 
-export type ModelToolsSearchMutationResponse = ModelToolsSearch200;
-
-export type ModelToolsSearchMutation = {
+export type ModelToolsSearchQuery = {
     Response: ModelToolsSearch200;
-    Request: ModelToolsSearchMutationRequest;
+    QueryParams: ModelToolsSearchQueryParams;
     Errors: any;
 };

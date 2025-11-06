@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TopicCommentListMutationRequest, TopicCommentListMutationResponse } from "../../types/topic_commentTypes/TopicCommentList";
+import type { TopicCommentListQueryResponse, TopicCommentListQueryParams } from "../../types/topic_commentTypes/TopicCommentList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { topicCommentList } from "../../clients/axios/topic_commentService/topicCommentList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const topicCommentListMutationKey = () => [{ url: '/api/topic_comment/list' }] as const
+export const topicCommentListQueryKey = (params: TopicCommentListQueryParams) => [{ url: '/api/topic_comment/list' }, ...(params ? [params] : [])] as const
 
-export type TopicCommentListMutationKey = ReturnType<typeof topicCommentListMutationKey>
+export type TopicCommentListQueryKey = ReturnType<typeof topicCommentListQueryKey>
 
-export function topicCommentListMutationOptions(config: Partial<RequestConfig<TopicCommentListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = topicCommentListMutationKey()
-  return mutationOptions<TopicCommentListMutationResponse, ResponseErrorConfig<Error>, {data: TopicCommentListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return topicCommentList(data, config)
-    },
+export function topicCommentListQueryOptions(params: TopicCommentListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = topicCommentListQueryKey(params)
+  return queryOptions<TopicCommentListQueryResponse, ResponseErrorConfig<Error>, TopicCommentListQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return topicCommentList(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function topicCommentListMutationOptions(config: Partial<RequestConfig<To
  * @summary 主题评论列表
  * {@link /api/topic_comment/list}
  */
-export function useTopicCommentList<TContext>(options: 
+export function useTopicCommentList<TData = TopicCommentListQueryResponse, TQueryData = TopicCommentListQueryResponse, TQueryKey extends QueryKey = TopicCommentListQueryKey>(params: TopicCommentListQueryParams, options: 
 {
-  mutation?: UseMutationOptions<TopicCommentListMutationResponse, ResponseErrorConfig<Error>, {data: TopicCommentListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TopicCommentListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TopicCommentListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? topicCommentListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? topicCommentListQueryKey(params)
 
-  const baseOptions = topicCommentListMutationOptions(config) as UseMutationOptions<TopicCommentListMutationResponse, ResponseErrorConfig<Error>, {data: TopicCommentListMutationRequest}, TContext>
+  const query = useQuery({
+   ...topicCommentListQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TopicCommentListMutationResponse, ResponseErrorConfig<Error>, {data: TopicCommentListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TopicCommentListMutationResponse, ResponseErrorConfig<Error>, {data: TopicCommentListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

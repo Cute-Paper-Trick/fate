@@ -1,1 +1,1 @@
-export { userPurchaseDetail200Schema, userPurchaseDetailMutationRequestSchema, userPurchaseDetailMutationResponseSchema } from "./userPurchaseDetailSchema";
+export { userPurchaseDetail200Schema, userPurchaseDetailQueryResponseSchema } from "./userPurchaseDetailSchema";

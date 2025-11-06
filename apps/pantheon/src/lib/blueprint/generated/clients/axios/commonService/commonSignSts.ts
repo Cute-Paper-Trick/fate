@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { CommonSignStsMutationRequest, CommonSignStsMutationResponse } from "../../../types/commonTypes/CommonSignSts";
+import type { CommonSignStsQueryResponse } from "../../../types/commonTypes/CommonSignSts";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getCommonSignStsUrl() {
-  const res = { method: 'POST', url: `/api/common/sign_sts` as const }  
+  const res = { method: 'GET', url: `/api/common/sign_sts` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getCommonSignStsUrl() {
  * @summary 获取STS临时凭证
  * {@link /api/common/sign_sts}
  */
-export async function commonSignSts(data?: CommonSignStsMutationRequest, config: Partial<RequestConfig<CommonSignStsMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function commonSignSts(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<CommonSignStsMutationResponse, ResponseErrorConfig<Error>, CommonSignStsMutationRequest>({ method : "POST", url : getCommonSignStsUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<CommonSignStsQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getCommonSignStsUrl().url.toString(), ... requestConfig })  
   return res.data
 }

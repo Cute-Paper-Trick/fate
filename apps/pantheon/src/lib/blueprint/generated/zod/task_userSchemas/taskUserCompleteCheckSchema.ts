@@ -4,13 +4,14 @@
 * Do not edit manually.
 */
 
-import type { TaskUserCompleteCheck200, TaskUserCompleteCheckMutationRequest, TaskUserCompleteCheckMutationResponse } from "../../types/task_userTypes/TaskUserCompleteCheck";
-import { v1TaskUserCompleteCheckReqSchema } from "../v1/taskUserCompleteCheckReqSchema";
+import type { TaskUserCompleteCheckQueryParams, TaskUserCompleteCheck200, TaskUserCompleteCheckQueryResponse } from "../../types/task_userTypes/TaskUserCompleteCheck";
 import { v1TaskUserCompleteCheckResSchema } from "../v1/taskUserCompleteCheckResSchema";
 import { z } from "zod/v4";
 
+export const taskUserCompleteCheckQueryParamsSchema = z.object({
+    "task_index_list": z.array(z.coerce.number().int())
+    }) as unknown as z.ZodType<TaskUserCompleteCheckQueryParams>
+
 export const taskUserCompleteCheck200Schema = v1TaskUserCompleteCheckResSchema as unknown as z.ZodType<TaskUserCompleteCheck200>
 
-export const taskUserCompleteCheckMutationRequestSchema = v1TaskUserCompleteCheckReqSchema as unknown as z.ZodType<TaskUserCompleteCheckMutationRequest>
-
-export const taskUserCompleteCheckMutationResponseSchema = taskUserCompleteCheck200Schema as unknown as z.ZodType<TaskUserCompleteCheckMutationResponse>
+export const taskUserCompleteCheckQueryResponseSchema = taskUserCompleteCheck200Schema as unknown as z.ZodType<TaskUserCompleteCheckQueryResponse>

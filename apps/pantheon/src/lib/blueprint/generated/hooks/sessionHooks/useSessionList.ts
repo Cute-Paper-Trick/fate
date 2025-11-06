@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { SessionListMutationRequest, SessionListMutationResponse } from "../../types/sessionTypes/SessionList";
+import type { SessionListQueryResponse, SessionListQueryParams } from "../../types/sessionTypes/SessionList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { sessionList } from "../../clients/axios/sessionService/sessionList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const sessionListMutationKey = () => [{ url: '/api/session/list' }] as const
+export const sessionListQueryKey = (params: SessionListQueryParams) => [{ url: '/api/session/list' }, ...(params ? [params] : [])] as const
 
-export type SessionListMutationKey = ReturnType<typeof sessionListMutationKey>
+export type SessionListQueryKey = ReturnType<typeof sessionListQueryKey>
 
-export function sessionListMutationOptions(config: Partial<RequestConfig<SessionListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = sessionListMutationKey()
-  return mutationOptions<SessionListMutationResponse, ResponseErrorConfig<Error>, {data: SessionListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return sessionList(data, config)
-    },
+export function sessionListQueryOptions(params: SessionListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = sessionListQueryKey(params)
+  return queryOptions<SessionListQueryResponse, ResponseErrorConfig<Error>, SessionListQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return sessionList(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function sessionListMutationOptions(config: Partial<RequestConfig<Session
  * @summary 获取会话列表
  * {@link /api/session/list}
  */
-export function useSessionList<TContext>(options: 
+export function useSessionList<TData = SessionListQueryResponse, TQueryData = SessionListQueryResponse, TQueryKey extends QueryKey = SessionListQueryKey>(params: SessionListQueryParams, options: 
 {
-  mutation?: UseMutationOptions<SessionListMutationResponse, ResponseErrorConfig<Error>, {data: SessionListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<SessionListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<SessionListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? sessionListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? sessionListQueryKey(params)
 
-  const baseOptions = sessionListMutationOptions(config) as UseMutationOptions<SessionListMutationResponse, ResponseErrorConfig<Error>, {data: SessionListMutationRequest}, TContext>
+  const query = useQuery({
+   ...sessionListQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<SessionListMutationResponse, ResponseErrorConfig<Error>, {data: SessionListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<SessionListMutationResponse, ResponseErrorConfig<Error>, {data: SessionListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

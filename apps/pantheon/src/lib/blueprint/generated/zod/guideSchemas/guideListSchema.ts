@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { GuideList200, GuideListMutationRequest, GuideListMutationResponse } from "../../types/guideTypes/GuideList";
-import { v1GuideListReqSchema } from "../v1/guideListReqSchema";
+import type { GuideList200, GuideListQueryResponse } from "../../types/guideTypes/GuideList";
 import { v1GuideListResSchema } from "../v1/guideListResSchema";
 import { z } from "zod/v4";
 
 export const guideList200Schema = v1GuideListResSchema as unknown as z.ZodType<GuideList200>
 
-export const guideListMutationRequestSchema = v1GuideListReqSchema as unknown as z.ZodType<GuideListMutationRequest>
-
-export const guideListMutationResponseSchema = guideList200Schema as unknown as z.ZodType<GuideListMutationResponse>
+export const guideListQueryResponseSchema = guideList200Schema as unknown as z.ZodType<GuideListQueryResponse>

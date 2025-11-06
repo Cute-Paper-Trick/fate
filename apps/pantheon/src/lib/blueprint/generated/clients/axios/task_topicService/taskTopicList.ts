@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskTopicListMutationRequest, TaskTopicListMutationResponse } from "../../../types/task_topicTypes/TaskTopicList";
+import type { TaskTopicListQueryResponse, TaskTopicListQueryParams } from "../../../types/task_topicTypes/TaskTopicList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTaskTopicListUrl() {
-  const res = { method: 'POST', url: `/api/task_topic/list` as const }  
+  const res = { method: 'GET', url: `/api/task_topic/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTaskTopicListUrl() {
  * @summary 主题列表
  * {@link /api/task_topic/list}
  */
-export async function taskTopicList(data: TaskTopicListMutationRequest, config: Partial<RequestConfig<TaskTopicListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function taskTopicList(params: TaskTopicListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TaskTopicListMutationResponse, ResponseErrorConfig<Error>, TaskTopicListMutationRequest>({ method : "POST", url : getTaskTopicListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TaskTopicListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTaskTopicListUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

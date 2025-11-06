@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { GuideListMutationRequest, GuideListMutationResponse } from "../../types/guideTypes/GuideList";
+import type { GuideListQueryResponse } from "../../types/guideTypes/GuideList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { guideList } from "../../clients/axios/guideService/guideList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const guideListMutationKey = () => [{ url: '/api/guide/list' }] as const
+export const guideListQueryKey = () => [{ url: '/api/guide/list' }] as const
 
-export type GuideListMutationKey = ReturnType<typeof guideListMutationKey>
+export type GuideListQueryKey = ReturnType<typeof guideListQueryKey>
 
-export function guideListMutationOptions(config: Partial<RequestConfig<GuideListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = guideListMutationKey()
-  return mutationOptions<GuideListMutationResponse, ResponseErrorConfig<Error>, {data?: GuideListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return guideList(data, config)
-    },
+export function guideListQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = guideListQueryKey()
+  return queryOptions<GuideListQueryResponse, ResponseErrorConfig<Error>, GuideListQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return guideList(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function guideListMutationOptions(config: Partial<RequestConfig<GuideList
  * @summary 列表
  * {@link /api/guide/list}
  */
-export function useGuideList<TContext>(options: 
+export function useGuideList<TData = GuideListQueryResponse, TQueryData = GuideListQueryResponse, TQueryKey extends QueryKey = GuideListQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<GuideListMutationResponse, ResponseErrorConfig<Error>, {data?: GuideListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<GuideListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<GuideListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? guideListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? guideListQueryKey()
 
-  const baseOptions = guideListMutationOptions(config) as UseMutationOptions<GuideListMutationResponse, ResponseErrorConfig<Error>, {data?: GuideListMutationRequest}, TContext>
+  const query = useQuery({
+   ...guideListQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<GuideListMutationResponse, ResponseErrorConfig<Error>, {data?: GuideListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<GuideListMutationResponse, ResponseErrorConfig<Error>, {data?: GuideListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

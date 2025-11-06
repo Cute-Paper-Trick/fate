@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1TaskUserListReq } from "../v1/TaskUserListReq";
 import type { V1TaskUserListRes } from "../v1/TaskUserListRes";
 
 export type TaskUserList200 = V1TaskUserListRes;
 
-export type TaskUserListMutationRequest = V1TaskUserListReq;
+export type TaskUserListQueryResponse = TaskUserList200;
 
-export type TaskUserListMutationResponse = TaskUserList200;
-
-export type TaskUserListMutation = {
+export type TaskUserListQuery = {
     Response: TaskUserList200;
-    Request: TaskUserListMutationRequest;
     Errors: any;
 };

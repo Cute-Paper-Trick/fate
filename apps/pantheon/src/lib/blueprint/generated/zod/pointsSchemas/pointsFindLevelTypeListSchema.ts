@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { PointsFindLevelTypeList200, PointsFindLevelTypeListMutationRequest, PointsFindLevelTypeListMutationResponse } from "../../types/pointsTypes/PointsFindLevelTypeList";
-import { v1PointsFindLevelTypeListReqSchema } from "../v1/pointsFindLevelTypeListReqSchema";
+import type { PointsFindLevelTypeList200, PointsFindLevelTypeListQueryResponse } from "../../types/pointsTypes/PointsFindLevelTypeList";
 import { v1PointsFindLevelTypeListResSchema } from "../v1/pointsFindLevelTypeListResSchema";
 import { z } from "zod/v4";
 
 export const pointsFindLevelTypeList200Schema = v1PointsFindLevelTypeListResSchema as unknown as z.ZodType<PointsFindLevelTypeList200>
 
-export const pointsFindLevelTypeListMutationRequestSchema = v1PointsFindLevelTypeListReqSchema as unknown as z.ZodType<PointsFindLevelTypeListMutationRequest>
-
-export const pointsFindLevelTypeListMutationResponseSchema = pointsFindLevelTypeList200Schema as unknown as z.ZodType<PointsFindLevelTypeListMutationResponse>
+export const pointsFindLevelTypeListQueryResponseSchema = pointsFindLevelTypeList200Schema as unknown as z.ZodType<PointsFindLevelTypeListQueryResponse>

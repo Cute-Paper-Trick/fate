@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskTopicListMutationRequest, TaskTopicListMutationResponse } from "../../types/task_topicTypes/TaskTopicList";
+import type { TaskTopicListQueryResponse, TaskTopicListQueryParams } from "../../types/task_topicTypes/TaskTopicList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { taskTopicList } from "../../clients/axios/task_topicService/taskTopicList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const taskTopicListMutationKey = () => [{ url: '/api/task_topic/list' }] as const
+export const taskTopicListQueryKey = (params: TaskTopicListQueryParams) => [{ url: '/api/task_topic/list' }, ...(params ? [params] : [])] as const
 
-export type TaskTopicListMutationKey = ReturnType<typeof taskTopicListMutationKey>
+export type TaskTopicListQueryKey = ReturnType<typeof taskTopicListQueryKey>
 
-export function taskTopicListMutationOptions(config: Partial<RequestConfig<TaskTopicListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = taskTopicListMutationKey()
-  return mutationOptions<TaskTopicListMutationResponse, ResponseErrorConfig<Error>, {data: TaskTopicListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return taskTopicList(data, config)
-    },
+export function taskTopicListQueryOptions(params: TaskTopicListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = taskTopicListQueryKey(params)
+  return queryOptions<TaskTopicListQueryResponse, ResponseErrorConfig<Error>, TaskTopicListQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return taskTopicList(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function taskTopicListMutationOptions(config: Partial<RequestConfig<TaskT
  * @summary 主题列表
  * {@link /api/task_topic/list}
  */
-export function useTaskTopicList<TContext>(options: 
+export function useTaskTopicList<TData = TaskTopicListQueryResponse, TQueryData = TaskTopicListQueryResponse, TQueryKey extends QueryKey = TaskTopicListQueryKey>(params: TaskTopicListQueryParams, options: 
 {
-  mutation?: UseMutationOptions<TaskTopicListMutationResponse, ResponseErrorConfig<Error>, {data: TaskTopicListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TaskTopicListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TaskTopicListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? taskTopicListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? taskTopicListQueryKey(params)
 
-  const baseOptions = taskTopicListMutationOptions(config) as UseMutationOptions<TaskTopicListMutationResponse, ResponseErrorConfig<Error>, {data: TaskTopicListMutationRequest}, TContext>
+  const query = useQuery({
+   ...taskTopicListQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TaskTopicListMutationResponse, ResponseErrorConfig<Error>, {data: TaskTopicListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TaskTopicListMutationResponse, ResponseErrorConfig<Error>, {data: TaskTopicListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

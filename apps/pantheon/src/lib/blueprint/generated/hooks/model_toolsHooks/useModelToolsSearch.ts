@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { ModelToolsSearchMutationRequest, ModelToolsSearchMutationResponse } from "../../types/model_toolsTypes/ModelToolsSearch";
+import type { ModelToolsSearchQueryResponse, ModelToolsSearchQueryParams } from "../../types/model_toolsTypes/ModelToolsSearch";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { modelToolsSearch } from "../../clients/axios/model_toolsService/modelToolsSearch";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const modelToolsSearchMutationKey = () => [{ url: '/api/model_tools/search' }] as const
+export const modelToolsSearchQueryKey = (params: ModelToolsSearchQueryParams) => [{ url: '/api/model_tools/search' }, ...(params ? [params] : [])] as const
 
-export type ModelToolsSearchMutationKey = ReturnType<typeof modelToolsSearchMutationKey>
+export type ModelToolsSearchQueryKey = ReturnType<typeof modelToolsSearchQueryKey>
 
-export function modelToolsSearchMutationOptions(config: Partial<RequestConfig<ModelToolsSearchMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = modelToolsSearchMutationKey()
-  return mutationOptions<ModelToolsSearchMutationResponse, ResponseErrorConfig<Error>, {data: ModelToolsSearchMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return modelToolsSearch(data, config)
-    },
+export function modelToolsSearchQueryOptions(params: ModelToolsSearchQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = modelToolsSearchQueryKey(params)
+  return queryOptions<ModelToolsSearchQueryResponse, ResponseErrorConfig<Error>, ModelToolsSearchQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return modelToolsSearch(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function modelToolsSearchMutationOptions(config: Partial<RequestConfig<Mo
  * @summary 搜索
  * {@link /api/model_tools/search}
  */
-export function useModelToolsSearch<TContext>(options: 
+export function useModelToolsSearch<TData = ModelToolsSearchQueryResponse, TQueryData = ModelToolsSearchQueryResponse, TQueryKey extends QueryKey = ModelToolsSearchQueryKey>(params: ModelToolsSearchQueryParams, options: 
 {
-  mutation?: UseMutationOptions<ModelToolsSearchMutationResponse, ResponseErrorConfig<Error>, {data: ModelToolsSearchMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<ModelToolsSearchMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<ModelToolsSearchQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? modelToolsSearchMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? modelToolsSearchQueryKey(params)
 
-  const baseOptions = modelToolsSearchMutationOptions(config) as UseMutationOptions<ModelToolsSearchMutationResponse, ResponseErrorConfig<Error>, {data: ModelToolsSearchMutationRequest}, TContext>
+  const query = useQuery({
+   ...modelToolsSearchQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<ModelToolsSearchMutationResponse, ResponseErrorConfig<Error>, {data: ModelToolsSearchMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<ModelToolsSearchMutationResponse, ResponseErrorConfig<Error>, {data: ModelToolsSearchMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

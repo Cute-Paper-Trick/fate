@@ -4,13 +4,14 @@
 * Do not edit manually.
 */
 
-import type { PointsFindAccountPointAndLevel200, PointsFindAccountPointAndLevelMutationRequest, PointsFindAccountPointAndLevelMutationResponse } from "../../types/pointsTypes/PointsFindAccountPointAndLevel";
-import { v1PointsFindAccountPointAndLevelReqSchema } from "../v1/pointsFindAccountPointAndLevelReqSchema";
+import type { PointsFindAccountPointAndLevelQueryParams, PointsFindAccountPointAndLevel200, PointsFindAccountPointAndLevelQueryResponse } from "../../types/pointsTypes/PointsFindAccountPointAndLevel";
 import { v1PointsFindAccountPointAndLevelResSchema } from "../v1/pointsFindAccountPointAndLevelResSchema";
 import { z } from "zod/v4";
 
+export const pointsFindAccountPointAndLevelQueryParamsSchema = z.object({
+    "accountId": z.optional(z.coerce.number().int())
+    }).optional() as unknown as z.ZodType<PointsFindAccountPointAndLevelQueryParams>
+
 export const pointsFindAccountPointAndLevel200Schema = v1PointsFindAccountPointAndLevelResSchema as unknown as z.ZodType<PointsFindAccountPointAndLevel200>
 
-export const pointsFindAccountPointAndLevelMutationRequestSchema = v1PointsFindAccountPointAndLevelReqSchema as unknown as z.ZodType<PointsFindAccountPointAndLevelMutationRequest>
-
-export const pointsFindAccountPointAndLevelMutationResponseSchema = pointsFindAccountPointAndLevel200Schema as unknown as z.ZodType<PointsFindAccountPointAndLevelMutationResponse>
+export const pointsFindAccountPointAndLevelQueryResponseSchema = pointsFindAccountPointAndLevel200Schema as unknown as z.ZodType<PointsFindAccountPointAndLevelQueryResponse>

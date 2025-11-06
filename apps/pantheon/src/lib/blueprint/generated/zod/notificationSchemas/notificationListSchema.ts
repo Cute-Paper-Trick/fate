@@ -4,13 +4,17 @@
 * Do not edit manually.
 */
 
-import type { NotificationList200, NotificationListMutationRequest, NotificationListMutationResponse } from "../../types/notificationTypes/NotificationList";
-import { v1NotificationListReqSchema } from "../v1/notificationListReqSchema";
+import type { NotificationListQueryParams, NotificationList200, NotificationListQueryResponse } from "../../types/notificationTypes/NotificationList";
 import { v1NotificationListResSchema } from "../v1/notificationListResSchema";
 import { z } from "zod/v4";
 
+export const notificationListQueryParamsSchema = z.object({
+    "page": z.coerce.number().int(),
+"size": z.coerce.number().int(),
+"type": z.optional(z.string()),
+"status": z.optional(z.string())
+    }) as unknown as z.ZodType<NotificationListQueryParams>
+
 export const notificationList200Schema = v1NotificationListResSchema as unknown as z.ZodType<NotificationList200>
 
-export const notificationListMutationRequestSchema = v1NotificationListReqSchema as unknown as z.ZodType<NotificationListMutationRequest>
-
-export const notificationListMutationResponseSchema = notificationList200Schema as unknown as z.ZodType<NotificationListMutationResponse>
+export const notificationListQueryResponseSchema = notificationList200Schema as unknown as z.ZodType<NotificationListQueryResponse>

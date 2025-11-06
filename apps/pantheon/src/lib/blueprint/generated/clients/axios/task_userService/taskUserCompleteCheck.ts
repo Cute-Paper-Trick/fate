@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskUserCompleteCheckMutationRequest, TaskUserCompleteCheckMutationResponse } from "../../../types/task_userTypes/TaskUserCompleteCheck";
+import type { TaskUserCompleteCheckQueryResponse, TaskUserCompleteCheckQueryParams } from "../../../types/task_userTypes/TaskUserCompleteCheck";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTaskUserCompleteCheckUrl() {
-  const res = { method: 'POST', url: `/api/task_user/complete_check` as const }  
+  const res = { method: 'GET', url: `/api/task_user/complete_check` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTaskUserCompleteCheckUrl() {
  * @summary 任务完成检查
  * {@link /api/task_user/complete_check}
  */
-export async function taskUserCompleteCheck(data: TaskUserCompleteCheckMutationRequest, config: Partial<RequestConfig<TaskUserCompleteCheckMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function taskUserCompleteCheck(params: TaskUserCompleteCheckQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TaskUserCompleteCheckMutationResponse, ResponseErrorConfig<Error>, TaskUserCompleteCheckMutationRequest>({ method : "POST", url : getTaskUserCompleteCheckUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TaskUserCompleteCheckQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTaskUserCompleteCheckUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { ModelList200, ModelListMutationRequest, ModelListMutationResponse } from "../../types/modelTypes/ModelList";
-import { v1ModelListReqSchema } from "../v1/modelListReqSchema";
+import type { ModelList200, ModelListQueryResponse } from "../../types/modelTypes/ModelList";
 import { v1ModelListResSchema } from "../v1/modelListResSchema";
 import { z } from "zod/v4";
 
 export const modelList200Schema = v1ModelListResSchema as unknown as z.ZodType<ModelList200>
 
-export const modelListMutationRequestSchema = v1ModelListReqSchema as unknown as z.ZodType<ModelListMutationRequest>
-
-export const modelListMutationResponseSchema = modelList200Schema as unknown as z.ZodType<ModelListMutationResponse>
+export const modelListQueryResponseSchema = modelList200Schema as unknown as z.ZodType<ModelListQueryResponse>

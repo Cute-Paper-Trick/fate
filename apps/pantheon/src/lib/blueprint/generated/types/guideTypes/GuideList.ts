@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1GuideListReq } from "../v1/GuideListReq";
 import type { V1GuideListRes } from "../v1/GuideListRes";
 
 export type GuideList200 = V1GuideListRes;
 
-export type GuideListMutationRequest = V1GuideListReq;
+export type GuideListQueryResponse = GuideList200;
 
-export type GuideListMutationResponse = GuideList200;
-
-export type GuideListMutation = {
+export type GuideListQuery = {
     Response: GuideList200;
-    Request: GuideListMutationRequest;
     Errors: any;
 };

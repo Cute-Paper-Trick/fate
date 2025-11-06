@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { ModelToolsSearchMutationRequest, ModelToolsSearchMutationResponse } from "../../../types/model_toolsTypes/ModelToolsSearch";
+import type { ModelToolsSearchQueryResponse, ModelToolsSearchQueryParams } from "../../../types/model_toolsTypes/ModelToolsSearch";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getModelToolsSearchUrl() {
-  const res = { method: 'POST', url: `/api/model_tools/search` as const }  
+  const res = { method: 'GET', url: `/api/model_tools/search` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getModelToolsSearchUrl() {
  * @summary 搜索
  * {@link /api/model_tools/search}
  */
-export async function modelToolsSearch(data: ModelToolsSearchMutationRequest, config: Partial<RequestConfig<ModelToolsSearchMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function modelToolsSearch(params: ModelToolsSearchQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<ModelToolsSearchMutationResponse, ResponseErrorConfig<Error>, ModelToolsSearchMutationRequest>({ method : "POST", url : getModelToolsSearchUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<ModelToolsSearchQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getModelToolsSearchUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

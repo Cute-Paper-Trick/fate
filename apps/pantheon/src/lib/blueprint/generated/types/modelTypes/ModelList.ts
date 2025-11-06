@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1ModelListReq } from "../v1/ModelListReq";
 import type { V1ModelListRes } from "../v1/ModelListRes";
 
 export type ModelList200 = V1ModelListRes;
 
-export type ModelListMutationRequest = V1ModelListReq;
+export type ModelListQueryResponse = ModelList200;
 
-export type ModelListMutationResponse = ModelList200;
-
-export type ModelListMutation = {
+export type ModelListQuery = {
     Response: ModelList200;
-    Request: ModelListMutationRequest;
     Errors: any;
 };

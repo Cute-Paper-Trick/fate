@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { UserPurchaseDetail200, UserPurchaseDetailMutationRequest, UserPurchaseDetailMutationResponse } from "../../types/user_purchaseTypes/UserPurchaseDetail";
-import { v1UserPurchaseDetailReqSchema } from "../v1/userPurchaseDetailReqSchema";
+import type { UserPurchaseDetail200, UserPurchaseDetailQueryResponse } from "../../types/user_purchaseTypes/UserPurchaseDetail";
 import { v1UserPurchaseDetailResSchema } from "../v1/userPurchaseDetailResSchema";
 import { z } from "zod/v4";
 
 export const userPurchaseDetail200Schema = v1UserPurchaseDetailResSchema as unknown as z.ZodType<UserPurchaseDetail200>
 
-export const userPurchaseDetailMutationRequestSchema = v1UserPurchaseDetailReqSchema as unknown as z.ZodType<UserPurchaseDetailMutationRequest>
-
-export const userPurchaseDetailMutationResponseSchema = userPurchaseDetail200Schema as unknown as z.ZodType<UserPurchaseDetailMutationResponse>
+export const userPurchaseDetailQueryResponseSchema = userPurchaseDetail200Schema as unknown as z.ZodType<UserPurchaseDetailQueryResponse>

@@ -1,1 +1,1 @@
-export type { ModelToolsSearch200, ModelToolsSearchMutationRequest, ModelToolsSearchMutationResponse, ModelToolsSearchMutation } from "./ModelToolsSearch";
+export type { ModelToolsSearchQueryParams, ModelToolsSearch200, ModelToolsSearchQueryResponse, ModelToolsSearchQuery } from "./ModelToolsSearch";

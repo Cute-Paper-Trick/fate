@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { AccountDeviceListMutationRequest, AccountDeviceListMutationResponse } from "../../../types/accountTypes/AccountDeviceList";
+import type { AccountDeviceListQueryResponse } from "../../../types/accountTypes/AccountDeviceList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getAccountDeviceListUrl() {
-  const res = { method: 'POST', url: `/api/account/device_list` as const }  
+  const res = { method: 'GET', url: `/api/account/device_list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getAccountDeviceListUrl() {
  * @summary 用户设备列表
  * {@link /api/account/device_list}
  */
-export async function accountDeviceList(data?: AccountDeviceListMutationRequest, config: Partial<RequestConfig<AccountDeviceListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function accountDeviceList(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<AccountDeviceListMutationResponse, ResponseErrorConfig<Error>, AccountDeviceListMutationRequest>({ method : "POST", url : getAccountDeviceListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<AccountDeviceListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getAccountDeviceListUrl().url.toString(), ... requestConfig })  
   return res.data
 }

@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1PointsFindAccountPointAndLevelReq } from "../v1/PointsFindAccountPointAndLevelReq";
 import type { V1PointsFindAccountPointAndLevelRes } from "../v1/PointsFindAccountPointAndLevelRes";
+
+export type PointsFindAccountPointAndLevelQueryParams = {
+    /**
+     * @type integer | undefined, int64
+    */
+    accountId?: number | undefined;
+};
 
 export type PointsFindAccountPointAndLevel200 = V1PointsFindAccountPointAndLevelRes;
 
-export type PointsFindAccountPointAndLevelMutationRequest = V1PointsFindAccountPointAndLevelReq;
+export type PointsFindAccountPointAndLevelQueryResponse = PointsFindAccountPointAndLevel200;
 
-export type PointsFindAccountPointAndLevelMutationResponse = PointsFindAccountPointAndLevel200;
-
-export type PointsFindAccountPointAndLevelMutation = {
+export type PointsFindAccountPointAndLevelQuery = {
     Response: PointsFindAccountPointAndLevel200;
-    Request: PointsFindAccountPointAndLevelMutationRequest;
+    QueryParams: PointsFindAccountPointAndLevelQueryParams;
     Errors: any;
 };

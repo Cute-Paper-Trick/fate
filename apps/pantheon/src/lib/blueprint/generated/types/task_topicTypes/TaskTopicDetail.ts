@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1TaskTopicDetailReq } from "../v1/TaskTopicDetailReq";
 import type { V1TaskTopicDetailRes } from "../v1/TaskTopicDetailRes";
+
+export type TaskTopicDetailQueryParams = {
+    /**
+     * @type integer, int64
+    */
+    id: number;
+};
 
 export type TaskTopicDetail200 = V1TaskTopicDetailRes;
 
-export type TaskTopicDetailMutationRequest = V1TaskTopicDetailReq;
+export type TaskTopicDetailQueryResponse = TaskTopicDetail200;
 
-export type TaskTopicDetailMutationResponse = TaskTopicDetail200;
-
-export type TaskTopicDetailMutation = {
+export type TaskTopicDetailQuery = {
     Response: TaskTopicDetail200;
-    Request: TaskTopicDetailMutationRequest;
+    QueryParams: TaskTopicDetailQueryParams;
     Errors: any;
 };

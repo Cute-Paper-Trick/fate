@@ -4,17 +4,25 @@
 * Do not edit manually.
 */
 
-import type { V1SessionListReq } from "../v1/SessionListReq";
 import type { V1SessionListRes } from "../v1/SessionListRes";
+
+export type SessionListQueryParams = {
+    /**
+     * @type integer, int
+    */
+    page: number;
+    /**
+     * @type integer, int
+    */
+    size: number;
+};
 
 export type SessionList200 = V1SessionListRes;
 
-export type SessionListMutationRequest = V1SessionListReq;
+export type SessionListQueryResponse = SessionList200;
 
-export type SessionListMutationResponse = SessionList200;
-
-export type SessionListMutation = {
+export type SessionListQuery = {
     Response: SessionList200;
-    Request: SessionListMutationRequest;
+    QueryParams: SessionListQueryParams;
     Errors: any;
 };

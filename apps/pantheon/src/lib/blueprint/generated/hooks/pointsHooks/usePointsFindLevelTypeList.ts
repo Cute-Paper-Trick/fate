@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { PointsFindLevelTypeListMutationRequest, PointsFindLevelTypeListMutationResponse } from "../../types/pointsTypes/PointsFindLevelTypeList";
+import type { PointsFindLevelTypeListQueryResponse } from "../../types/pointsTypes/PointsFindLevelTypeList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { pointsFindLevelTypeList } from "../../clients/axios/pointsService/pointsFindLevelTypeList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const pointsFindLevelTypeListMutationKey = () => [{ url: '/api/points/findLevelTypeList' }] as const
+export const pointsFindLevelTypeListQueryKey = () => [{ url: '/api/points/findLevelTypeList' }] as const
 
-export type PointsFindLevelTypeListMutationKey = ReturnType<typeof pointsFindLevelTypeListMutationKey>
+export type PointsFindLevelTypeListQueryKey = ReturnType<typeof pointsFindLevelTypeListQueryKey>
 
-export function pointsFindLevelTypeListMutationOptions(config: Partial<RequestConfig<PointsFindLevelTypeListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = pointsFindLevelTypeListMutationKey()
-  return mutationOptions<PointsFindLevelTypeListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindLevelTypeListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return pointsFindLevelTypeList(data, config)
-    },
+export function pointsFindLevelTypeListQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = pointsFindLevelTypeListQueryKey()
+  return queryOptions<PointsFindLevelTypeListQueryResponse, ResponseErrorConfig<Error>, PointsFindLevelTypeListQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return pointsFindLevelTypeList(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function pointsFindLevelTypeListMutationOptions(config: Partial<RequestCo
  * @summary 查询等级类型列表
  * {@link /api/points/findLevelTypeList}
  */
-export function usePointsFindLevelTypeList<TContext>(options: 
+export function usePointsFindLevelTypeList<TData = PointsFindLevelTypeListQueryResponse, TQueryData = PointsFindLevelTypeListQueryResponse, TQueryKey extends QueryKey = PointsFindLevelTypeListQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<PointsFindLevelTypeListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindLevelTypeListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<PointsFindLevelTypeListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<PointsFindLevelTypeListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? pointsFindLevelTypeListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? pointsFindLevelTypeListQueryKey()
 
-  const baseOptions = pointsFindLevelTypeListMutationOptions(config) as UseMutationOptions<PointsFindLevelTypeListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindLevelTypeListMutationRequest}, TContext>
+  const query = useQuery({
+   ...pointsFindLevelTypeListQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<PointsFindLevelTypeListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindLevelTypeListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<PointsFindLevelTypeListMutationResponse, ResponseErrorConfig<Error>, {data?: PointsFindLevelTypeListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

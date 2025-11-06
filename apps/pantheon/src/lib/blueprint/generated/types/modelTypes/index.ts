@@ -1,1 +1,1 @@
-export type { ModelList200, ModelListMutationRequest, ModelListMutationResponse, ModelListMutation } from "./ModelList";
+export type { ModelList200, ModelListQueryResponse, ModelListQuery } from "./ModelList";

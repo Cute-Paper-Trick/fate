@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TopicCommentListMutationRequest, TopicCommentListMutationResponse } from "../../../types/topic_commentTypes/TopicCommentList";
+import type { TopicCommentListQueryResponse, TopicCommentListQueryParams } from "../../../types/topic_commentTypes/TopicCommentList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTopicCommentListUrl() {
-  const res = { method: 'POST', url: `/api/topic_comment/list` as const }  
+  const res = { method: 'GET', url: `/api/topic_comment/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTopicCommentListUrl() {
  * @summary 主题评论列表
  * {@link /api/topic_comment/list}
  */
-export async function topicCommentList(data: TopicCommentListMutationRequest, config: Partial<RequestConfig<TopicCommentListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function topicCommentList(params: TopicCommentListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TopicCommentListMutationResponse, ResponseErrorConfig<Error>, TopicCommentListMutationRequest>({ method : "POST", url : getTopicCommentListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TopicCommentListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTopicCommentListUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

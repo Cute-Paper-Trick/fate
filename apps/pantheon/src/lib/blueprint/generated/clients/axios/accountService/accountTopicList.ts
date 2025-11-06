@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { AccountTopicListMutationRequest, AccountTopicListMutationResponse } from "../../../types/accountTypes/AccountTopicList";
+import type { AccountTopicListQueryResponse, AccountTopicListQueryParams } from "../../../types/accountTypes/AccountTopicList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getAccountTopicListUrl() {
-  const res = { method: 'POST', url: `/api/account/topic_list` as const }  
+  const res = { method: 'GET', url: `/api/account/topic_list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getAccountTopicListUrl() {
  * @summary 我的主题列表
  * {@link /api/account/topic_list}
  */
-export async function accountTopicList(data: AccountTopicListMutationRequest, config: Partial<RequestConfig<AccountTopicListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function accountTopicList(params: AccountTopicListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<AccountTopicListMutationResponse, ResponseErrorConfig<Error>, AccountTopicListMutationRequest>({ method : "POST", url : getAccountTopicListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<AccountTopicListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getAccountTopicListUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

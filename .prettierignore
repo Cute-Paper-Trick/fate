@@ -62,6 +62,6 @@ Dockerfile*
 .next
 
 # generated
-src/lib/http/generated/*
 **/*.generated.*
 apps/pantheon/drizzle/**/*
+apps/pantheon/src/lib/blueprint/generated/*

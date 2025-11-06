@@ -4,17 +4,33 @@
 * Do not edit manually.
 */
 
-import type { V1NotificationListReq } from "../v1/NotificationListReq";
 import type { V1NotificationListRes } from "../v1/NotificationListRes";
+
+export type NotificationListQueryParams = {
+    /**
+     * @type integer, int
+    */
+    page: number;
+    /**
+     * @type integer, int
+    */
+    size: number;
+    /**
+     * @type string | undefined, consts.NotificationType
+    */
+    type?: string | undefined;
+    /**
+     * @type string | undefined, consts.NotificationStatus
+    */
+    status?: string | undefined;
+};
 
 export type NotificationList200 = V1NotificationListRes;
 
-export type NotificationListMutationRequest = V1NotificationListReq;
+export type NotificationListQueryResponse = NotificationList200;
 
-export type NotificationListMutationResponse = NotificationList200;
-
-export type NotificationListMutation = {
+export type NotificationListQuery = {
     Response: NotificationList200;
-    Request: NotificationListMutationRequest;
+    QueryParams: NotificationListQueryParams;
     Errors: any;
 };

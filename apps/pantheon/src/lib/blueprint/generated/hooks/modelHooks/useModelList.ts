@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { ModelListMutationRequest, ModelListMutationResponse } from "../../types/modelTypes/ModelList";
+import type { ModelListQueryResponse } from "../../types/modelTypes/ModelList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { modelList } from "../../clients/axios/modelService/modelList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const modelListMutationKey = () => [{ url: '/api/model/list' }] as const
+export const modelListQueryKey = () => [{ url: '/api/model/list' }] as const
 
-export type ModelListMutationKey = ReturnType<typeof modelListMutationKey>
+export type ModelListQueryKey = ReturnType<typeof modelListQueryKey>
 
-export function modelListMutationOptions(config: Partial<RequestConfig<ModelListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = modelListMutationKey()
-  return mutationOptions<ModelListMutationResponse, ResponseErrorConfig<Error>, {data?: ModelListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return modelList(data, config)
-    },
+export function modelListQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = modelListQueryKey()
+  return queryOptions<ModelListQueryResponse, ResponseErrorConfig<Error>, ModelListQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return modelList(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function modelListMutationOptions(config: Partial<RequestConfig<ModelList
  * @summary 模型列表
  * {@link /api/model/list}
  */
-export function useModelList<TContext>(options: 
+export function useModelList<TData = ModelListQueryResponse, TQueryData = ModelListQueryResponse, TQueryKey extends QueryKey = ModelListQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<ModelListMutationResponse, ResponseErrorConfig<Error>, {data?: ModelListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<ModelListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<ModelListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? modelListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? modelListQueryKey()
 
-  const baseOptions = modelListMutationOptions(config) as UseMutationOptions<ModelListMutationResponse, ResponseErrorConfig<Error>, {data?: ModelListMutationRequest}, TContext>
+  const query = useQuery({
+   ...modelListQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<ModelListMutationResponse, ResponseErrorConfig<Error>, {data?: ModelListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<ModelListMutationResponse, ResponseErrorConfig<Error>, {data?: ModelListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

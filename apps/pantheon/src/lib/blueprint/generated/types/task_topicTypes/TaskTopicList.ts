@@ -4,17 +4,25 @@
 * Do not edit manually.
 */
 
-import type { V1TaskTopicListReq } from "../v1/TaskTopicListReq";
 import type { V1TaskTopicListRes } from "../v1/TaskTopicListRes";
+
+export type TaskTopicListQueryParams = {
+    /**
+     * @type integer, int
+    */
+    page: number;
+    /**
+     * @type integer, int
+    */
+    size: number;
+};
 
 export type TaskTopicList200 = V1TaskTopicListRes;
 
-export type TaskTopicListMutationRequest = V1TaskTopicListReq;
+export type TaskTopicListQueryResponse = TaskTopicList200;
 
-export type TaskTopicListMutationResponse = TaskTopicList200;
-
-export type TaskTopicListMutation = {
+export type TaskTopicListQuery = {
     Response: TaskTopicList200;
-    Request: TaskTopicListMutationRequest;
+    QueryParams: TaskTopicListQueryParams;
     Errors: any;
 };

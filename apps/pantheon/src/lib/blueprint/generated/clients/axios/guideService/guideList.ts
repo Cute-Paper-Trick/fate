@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { GuideListMutationRequest, GuideListMutationResponse } from "../../../types/guideTypes/GuideList";
+import type { GuideListQueryResponse } from "../../../types/guideTypes/GuideList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getGuideListUrl() {
-  const res = { method: 'POST', url: `/api/guide/list` as const }  
+  const res = { method: 'GET', url: `/api/guide/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getGuideListUrl() {
  * @summary 列表
  * {@link /api/guide/list}
  */
-export async function guideList(data?: GuideListMutationRequest, config: Partial<RequestConfig<GuideListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function guideList(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<GuideListMutationResponse, ResponseErrorConfig<Error>, GuideListMutationRequest>({ method : "POST", url : getGuideListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<GuideListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getGuideListUrl().url.toString(), ... requestConfig })  
   return res.data
 }

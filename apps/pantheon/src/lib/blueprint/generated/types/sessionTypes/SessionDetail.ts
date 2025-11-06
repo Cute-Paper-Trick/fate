@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1SessionDetailReq } from "../v1/SessionDetailReq";
 import type { V1SessionDetailRes } from "../v1/SessionDetailRes";
+
+export type SessionDetailQueryParams = {
+    /**
+     * @type string, string
+    */
+    session_id: string;
+};
 
 export type SessionDetail200 = V1SessionDetailRes;
 
-export type SessionDetailMutationRequest = V1SessionDetailReq;
+export type SessionDetailQueryResponse = SessionDetail200;
 
-export type SessionDetailMutationResponse = SessionDetail200;
-
-export type SessionDetailMutation = {
+export type SessionDetailQuery = {
     Response: SessionDetail200;
-    Request: SessionDetailMutationRequest;
+    QueryParams: SessionDetailQueryParams;
     Errors: any;
 };

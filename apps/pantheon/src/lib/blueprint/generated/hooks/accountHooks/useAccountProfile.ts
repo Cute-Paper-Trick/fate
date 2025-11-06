@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { AccountProfileMutationRequest, AccountProfileMutationResponse } from "../../types/accountTypes/AccountProfile";
+import type { AccountProfileQueryResponse } from "../../types/accountTypes/AccountProfile";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { accountProfile } from "../../clients/axios/accountService/accountProfile";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const accountProfileMutationKey = () => [{ url: '/api/account/profile' }] as const
+export const accountProfileQueryKey = () => [{ url: '/api/account/profile' }] as const
 
-export type AccountProfileMutationKey = ReturnType<typeof accountProfileMutationKey>
+export type AccountProfileQueryKey = ReturnType<typeof accountProfileQueryKey>
 
-export function accountProfileMutationOptions(config: Partial<RequestConfig<AccountProfileMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = accountProfileMutationKey()
-  return mutationOptions<AccountProfileMutationResponse, ResponseErrorConfig<Error>, {data?: AccountProfileMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return accountProfile(data, config)
-    },
+export function accountProfileQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = accountProfileQueryKey()
+  return queryOptions<AccountProfileQueryResponse, ResponseErrorConfig<Error>, AccountProfileQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return accountProfile(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function accountProfileMutationOptions(config: Partial<RequestConfig<Acco
  * @summary 获取用户详细信息
  * {@link /api/account/profile}
  */
-export function useAccountProfile<TContext>(options: 
+export function useAccountProfile<TData = AccountProfileQueryResponse, TQueryData = AccountProfileQueryResponse, TQueryKey extends QueryKey = AccountProfileQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<AccountProfileMutationResponse, ResponseErrorConfig<Error>, {data?: AccountProfileMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<AccountProfileMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<AccountProfileQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? accountProfileMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? accountProfileQueryKey()
 
-  const baseOptions = accountProfileMutationOptions(config) as UseMutationOptions<AccountProfileMutationResponse, ResponseErrorConfig<Error>, {data?: AccountProfileMutationRequest}, TContext>
+  const query = useQuery({
+   ...accountProfileQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<AccountProfileMutationResponse, ResponseErrorConfig<Error>, {data?: AccountProfileMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<AccountProfileMutationResponse, ResponseErrorConfig<Error>, {data?: AccountProfileMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

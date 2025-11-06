@@ -4,13 +4,17 @@
 * Do not edit manually.
 */
 
-import type { TopicCommentSubList200, TopicCommentSubListMutationRequest, TopicCommentSubListMutationResponse } from "../../types/topic_commentTypes/TopicCommentSubList";
-import { v1TopicCommentSubListReqSchema } from "../v1/topicCommentSubListReqSchema";
+import type { TopicCommentSubListQueryParams, TopicCommentSubList200, TopicCommentSubListQueryResponse } from "../../types/topic_commentTypes/TopicCommentSubList";
 import { v1TopicCommentSubListResSchema } from "../v1/topicCommentSubListResSchema";
 import { z } from "zod/v4";
 
+export const topicCommentSubListQueryParamsSchema = z.object({
+    "topic_id": z.coerce.number().int(),
+"root_comment_id": z.coerce.number().int(),
+"page": z.coerce.number().int(),
+"size": z.coerce.number().int()
+    }) as unknown as z.ZodType<TopicCommentSubListQueryParams>
+
 export const topicCommentSubList200Schema = v1TopicCommentSubListResSchema as unknown as z.ZodType<TopicCommentSubList200>
 
-export const topicCommentSubListMutationRequestSchema = v1TopicCommentSubListReqSchema as unknown as z.ZodType<TopicCommentSubListMutationRequest>
-
-export const topicCommentSubListMutationResponseSchema = topicCommentSubList200Schema as unknown as z.ZodType<TopicCommentSubListMutationResponse>
+export const topicCommentSubListQueryResponseSchema = topicCommentSubList200Schema as unknown as z.ZodType<TopicCommentSubListQueryResponse>

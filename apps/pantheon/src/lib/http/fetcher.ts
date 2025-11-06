@@ -1,43 +1,37 @@
-import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { axiosInstance } from './axiosClient'
-
+import { axiosInstance } from './axiosClient';
 
 /**
  * Subset of AxiosRequestConfig
  */
 export type RequestConfig<TData = unknown> = {
-  baseURL?: string
-  url?: string
-  method?: 'GET' | 'PUT' | 'PATCH' | 'POST' | 'DELETE' | 'OPTIONS' | 'HEAD'
-  params?: unknown
-  data?: TData | FormData
-  responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream'
-  signal?: AbortSignal
-  validateStatus?: (status: number) => boolean
-  headers?: AxiosRequestConfig['headers']
-}
+  baseURL?: string;
+  url?: string;
+  method?: 'GET' | 'PUT' | 'PATCH' | 'POST' | 'DELETE' | 'OPTIONS' | 'HEAD';
+  params?: unknown;
+  data?: TData | FormData;
+  responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream';
+  signal?: AbortSignal;
+  validateStatus?: (status: number) => boolean;
+  headers?: AxiosRequestConfig['headers'];
+};
 
 /**
  * Subset of AxiosResponse
  */
 export type ResponseConfig<TData = unknown> = {
-  data: TData
-  status: number
-  statusText: string
-  headers: AxiosResponse['headers']
-}
+  data: TData;
+  status: number;
+  statusText: string;
+  headers: AxiosResponse['headers'];
+};
 
-export type ResponseErrorConfig<TError = unknown> = AxiosError<TError>
+export type ResponseErrorConfig<TError = unknown> = AxiosError<TError>;
 
-
-
-
-
-
-
-
-export const client = async <TData, TError = unknown, TVariables = unknown>(config: RequestConfig<TVariables>): Promise<ResponseConfig<TData>> => {
+export const client = async <TData, TError = unknown, TVariables = unknown>(
+  config: RequestConfig<TVariables>,
+): Promise<ResponseConfig<TData>> => {
   // const globalConfig = getConfig()
 
   return axiosInstance
@@ -50,11 +44,11 @@ export const client = async <TData, TError = unknown, TVariables = unknown>(conf
       },
     })
     .catch((error: AxiosError<TError>) => {
-      throw error
-    })
-}
+      throw error;
+    });
+};
 
 // client.getConfig = getConfig
 // client.setConfig = setConfig
 
-export default client
+export default client;

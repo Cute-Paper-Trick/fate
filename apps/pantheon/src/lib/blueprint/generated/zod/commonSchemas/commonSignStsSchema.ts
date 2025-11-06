@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { CommonSignSts200, CommonSignStsMutationRequest, CommonSignStsMutationResponse } from "../../types/commonTypes/CommonSignSts";
-import { v1CommonSignStsReqSchema } from "../v1/commonSignStsReqSchema";
+import type { CommonSignSts200, CommonSignStsQueryResponse } from "../../types/commonTypes/CommonSignSts";
 import { v1CommonSignStsResSchema } from "../v1/commonSignStsResSchema";
 import { z } from "zod/v4";
 
 export const commonSignSts200Schema = v1CommonSignStsResSchema as unknown as z.ZodType<CommonSignSts200>
 
-export const commonSignStsMutationRequestSchema = v1CommonSignStsReqSchema as unknown as z.ZodType<CommonSignStsMutationRequest>
-
-export const commonSignStsMutationResponseSchema = commonSignSts200Schema as unknown as z.ZodType<CommonSignStsMutationResponse>
+export const commonSignStsQueryResponseSchema = commonSignSts200Schema as unknown as z.ZodType<CommonSignStsQueryResponse>

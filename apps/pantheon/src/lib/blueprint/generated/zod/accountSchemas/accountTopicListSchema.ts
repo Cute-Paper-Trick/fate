@@ -4,13 +4,16 @@
 * Do not edit manually.
 */
 
-import type { AccountTopicList200, AccountTopicListMutationRequest, AccountTopicListMutationResponse } from "../../types/accountTypes/AccountTopicList";
-import { v1AccountTopicListReqSchema } from "../v1/accountTopicListReqSchema";
+import type { AccountTopicListQueryParams, AccountTopicList200, AccountTopicListQueryResponse } from "../../types/accountTypes/AccountTopicList";
 import { v1AccountTopicListResSchema } from "../v1/accountTopicListResSchema";
 import { z } from "zod/v4";
 
+export const accountTopicListQueryParamsSchema = z.object({
+    "status": z.optional(z.string()),
+"page": z.coerce.number().int(),
+"size": z.coerce.number().int()
+    }) as unknown as z.ZodType<AccountTopicListQueryParams>
+
 export const accountTopicList200Schema = v1AccountTopicListResSchema as unknown as z.ZodType<AccountTopicList200>
 
-export const accountTopicListMutationRequestSchema = v1AccountTopicListReqSchema as unknown as z.ZodType<AccountTopicListMutationRequest>
-
-export const accountTopicListMutationResponseSchema = accountTopicList200Schema as unknown as z.ZodType<AccountTopicListMutationResponse>
+export const accountTopicListQueryResponseSchema = accountTopicList200Schema as unknown as z.ZodType<AccountTopicListQueryResponse>

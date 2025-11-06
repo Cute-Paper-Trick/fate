@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1CommonSignStsReq } from "../v1/CommonSignStsReq";
 import type { V1CommonSignStsRes } from "../v1/CommonSignStsRes";
 
 export type CommonSignSts200 = V1CommonSignStsRes;
 
-export type CommonSignStsMutationRequest = V1CommonSignStsReq;
+export type CommonSignStsQueryResponse = CommonSignSts200;
 
-export type CommonSignStsMutationResponse = CommonSignSts200;
-
-export type CommonSignStsMutation = {
+export type CommonSignStsQuery = {
     Response: CommonSignSts200;
-    Request: CommonSignStsMutationRequest;
     Errors: any;
 };

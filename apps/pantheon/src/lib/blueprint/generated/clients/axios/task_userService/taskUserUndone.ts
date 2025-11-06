@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskUserUndoneMutationRequest, TaskUserUndoneMutationResponse } from "../../../types/task_userTypes/TaskUserUndone";
+import type { TaskUserUndoneQueryResponse } from "../../../types/task_userTypes/TaskUserUndone";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTaskUserUndoneUrl() {
-  const res = { method: 'POST', url: `/api/task_user/undone` as const }  
+  const res = { method: 'GET', url: `/api/task_user/undone` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTaskUserUndoneUrl() {
  * @summary 未做的任务
  * {@link /api/task_user/undone}
  */
-export async function taskUserUndone(data?: TaskUserUndoneMutationRequest, config: Partial<RequestConfig<TaskUserUndoneMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function taskUserUndone(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TaskUserUndoneMutationResponse, ResponseErrorConfig<Error>, TaskUserUndoneMutationRequest>({ method : "POST", url : getTaskUserUndoneUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TaskUserUndoneQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTaskUserUndoneUrl().url.toString(), ... requestConfig })  
   return res.data
 }

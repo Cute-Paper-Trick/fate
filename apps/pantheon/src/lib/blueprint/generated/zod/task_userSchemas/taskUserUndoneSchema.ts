@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { TaskUserUndone200, TaskUserUndoneMutationRequest, TaskUserUndoneMutationResponse } from "../../types/task_userTypes/TaskUserUndone";
-import { v1TaskUserUndoneReqSchema } from "../v1/taskUserUndoneReqSchema";
+import type { TaskUserUndone200, TaskUserUndoneQueryResponse } from "../../types/task_userTypes/TaskUserUndone";
 import { v1TaskUserUndoneResSchema } from "../v1/taskUserUndoneResSchema";
 import { z } from "zod/v4";
 
 export const taskUserUndone200Schema = v1TaskUserUndoneResSchema as unknown as z.ZodType<TaskUserUndone200>
 
-export const taskUserUndoneMutationRequestSchema = v1TaskUserUndoneReqSchema as unknown as z.ZodType<TaskUserUndoneMutationRequest>
-
-export const taskUserUndoneMutationResponseSchema = taskUserUndone200Schema as unknown as z.ZodType<TaskUserUndoneMutationResponse>
+export const taskUserUndoneQueryResponseSchema = taskUserUndone200Schema as unknown as z.ZodType<TaskUserUndoneQueryResponse>

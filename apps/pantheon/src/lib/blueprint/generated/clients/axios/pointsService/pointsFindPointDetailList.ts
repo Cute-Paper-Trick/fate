@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { PointsFindPointDetailListMutationRequest, PointsFindPointDetailListMutationResponse } from "../../../types/pointsTypes/PointsFindPointDetailList";
+import type { PointsFindPointDetailListQueryResponse } from "../../../types/pointsTypes/PointsFindPointDetailList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getPointsFindPointDetailListUrl() {
-  const res = { method: 'POST', url: `/api/points/findPointDetailList` as const }  
+  const res = { method: 'GET', url: `/api/points/findPointDetailList` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getPointsFindPointDetailListUrl() {
  * @summary 查询积分明细列表
  * {@link /api/points/findPointDetailList}
  */
-export async function pointsFindPointDetailList(data?: PointsFindPointDetailListMutationRequest, config: Partial<RequestConfig<PointsFindPointDetailListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function pointsFindPointDetailList(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<PointsFindPointDetailListMutationResponse, ResponseErrorConfig<Error>, PointsFindPointDetailListMutationRequest>({ method : "POST", url : getPointsFindPointDetailListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<PointsFindPointDetailListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getPointsFindPointDetailListUrl().url.toString(), ... requestConfig })  
   return res.data
 }

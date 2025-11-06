@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TaskListMutationRequest, TaskListMutationResponse } from "../../types/taskTypes/TaskList";
+import type { TaskListQueryResponse } from "../../types/taskTypes/TaskList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { taskList } from "../../clients/axios/taskService/taskList";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const taskListMutationKey = () => [{ url: '/api/task/list' }] as const
+export const taskListQueryKey = () => [{ url: '/api/task/list' }] as const
 
-export type TaskListMutationKey = ReturnType<typeof taskListMutationKey>
+export type TaskListQueryKey = ReturnType<typeof taskListQueryKey>
 
-export function taskListMutationOptions(config: Partial<RequestConfig<TaskListMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = taskListMutationKey()
-  return mutationOptions<TaskListMutationResponse, ResponseErrorConfig<Error>, {data?: TaskListMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return taskList(data, config)
-    },
+export function taskListQueryOptions(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = taskListQueryKey()
+  return queryOptions<TaskListQueryResponse, ResponseErrorConfig<Error>, TaskListQueryResponse, typeof queryKey>({
+ 
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return taskList(config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function taskListMutationOptions(config: Partial<RequestConfig<TaskListMu
  * @summary 任务列表
  * {@link /api/task/list}
  */
-export function useTaskList<TContext>(options: 
+export function useTaskList<TData = TaskListQueryResponse, TQueryData = TaskListQueryResponse, TQueryKey extends QueryKey = TaskListQueryKey>(options: 
 {
-  mutation?: UseMutationOptions<TaskListMutationResponse, ResponseErrorConfig<Error>, {data?: TaskListMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TaskListMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TaskListQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? taskListMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? taskListQueryKey()
 
-  const baseOptions = taskListMutationOptions(config) as UseMutationOptions<TaskListMutationResponse, ResponseErrorConfig<Error>, {data?: TaskListMutationRequest}, TContext>
+  const query = useQuery({
+   ...taskListQueryOptions(config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TaskListMutationResponse, ResponseErrorConfig<Error>, {data?: TaskListMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TaskListMutationResponse, ResponseErrorConfig<Error>, {data?: TaskListMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

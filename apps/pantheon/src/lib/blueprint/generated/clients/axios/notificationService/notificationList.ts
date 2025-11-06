@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { NotificationListMutationRequest, NotificationListMutationResponse } from "../../../types/notificationTypes/NotificationList";
+import type { NotificationListQueryResponse, NotificationListQueryParams } from "../../../types/notificationTypes/NotificationList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getNotificationListUrl() {
-  const res = { method: 'POST', url: `/api/notification/list` as const }  
+  const res = { method: 'GET', url: `/api/notification/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getNotificationListUrl() {
  * @summary 通知列表
  * {@link /api/notification/list}
  */
-export async function notificationList(data: NotificationListMutationRequest, config: Partial<RequestConfig<NotificationListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function notificationList(params: NotificationListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<NotificationListMutationResponse, ResponseErrorConfig<Error>, NotificationListMutationRequest>({ method : "POST", url : getNotificationListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<NotificationListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getNotificationListUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

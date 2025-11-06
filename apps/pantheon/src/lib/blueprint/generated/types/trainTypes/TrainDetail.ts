@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1TrainDetailReq } from "../v1/TrainDetailReq";
 import type { V1TrainDetailRes } from "../v1/TrainDetailRes";
+
+export type TrainDetailQueryParams = {
+    /**
+     * @type integer, int64
+    */
+    train_id: number;
+};
 
 export type TrainDetail200 = V1TrainDetailRes;
 
-export type TrainDetailMutationRequest = V1TrainDetailReq;
+export type TrainDetailQueryResponse = TrainDetail200;
 
-export type TrainDetailMutationResponse = TrainDetail200;
-
-export type TrainDetailMutation = {
+export type TrainDetailQuery = {
     Response: TrainDetail200;
-    Request: TrainDetailMutationRequest;
+    QueryParams: TrainDetailQueryParams;
     Errors: any;
 };

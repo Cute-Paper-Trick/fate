@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TrainListMutationRequest, TrainListMutationResponse } from "../../../types/trainTypes/TrainList";
+import type { TrainListQueryResponse, TrainListQueryParams } from "../../../types/trainTypes/TrainList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getTrainListUrl() {
-  const res = { method: 'POST', url: `/api/train/list` as const }  
+  const res = { method: 'GET', url: `/api/train/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getTrainListUrl() {
  * @summary 我的模型列表
  * {@link /api/train/list}
  */
-export async function trainList(data: TrainListMutationRequest, config: Partial<RequestConfig<TrainListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function trainList(params: TrainListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<TrainListMutationResponse, ResponseErrorConfig<Error>, TrainListMutationRequest>({ method : "POST", url : getTrainListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<TrainListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getTrainListUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }

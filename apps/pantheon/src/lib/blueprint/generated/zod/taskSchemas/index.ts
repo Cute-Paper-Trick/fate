@@ -1,1 +1,1 @@
-export { taskList200Schema, taskListMutationRequestSchema, taskListMutationResponseSchema } from "./taskListSchema";
+export { taskList200Schema, taskListQueryResponseSchema } from "./taskListSchema";

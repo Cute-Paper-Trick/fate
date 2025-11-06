@@ -4,13 +4,10 @@
 * Do not edit manually.
 */
 
-import type { PointsFindPointDetailList200, PointsFindPointDetailListMutationRequest, PointsFindPointDetailListMutationResponse } from "../../types/pointsTypes/PointsFindPointDetailList";
-import { v1PointsFindPointDetailListReqSchema } from "../v1/pointsFindPointDetailListReqSchema";
+import type { PointsFindPointDetailList200, PointsFindPointDetailListQueryResponse } from "../../types/pointsTypes/PointsFindPointDetailList";
 import { v1PointsFindPointDetailListResSchema } from "../v1/pointsFindPointDetailListResSchema";
 import { z } from "zod/v4";
 
 export const pointsFindPointDetailList200Schema = v1PointsFindPointDetailListResSchema as unknown as z.ZodType<PointsFindPointDetailList200>
 
-export const pointsFindPointDetailListMutationRequestSchema = v1PointsFindPointDetailListReqSchema as unknown as z.ZodType<PointsFindPointDetailListMutationRequest>
-
-export const pointsFindPointDetailListMutationResponseSchema = pointsFindPointDetailList200Schema as unknown as z.ZodType<PointsFindPointDetailListMutationResponse>
+export const pointsFindPointDetailListQueryResponseSchema = pointsFindPointDetailList200Schema as unknown as z.ZodType<PointsFindPointDetailListQueryResponse>

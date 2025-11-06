@@ -4,17 +4,13 @@
 * Do not edit manually.
 */
 
-import type { V1TaskUserUndoneReq } from "../v1/TaskUserUndoneReq";
 import type { V1TaskUserUndoneRes } from "../v1/TaskUserUndoneRes";
 
 export type TaskUserUndone200 = V1TaskUserUndoneRes;
 
-export type TaskUserUndoneMutationRequest = V1TaskUserUndoneReq;
+export type TaskUserUndoneQueryResponse = TaskUserUndone200;
 
-export type TaskUserUndoneMutationResponse = TaskUserUndone200;
-
-export type TaskUserUndoneMutation = {
+export type TaskUserUndoneQuery = {
     Response: TaskUserUndone200;
-    Request: TaskUserUndoneMutationRequest;
     Errors: any;
 };

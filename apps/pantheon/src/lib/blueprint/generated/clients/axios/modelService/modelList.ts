@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { ModelListMutationRequest, ModelListMutationResponse } from "../../../types/modelTypes/ModelList";
+import type { ModelListQueryResponse } from "../../../types/modelTypes/ModelList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getModelListUrl() {
-  const res = { method: 'POST', url: `/api/model/list` as const }  
+  const res = { method: 'GET', url: `/api/model/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getModelListUrl() {
  * @summary 模型列表
  * {@link /api/model/list}
  */
-export async function modelList(data?: ModelListMutationRequest, config: Partial<RequestConfig<ModelListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function modelList(config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<ModelListMutationResponse, ResponseErrorConfig<Error>, ModelListMutationRequest>({ method : "POST", url : getModelListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<ModelListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getModelListUrl().url.toString(), ... requestConfig })  
   return res.data
 }

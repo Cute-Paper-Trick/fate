@@ -4,17 +4,21 @@
 * Do not edit manually.
 */
 
-import type { V1TrainListReq } from "../v1/TrainListReq";
 import type { V1TrainListRes } from "../v1/TrainListRes";
+
+export type TrainListQueryParams = {
+    /**
+     * @type string, string
+    */
+    train_type: string;
+};
 
 export type TrainList200 = V1TrainListRes;
 
-export type TrainListMutationRequest = V1TrainListReq;
+export type TrainListQueryResponse = TrainList200;
 
-export type TrainListMutationResponse = TrainList200;
-
-export type TrainListMutation = {
+export type TrainListQuery = {
     Response: TrainList200;
-    Request: TrainListMutationRequest;
+    QueryParams: TrainListQueryParams;
     Errors: any;
 };

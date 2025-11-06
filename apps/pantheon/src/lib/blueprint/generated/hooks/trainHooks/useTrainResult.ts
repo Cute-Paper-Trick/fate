@@ -5,23 +5,25 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { TrainResultMutationRequest, TrainResultMutationResponse } from "../../types/trainTypes/TrainResult";
+import type { TrainResultQueryResponse, TrainResultQueryParams } from "../../types/trainTypes/TrainResult";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
-import type { UseMutationOptions, UseMutationResult, QueryClient } from "@tanstack/react-query";
+import type { QueryKey, QueryClient, QueryObserverOptions, UseQueryResult } from "@tanstack/react-query";
 import { trainResult } from "../../clients/axios/trainService/trainResult";
-import { mutationOptions, useMutation } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
-export const trainResultMutationKey = () => [{ url: '/api/train/result' }] as const
+export const trainResultQueryKey = (params: TrainResultQueryParams) => [{ url: '/api/train/result' }, ...(params ? [params] : [])] as const
 
-export type TrainResultMutationKey = ReturnType<typeof trainResultMutationKey>
+export type TrainResultQueryKey = ReturnType<typeof trainResultQueryKey>
 
-export function trainResultMutationOptions(config: Partial<RequestConfig<TrainResultMutationRequest>> & { client?: typeof fetch } = {}) {
-  const mutationKey = trainResultMutationKey()
-  return mutationOptions<TrainResultMutationResponse, ResponseErrorConfig<Error>, {data: TrainResultMutationRequest}, typeof mutationKey>({
-    mutationKey,
-    mutationFn: async({ data }) => {
-      return trainResult(data, config)
-    },
+export function trainResultQueryOptions(params: TrainResultQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
+  const queryKey = trainResultQueryKey(params)
+  return queryOptions<TrainResultQueryResponse, ResponseErrorConfig<Error>, TrainResultQueryResponse, typeof queryKey>({
+   enabled: !!(params),
+   queryKey,
+   queryFn: async ({ signal }) => {
+      config.signal = signal
+      return trainResult(params, config)
+   },
   })
 }
 
@@ -29,21 +31,23 @@ export function trainResultMutationOptions(config: Partial<RequestConfig<TrainRe
  * @summary 查询训练结果
  * {@link /api/train/result}
  */
-export function useTrainResult<TContext>(options: 
+export function useTrainResult<TData = TrainResultQueryResponse, TQueryData = TrainResultQueryResponse, TQueryKey extends QueryKey = TrainResultQueryKey>(params: TrainResultQueryParams, options: 
 {
-  mutation?: UseMutationOptions<TrainResultMutationResponse, ResponseErrorConfig<Error>, {data: TrainResultMutationRequest}, TContext> & { client?: QueryClient },
-  client?: Partial<RequestConfig<TrainResultMutationRequest>> & { client?: typeof fetch },
+  query?: Partial<QueryObserverOptions<TrainResultQueryResponse, ResponseErrorConfig<Error>, TData, TQueryData, TQueryKey>> & { client?: QueryClient },
+  client?: Partial<RequestConfig> & { client?: typeof fetch }
 }
  = {}) {
-  const { mutation = {}, client: config = {} } = options ?? {}
-  const { client: queryClient, ...mutationOptions } = mutation;
-  const mutationKey = mutationOptions.mutationKey ?? trainResultMutationKey()
+  const { query: queryConfig = {}, client: config = {} } = options ?? {}
+  const { client: queryClient, ...queryOptions } = queryConfig
+  const queryKey = queryOptions?.queryKey ?? trainResultQueryKey(params)
 
-  const baseOptions = trainResultMutationOptions(config) as UseMutationOptions<TrainResultMutationResponse, ResponseErrorConfig<Error>, {data: TrainResultMutationRequest}, TContext>
+  const query = useQuery({
+   ...trainResultQueryOptions(params, config),
+   queryKey,
+   ...queryOptions
+  } as unknown as QueryObserverOptions, queryClient) as UseQueryResult<TData, ResponseErrorConfig<Error>> & { queryKey: TQueryKey }
 
-  return useMutation<TrainResultMutationResponse, ResponseErrorConfig<Error>, {data: TrainResultMutationRequest}, TContext>({
-    ...baseOptions,
-    mutationKey,
-    ...mutationOptions,
-  }, queryClient) as UseMutationResult<TrainResultMutationResponse, ResponseErrorConfig<Error>, {data: TrainResultMutationRequest}, TContext>
+  query.queryKey = queryKey as TQueryKey
+
+  return query
 }

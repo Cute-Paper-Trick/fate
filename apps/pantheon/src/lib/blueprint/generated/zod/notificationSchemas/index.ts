@@ -1,2 +1,2 @@
-export { notificationList200Schema, notificationListMutationRequestSchema, notificationListMutationResponseSchema } from "./notificationListSchema";
+export { notificationListQueryParamsSchema, notificationList200Schema, notificationListQueryResponseSchema } from "./notificationListSchema";
 export { notificationMarkRead200Schema, notificationMarkReadMutationRequestSchema, notificationMarkReadMutationResponseSchema } from "./notificationMarkReadSchema";

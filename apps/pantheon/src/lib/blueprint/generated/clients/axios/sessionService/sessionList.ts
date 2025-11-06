@@ -5,11 +5,11 @@
 */
 
 import fetch from "@/lib/http/fetcher";
-import type { SessionListMutationRequest, SessionListMutationResponse } from "../../../types/sessionTypes/SessionList";
+import type { SessionListQueryResponse, SessionListQueryParams } from "../../../types/sessionTypes/SessionList";
 import type { RequestConfig, ResponseErrorConfig } from "@/lib/http/fetcher";
 
 function getSessionListUrl() {
-  const res = { method: 'POST', url: `/api/session/list` as const }  
+  const res = { method: 'GET', url: `/api/session/list` as const }  
   return res
 }
 
@@ -17,11 +17,9 @@ function getSessionListUrl() {
  * @summary 获取会话列表
  * {@link /api/session/list}
  */
-export async function sessionList(data: SessionListMutationRequest, config: Partial<RequestConfig<SessionListMutationRequest>> & { client?: typeof fetch } = {}) {
+export async function sessionList(params: SessionListQueryParams, config: Partial<RequestConfig> & { client?: typeof fetch } = {}) {
   const { client: request = fetch, ...requestConfig } = config  
   
-  const requestData = data  
-  
-  const res = await request<SessionListMutationResponse, ResponseErrorConfig<Error>, SessionListMutationRequest>({ method : "POST", url : getSessionListUrl().url.toString(), data : requestData, ... requestConfig })  
+  const res = await request<SessionListQueryResponse, ResponseErrorConfig<Error>, unknown>({ method : "GET", url : getSessionListUrl().url.toString(), params, ... requestConfig })  
   return res.data
 }
