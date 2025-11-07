@@ -19,6 +19,7 @@ export default {
       files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       rules: {
         'selector-id-pattern': null,
+        'CssSyntaxError': null,
         // Disable rules that don't apply to CSS-in-JS
         'no-empty-source': null,
         'no-invalid-double-slash-comments': null,

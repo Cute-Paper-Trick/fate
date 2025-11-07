@@ -17,9 +17,9 @@ const globalStyle = ({ token }: { prefixCls: string; token: Theme }) => css`
 
     background: ${token.colorBgLayout};
 
-    @media (device-width >= 576px) {
-      overflow: hidden;
-    }
+    // @media (device-width >= 576px) {
+    //   overflow: hidden;
+    // }
   }
 
   body {

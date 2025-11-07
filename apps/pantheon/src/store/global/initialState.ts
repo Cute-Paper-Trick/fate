@@ -9,6 +9,13 @@ export interface SystemStatus {
   themeMode?: ThemeMode;
 }
 
+export enum ProfileTabs {
+  APIKey = 'apikey',
+  Profile = 'profile',
+  Security = 'security',
+  Stats = 'stats',
+}
+
 export const INITIAL_STATUS = {
   showAppPanel: false,
 } satisfies SystemStatus;

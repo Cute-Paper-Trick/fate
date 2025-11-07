@@ -1,21 +1,37 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { PropsWithChildren, Suspense, memo } from 'react';
-import { HotkeysProvider } from 'react-hotkeys-hook';
 import { Flexbox } from 'react-layout-kit';
 
 import TitleBar from './TitleBar';
 
+const AppNavigationDrawer = dynamic(() => import('../../features/AppNavigationDrawer'), {
+  ssr: false,
+});
+
 const Layout = memo<PropsWithChildren>(({ children }) => {
   // const { isPWA } = usePlatform();
   return (
-    <HotkeysProvider>
+    <Flexbox
+      direction="vertical"
+      height={'100%'}
+      style={{ height: '100vh', position: 'relative', borderTop: undefined }}
+      width={'100%'}
+    >
+      <AppNavigationDrawer />
       <TitleBar />
-      <Flexbox height={'100%'} horizontal style={{ position: 'relative' }} width="100%">
+      <Flexbox
+        direction="vertical"
+        height={'100%'}
+        id="#navigator-drawer-container"
+        style={{ position: 'relative' }}
+        width="100%"
+      >
         {children}
       </Flexbox>
       <Suspense>{/* <RegisterHotkeys /> */}</Suspense>
-    </HotkeysProvider>
+    </Flexbox>
   );
 });
 

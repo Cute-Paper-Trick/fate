@@ -17,6 +17,12 @@ function AuthProvider({ children }: { children: ReactNode }) {
     <AuthUIProvider
       Link={Link}
       authClient={authClient}
+      avatar={{
+        upload: async (file: File) => {
+          console.log(file);
+          return undefined;
+        },
+      }}
       credentials={{ username: true, rememberMe: true }}
       localization={{
         USERNAME: t('username'),

@@ -18,9 +18,10 @@ const AppNavigationDrawer = memo(() => {
   return (
     <Drawer
       noHeader
-      placement={'left'}
-      open={showAppPanel}
       onClose={() => updateSystemStatus({ showAppPanel: false })}
+      open={showAppPanel}
+      placement={'left'}
+      getContainer="#navigator-drawer-container"
       // sidebar={<></>}
       // sidebarWidth={180}
     >

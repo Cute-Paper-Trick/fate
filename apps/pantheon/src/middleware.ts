@@ -22,6 +22,7 @@ const isAuthRoute = createRouteMatcher(['/auth(.*)']);
 
 const isAdminRoute = createRouteMatcher(['/admin(.*)']);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isPublicRoute = createRouteMatcher([
   '/',
   '/unauthorized',
@@ -29,6 +30,96 @@ const isPublicRoute = createRouteMatcher([
   '/talk(.*)',
   '/task(.*)',
 ]);
+
+function redirectToLogin(request: NextRequest) {
+  const loginUrl = new URL('/auth/sign-in', request.url);
+  loginUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
+  return NextResponse.redirect(loginUrl);
+}
+
+/**
+ * 获取用户语言偏好
+ * 语言设置优先级
+ * 1. search params
+ * 2. cookie
+ * 3. browser
+ */
+function getLocale(request: NextRequest) {
+  const url = request.nextUrl;
+  // 最高优先级在搜索参数中明确指定，例如？hl=zh-CN
+  const explicitlyLocale = (url.searchParams.get('hl') || undefined) as Locales | undefined;
+
+  // 如果是新用户，没有cookie，所以我们需要使用通过 accept-language 解析的备用语言
+  const browserLanguage = parseBrowserLanguage(request.headers);
+  const locale =
+    explicitlyLocale ||
+    ((request.cookies.get(APP_LOCALE_COOKIE)?.value || browserLanguage) as Locales);
+
+  return { browserLanguage, locale };
+}
+
+function getTheme(request: NextRequest) {
+  return request.cookies.get(APP_THEME_APPEARANCE)?.value || 'light';
+}
+
+function getDevice(request: NextRequest) {
+  const ua = request.headers.get('user-agent');
+  const device = new UAParser(ua || '').getDevice();
+  return device;
+}
+
+/**
+ * 变体重写中间件
+ * 根据用户的语言、主题和设备类型偏好，重写请求路径以包含相应的变体信息。
+ */
+function variantRewrite(request: NextRequest) {
+  const url = request.nextUrl;
+  logDefault('Processing request: %s %s', request.method, request.url);
+
+  const theme = getTheme(request);
+  const { browserLanguage, locale } = getLocale(request);
+  const device = getDevice(request);
+
+  logDefault('User preferences: %O', {
+    browserLanguage,
+    deviceType: device.type,
+    hasCookies: {
+      locale: !!request.cookies.get(APP_LOCALE_COOKIE)?.value,
+      theme: !!request.cookies.get(APP_THEME_APPEARANCE)?.value,
+    },
+    locale,
+    theme,
+  });
+
+  // Create normalized preference values
+  const route = RouteVariants.serializeVariants({
+    isMobile: device.type === 'mobile',
+    locale,
+    theme,
+  });
+
+  logDefault('Serialized route variant: %s', route);
+
+  // refs: https://github.com/lobehub/lobe-chat/pull/5866
+  // new handle segment rewrite: /${route}${originalPathname}
+  // / -> /zh-CN__0__dark
+  // /discover -> /zh-CN__0__dark/discover
+  const nextPathname = `/${route}` + (url.pathname === '/' ? '' : url.pathname);
+  const nextURL = appEnv.MIDDLEWARE_REWRITE_THROUGH_LOCAL
+    ? urlJoin(url.origin, nextPathname)
+    : nextPathname;
+
+  logDefault('URL rewrite: %O', {
+    isLocalRewrite: appEnv.MIDDLEWARE_REWRITE_THROUGH_LOCAL,
+    nextPathname: nextPathname,
+    nextURL: nextURL,
+    originalPathname: url.pathname,
+  });
+
+  url.pathname = nextPathname;
+
+  return NextResponse.rewrite(url, { status: 200 });
+}
 
 const middleware = async (request: NextRequest) => {
   const sessionCookie = getSessionCookie(request, { cookiePrefix: 'fate' });
@@ -92,7 +183,8 @@ export const config = {
     '/lab(.*)',
     '/talk(.*)',
     '/task(.*)',
-    '/brief-introduct(.*)'
+    '/brief-introduct(.*)',
+    '/profile(.*)',
   ],
   // matcher: [
   //   /*
@@ -105,93 +197,3 @@ export const config = {
   //   '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
   // ],
 };
-
-function redirectToLogin(request: NextRequest) {
-  const loginUrl = new URL('/auth/sign-in', request.url);
-  loginUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
-  return NextResponse.redirect(loginUrl);
-}
-
-/**
- * 变体重写中间件
- * 根据用户的语言、主题和设备类型偏好，重写请求路径以包含相应的变体信息。
- */
-function variantRewrite(request: NextRequest) {
-  const url = request.nextUrl;
-  logDefault('Processing request: %s %s', request.method, request.url);
-
-  const theme = getTheme(request);
-  const { browserLanguage, locale } = getLocale(request);
-  const device = getDevice(request);
-
-  logDefault('User preferences: %O', {
-    browserLanguage,
-    deviceType: device.type,
-    hasCookies: {
-      locale: !!request.cookies.get(APP_LOCALE_COOKIE)?.value,
-      theme: !!request.cookies.get(APP_THEME_APPEARANCE)?.value,
-    },
-    locale,
-    theme,
-  });
-
-  // Create normalized preference values
-  const route = RouteVariants.serializeVariants({
-    isMobile: device.type === 'mobile',
-    locale,
-    theme,
-  });
-
-  logDefault('Serialized route variant: %s', route);
-
-  // refs: https://github.com/lobehub/lobe-chat/pull/5866
-  // new handle segment rewrite: /${route}${originalPathname}
-  // / -> /zh-CN__0__dark
-  // /discover -> /zh-CN__0__dark/discover
-  const nextPathname = `/${route}` + (url.pathname === '/' ? '' : url.pathname);
-  const nextURL = appEnv.MIDDLEWARE_REWRITE_THROUGH_LOCAL
-    ? urlJoin(url.origin, nextPathname)
-    : nextPathname;
-
-  logDefault('URL rewrite: %O', {
-    isLocalRewrite: appEnv.MIDDLEWARE_REWRITE_THROUGH_LOCAL,
-    nextPathname: nextPathname,
-    nextURL: nextURL,
-    originalPathname: url.pathname,
-  });
-
-  url.pathname = nextPathname;
-
-  return NextResponse.rewrite(url, { status: 200 });
-}
-
-/**
- * 获取用户语言偏好
- * 语言设置优先级
- * 1. search params
- * 2. cookie
- * 3. browser
- */
-function getLocale(request: NextRequest) {
-  const url = request.nextUrl;
-  // 最高优先级在搜索参数中明确指定，例如？hl=zh-CN
-  const explicitlyLocale = (url.searchParams.get('hl') || undefined) as Locales | undefined;
-
-  // 如果是新用户，没有cookie，所以我们需要使用通过 accept-language 解析的备用语言
-  const browserLanguage = parseBrowserLanguage(request.headers);
-  const locale =
-    explicitlyLocale ||
-    ((request.cookies.get(APP_LOCALE_COOKIE)?.value || browserLanguage) as Locales);
-
-  return { browserLanguage, locale };
-}
-
-function getTheme(request: NextRequest) {
-  return request.cookies.get(APP_THEME_APPEARANCE)?.value || 'light';
-}
-
-function getDevice(request: NextRequest) {
-  const ua = request.headers.get('user-agent');
-  const device = new UAParser(ua || '').getDevice();
-  return device;
-}
