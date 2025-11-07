@@ -183,6 +183,7 @@ export const config = {
     '/lab(.*)',
     '/talk(.*)',
     '/task(.*)',
+    '/learning(.*)',
     '/brief-introduct(.*)',
     '/profile(.*)',
   ],

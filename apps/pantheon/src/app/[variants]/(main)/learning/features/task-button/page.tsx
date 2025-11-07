@@ -1,0 +1,72 @@
+'use client';
+
+import { Button } from 'antd';
+import React, { useState } from 'react';
+
+import { useTaskButtons } from '@/store/learning/helpers';
+import {
+  TaskButtonConfig,
+  TaskButtonGroupProps,
+  V1TaskUserInfo,
+} from '@/store/learning/initialState';
+import { useLearningStore } from '@/store/learning/store';
+
+import styles from './index.module.css';
+
+const validButtonTypes = ['primary', 'link', 'text', 'default', 'dashed'] as const;
+const goComplete = (item: V1TaskUserInfo) => {
+  //去发布
+  const { page } = JSON.parse(item.jump) as { page: string };
+  //TODO: 暂时跳转此页面 后续会改
+  console.log('跳转到', page);
+  // router.push('/brief-introduct');
+};
+type ButtonType = (typeof validButtonTypes)[number];
+
+export const TaskButtonGroup: React.FC<TaskButtonGroupProps> = ({ item }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { listDict, completeTask } = useLearningStore();
+  const { getTaskButtons } = useTaskButtons();
+  const handleButtonClick = (config: TaskButtonConfig) => {
+    if (config?.action === 'challenge') {
+      goComplete(item); // 跳转页面
+    } else if (config?.action === 'complete') {
+      setIsModalOpen(true); // TODO: 显示去完成弹框 后续对接 下面是完成接口
+      if (config?.taskIndex) {
+        completeTask(config.taskIndex);
+      }
+      console.log('状态', isModalOpen);
+    }
+  };
+
+  const buttonConfigs = getTaskButtons(item, listDict);
+
+  return (
+    <div className={styles.taskButton}>
+      {buttonConfigs.map((config, index) => (
+        <Button
+          disabled={'disabled' in config ? config.disabled : false}
+          key={index}
+          onClick={() => {
+            if ('action' in config && config.action) {
+              handleButtonClick(config);
+            }
+          }}
+          style={{
+            color: config.type !== 'primary' ? config.color : '',
+            border: config.type === 'default' ? `1px solid ${config.color}` : '',
+            backgroundColor: config.type === 'primary' ? config.color : '',
+          }}
+          type={
+            'type' in config && config.type && validButtonTypes.includes(config.type as ButtonType)
+              ? (config.type as ButtonType)
+              : 'primary'
+          }
+        >
+          {config.text}
+        </Button>
+      ))}
+      {/* TODO: 此处为后续弹框调用 */}
+    </div>
+  );
+};

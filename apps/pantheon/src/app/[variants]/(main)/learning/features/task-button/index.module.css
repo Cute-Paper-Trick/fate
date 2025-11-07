@@ -1,0 +1,14 @@
+.taskButton{
+    :global(.ant-btn){
+        padding: 8px 14px;
+        height: auto;
+        font-weight: bold;
+        font-size: 0.875rem;
+    }
+    :global(.ant-btn:nth-child(2)){
+        margin-left: 12px;
+    }
+    :global(.ant-btn-text){
+        font-weight: bold;
+    }
+}

@@ -12,6 +12,12 @@ export default {
         'color-no-invalid-hex': true,
         'function-no-unknown': null,
         'less/color-no-invalid-hex': true,
+        'selector-pseudo-class-no-unknown': [
+          true,
+          {
+            ignorePseudoClasses: ['global'],
+          },
+        ],
       },
     },
     {

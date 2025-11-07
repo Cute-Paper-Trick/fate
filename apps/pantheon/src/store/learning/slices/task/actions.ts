@@ -1,24 +1,36 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { StateCreator } from 'zustand';
 
-import { V1TaskListReq, V1TaskListRes, taskService } from '@/lib/http';
+import { taskUserService } from '@/lib/http';
+import { queryClient } from '@/lib/query';
+
+import { TaskListActions, TaskListState, V1TaskUserDoneReq } from '../../initialState';
 
 // import type { StateCreator } from 'zustand/vanilla';
 
-export interface TaskAction {
-  useFetchTaskList: (params: V1TaskListReq) => UseQueryResult<V1TaskListRes>;
-}
-
 export const createTaskSlice: StateCreator<
-  TaskAction,
+  TaskListState & TaskListActions,
   [['zustand/devtools', never]],
   [],
-  TaskAction
+  TaskListActions
 > = () => ({
   useFetchTaskList: (params) => {
     return useQuery({
       queryKey: ['tasks', params],
-      queryFn: async () => taskService().taskList(params),
+      queryFn: async () => taskUserService().taskUserList(params),
     });
+  },
+
+  /**
+   * @title 发布并完成任务并刷新tasks（弹框内）
+   */
+  completeTask: async (taskIndex: V1TaskUserDoneReq) => {
+    try {
+      await taskUserService().taskUserDone(taskIndex);
+      await queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    } catch (error) {
+      console.error('Failed to complete task:', error);
+      throw error;
+    }
   },
 });
