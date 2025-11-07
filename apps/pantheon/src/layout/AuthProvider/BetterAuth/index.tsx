@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
 import { authClient } from '@/features/cerberus/client';
+import SonnerProvider from '@/layout/GlobalProvider/Sonner';
 
 import { useLocalization } from './useLocalization';
 import UserUpdater from './UserUpdater';
@@ -33,7 +34,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
       replace={router.replace}
       signUp={false}
     >
-      {children}
+      <SonnerProvider>{children}</SonnerProvider>
       <UserUpdater />
     </AuthUIProvider>
   );

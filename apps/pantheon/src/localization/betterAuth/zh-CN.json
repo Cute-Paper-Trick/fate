@@ -267,7 +267,7 @@
   "SET_PASSWORD_DESCRIPTION": "点击下方按钮以接收邮件来为您的账号设置密码。",
   "SIGN_IN": "登录",
   "SIGN_IN_ACTION": "登录",
-  "SIGN_IN_DESCRIPTION": "在下方输入您的邮箱以登录账号",
+  "SIGN_IN_DESCRIPTION": "在下方输入您的邮箱或用户名以登录账号",
   "SIGN_IN_USERNAME_DESCRIPTION": "输入您的用户名或邮箱以登录账号",
   "SIGN_IN_USERNAME_PLACEHOLDER": "用户名或邮箱",
   "SIGN_IN_WITH": "使用以下方式登录",
