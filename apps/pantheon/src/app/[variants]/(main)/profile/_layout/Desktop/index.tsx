@@ -33,7 +33,7 @@ const Layout = memo<LayoutProps>(({ children, category }) => {
         <SideBar>{category}</SideBar>
       ) : (
         <Header getContainer={() => ref.current} title={<>{t(`tab.${'activeKey'}`)}</>}>
-          111{category}
+          {category}
         </Header>
       )}
       <SettingContainer

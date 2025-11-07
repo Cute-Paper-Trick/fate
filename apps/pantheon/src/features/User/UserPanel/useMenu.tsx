@@ -18,7 +18,7 @@ export const useMenu = () => {
     {
       icon: <Icon icon={CircleUserRound} />,
       key: 'profile',
-      label: <Link href={'/profile/stats'}>{t('userPanel.profile')}</Link>,
+      label: <Link href={'/profile'}>{t('userPanel.profile')}</Link>,
     },
   ];
 
