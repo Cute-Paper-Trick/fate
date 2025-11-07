@@ -1,3 +1,5 @@
+import NProgress from '@/components/NProgress';
+
 import AuthProvider from '../AuthProvider/BetterAuth';
 import AnalyticsProvider from './Analytics';
 import AppTheme from './AppTheme';
@@ -12,7 +14,10 @@ const GlobalLayout = ({ children }: GlobalLayoutProps) => {
       <Locale defaultLang={'zh'}>
         <AuthProvider>
           <AppTheme>
-            <QueryProvider>{children}</QueryProvider>
+            <QueryProvider>
+              <NProgress />
+              {children}
+            </QueryProvider>
           </AppTheme>
         </AuthProvider>
       </Locale>
