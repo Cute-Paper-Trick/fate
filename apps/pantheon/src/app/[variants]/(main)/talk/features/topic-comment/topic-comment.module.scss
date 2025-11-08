@@ -1,0 +1,142 @@
+.talk_topic {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .talk_likes {
+    font-size: 12px;
+    color: #aaa;
+  }
+}
+
+.comment {
+  display: flex;
+  flex: 0 auto;
+
+  min-width: 200px;
+
+  .comment_avatar {
+    margin-right: 1.066rem;
+  }
+
+  .comment_action_activce {
+    color: orange !important;
+  }
+
+  .comment_main {
+    flex: 1;
+    .comment_name {
+      .author {
+        color: rgb(50, 50, 50);
+      }
+      color: rgb(142, 142, 147);
+      font-size: 0.9777777778em;
+    }
+
+    .comment_body {
+      margin: 0px 0 0;
+    }
+
+    .comment_bottom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      // justify-content: center;
+      margin-top: 4px;
+    }
+
+    .comment_action {
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 12px;
+      white-space: nowrap;
+      color: rgb(142, 142, 147);
+      margin: 0 3px;
+      &:hover {
+        color: #524f4f;
+      }
+    }
+
+    .action_num {
+      margin-left: 8px;
+    }
+
+    .vote {
+      cursor: pointer;
+      color: #c7c7cc;
+      font-size: 14px;
+    }
+
+    .vote_up {
+      margin-right: 5px;
+
+      svg:hover {
+        color: #ff4d43;
+      }
+    }
+
+    .vote_down {
+      margin-right: 20px;
+      margin-top: 2px;
+
+      svg:hover {
+        color: #807a7a;
+      }
+    }
+  }
+}
+
+.comments_input_container {
+  display: flex;
+  margin: 8px 0;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .talk_input {
+    min-height: 50px !important;
+  }
+
+  .comment_send {
+    margin-top: 5px;
+    height: 40px !important;
+  }
+
+  .avatar {
+    margin-right: 1.066rem;
+  }
+
+  .input_wrapper {
+    // width: 100%;
+    flex: 1;
+    margin-right: 1.066rem;
+  }
+}
+
+.talk_input {
+  background: rgb(246, 246, 246) !important;
+  /* 可自定义颜色 */
+}
+
+.comment_tabs {
+  font-size: 15px;
+  color: #323232;
+  border-bottom: 1px solid rgb(230, 230, 230);
+
+  display: flex;
+  font-weight: 600;
+  justify-content: space-between;
+  margin: 30px 0;
+  padding-bottom: 12px;
+}
+
+.comment_list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+  margin-bottom: 1rem;
+}
+
+.liked {
+  color: red;
+}

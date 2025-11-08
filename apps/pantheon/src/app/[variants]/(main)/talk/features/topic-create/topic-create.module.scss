@@ -1,0 +1,71 @@
+.icon {
+  display: inline-block;
+  background: linear-gradient(168deg, #0be3ff 32.24%, #2424ff 97.71%);
+  width: 7px;
+  height: 15px;
+  flex-shrink: 0;
+
+  padding: 3.5px 0;
+  margin-right: 5px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: #000;
+  font-family: 'PingFang SC';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px; /* 137.5% */
+}
+
+.create_box {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  border: 1px solid rgb(229 231 235 / 1);
+  background-color: #fff;
+  gap: 16px;
+
+  .detail_input {
+    :global(.ant-upload-select) {
+      margin-bottom: 20px;
+      width: 70px !important;
+      height: 70px !important;
+    }
+    :global(.ant-upload-list-item-container) {
+      width: 70px !important;
+      height: 70px !important;
+    }
+    .space {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 16px;
+      .upload_icon {
+        border-radius: 100%;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        bottom: 0px;
+        right: -7px;
+        background-color: #fff;
+      }
+      .postBtn {
+        width: 76px;
+        height: 36px;
+        border-radius: 36px;
+        // background-color: #4f46e5;
+        font-size: 14px;
+        font-weight: 600;
+        // color: #fff;
+        border: none;
+      }
+      :global(.ant-space-item) {
+        display: flex;
+      }
+    }
+  }
+}

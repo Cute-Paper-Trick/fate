@@ -1,0 +1,154 @@
+.topic_wrapper {
+  max-width: 1400px;
+  width: 100%;
+  margin: 6px auto;
+  padding: 16px;
+  border: 1px solid rgb(229 231 235 / 1);
+  border-radius: 8px;
+  :global(.ant-card-body) {
+    padding: 0 !important;
+  }
+}
+
+.topic {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+  .talk_head {
+    margin-left: 16px;
+    flex: 1 1 0;
+    // max-width: 565px;
+    .topic_title {
+      margin-top: 8px;
+      :global(.ant-typography) {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.talk_author {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .avatarText {
+    .name {
+      color: #1f2937;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+    }
+
+    .avatar_sub {
+      color: #b2b2b2;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+    }
+  }
+}
+
+.talk_paragraphs {
+  margin-top: 5px;
+  word-wrap: break-word;
+  font-size: 14px;
+  word-break: break-all;
+
+  color: #000;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 157.143% */
+  
+  p {
+    margin: 0;
+    min-height: 1em;
+  }
+
+  button {
+    color: orange !important;
+  }
+}
+
+.topic_actions {
+  padding-bottom: 1rem;
+  margin: 0 0 0 -64px;
+
+  .comment_btn {
+    max-width: 170px;
+    &:hover {
+      background-color: transparent !important;
+      color: orange !important;
+      transition-duration: 0s;
+      .action_icon {
+        color: orange;
+        background-color: rgb(253, 217, 150);
+        border-radius: 50%;
+        outline: 3px solid rgb(253, 217, 150);
+        svg {
+          fill: rgb(250, 207, 126);
+        }
+      }
+    }
+    &.commented {
+      background-color: transparent !important;
+      color: orange !important;
+      transition-duration: 0s;
+      .action_icon {
+        color: orange;
+        svg {
+          fill: rgb(250, 207, 126);
+        }
+      }
+    }
+  }
+
+  .like_btn {
+    max-width: 170px;
+    &:hover {
+      background-color: transparent !important;
+      color: red !important;
+      transition-duration: 0s;
+      .action_icon {
+        color: red;
+        background-color: rgb(255, 137, 137);
+        border-radius: 50%;
+        outline: 3px solid rgb(255, 137, 137);
+        svg {
+          fill: rgb(250, 167, 167);
+        }
+      }
+    }
+    &.liked {
+      background-color: transparent !important;
+      color: red !important;
+      transition-duration: 0s;
+      .action_icon {
+        color: red;
+        svg {
+          fill: rgb(250, 167, 167);
+        }
+      }
+    }
+  }
+}
+
+.height_text {
+  color: #eb7340;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 1px solid #eb7340;
+  }
+}
+
+.talk_content {
+  white-space: break-spaces;
+}
