@@ -1,8 +1,11 @@
+import NProgress from '@/components/NProgress';
+
 import AuthProvider from '../AuthProvider/BetterAuth';
 import AnalyticsProvider from './Analytics';
 import AppTheme from './AppTheme';
 import Locale from './Locale';
 import QueryProvider from './Query';
+import S3Provider from './S3';
 
 type GlobalLayoutProps = React.PropsWithChildren;
 
@@ -10,11 +13,16 @@ const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
     <AnalyticsProvider>
       <Locale defaultLang={'zh'}>
-        <AuthProvider>
-          <AppTheme>
-            <QueryProvider>{children}</QueryProvider>
-          </AppTheme>
-        </AuthProvider>
+        <S3Provider>
+          <AuthProvider>
+            <AppTheme>
+              <QueryProvider>
+                <NProgress />
+                {children}
+              </QueryProvider>
+            </AppTheme>
+          </AuthProvider>
+        </S3Provider>
       </Locale>
     </AnalyticsProvider>
   );

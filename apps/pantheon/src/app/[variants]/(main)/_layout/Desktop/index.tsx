@@ -19,16 +19,18 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
       style={{ height: '100vh', position: 'relative', borderTop: undefined }}
       width={'100%'}
     >
-      <AppNavigationDrawer />
       <TitleBar />
-      <Flexbox
-        direction="vertical"
-        height={'100%'}
-        id="#navigator-drawer-container"
-        style={{ position: 'relative' }}
-        width="100%"
-      >
-        {children}
+      <Flexbox height={'calc(100% - 50px)'} horizontal width={'100%'}>
+        <AppNavigationDrawer />
+        <Flexbox
+          direction="vertical"
+          height={'100%'}
+          id="desktop-main-container"
+          style={{ position: 'relative', overflowY: 'auto' }}
+          width="100%"
+        >
+          {children}
+        </Flexbox>
       </Flexbox>
       <Suspense>{/* <RegisterHotkeys /> */}</Suspense>
     </Flexbox>

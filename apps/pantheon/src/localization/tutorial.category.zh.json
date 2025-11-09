@@ -1,0 +1,14 @@
+{
+  "tutorial.categories.all.description": "全部教程",
+  "tutorial.categories.all.name": "全部",
+  "tutorial.categories.audio.description": "音频识别",
+  "tutorial.categories.audio.name": "音频",
+  "tutorial.categories.chat.description": "聊天",
+  "tutorial.categories.chat.name": "聊天",
+  "tutorial.categories.game.description": "游戏制作",
+  "tutorial.categories.game.name": "游戏",
+  "tutorial.categories.posture.description": "姿态识别",
+  "tutorial.categories.posture.name": "姿态",
+  "tutorial.categories.video.description": "视频识别",
+  "tutorial.categories.video.name": "视频"
+}

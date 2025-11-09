@@ -178,7 +178,6 @@ export default function TopicList() {
   return (
     <div className={styles.topic_list_box}>
       <section className={styles.topic_side}>
-        <p className={styles.topic_side_title}>GooodSpace</p>
         {/* <Menu
           {...options}
           items={groupItems}

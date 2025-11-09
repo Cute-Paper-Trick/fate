@@ -22,6 +22,8 @@ export const useMenu = () => {
     },
   ];
 
+  const enableHelp = false;
+
   const helps: MenuProps['items'] = [
     {
       icon: <Icon icon={FileClockIcon} />,
@@ -55,14 +57,16 @@ export const useMenu = () => {
         {
           icon: <Icon icon={LogOut} />,
           key: 'logout',
-          label: <span>{t('signout', { ns: 'auth' })}</span>,
+          label: <span>{t('SIGN_OUT', { ns: 'betterAuth' })}</span>,
         },
       ]
     : [];
 
-  const mainItems = [{ type: 'divider' }, ...(isLogin ? profile : []), ...helps].filter(
-    Boolean,
-  ) as MenuProps['items'];
+  const mainItems = [
+    { type: 'divider' },
+    ...(isLogin ? profile : []),
+    ...(enableHelp ? helps : []),
+  ].filter(Boolean) as MenuProps['items'];
 
   return { mainItems, logoutItems };
 };

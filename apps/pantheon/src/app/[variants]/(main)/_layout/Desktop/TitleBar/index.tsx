@@ -1,49 +1,30 @@
 'use client';
 
 import { Header } from '@lobehub/ui';
+import { useTranslate } from '@tolgee/react';
+import { usePathname } from 'next/navigation';
 import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
-// import Cerberus from '@/components/brand/Cerberus';
-import Pantheon from '@/components/brand/Pantheon';
+import { ProductLogo } from '@/components/Branding';
+import { AppTab } from '@/store/global/initialState';
 
-import BurgerButton from '../../../features/BurgerButton';
+// import Pantheon from '@/components/brand/Pantheon';
 import Avatar from './Avatar';
 
-// import CHeader from './Header';
-
 const Nav = memo(() => {
-  // const { t } = useTranslate('common');
+  const { t } = useTranslate('common');
+  const pathname = usePathname();
+  const activeTab = pathname.split('/').at(-1);
 
-  // const menu = (
-  //   <Menu
-  //     items={[
-  //       { key: 'chat', label: <Link href="/chat">{t('page.chat')}</Link> },
-  //       {
-  //         key: 'talk',
-  //         label: <Link href="/talk">{t('page.talk')}</Link>,
-  //         onClick: () => console.log('click talk'),
-  //       },
-  //       { key: 'lab', label: <Link href="/lab">{t('page.lab')}</Link> },
-  //       { key: 'task', label: <Link href="/task">{t('page.task')}</Link> },
-  //     ]}
-  //     mode="horizontal"
-  //   />
-  // );
-
-  const left = (
-    <Flexbox align="center" as={'section'} gap={8} horizontal>
-      <BurgerButton />
-      <Pantheon type={'combine'} />
-    </Flexbox>
-  );
+  const isActive = Object.values(AppTab).includes(activeTab as AppTab);
 
   return (
     <>
       {/* <CHeader logo={<Pantheon type={'combine'} />}>HEADER</CHeader> */}
-      <Header actions={<Avatar />} logo={left} />
-      {/* <Header actions={<Avatar />} logo={<Cerberus type={'combine'} />} nav={menu} /> */}
-      {/* <Flexbox align="center" as="section" /> */}
+      <Header
+        actions={<Avatar />}
+        logo={<ProductLogo extra={isActive ? t(`tab.${activeTab}`) : undefined} type="combine" />}
+      />
     </>
   );
 });

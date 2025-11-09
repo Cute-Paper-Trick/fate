@@ -7,7 +7,7 @@ const apiUrl = process.env.NEXT_PUBLIC_TOLGEE_API_URL;
 
 export const ALL_LANGUAGES = ['en', 'zh'];
 
-const LANGUAGE_COOKIE = 'NEXT_LOCALE';
+// const LANGUAGE_COOKIE = 'NEXT_LOCALE';
 
 export const createTolgee = (lang?: string) => {
   const instance = Tolgee()
@@ -16,6 +16,10 @@ export const createTolgee = (lang?: string) => {
     .use(DevBackend()) // 从 Tolgee 平台动态加载翻译数据
     // .use(BackendFetch()) // 从 CDN 加载预编译的翻译文件
     .updateDefaults({
+      staticData: {
+        'en:betterAuth': () => import('@/localization/betterAuth/en.json'),
+        'zh:betterAuth': () => import('@/localization/betterAuth/zh-CN.json'),
+      },
       language: lang || DEFAULT_LANG,
       apiKey,
       apiUrl,

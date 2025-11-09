@@ -1,0 +1,14 @@
+{
+  "tutorial.categories.all.description": "All",
+  "tutorial.categories.all.name": "All",
+  "tutorial.categories.audio.description": "Audio Recognition",
+  "tutorial.categories.audio.name": "Audio",
+  "tutorial.categories.chat.description": "Chat",
+  "tutorial.categories.chat.name": "Chat",
+  "tutorial.categories.game.description": "Game Development",
+  "tutorial.categories.game.name": "Game",
+  "tutorial.categories.posture.description": "Posture Recognition",
+  "tutorial.categories.posture.name": "Posture",
+  "tutorial.categories.video.description": "Video Recognition",
+  "tutorial.categories.video.name": "Video"
+}

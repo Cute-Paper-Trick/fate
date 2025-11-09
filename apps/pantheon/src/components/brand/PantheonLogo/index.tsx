@@ -16,7 +16,7 @@ const Logo3d = memo<Logo3dProps>(({ size = '1em', style, alt = 'LobeHub', ...res
       alt={alt}
       height={size}
       preview={false}
-      src={'pantheon.png'}
+      src={'/pantheon.png'}
       style={style}
       width={size}
       {...rest}

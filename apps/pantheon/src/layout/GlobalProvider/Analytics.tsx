@@ -16,7 +16,7 @@ function PostHogProvider({ children }: { children: React.ReactNode }) {
   // }, []);
 
   // return <PHProvider client={posthog}>{children}</PHProvider>;
-  return <>{children}</>;
+  return children;
 }
 
 PostHogProvider.displayName = 'AnalyticsProvider';

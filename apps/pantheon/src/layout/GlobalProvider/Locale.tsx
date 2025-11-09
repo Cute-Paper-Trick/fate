@@ -12,14 +12,8 @@ interface LocaleLayoutProps extends PropsWithChildren {
 }
 
 const Locale = memo(({ children, defaultLang }: LocaleLayoutProps) => {
-  const [tolgee] = useState(
-    createTolgee(defaultLang).init({
-      staticData: {
-        'en:betterAuth': () => import('@/localization/betterAuth/en.json'),
-        'zh:betterAuth': () => import('@/localization/betterAuth/zh-CN.json'),
-      },
-    }),
-  );
+  const [tolgee] = useState(createTolgee(defaultLang).init());
+
   const [lang] = useState(defaultLang);
   // const [locale, setLocale] = useState(antdLocale);
 

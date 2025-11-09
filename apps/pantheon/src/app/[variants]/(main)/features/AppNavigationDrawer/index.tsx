@@ -1,35 +1,30 @@
 'use client';
 
-import { Drawer } from '@lobehub/ui';
+import { createStyles } from 'antd-style';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { useGlobalStore } from '@/store/global';
-import { systemStatusSelectors } from '@/store/global/selectors';
+import BrandWatermark from '@/components/BrandWatermark';
 
-import NavCategory from './NavCategory';
+import CategoryContent from './CategoryContent';
+
+const useStyles = createStyles(({ token, css }) => ({
+  container: css`
+    padding-block: 0 16px;
+    padding-inline: 12px;
+    padding-top: 20px;
+    border-inline-end: 1px solid ${token.colorBorderSecondary};
+    background: ${token.colorBgLayout};
+  `,
+}));
 
 const AppNavigationDrawer = memo(() => {
-  const [showAppPanel, updateSystemStatus] = useGlobalStore((s) => [
-    systemStatusSelectors.showAppPanel(s),
-    s.updateSystemStatus,
-  ]);
-
+  const { cx, styles } = useStyles();
   return (
-    <Drawer
-      noHeader
-      onClose={() => updateSystemStatus({ showAppPanel: false })}
-      open={showAppPanel}
-      placement={'left'}
-      getContainer="#navigator-drawer-container"
-      // sidebar={<></>}
-      // sidebarWidth={180}
-    >
-      <Flexbox gap={20} style={{ minHeight: '100%', marginTop: 30 }}>
-        <NavCategory setTab={() => {}} tab={'chat'} />
-      </Flexbox>
-      {/* 这是全局菜单 */}
-    </Drawer>
+    <Flexbox className={cx(styles.container)} flex={'none'} gap={20}>
+      <CategoryContent />
+      <BrandWatermark paddingInline={12} />
+    </Flexbox>
   );
 });
 

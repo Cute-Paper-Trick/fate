@@ -1,7 +1,6 @@
 import { createRouteMatcher } from '@clerk/nextjs/server';
 import { getCookieCache, getSessionCookie } from 'better-auth/cookies';
 import debug from 'debug';
-// import { createLocalJWKSet, jwtVerify } from 'jose';
 import { NextRequest, NextResponse } from 'next/server';
 import { UAParser } from 'ua-parser-js';
 import urlJoin from 'url-join';
@@ -121,6 +120,8 @@ function variantRewrite(request: NextRequest) {
   return NextResponse.rewrite(url, { status: 200 });
 }
 
+const backendApiEndpoints = ['/api', '/trpc', '/webapi'];
+
 const middleware = async (request: NextRequest) => {
   const sessionCookie = getSessionCookie(request, { cookiePrefix: 'fate' });
 
@@ -135,6 +136,11 @@ const middleware = async (request: NextRequest) => {
       console.log('缓存中未找到 session，正在从数据库获取...');
       session = await auth.api.getSession(request);
     }
+  }
+
+  if (backendApiEndpoints.some((path) => request.nextUrl.pathname.startsWith(path))) {
+    logDefault('Skipping API request: %s', request.nextUrl.pathname);
+    return NextResponse.next();
   }
 
   // 未登录访问受保护页面 -> 重定向到登录页
@@ -184,17 +190,7 @@ export const config = {
     '/talk(.*)',
     '/task(.*)',
     '/learning(.*)',
-    '/brief-introduct(.*)',
     '/profile(.*)',
+    '/discover(.*)',
   ],
-  // matcher: [
-  //   /*
-  //    * Match all request paths except for the ones starting with:
-  //    * - api (API routes)
-  //    * - _next/static (static files)
-  //    * - _next/image (image optimization files)
-  //    * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-  //    */
-  //   '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-  // ],
 };

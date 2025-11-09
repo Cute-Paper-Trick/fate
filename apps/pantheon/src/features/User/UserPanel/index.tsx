@@ -11,14 +11,14 @@ const UserPanel = memo<PropsWithChildren>(({ children }) => {
   return (
     <Popover
       arrow={false}
-      placement="bottomRight"
-      open={open}
+      content={<PannelContent closePopover={() => setOpen(false)} />}
       onOpenChange={setOpen}
+      open={open}
+      placement="bottomRight"
       styles={{
         body: { padding: 0 },
       }}
       trigger={['click']}
-      content={<PannelContent closePopover={() => setOpen(false)} />}
     >
       {children}
     </Popover>

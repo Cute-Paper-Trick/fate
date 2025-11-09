@@ -7,13 +7,13 @@ import { ReactNode } from 'react';
 
 import { authClient } from '@/features/cerberus/client';
 import SonnerProvider from '@/layout/GlobalProvider/Sonner';
+import { accountService } from '@/lib/http';
 
 import { useLocalization } from './useLocalization';
 import UserUpdater from './UserUpdater';
 
 function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-
   const localization = useLocalization();
   return (
     <AuthUIProvider
@@ -22,7 +22,11 @@ function AuthProvider({ children }: { children: ReactNode }) {
       avatar={{
         upload: async (file: File) => {
           console.log(file);
-          return undefined;
+          const res = await accountService().accountAvatar(
+            { file },
+            { headers: { 'Content-Type': 'multipart/form-data' } },
+          );
+          return res.avatar;
         },
       }}
       credentials={{ username: true, rememberMe: true }}

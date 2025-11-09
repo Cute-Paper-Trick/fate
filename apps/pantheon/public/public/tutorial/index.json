@@ -1,0 +1,313 @@
+{
+  "$schema": "https://fate-pantheon.chieh.ren/public/tutorial/schema.json",
+  "tutorial": [
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": " 插件生态系统 - 功能扩展与开发资源",
+      "date": "2024-06-15",
+      "description": "了解插件生态系统如何增强助手的实用性和灵活性，以及提供的开发资源和插件开发指南。",
+      "id": "getting-started",
+      "category": "audio",
+      "isFeatured": true,
+      "isOfficial": true
+    },
+    {
+      "title": "AI 助手配置指南 - 模型选择与参数优化",
+      "date": "2024-08-22",
+      "description": "深入探索如何为不同场景选择最合适的 AI 模型，调整温度、top-p 等关键参数以获得最佳对话效果。深入探索如何为不同场景选择最合适的 AI 模型，调整温度、top-p 等关键参数以获得最佳对话效果。深入探索如何为不同场景选择最合适的 AI 模型，调整温度、top-p 等关键参数以获得最佳对话效果。深入探索如何为不同场景选择最合适的 AI 模型，调整温度、top-p 等关键参数以获得最佳对话效果。",
+      "id": "tutorial-3h8p4w6q",
+      "category": "video"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/7350f211-61ce-488e-b0e2-f0fcac25caeb",
+      "title": "多模态对话实践 - 图像识别与处理",
+      "date": "2024-07-10",
+      "description": "学习如何使用视觉模型进行图像分析、OCR 文字识别和视觉问答，提升多模态交互体验。",
+      "author": "技术团队",
+      "category": "game",
+      "id": "tutorial-9r2t5y7m"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/3d80e0f5-d32a-4412-85b2-e709731460a0",
+      "title": "知识库搭建教程 - RAG 检索增强生成",
+      "date": "2024-09-05",
+      "description": "构建专属知识库，通过向量数据库和语义检索技术,让 AI 助手能够基于您的文档进行精准回答。",
+      "author": "技术团队",
+      "category": "posture",
+      "id": "tutorial-1d6f8k3s"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/2048b4c2-4a56-4029-acf9-71e35ff08652",
+      "title": "角色设定最佳实践 - Prompt 工程技巧",
+      "date": "2024-05-18",
+      "description": "掌握系统提示词编写技巧，创建具有专业知识和独特性格的 AI 助手，满足各类业务场景需求。",
+      "author": "技术团队",
+      "category": "chat",
+      "id": "tutorial-5j4n7p9v"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/fa8fab19-ace2-4f85-8428-a3a0e28845bb",
+      "title": "私有化部署方案 - 企业级安全配置",
+      "date": "2024-10-12",
+      "description": "详细讲解如何在企业内网环境部署应用，包括数据隔离、权限管理和 SSO 单点登录集成。",
+      "author": "技术团队",
+      "id": "tutorial-8b3x2c6z"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/eb3f3d8a-79ce-40aa-a206-2c846206c0c0",
+      "title": "工作流自动化 - 插件链式调用",
+      "date": "2024-06-28",
+      "description": "通过组合多个插件功能，创建复杂的自动化工作流，实现从数据采集到分析报告的一站式处理。",
+      "author": "技术团队",
+      "id": "tutorial-2q7w9m4h"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/e70c2db6-05c9-43ea-b111-6f6f99e0ae88",
+      "title": "API 接口对接 - 第三方服务集成",
+      "date": "2024-11-03",
+      "description": "学习如何连接外部 API，将 CRM、ERP 等业务系统与 AI 助手无缝集成，提升业务流程效率。",
+      "author": "技术团队",
+      "id": "tutorial-6v1r8k5t"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/635f1c74-6327-48a8-a8d9-68d7376c7749",
+      "title": "对话历史管理 - 数据备份与迁移",
+      "date": "2024-04-25",
+      "description": "了解对话记录的存储机制，掌握数据导出、备份和跨设备同步的方法，确保重要对话永不丢失。",
+      "author": "技术团队",
+      "id": "tutorial-4n9s3j7p"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/bd6d0c82-8f14-4167-ad09-2a841f1e34e4",
+      "title": "性能优化指南 - 响应速度提升技巧",
+      "date": "2024-08-14",
+      "description": "探索缓存策略、流式输出和并发请求优化等技术，显著提升大规模部署环境下的系统响应性能。",
+      "author": "技术团队",
+      "id": "tutorial-7h2d6f8x"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/385eaca6-daea-484a-9bea-ba7270b4753d",
+      "title": "多语言支持实现 - 国际化配置",
+      "date": "2024-07-31",
+      "description": "配置多语言界面和跨语言对话能力，让 AI 助手能够流畅切换中英日韩等多种语言，服务全球用户。",
+      "author": "技术团队",
+      "id": "tutorial-9p5k1m3w"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/2a4116a7-15ad-43e5-b801-cc62d8da2012",
+      "title": "安全防护机制 - 内容审核与过滤",
+      "date": "2024-09-19",
+      "description": "实施敏感词过滤、输入验证和输出审核机制，建立多层次安全防护体系，确保对话内容合规安全。",
+      "author": "技术团队",
+      "id": "tutorial-3c8t4y6r"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/0e3a7174-6b66-4432-a319-dff60b033c24",
+      "title": "成本控制策略 - Token 用量优化",
+      "date": "2024-05-07",
+      "description": "分析 API 调用成本构成，通过上下文压缩、智能缓存等方法有效降低 Token 消耗和运营成本。",
+      "author": "技术团队",
+      "id": "tutorial-1x7b9n2q"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/82bfc467-e0c6-4d99-9b1f-18e4aea24285",
+      "title": "数据分析插件开发 - 图表可视化",
+      "date": "2024-10-26",
+      "description": "创建数据分析插件，支持 CSV/Excel 数据处理，生成交互式图表和统计报告，辅助商业决策。",
+      "author": "技术团队",
+      "id": "tutorial-5m4v8h3s"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/aee846d5-b5ee-46cb-9dd0-d952ea708b67",
+      "title": "语音交互集成 - TTS 与 STT 配置",
+      "date": "2024-06-03",
+      "description": "接入文字转语音和语音识别服务，实现语音输入输出功能，打造更自然的人机交互体验。",
+      "author": "技术团队",
+      "id": "tutorial-8r6j2z9k"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/533f7a5e-8a93-4a57-a62f-8233897d72b5",
+      "title": "团队协作功能 - 共享助手与权限管理",
+      "date": "2024-11-15",
+      "description": "设置团队工作空间，配置助手共享权限和访问控制，促进团队成员之间的知识共享与协作。",
+      "author": "技术团队",
+      "id": "tutorial-2w9p5t7d"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/6069332b-8e15-4d3c-8a77-479e8bc09c23",
+      "title": "文档问答系统 - PDF 解析与摘要",
+      "date": "2024-07-20",
+      "description": "构建智能文档问答系统，自动解析 PDF、Word 等格式文件，提取关键信息并生成结构化摘要。",
+      "author": "技术团队",
+      "id": "tutorial-6k3n1f4v"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/03433283-08a5-481a-8f6c-069b2fc6bace",
+      "title": "客服机器人搭建 - 意图识别与路由",
+      "date": "2024-08-08",
+      "description": "设计智能客服系统，实现用户意图自动识别、问题分类和多级路由，提升客户服务效率和满意度。",
+      "author": "技术团队",
+      "id": "tutorial-4s8h7c2x"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/dde2c9c5-cdda-4a65-8f32-b6f4da907df2",
+      "title": "代码生成助手 - 编程语言支持",
+      "date": "2024-09-27",
+      "description": "配置专业的代码生成助手，支持多种编程语言的代码编写、审查和优化建议，提升开发效率。",
+      "author": "技术团队",
+      "id": "tutorial-7t2q6m9b"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/eaed3762-136f-4297-b161-ca92a27c4982",
+      "title": "实时数据监控 - WebSocket 推送",
+      "date": "2024-04-12",
+      "description": "实现实时数据流监控，通过 WebSocket 推送市场行情、系统告警等时效性信息，及时响应变化。",
+      "author": "技术团队",
+      "id": "tutorial-9f5r3k8j"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "电商导购助手 - 商品推荐系统",
+      "date": "2024-10-18",
+      "description": "打造智能导购助手，基于用户偏好和行为数据进行个性化商品推荐，提升转化率和客单价。",
+      "author": "技术团队",
+      "id": "tutorial-3y7w1n5p"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "内容创作工具 - SEO 优化与改写",
+      "date": "2024-06-19",
+      "description": "利用 AI 辅助内容创作，生成 SEO 友好的文章、优化关键词布局，并提供多版本改写建议。",
+      "author": "技术团队",
+      "id": "tutorial-1z4d8v6h"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "会议纪要生成 - 自动摘要与任务提取",
+      "date": "2024-11-08",
+      "description": "从会议录音或文字记录中自动生成结构化纪要，提取关键决策和待办事项，提升会议效率。",
+      "author": "技术团队",
+      "id": "tutorial-5b9x2s4m"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "情感分析应用 - 用户反馈洞察",
+      "date": "2024-07-25",
+      "description": "应用情感分析技术解读用户评论和反馈，识别满意度趋势和潜在问题，指导产品改进方向。",
+      "author": "技术团队",
+      "id": "tutorial-8p3c7t1w"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "教育辅助系统 - 自适应学习路径",
+      "date": "2024-05-29",
+      "description": "开发智能教育助手，根据学生水平和学习进度生成个性化习题和讲解，实现因材施教。",
+      "author": "技术团队",
+      "id": "tutorial-2h6j9r5q"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "法律文书辅助 - 合同审查与起草",
+      "date": "2024-09-11",
+      "description": "训练专业法律助手，协助审查合同条款、识别风险点，并根据模板快速生成标准法律文书。",
+      "author": "技术团队",
+      "id": "tutorial-6n1k4f8z"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "医疗问诊助手 - 症状分析与建议",
+      "date": "2024-08-01",
+      "description": "构建医疗咨询辅助系统，基于症状描述提供初步分析和就医建议，但需明确非诊断结论。",
+      "author": "技术团队",
+      "id": "tutorial-4v8m3y7s"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "金融投顾应用 - 市场分析与策略",
+      "date": "2024-10-04",
+      "description": "整合财经数据源，提供实时市场分析、投资组合建议和风险评估，辅助投资决策制定。",
+      "author": "技术团队",
+      "id": "tutorial-7q2x6p9d"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "HR 招聘助手 - 简历筛选与匹配",
+      "date": "2024-06-11",
+      "description": "自动化简历解析和候选人评估流程，基于岗位要求进行智能匹配，提高招聘效率和质量。",
+      "author": "技术团队",
+      "id": "tutorial-9w5t1h3k"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "旅游规划助手 - 行程定制与推荐",
+      "date": "2024-11-21",
+      "description": "根据预算、偏好和时间生成个性化旅游行程，包含景点推荐、交通安排和住宿建议。",
+      "author": "技术团队",
+      "id": "tutorial-3r7b4c2v"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "智能翻译工具 - 上下文感知翻译",
+      "date": "2024-07-16",
+      "description": "实现考虑上下文语境的高质量翻译，支持专业术语库自定义，满足技术文档和商务翻译需求。",
+      "author": "技术团队",
+      "id": "tutorial-1j9s8n6x"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "社交媒体运营 - 内容策划与排期",
+      "date": "2024-09-23",
+      "description": "规划社交媒体内容日历，生成多平台适配的文案和配图建议，优化发布时机和互动策略。",
+      "author": "技术团队",
+      "id": "tutorial-5f4k7m1p"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "项目管理助手 - 任务分解与跟踪",
+      "date": "2024-05-14",
+      "description": "协助项目任务分解和工时估算，自动生成甘特图和进度报告，实时跟踪项目交付状态。",
+      "author": "技术团队",
+      "id": "tutorial-8d6z2w9h"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "竞品分析工具 - 市场情报收集",
+      "date": "2024-10-30",
+      "description": "自动化竞品信息收集和分析，生成对比报告，识别市场机会和自身产品的差异化优势。",
+      "author": "技术团队",
+      "id": "tutorial-2c3y5t8r"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "邮件自动化 - 智能回复与分类",
+      "date": "2024-06-26",
+      "description": "实现邮件内容理解和自动分类，生成回复草稿和待办提醒，有效管理日常邮件沟通。",
+      "author": "技术团队",
+      "id": "tutorial-6x9v1q4m"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "版本更新日志 - 自动生成与发布",
+      "date": "2024-08-19",
+      "description": "从 Git 提交记录自动生成结构化的版本更新日志，支持多种格式导出和发布渠道推送。",
+      "author": "技术团队",
+      "id": "tutorial-4h7p3k6s"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "测试用例生成 - 自动化测试支持",
+      "date": "2024-11-12",
+      "description": "基于需求文档和代码逻辑自动生成测试用例，覆盖边界条件和异常场景，提升测试覆盖率。",
+      "author": "技术团队",
+      "id": "tutorial-7m1n8f2w"
+    },
+    {
+      "image": "https://github.com/user-attachments/assets/5fe4c373-ebd0-42a9-bdca-0ab7e0a2e747",
+      "title": "数据清洗工具 - 格式标准化处理",
+      "date": "2024-07-05",
+      "description": "处理脏数据和格式不一致问题，实现数据去重、校验和标准化，为后续分析提供高质量数据。",
+      "author": "技术团队",
+      "id": "tutorial-9t5b6r3z"
+    }
+  ]
+}

@@ -26,12 +26,13 @@ export interface GlobalState {
   statusStorage: AsyncLocalStorage<SystemStatus>;
 }
 
-export enum AppFuncs {
+export enum AppTab {
   Chat = 'chat',
+  Learning = 'learning',
   Talk = 'talk',
-  Task = 'task',
   Lab = 'lab',
   Settings = 'settings',
+  Discover = 'discover',
 }
 
 export const initialState: GlobalState = {

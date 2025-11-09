@@ -12,7 +12,7 @@ import Pantheon from '../brand/Pantheon';
 // import { isCustomORG } from '@/const/version';
 
 const ORG_NAME = 'Pantheon';
-const UTM_SOURCE = 'pantheon_app';
+// const UTM_SOURCE = 'pantheon_app';
 const isCustomORG = false;
 
 const useStyles = createStyles(({ token, css }) => ({
@@ -42,11 +42,7 @@ const BrandWatermark = memo<Omit<FlexboxProps, 'children'>>(({ style, ...rest })
       {isCustomORG ? (
         <span>{ORG_NAME}</span>
       ) : (
-        <Link
-          className={styles.logoLink}
-          href={`https://lobehub.com?utm_source=${UTM_SOURCE}&utm_content=brand_watermark`}
-          target={'_blank'}
-        >
+        <Link className={styles.logoLink} href={`#`}>
           <Pantheon size={20} type={'text'} />
         </Link>
       )}

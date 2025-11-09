@@ -1,7 +1,7 @@
 import { UserStore } from '@/store/user';
 
 const nickName = (s: UserStore) => {
-  const defaultNickName = s.user?.displayUsername || s.user?.name;
+  const defaultNickName = s.user?.name || s.user?.displayUsername;
   if (s.isSignedIn) return defaultNickName;
 };
 

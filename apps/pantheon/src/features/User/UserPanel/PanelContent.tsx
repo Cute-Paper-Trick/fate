@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -11,7 +12,7 @@ import { authSelectors } from '@/store/user/selectors';
 import UserLogin from '../Login';
 import UserInfo from '../UserInfo';
 import LangButton from './LangButton';
-import ThemeButton from './ThemeButton';
+// import ThemeButton from './ThemeButton';
 import { useMenu } from './useMenu';
 
 interface PannelContentProps {
@@ -19,6 +20,8 @@ interface PannelContentProps {
 }
 
 const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
+  const router = useRouter();
+
   const isLoginWithAuth = useUserStore((s) => authSelectors.isLogin(s));
 
   const { mainItems, logoutItems } = useMenu();
@@ -29,7 +32,13 @@ const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
 
   const handleSignOut = async () => {
     try {
-      await authClient.signOut();
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.replace('/auth/sign-in');
+          },
+        },
+      });
     } finally {
       closePopover();
     }
@@ -43,7 +52,7 @@ const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
         <UserLogin onClick={handleSignIn} />
       )}
 
-      <Menu items={mainItems} onClick={closePopover} mode="inline" />
+      <Menu items={mainItems} mode="inline" onClick={closePopover} />
 
       <Flexbox
         align={'center'}
@@ -58,7 +67,7 @@ const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
         {/* )} */}
         <Flexbox align={'center'} flex={'none'} gap={2} horizontal>
           <LangButton />
-          <ThemeButton />
+          {/* <ThemeButton /> */}
         </Flexbox>
       </Flexbox>
     </Flexbox>
