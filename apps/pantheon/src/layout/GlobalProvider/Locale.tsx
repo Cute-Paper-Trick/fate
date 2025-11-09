@@ -3,6 +3,7 @@
 import { TolgeeProvider } from '@tolgee/react';
 import { PropsWithChildren, memo, useEffect, useState } from 'react';
 
+import BrandTextLoading from '@/components/Loading/BrandTextLoading';
 // import { DEFAULT_LANG } from '@/const/locale';
 import { createTolgee } from '@/locales/tolgee';
 
@@ -23,7 +24,7 @@ const Locale = memo(({ children, defaultLang }: LocaleLayoutProps) => {
   }, [tolgee]);
 
   return (
-    <TolgeeProvider fallback="Loading" ssr={{ language: lang }} tolgee={tolgee}>
+    <TolgeeProvider fallback={<BrandTextLoading />} ssr={{ language: lang }} tolgee={tolgee}>
       {children}
     </TolgeeProvider>
   );

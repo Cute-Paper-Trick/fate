@@ -12,18 +12,18 @@ type GlobalLayoutProps = React.PropsWithChildren;
 const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
     <AnalyticsProvider>
-      <Locale defaultLang={'zh'}>
-        <S3Provider>
-          <AuthProvider>
-            <AppTheme>
+      <AppTheme>
+        <Locale defaultLang={'zh'}>
+          <S3Provider>
+            <AuthProvider>
               <QueryProvider>
                 <NProgress />
                 {children}
               </QueryProvider>
-            </AppTheme>
-          </AuthProvider>
-        </S3Provider>
-      </Locale>
+            </AuthProvider>
+          </S3Provider>
+        </Locale>
+      </AppTheme>
     </AnalyticsProvider>
   );
 };
