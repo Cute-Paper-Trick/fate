@@ -1,0 +1,15 @@
+'use client';
+import { PropsWithChildren, memo } from 'react';
+import { Flexbox } from 'react-layout-kit';
+
+const MobilePoseClassifier = memo<PropsWithChildren>(({ children }) => {
+  return (
+    <Flexbox height={'100%'} horizontal style={{ position: 'relative' }} width="100%">
+      {children}
+    </Flexbox>
+  );
+});
+
+MobilePoseClassifier.displayName = 'MobilePoseClassifier';
+
+export default MobilePoseClassifier;

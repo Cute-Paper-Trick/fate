@@ -18,6 +18,21 @@ const nextConfig: NextConfig = {
 
     return rewrites;
   },
+
+  turbopack: {},
+
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false, // 禁用 fs
+        path: false, // 禁用 path
+        os: false, // 禁用 os
+      };
+    }
+
+    return config;
+  },
 };
 
 const withSentry = withSentryConfig(nextConfig, {

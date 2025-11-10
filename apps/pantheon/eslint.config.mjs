@@ -4,7 +4,6 @@ import nextTs from 'eslint-config-next/typescript';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import perfectionist from 'eslint-plugin-perfectionist';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-// import unusedImports from 'eslint-plugin-unused-imports';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 

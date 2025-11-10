@@ -1,0 +1,45 @@
+.output_area {
+  color: #000;
+  width: 100%;
+  padding: 0 18px 18px;
+
+  .prediction_item {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    color: #000 !important;
+
+    > div {
+      span {
+        vertical-align: middle;
+      }
+    }
+
+    .prediction_label {
+      max-width: 70px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prediction_progress {
+      width: 180px;
+      height: 29px;
+    }
+
+    :global(.ant-progress-inner) {
+      border-radius: 5px !important;
+    }
+
+    :global(.ant-progress-bg) {
+      border-radius: 5px !important;
+    }
+
+    :global(.ant-progress) {
+      span {
+        color: #fff !important;
+      }
+    }
+  }
+}
