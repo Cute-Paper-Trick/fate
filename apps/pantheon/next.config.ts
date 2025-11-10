@@ -7,7 +7,17 @@ const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
   },
-  serverExternalPackages: ['require-in-the-middle'],
+  serverExternalPackages: [
+    'require-in-the-middle',
+    '@mediapipe/pose',
+    '@tensorflow-models/pose-detection',
+    '@tensorflow-models/knn-classifier',
+    '@tensorflow-models/mobilenet',
+    '@tensorflow-models/speech-commands',
+    '@tensorflow/tfjs',
+    '@tensorflow/tfjs-backend-webgl',
+  ],
+  // Turbopack 在客户端自动忽略 Node.js 内置模块，无需手动配置
   async rewrites() {
     const rewrites: Rewrite[] = [
       {
@@ -19,7 +29,12 @@ const nextConfig: NextConfig = {
     return rewrites;
   },
 
-  turbopack: {},
+  turbopack: {
+    resolveAlias: {
+      'fs': './turbopack-empty-module.js',
+      '@mediapipe/pose': './turbopack-empty-module.js',
+    },
+  },
 
   webpack: (config, { isServer }) => {
     if (!isServer) {
