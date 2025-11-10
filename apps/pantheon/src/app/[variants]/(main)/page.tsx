@@ -1,6 +1,7 @@
 'use client';
 
 import { Spin } from 'antd';
+import Link from 'next/link';
 
 import TalkContent from '@/features/Talk/TalkContent';
 import TalkEditor from '@/features/Talk/TalkEditor';
@@ -28,7 +29,7 @@ export default function Home() {
     <Spin spinning={false}>
       <main className="container mx-auto flex flex-col gap-4 p-6">
         <h1 className="font-bold text-2xl">Hello, world.</h1>
-
+        <Link href="/account/modal">Go to Modal</Link>
         <TalkEditor onChange={() => {}} />
         <TalkContent content={'###1### #2# #3\n#'} />
       </main>

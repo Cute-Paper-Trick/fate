@@ -1,6 +1,8 @@
 import { DevBackend, DevTools, FormatSimple, Tolgee } from '@tolgee/web';
+import { InContextTools } from '@tolgee/web/tools';
 
 import { DEFAULT_LANG } from '@/const/locale';
+import { appEnv } from '@/envs/app';
 
 const apiKey = process.env.NEXT_PUBLIC_TOLGEE_API_KEY;
 const apiUrl = process.env.NEXT_PUBLIC_TOLGEE_API_URL;
@@ -24,6 +26,10 @@ export const createTolgee = (lang?: string) => {
       apiKey,
       apiUrl,
     });
+
+  if (appEnv.ENABLE_TRANS_TOOLS) {
+    instance.use(InContextTools());
+  }
 
   return instance;
 };
