@@ -12,7 +12,7 @@ import {
 } from 'better-auth/plugins';
 
 import { authEnv } from '@/envs/cerberus';
-import { sendResetPasswordEmail } from '@/lib/email';
+import { sendResetPasswordEmail, sendVerificationEmail } from '@/lib/email';
 
 import { db } from './db';
 
@@ -22,6 +22,15 @@ export const auth = betterAuth({
     provider: 'pg',
     usePlural: true,
   }),
+  user: {
+    changeEmail: {
+      enabled: true,
+      // sendChangeEmailVerification: async ({ user, newEmail, url }) => {
+      //   await sendVerificationEmail(newEmail, url);
+      // },
+      sendOnSignIn: true,
+    },
+  },
   advanced: {
     useSecureCookies: true,
     cookiePrefix: 'fate',
@@ -35,19 +44,16 @@ export const auth = betterAuth({
     'http://localhost:5090',
     'https://dev-daily-backend.goood.space',
   ],
-  // emailVerification: {
-  //   sendVerificationEmail: async ({ user, url }) => {
-  //     await sendEmail({
-  //       to: user.email,
-  //       subject: "Verify your email address",
-  //       text: `Click the link to verify your email: ${url}`,
-  //     });
-  //   },
-  //   sendOnSignIn: true,
-  // },
+  emailVerification: {
+    sendVerificationEmail: async ({ user, url }) => {
+      console.log('Sending verification email to:', user.email, 'with url:', url);
+      await sendVerificationEmail(user.email, url);
+    },
+    sendOnSignIn: true,
+  },
   emailAndPassword: {
-    // requireEmailVerification: true,
     enabled: true,
+    // requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       console.log('Sending reset password email to:', user.email, 'with url:', url);
       await sendResetPasswordEmail(user.email, url);
