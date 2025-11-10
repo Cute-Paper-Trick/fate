@@ -107,4 +107,9 @@
       }
     }
   }
+  @media (max-width: 768px) {
+    .flow {
+      margin-left: 0!important;
+    }
+  }
 }

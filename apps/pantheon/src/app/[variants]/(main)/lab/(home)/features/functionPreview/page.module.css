@@ -22,9 +22,12 @@
         margin-bottom: 1.5rem;
         display: flex;
         justify-content: space-between;
+        >div>div:nth-child(2){ 
+            display: flex;
+            justify-content: right;
+        }
         .flow{
-          margin-left: 40px;
-          width: calc(100% - 600px);
+          width: 100%;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -91,14 +94,34 @@
             }
         }
       }
+      .cardContent2{
+        .flow{
+          margin-left: 30px;
+        }
+        >div>div:nth-child(1){ 
+          order: 2!important;
+        }
+        >div>div:nth-child(2){ 
+          justify-content: left;
+        }
+      }
       .image{
-        width: 600px;
+        width: 100%;
+        max-width: 520px;
         img{
           object-fit: cover;
-          height: 600px;
-          width: 600px;
+          height: auto;
+          width: 100%;
           border-radius: 4px;
         }
       }
     }
+    @media (max-width: 576px) {
+    .flow {
+      margin-left: 0!important;
+    }
+    .cardContent2 >div:nth-child(1)>div:nth-child(1){ 
+        order: 1!important;
+      }
+  }
   }

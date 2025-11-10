@@ -2,6 +2,7 @@
 
 import { AudioFilled, FileImageFilled, SmileFilled } from '@ant-design/icons';
 import { useTranslate } from '@tolgee/react';
+import { Col, Row } from 'antd';
 import Image from 'next/image';
 import { FC, useMemo } from 'react';
 
@@ -102,29 +103,31 @@ const FunctionPreview: FC = () => {
           key={index}
           onClick={() => (globalThis.location.href = item.src)}
         >
-          <div className={styles.cardContent}>
-            <div
-              className={styles.image}
-              style={{ order: item.imagePosition === 'left' ? '1' : '2' }}
-            >
-              <Image alt={item.title} src={item.img} />
-            </div>
-            <div
-              className={styles.flow}
-              style={{ order: item.imagePosition === 'left' ? '2' : '1' }}
-            >
-              <div className={styles.cardTitle}>
-                <span className={styles.icon}>{item.icon}</span>
-                <span>{item.title}</span>
-              </div>
-              <div className={styles.cardDetail}>{item.detail}</div>
-              {item.stepList.map((step, stepIndex) => (
-                <div className={styles.step} key={stepIndex}>
-                  <span className={styles.stepTitle}>{step.title}</span>
-                  <span className={styles.stepContext}>{step.context}</span>
+          <div
+            className={`${styles.cardContent} ${item.imagePosition === 'left' ? styles.cardContent2 : ''}`}
+          >
+            <Row gutter={[20, 20]} style={{ flex: 1 }}>
+              <Col sm={12} style={{ display: 'flex' }} xs={24}>
+                <div className={styles.flow}>
+                  <div className={styles.cardTitle}>
+                    <span className={styles.icon}>{item.icon}</span>
+                    <span>{item.title}</span>
+                  </div>
+                  <div className={styles.cardDetail}>{item.detail}</div>
+                  {item.stepList.map((step, stepIndex) => (
+                    <div className={styles.step} key={stepIndex}>
+                      <span className={styles.stepTitle}>{step.title}</span>
+                      <span className={styles.stepContext}>{step.context}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </Col>
+              <Col sm={12} style={{ display: 'flex' }} xs={24}>
+                <div className={styles.image}>
+                  <Image alt={item.title} src={item.img} />
+                </div>
+              </Col>
+            </Row>
           </div>
         </div>
       ))}

@@ -57,7 +57,7 @@ const Example: FC = () => {
       </div>
       <Row gutter={[20, 20]} style={{ flex: 1 }}>
         {data.map((item, index) => (
-          <Col key={index} span={8} style={{ display: 'flex' }}>
+          <Col key={index} md={12} span={8} style={{ display: 'flex' }} xl={8} xs={24}>
             <div className={styles.card}>
               <div className={styles.title}>{item.title}</div>
               <div className={styles.detail}>{item.detail}</div>

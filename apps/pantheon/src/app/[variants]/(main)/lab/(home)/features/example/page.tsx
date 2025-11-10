@@ -2,7 +2,7 @@
 
 import { AudioFilled, FileImageFilled, SmileFilled } from '@ant-design/icons';
 import { useTranslate } from '@tolgee/react';
-import { Steps } from 'antd';
+import { Col, Row, Steps } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FC, useMemo } from 'react';
@@ -87,12 +87,18 @@ const Example: FC = () => {
             <span>{item.title}</span>
           </div>
           <div className={styles.cardContent}>
-            <div className={styles.image}>
-              <Image alt={item.title} src={item.img} />
-            </div>
-            <div className={styles.flow}>
-              <Steps current={0} direction="vertical" items={item.stepList} />
-            </div>
+            <Row gutter={[20, 20]} style={{ flex: 1 }}>
+              <Col md={12} style={{ display: 'flex' }} xs={24}>
+                <div className={styles.image}>
+                  <Image alt={item.title} src={item.img} />
+                </div>
+              </Col>
+              <Col md={12} style={{ display: 'flex' }} xs={24}>
+                <div className={styles.flow}>
+                  <Steps current={0} direction="vertical" items={item.stepList} />
+                </div>
+              </Col>
+            </Row>
           </div>
         </div>
       ))}
