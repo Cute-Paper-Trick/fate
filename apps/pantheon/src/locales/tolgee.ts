@@ -27,7 +27,7 @@ export const createTolgee = (lang?: string) => {
       apiUrl,
     });
 
-  if (appEnv.ENABLE_TRANS_TOOLS) {
+  if (appEnv.NEXT_PUBLIC_ENABLE_TRANS_TOOLS) {
     instance.use(InContextTools());
   }
 
