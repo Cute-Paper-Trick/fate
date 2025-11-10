@@ -18,6 +18,6 @@ export const appEnv = createEnv({
     MIDDLEWARE_REWRITE_THROUGH_LOCAL: process.env.MIDDLEWARE_REWRITE_THROUGH_LOCAL === '1',
     CERBERUS_URL: process.env.CERBERUS_URL || 'http://localhost:5090',
     NEXT_PUBLIC_CERBERUS_URL: process.env.NEXT_PUBLIC_CERBERUS_URL || 'http://localhost:5090',
-    NEXT_PUBLIC_ENABLE_TRANS_TOOLS: process.env.ENABLE_TRANS_TOOLS === '1',
+    NEXT_PUBLIC_ENABLE_TRANS_TOOLS: process.env.NEXT_PUBLIC_ENABLE_TRANS_TOOLS === '1',
   },
 });

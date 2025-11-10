@@ -1,4 +1,4 @@
-import { DevBackend, DevTools, FormatSimple, Tolgee } from '@tolgee/web';
+import { DevBackend, FormatSimple, Tolgee } from '@tolgee/web';
 import { InContextTools } from '@tolgee/web/tools';
 
 import { DEFAULT_LANG } from '@/const/locale';
@@ -14,7 +14,7 @@ export const ALL_LANGUAGES = ['en', 'zh'];
 export const createTolgee = (lang?: string) => {
   const instance = Tolgee()
     .use(FormatSimple())
-    .use(DevTools()) // 启用页内翻译
+    // .use(DevTools()) // 启用页内翻译
     .use(DevBackend()) // 从 Tolgee 平台动态加载翻译数据
     // .use(BackendFetch()) // 从 CDN 加载预编译的翻译文件
     .updateDefaults({
@@ -25,10 +25,19 @@ export const createTolgee = (lang?: string) => {
       language: lang || DEFAULT_LANG,
       apiKey,
       apiUrl,
+      projectId: 7,
     });
 
   if (appEnv.NEXT_PUBLIC_ENABLE_TRANS_TOOLS) {
-    instance.use(InContextTools());
+    instance.use(
+      InContextTools({
+        // credentials: {
+        //   apiKey,
+        //   apiUrl,
+        //   projectId: 7,
+        // },
+      }),
+    );
   }
 
   return instance;
