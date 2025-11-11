@@ -1,11 +1,9 @@
 'use client';
-import { CaretRightFilled } from '@ant-design/icons';
 import { Icon } from '@lobehub/ui';
 import { InfiniteData, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { Avatar, Button, Form, Input } from 'antd';
 import clsx from 'clsx';
 import { Heart } from 'lucide-react';
-import { DateTime } from 'luxon';
 import { useMemo, useState } from 'react';
 
 import {
@@ -19,7 +17,8 @@ import {
 } from '@/lib/http';
 import { queryClient } from '@/lib/query';
 
-import { getNextPageParam } from '../../components/useInfiniteList';
+import { getNextPageParam } from '../components/useInfiniteList';
+import { TopicInfo } from '../topic-info';
 import styles from './topic-comment.module.scss';
 
 interface CommentProps {
@@ -60,8 +59,8 @@ const useRefreshTopic = (topicId: number) => {
 };
 
 function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
-  const parentId = comment.comment_id;
-  const parent = commentDict[parentId];
+  // const parentId = comment.comment_id;
+  // const parent = commentDict[parentId];
   const rootId = comment.root_comment_id || comment.comment_id || comment.id;
 
   const [likeCount, setLikeCount] = useState(comment.extra?.like_count || 0);
@@ -124,13 +123,13 @@ function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
 
   return (
     <li className={clsx(styles.comment, 'w-full')}>
-      <div className={styles.comment_avatar}>
-        <Avatar size={45} src={comment.avatar}>
+      {/* <div className={styles.comment_avatar}>
+        <Avatar size={42} src={comment.avatar}>
           {comment.nickname || comment.account}
         </Avatar>
-      </div>
+      </div> */}
       <div className={styles.comment_main}>
-        <div className={styles.comment_name}>
+        {/* <div className={styles.comment_name}>
           <strong className={styles.author}>{comment.account}</strong>
           {parent?.account && (
             <small>
@@ -144,7 +143,9 @@ function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
               .setZone('Asia/Shanghai')
               .toFormat('DD')}
           </small>
-        </div>
+        </div> */}
+        <TopicInfo topic={comment} />
+
         <div className={styles.comment_body}>
           <span>{comment.content}</span>
         </div>

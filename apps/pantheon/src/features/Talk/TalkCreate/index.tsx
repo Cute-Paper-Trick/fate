@@ -10,7 +10,7 @@ interface TopicCreateModalProps {
   onCancel: () => void;
 }
 
-export function TopicCreateModal({ open, onCreated, onCancel }: TopicCreateModalProps) {
+export function TopicCreateModal({ open, onCreated }: TopicCreateModalProps) {
   return (
     <Modal
       centered
@@ -20,7 +20,7 @@ export function TopicCreateModal({ open, onCreated, onCancel }: TopicCreateModal
       open={open}
       width={800}
     >
-      <TopicCreate onCancel={onCancel} onCreated={onCreated} />
+      <TopicCreate onChange={onCreated} />
     </Modal>
   );
 }

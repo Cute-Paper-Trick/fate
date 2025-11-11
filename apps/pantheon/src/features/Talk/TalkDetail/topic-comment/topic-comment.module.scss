@@ -20,25 +20,39 @@
     margin-right: 1.066rem;
   }
 
+  .comment_name {
+    .author {
+      color: rgb(50, 50, 50);
+    }
+    color: rgb(142, 142, 147);
+    font-size: 0.9777777778em;
+  }
+
   .comment_action_activce {
     color: orange !important;
   }
 
   .comment_main {
     flex: 1;
-    .comment_name {
-      .author {
-        color: rgb(50, 50, 50);
-      }
-      color: rgb(142, 142, 147);
-      font-size: 0.9777777778em;
+
+    :global(.topic-info-module-scss-module__LfcZjW__avatarText) {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    :global(.topic-info-module-scss-module__LfcZjW__avatar_sub) {
+      margin-left: 10px;
+      font-size: 0.8em;
+      line-height: 24px;
     }
 
     .comment_body {
-      margin: 0px 0 0;
+      margin: -20px 60px 0;
     }
 
     .comment_bottom {
+      margin: 0px 60px;
       display: flex;
       flex-direction: row;
       align-items: center;

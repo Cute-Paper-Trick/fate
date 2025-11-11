@@ -4,14 +4,14 @@ import { Divider, List, Skeleton, Tabs, type TabsProps } from 'antd';
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { V1TaskTopicInfo, accountService, taskTopicService } from '@/lib/http';
-
-import { getNextPageParam } from '../../components/useInfiniteList';
+import AppNavigationDrawer from '@/app/[variants]/(main)/talk/features/TopicSideMenu';
 // import { talkSelectors } from '@/store/talk/selectors';
 // import { useTalkStore } from '@/store/talk/store';
-import { TopicCreateInner } from '../topic-create/topic-create-inner';
-import { TopicDetail } from '../topic-detail';
-import AppNavigationDrawer from '../TopicSideMenu/index';
+import { TopicCreateInner } from '@/features/Talk/TalkCreate/topic-create-inner';
+import { TopicDetail } from '@/features/Talk/TalkDetail';
+import { getNextPageParam } from '@/features/Talk/TalkDetail/components/useInfiniteList';
+import { V1TaskTopicInfo, accountService, taskTopicService } from '@/lib/http';
+
 import styles from './topic-list.module.scss';
 
 function useTopicList({
@@ -161,17 +161,95 @@ export default function TopicList() {
     {
       key: '2',
       label: '文本任务',
-      children: '文本任务',
+      children: (
+        <>
+          <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
+
+          <section className={styles.content_wrapper}>
+            <InfiniteScroll
+              dataLength={topicList.length}
+              endMessage={<Divider plain>没有更多了</Divider>}
+              hasMore={hasMore}
+              loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
+              next={handleNextFetch}
+              scrollableTarget="scrollableDiv"
+              // scrollThreshold="90%"
+            >
+              <List
+                className={styles.topic_list}
+                dataSource={topicList}
+                renderItem={(item) => (
+                  <List.Item key={item.id} style={{ padding: '0' }}>
+                    <TopicDetail id={item.id} topic={item} />
+                  </List.Item>
+                )}
+              />
+            </InfiniteScroll>
+          </section>
+        </>
+      ),
     },
     {
       key: '3',
       label: '音频任务',
-      children: '音频任务',
+      children: (
+        <>
+          <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
+
+          <section className={styles.content_wrapper}>
+            <InfiniteScroll
+              dataLength={topicList.length}
+              endMessage={<Divider plain>没有更多了</Divider>}
+              hasMore={hasMore}
+              loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
+              next={handleNextFetch}
+              scrollableTarget="scrollableDiv"
+              // scrollThreshold="90%"
+            >
+              <List
+                className={styles.topic_list}
+                dataSource={topicList}
+                renderItem={(item) => (
+                  <List.Item key={item.id} style={{ padding: '0' }}>
+                    <TopicDetail id={item.id} topic={item} />
+                  </List.Item>
+                )}
+              />
+            </InfiniteScroll>
+          </section>
+        </>
+      ),
     },
     {
       key: '4',
       label: '视频任务',
-      children: '视频任务',
+      children: (
+        <>
+          <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
+
+          <section className={styles.content_wrapper}>
+            <InfiniteScroll
+              dataLength={topicList.length}
+              endMessage={<Divider plain>没有更多了</Divider>}
+              hasMore={hasMore}
+              loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
+              next={handleNextFetch}
+              scrollableTarget="scrollableDiv"
+              // scrollThreshold="90%"
+            >
+              <List
+                className={styles.topic_list}
+                dataSource={topicList}
+                renderItem={(item) => (
+                  <List.Item key={item.id} style={{ padding: '0' }}>
+                    <TopicDetail id={item.id} topic={item} />
+                  </List.Item>
+                )}
+              />
+            </InfiniteScroll>
+          </section>
+        </>
+      ),
     },
   ];
 

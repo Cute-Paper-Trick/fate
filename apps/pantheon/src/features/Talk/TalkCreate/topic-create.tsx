@@ -1,19 +1,13 @@
 'use client';
+import { IEditor, ReactCodeblockPlugin } from '@lobehub/editor';
+import { Editor, useEditor } from '@lobehub/editor/react';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslate } from '@tolgee/react';
 import OSS from 'ali-oss';
-import {
-  Button,
-  GetProp,
-  Image,
-  Input,
-  Space,
-  Upload,
-  type UploadFile,
-  UploadProps,
-  message,
-} from 'antd';
+import { Button, GetProp, Image, Space, Upload, type UploadFile, UploadProps, message } from 'antd';
 import { Plus } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { Flexbox } from 'react-layout-kit';
 import { v4 as uuid } from 'uuid';
 
 import { commonService, useTaskTopicAdd } from '@/lib/http';
@@ -31,19 +25,27 @@ const getBase64 = (file: FileType): Promise<string> =>
     reader.addEventListener('error', (error) => reject(error));
   });
 
-interface TopicCreateProps {
-  onCreated?: () => void;
-  onCancel?: () => void;
+interface TalkEditorProps {
+  content?: string;
+  onChange: (content: string) => void;
 }
 
-export function TopicCreate({ onCreated }: TopicCreateProps) {
+export function TopicCreate({ onChange }: TalkEditorProps) {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const { t } = useTranslate('common');
+
+  const handleInit = useCallback(
+    (editor: IEditor) => console.log('Editor initialized:', editor),
+    [],
+  );
 
   const createTopicMutation = useTaskTopicAdd({
     mutation: {
@@ -55,7 +57,8 @@ export function TopicCreate({ onCreated }: TopicCreateProps) {
         setContent('');
         setTitle('');
         setFileList([]);
-        onCreated?.();
+        onChange?.('');
+        setResetKey((prev) => prev + 1);
       },
       onError: () => {
         // window.$message.error("创建失败");
@@ -70,6 +73,7 @@ export function TopicCreate({ onCreated }: TopicCreateProps) {
   });
 
   const sts = useMemo(() => ossStsQuery.data, [ossStsQuery]);
+  const editor = useEditor();
 
   const uploadButton = (
     <button style={{ border: 0, background: 'none' }} type="button">
@@ -188,7 +192,7 @@ export function TopicCreate({ onCreated }: TopicCreateProps) {
             wrapperStyle={{ display: 'none' }}
           />
         )}
-        <Input.TextArea
+        {/* <Input.TextArea
           onChange={(e) => setContent(e.target.value)}
           placeholder="分享你的想法..."
           rows={4}
@@ -199,7 +203,37 @@ export function TopicCreate({ onCreated }: TopicCreateProps) {
             backgroundColor: '#f0f1f4',
           }}
           value={content}
-        />
+        /> */}
+        <Flexbox
+          as="section"
+          paddingBlock={8}
+          paddingInline={8}
+          style={{
+            border: '1px solid #f9f9f9',
+            minHeight: 100,
+            borderRadius: 10,
+            marginBottom: '22px',
+            backgroundColor: '#f0f1f4',
+          }}
+          width={'100%'}
+        >
+          <Editor
+            content={content}
+            editor={editor}
+            enablePasteMarkdown={false}
+            key={resetKey}
+            markdownOption={false}
+            onChange={() => {
+              const text = String(editor.getDocument('markdown') || '');
+              setContent(text);
+            }}
+            onInit={handleInit}
+            placeholder={t('editor.placeholder')}
+            plugins={[ReactCodeblockPlugin]}
+            type="text"
+            variant="chat"
+          />
+        </Flexbox>
 
         <Upload
           accept="image/*"

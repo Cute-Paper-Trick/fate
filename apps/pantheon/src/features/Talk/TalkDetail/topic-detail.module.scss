@@ -11,11 +11,9 @@
 }
 
 .topic {
-  display: flex;
-  align-items: flex-start;
   background-color: #fff;
   .talk_head {
-    margin-left: 16px;
+    margin-left: 56px;
     flex: 1 1 0;
     // max-width: 565px;
     .topic_title {
@@ -61,12 +59,12 @@
   word-break: break-all;
 
   color: #000;
-  font-family: "PingFang SC";
+  font-family: 'PingFang SC';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 157.143% */
-  
+
   p {
     margin: 0;
     min-height: 1em;

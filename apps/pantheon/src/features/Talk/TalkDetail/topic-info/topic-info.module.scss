@@ -1,0 +1,32 @@
+.topic_info {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+}
+
+.talk_author {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-left: 16px;
+  flex: 1 1 0;
+
+  .avatarText {
+    .name {
+      color: #1f2937;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+    }
+
+    .avatar_sub {
+      color: #b2b2b2;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+    }
+  }
+}
