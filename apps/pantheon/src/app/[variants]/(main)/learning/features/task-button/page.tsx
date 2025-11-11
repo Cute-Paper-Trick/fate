@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from 'antd';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import { useTaskButtons } from '@/store/learning/helpers';
@@ -14,22 +15,33 @@ import { useLearningStore } from '@/store/learning/store';
 import styles from './index.module.css';
 
 const validButtonTypes = ['primary', 'link', 'text', 'default', 'dashed'] as const;
-const goComplete = (item: V1TaskUserInfo) => {
-  //去发布
+const goComplete = (item: V1TaskUserInfo, router: any) => {
+  //去挑战
   const { page } = JSON.parse(item.jump) as { page: string };
-  //TODO: 暂时跳转此页面 后续会改
-  console.log('跳转到', page);
-  // router.push('/brief-introduct');
+  if (page === 'chat') {
+    router.push('/chat');
+    return;
+  }
+  if (page === 'pose') {
+    router.push('/lab/pose-classifier');
+  }
+  if (page === 'audio') {
+    router.push('/lab/audio-classifier');
+  }
+  if (page === 'image') {
+    router.push('/lab/image-classifier');
+  }
 };
 type ButtonType = (typeof validButtonTypes)[number];
 
 export const TaskButtonGroup: React.FC<TaskButtonGroupProps> = ({ item }) => {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { listDict, completeTask } = useLearningStore();
   const { getTaskButtons } = useTaskButtons();
   const handleButtonClick = (config: TaskButtonConfig) => {
     if (config?.action === 'challenge') {
-      goComplete(item); // 跳转页面
+      goComplete(item, router); // 跳转页面
     } else if (config?.action === 'complete') {
       setIsModalOpen(true); // TODO: 显示去完成弹框 后续对接 下面是完成接口
       if (config?.taskIndex) {
