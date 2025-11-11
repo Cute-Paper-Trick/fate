@@ -60,6 +60,7 @@ const VerifyEmail = () => {
 
   const emailVerified = useMutation({
     mutationFn: async () => {
+      await refetch();
       const { data: session } = await authClient.getSession();
       if (session?.user.emailVerified) {
         return;
