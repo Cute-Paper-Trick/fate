@@ -13,7 +13,7 @@ const BriefUse: FC = () => {
     <div className={styles.briefUseBtn}>
       <div className={styles.top}>
         <div className={styles.title}>
-          <div className={styles.text}>{t('brief_use.title')}</div>
+          <div className={styles.text}>{t('tab.lab', { ns: 'common' })}</div>
           <div className={styles.des}>{t('brief_use.detail')}</div>
         </div>
       </div>
