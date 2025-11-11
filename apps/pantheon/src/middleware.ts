@@ -26,7 +26,7 @@ const isProtectedRoute = createRouteMatcher([
   '/discover(.*)',
 ]);
 
-const isAuthRoute = createRouteMatcher(['/auth(.*)']);
+const isAuthRoute = createRouteMatcher(['/auth/sign-in']);
 
 const isAdminRoute = createRouteMatcher(['/admin(.*)']);
 
@@ -39,9 +39,9 @@ const isPublicRoute = createRouteMatcher([
   '/task(.*)',
 ]);
 
-function redirectToLogin(request: NextRequest) {
+function redirectToLogin(request: NextRequest, callbackUrl?: string) {
   const loginUrl = new URL('/auth/sign-in', request.url);
-  loginUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
+  loginUrl.searchParams.set('callbackUrl', callbackUrl || request.nextUrl.pathname);
   return NextResponse.redirect(loginUrl);
 }
 
@@ -157,7 +157,12 @@ const middleware = async (request: NextRequest) => {
     return redirectToLogin(request);
   }
 
+  if (!session && request.nextUrl.pathname === '/auth/sign-out') {
+    return redirectToLogin(request, '/');
+  }
+
   // 已登录访问鉴权页面 -> 重定向到首页
+  // 但需要排除 sign-out，让退出登录请求能够到达 Better Auth API
   if (isAuthRoute(request) && session) {
     return NextResponse.redirect(new URL('/', request.url));
   }
