@@ -7,7 +7,7 @@
     .audio_player {
       display: flex;
       align-items: center;
-      margin-top: 15px;
+      // margin-top: 15px;
       // color: #185abc;
       border: none !important;
       font-weight: 500;
@@ -22,7 +22,11 @@
     margin-top: 20px;
   }
 
-  height: 100vh;
+  .play_btn {
+    border: none !important;
+  }
+
+  height: calc(100vh - 50px);
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.03);
 
@@ -521,7 +525,7 @@
               justify-content: center;
               flex-direction: column;
               border: none;
-              background-color: #d2e3fc;
+              // background-color: #d2e3fc;
               border-radius: 4px;
               color: #000;
               font-weight: 500;

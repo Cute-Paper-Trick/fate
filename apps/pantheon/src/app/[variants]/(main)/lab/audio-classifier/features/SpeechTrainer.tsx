@@ -3,9 +3,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAudioStore } from '../stores/audioSlice';
 
-// ----------------------------------------------------
-// 接口定义保持不变
-// ----------------------------------------------------
 interface Prediction {
   label: number;
   confidences: Record<number, number>;
@@ -15,7 +12,6 @@ interface ExampleCounts {
   [label: string]: number;
 }
 
-// 修复：使用 window 作为基础，更符合浏览器环境
 interface WindowWithWebkitAudio extends Window {
   webkitAudioContext?: typeof AudioContext;
 }
@@ -38,7 +34,7 @@ interface TransferRecognizer {
   stopListening?: () => void;
 }
 
-const BACKGROUND_NOISE_LABEL = 'Class env';
+const BACKGROUND_NOISE_LABEL = 'Class background';
 // ----------------------------------------------------
 
 export const useSpeechTrainer = () => {
@@ -61,11 +57,6 @@ export const useSpeechTrainer = () => {
     [BACKGROUND_NOISE_LABEL]: 0,
   });
 
-  // ----------------------------------------------------
-  // 核心修复区域：调整函数顺序，修复依赖项
-  // ----------------------------------------------------
-
-  // 导入单个类别 (必须在 importAllClassesForTraining 之前声明)
   const importClassAudios = useCallback(
     async (classId: string) => {
       if (!transferRefCurrent.current) return;
@@ -75,7 +66,6 @@ export const useSpeechTrainer = () => {
         return;
       }
 
-      // 修复 TS 错误：使用 window 并双重断言，或更安全的 AudioContextClass 引用
       const AudioContextClass =
         globalThis.AudioContext ||
         (globalThis as unknown as WindowWithWebkitAudio).webkitAudioContext;
@@ -83,7 +73,7 @@ export const useSpeechTrainer = () => {
         console.error('浏览器不支持 AudioContext');
         return;
       }
-      const audioCtx = new AudioContextClass(); // 使用修复后的引用
+      const audioCtx = new AudioContextClass();
 
       console.log(`正在导入 ${classData.name} 类别音频...`);
       let count = 0;
@@ -110,22 +100,16 @@ export const useSpeechTrainer = () => {
 
       console.log(`已完成导入 ${classData.name} (${count}/${classData.audios.length})`);
     },
-    [
-      audios,
-      transferRefCurrent, // 修复 Compiler 警告
-      setExampleCounts, // 依赖 state setter
-      setIsModelTrained, // 依赖 state setter
-    ],
+    [audios, transferRefCurrent, setExampleCounts, setIsModelTrained],
   );
 
-  // 导入全部类别 (依赖 importClassAudios)
   const importAllClassesForTraining = useCallback(async () => {
     for (const cls of audios) {
       await importClassAudios(cls.id);
     }
   }, [audios, importClassAudios]); // 必须包含 importClassAudios
 
-  // 训练模型 (依赖 importAllClassesForTraining)
+  // 训练模型
   const trainModel = useCallback(async () => {
     if (!transferRefCurrent.current) return;
     await importAllClassesForTraining();
@@ -145,8 +129,8 @@ export const useSpeechTrainer = () => {
     transferRefCurrent,
     setTrainingOver,
     setSpeechCommands,
-    setIsModelTrained, // 依赖 state setter
-    setPredicting, // 依赖 state setter
+    setIsModelTrained,
+    setPredicting,
   ]);
 
   // 开始预测 (必须在 useEffect 之前声明)
@@ -165,24 +149,19 @@ export const useSpeechTrainer = () => {
             label: i,
             confidences: { [i]: scores[i]! },
           }));
-          setPredictions(prediction); // 修复 Compiler 警告：依赖 setPredictions
+          setPredictions(prediction);
         }
       },
       { probabilityThreshold: 0 },
     );
-  }, [
-    transferRefCurrent,
-    setPredictions, // 修复 Compiler 警告
-    setPredicting,
-  ]);
+  }, [transferRefCurrent, setPredictions, setPredicting]);
 
-  // useEffect (现在 startPredicting 已经被声明)
   useEffect(() => {
     if (predicting && !hasStartedPredictingRef.current) {
       startPredicting();
       hasStartedPredictingRef.current = true;
     }
-  }, [predicting, startPredicting]); // 必须包含 startPredicting
+  }, [predicting, startPredicting]);
 
   // 停止预测
   const stopPredicting = useCallback(() => {
@@ -204,9 +183,7 @@ export const useSpeechTrainer = () => {
     a.download = `speech_data_${Date.now()}.bin`;
     a.click();
     URL.revokeObjectURL(url);
-  }, []); // 依赖数组为空，因为只依赖传入的 refs
-
-  // ----------------------------------------------------
+  }, []);
 
   // 返回 API
   return {

@@ -1,13 +1,12 @@
 'use client';
-import type { MenuProps } from '@lobehub/ui';
-
 import {
   // SettingOutlined,
   ArrowDownOutlined,
   DownOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import { Button, Dropdown } from '@lobehub/ui';
+import { Button, Dropdown, type MenuProps } from '@lobehub/ui';
+import { useTranslate } from '@tolgee/react';
 import { Progress, Space, Switch, Upload } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -38,6 +37,7 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
   const [trainedComparePic, setTrainedComparePic] = useState<HTMLImageElement | null>(null);
   const [compareType, setCompareType] = useState('video');
   const previewCanvasRef = useRef<Record<string, HTMLCanvasElement | null>>({});
+  const { t } = useTranslate('lab');
 
   useEffect(() => {
     predictFromCapturedPose(videoRef.current, compareType);
@@ -118,7 +118,7 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
             handleCompareType('pic');
           }}
         >
-          文件
+          {t('classifier.document.title', '文件')}
         </span>
       ),
     },
@@ -142,9 +142,9 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
       <div className={styles.pose_preview_cont}>
         <div className={styles.pose_preview_box}>
           <div className={styles.preview_title_area}>
-            <p className={styles.preview_title}>预览</p>
+            <p className={styles.preview_title}>{t('preview.title', '预览')}</p>
             <Button disabled={!trainingOver} onClick={exportKNNModel} type="primary">
-              导出模型
+              {t('classifier.preview.export', '导出模型')}
             </Button>
           </div>
           {isPerviewOpen ? (
@@ -154,7 +154,9 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
                   <Space direction="horizontal">
                     <Switch className={styles.preview_switch} onChange={togglePrediction} />
                     <p className={styles.preview_switch_text}>
-                      {isPredicting ? '已启用' : '已停用'}
+                      {isPredicting
+                        ? t('classifier.preview.disable', '已停用')
+                        : t('classifier.preview.enable', '已启用')}
                     </p>
                   </Space>
                   <Dropdown
@@ -164,7 +166,7 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
                     trigger={['click']}
                   >
                     <Button>
-                      {compareType === 'pic' ? '文件' : 'Webcam'}
+                      {compareType === 'pic' ? t('classifier.document.title', '文件') : 'Webcam'}
                       <DownOutlined />
                     </Button>
                   </Dropdown>
@@ -206,13 +208,16 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
                           className={styles.button_upload}
                           icon={<UploadOutlined style={{ fontSize: '20px' }} />}
                         >
-                          您可以从文件中选择图片，也可以将图片拖放到此处
+                          {t(
+                            'classifier.image.preview.upload',
+                            '您可以从文件中选择图片，也可以将图片拖放到此处',
+                          )}
                         </Button>
                       </Upload>
                       {trainedComparePic && (
                         <div>
                           <img
-                            alt="对比图"
+                            alt="compare"
                             height={265}
                             src={trainedComparePic.src}
                             style={{
@@ -230,18 +235,21 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
                       fontSize: 14,
                       width: 265,
                       height: 265,
-                      color: '#1967D2',
+                      color: '#000',
                       textAlign: 'center',
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    打开摄像头时出错。请确保您启用了相关权限，或改为上传图片。
+                    {t(
+                      'classifier.image.preview.error',
+                      '打开摄像头时出错。请确保您启用了相关权限，或改为上传图片。',
+                    )}
                   </div>
                 )}
               </div>
               <div className={styles.preview_output_area}>
-                <p>输出</p>
+                <p>{t('preview.output.text', '输出')}</p>
                 <ArrowDownOutlined
                   style={{
                     borderRadius: '50%',
@@ -259,7 +267,7 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
                   <div key={predIndex}>
                     {Object.keys(pred.confidences).map((k) => {
                       const i = parseInt(k);
-                      const className = classList[i]?.name || '未定义';
+                      const className = classList[i]?.name || '';
                       const confidence = pred.confidences[i] || 0;
                       const percentage = (confidence * 100).toFixed(1);
 
@@ -285,7 +293,9 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
               </div>
             </>
           ) : (
-            <p className={styles.output_text}>您必须先在左侧训练模型，然后才可以在此处预览。</p>
+            <p className={styles.output_text}>
+              {t('classifier.preview.attention', '您必须先在左侧训练模型，然后才可以在此处预览。')}
+            </p>
           )}
         </div>
       </div>

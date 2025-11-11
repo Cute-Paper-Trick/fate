@@ -1,9 +1,10 @@
 'use client';
-import type { CollapseProps } from 'antd';
-
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import { Button, Collapse, Input, message } from 'antd';
+import { useTranslate } from '@tolgee/react';
+import { Button, Collapse, type CollapseProps, Input } from 'antd';
 import React, { useState } from 'react';
+
+import { message } from '@/components/AntdStaticMethods';
 
 import { useImageModel } from '../hooks/imageHooks';
 import styles from '../imageTrainer.module.scss';
@@ -31,6 +32,7 @@ const createImageElement = (src: string): Promise<HTMLImageElement> => {
 };
 
 const Training: React.FC = () => {
+  const { t } = useTranslate('lab');
   const [trainedCount, setTrainedCount] = useState(0); // 已训练图片数
   const [totalImages, setTotalImages] = useState(0); // 总图片数
   const {
@@ -100,14 +102,14 @@ const Training: React.FC = () => {
 
     for (const i of classList) {
       if (i.images.length === 0) {
-        message.warning('训练集不能为空');
+        message.error(t('classifier.training.error.empty', '训练集不能为空'));
         return;
       }
     }
 
     // 计算所有类别中的图片数量
     classList.forEach((item) => (count += item.images.length));
-    console.log(knnClassifierInstance);
+    // console.log(knnClassifierInstance);
 
     if (!knnClassifierInstance || count === 0) return;
 
@@ -150,11 +152,11 @@ const Training: React.FC = () => {
   const trainingItems: CollapseProps['items'] = [
     {
       key: '1',
-      label: '高级',
+      label: t('classifier.training.options.title', '高级'),
       children: (
         <>
           <section className={styles.training_input}>
-            <span>K值(最近邻数量)：</span>
+            <span>{t('classifier.training.options_k.title', 'K值(最近邻数量)')}：</span>
             <Input disabled name="kValue" onChange={handleKValue} value={kValue} />
             <div className={styles.training_input_buttons}>
               <CaretUpOutlined className={styles.button_increment} onClick={() => inkValue()} />
@@ -163,7 +165,7 @@ const Training: React.FC = () => {
             {/* <QuestionCircleOutlined /> */}
           </section>
           <section className={styles.training_input}>
-            <span>滤波器系数 (α) ：</span>
+            <span>{t('classifier.training.options_filter.title', '滤波器系数 (α)')}：</span>
             <Input disabled name="filterAlpha" onChange={handleFilterAlpha} value={filterAlpha} />
             <div className={styles.training_input_buttons}>
               <CaretUpOutlined
@@ -177,7 +179,7 @@ const Training: React.FC = () => {
             </div>
           </section>
           <section className={styles.training_input}>
-            <span>距离阈值：</span>
+            <span>{t('classifier.training.options_distance.title', '距离阈值')}距离阈值：</span>
             <Input
               disabled
               name="distanceThreshold"
@@ -204,7 +206,7 @@ const Training: React.FC = () => {
     <div className={styles.image_training_container}>
       <div className={styles.image_training_cont}>
         <div className={styles.image_training_box}>
-          <p className={styles.training_title}>训练</p>
+          <p className={styles.training_title}>{t('classifier.training.title', '训练')}</p>
           {!trainingOver ? (
             <Button
               disabled={!loading}
@@ -213,16 +215,16 @@ const Training: React.FC = () => {
               }}
               type="primary"
             >
-              开始训练
+              {t('classifier.training.start', '开始训练')}
             </Button>
           ) : (
             <Button onClick={handleRetraining} type="primary">
-              重新开始
+              {t('classifier.training.restart', '重新开始')}
             </Button>
           )}
           {totalImages !== 0 ? (
             <p className={styles.training_progress}>
-              已训练 {trainedCount} / {totalImages}
+              {t('classifier.training.finish', '已训练')} {trainedCount} / {totalImages}
             </p>
           ) : (
             []

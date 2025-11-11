@@ -1,8 +1,11 @@
 'use client';
 import * as speechCommands from '@tensorflow-models/speech-commands';
 import * as tf from '@tensorflow/tfjs';
-import { Spin, message } from 'antd';
+import { useTranslate } from '@tolgee/react';
+import { Spin } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { message } from '@/components/AntdStaticMethods';
 
 import styles from './audio.module.scss';
 import Preview from './features/Preview';
@@ -38,6 +41,7 @@ const AudioTrainer: React.FC = () => {
   const { setTransferRefCurrent } = useAudioStore();
   const { clearAudios } = useAudioStore();
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslate('lab');
 
   // 初始化模型
   useEffect(() => {
@@ -59,19 +63,20 @@ const AudioTrainer: React.FC = () => {
         const transfer = recognizer.createTransfer('my-custom-model');
 
         recognizerRef.current = recognizer;
-        console.log(transferRef.current);
+        // console.log(transferRef.current);
 
         // @ts-expect-error - spectrogram not in official types
         transferRef.current = transfer;
         if (transferRef.current) {
-          console.log(transferRef.current);
+          // console.log(transferRef.current);
 
           setTransferRefCurrent(transferRef.current);
         }
         setLoading(false);
-        message.success('模型加载完成！');
+        message.success(t('classifier.model.success.loaded', '模型加载完成！'));
       } catch (error) {
         console.log(`模型加载失败: ${error}`);
+        message.error(t('classifier.model.error.unloaded', '模型加载失败'));
       }
     };
     initModel();

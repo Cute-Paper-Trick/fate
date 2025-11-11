@@ -1,9 +1,12 @@
 'use client';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd';
+import { useTranslate } from '@tolgee/react';
+import { Button } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 // import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+
+import { message } from '@/components/AntdStaticMethods';
 
 import styles from '../audio.module.scss';
 import { useAudioStore } from '../stores/audioSlice';
@@ -73,6 +76,7 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
   const [audioDuration, setAudioDuration] = useState(0); // 专门存储音频时长
   const pendingSegmentsRef = useRef<CapturedAudio[]>([]); // 保存录制的音频片段
   const pendingScreenshotsRef = useRef<{ id: string; src: string }[]>([]); // 保存截图
+  const { t } = useTranslate('lab');
 
   const [isPlaying, setIsPlaying] = useState(false);
   const { clearTemporaryAudios } = useAudioStore();
@@ -183,7 +187,7 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
             // ~2秒
             const now = Date.now();
             if (now - lastWarningTimeRef.current > 1000) {
-              message.warning('音量过低，可能导致样本提取失败');
+              message.warning(t('classifier.audio.warring.low', '音量过低，可能导致样本提取失败'));
               lastWarningTimeRef.current = now;
             }
             lowSignalCounterRef.current = 0;
@@ -338,13 +342,13 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
 
         track!.addEventListener('onended', () => {
           console.warn('麦克风输入已中断');
-          message.error('麦克风输入已断开');
+          message.error(t('classifier.audio.error.lost', '麦克风输入已断开'));
           return;
         });
 
         track!.onmute = () => {
           console.warn('麦克风被静音或设备不可用');
-          message.warning('检测到音频输入中断');
+          message.warning(t('classifier.audio.warning.mute', '检测到音频输入中断'));
           return;
         };
 
@@ -407,7 +411,7 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
             pendingSegmentsRef.current = segments;
           } catch (error) {
             console.error('Error decoding audio data:', error);
-            message.error('未捕获有效音频', 2);
+            message.error(t('classifier.audio.error.invalid_vocal', '未捕获有效音频'), 2);
             setAudioDuration(duration);
           }
 
@@ -432,14 +436,17 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
       console.log(error);
       if (error instanceof DOMException) {
         if (error.name === 'EncodingError') {
-          message.error('没有有效音频', 2);
+          message.error(t('classifier.audio.error.invalid_vocal', '未捕获有效音频'), 2);
         } else if (error.name === 'NotFoundError') {
-          message.error('未找到有效设备', 2);
+          message.error(t('classifier.audio.error.invalid_device', '未找到有效设备'), 2);
         } else {
-          message.error(`音频解码失败: ${error.name}`, 2);
+          message.error(
+            `${t('classifier.audio.error.encode_fail', '音频解码失败')}: ${error.name}`,
+            2,
+          );
         }
       } else {
-        message.error('未知错误', 2);
+        message.error(t('classifier.audio.error.unknown', '未知错误'), 2);
       }
     }
   };
@@ -499,7 +506,14 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
 
       {/* 播放器 */}
       {audioSrc && recEnding && (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 15,
+          }}
+        >
           <div className={styles.audio_player}>
             <audio
               controls={false} // 不显示默认的播放控件
@@ -510,11 +524,7 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
               src={audioSrc}
             />
             <Button className={styles.play_btn} onClick={togglePlayback}>
-              {isPlaying ? (
-                <PauseOutlined style={{ color: '#185ABC' }} />
-              ) : (
-                <CaretRightOutlined style={{ color: '#185ABC' }} />
-              )}
+              {isPlaying ? <PauseOutlined /> : <CaretRightOutlined />}
             </Button>
             <span>
               {formatTime(currentTime)} /{' '}
@@ -530,12 +540,12 @@ const LiveSpectrogram: React.FC<ClassComponentProps> = ({ classId }) => {
       )}
       <Button className={styles.button_Rec} onClick={toggleRecording}>
         {recording && classId === 'class-env'
-          ? '停止（' + (20 - duration) + 's）'
+          ? t('classifier.audio.stop', '停止') + '（' + (20 - duration) + 's）'
           : recording && classId !== 'class-env'
-            ? '停止（' + (10 - duration) + 's）'
+            ? t('classifier.audio.stop', '停止') + '（' + (10 - duration) + 's）'
             : classId === 'class-env'
-              ? '开始录制'
-              : '开始录制'}
+              ? t('classifier.audio.recording', '开始录制')
+              : t('classifier.audio.recording', '开始录制')}
       </Button>
     </div>
   );

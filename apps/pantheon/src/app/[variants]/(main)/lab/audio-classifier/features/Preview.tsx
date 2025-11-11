@@ -1,5 +1,6 @@
 'use client';
 import { ArrowDownOutlined } from '@ant-design/icons';
+import { useTranslate } from '@tolgee/react';
 import { Button, Space, Switch } from 'antd';
 import { useRef, useState } from 'react';
 
@@ -14,6 +15,7 @@ const Preview: React.FC = () => {
   const livePreviewRef = useRef<{ togglePause: () => void }>(null);
   const [isPredicting, setIsPredicting] = useState(true);
   const { trainingOver, predictions, speechCommands, list: classList } = useAudioStore();
+  const { t } = useTranslate('lab');
 
   const handleSwitchChange = async (checked: boolean) => {
     if (checked) {
@@ -34,14 +36,14 @@ const Preview: React.FC = () => {
       <div className={styles.audio_preview_cont}>
         <div className={styles.audio_preview_box}>
           <div className={styles.preview_title_area}>
-            <p className={styles.preview_title}>预览</p>
+            <p className={styles.preview_title}>{t('classifier.preview.title', '预览')}</p>
             <Button
               disabled={!trainingOver}
               onClick={() => {
                 exportModel(speechCommands);
               }}
             >
-              导出模型
+              {t('classifier.preview.export', '导出模型')}
             </Button>
           </div>
           {trainingOver ? (
@@ -55,14 +57,16 @@ const Preview: React.FC = () => {
                       onChange={handleSwitchChange}
                     />
                     <p className={styles.preview_switch_text}>
-                      {!isPredicting ? '已停用' : '已启用'}
+                      {!isPredicting
+                        ? t('classifier.preview.disable', '已停用')
+                        : t('classifier.preview.enable', '已启用')}
                     </p>
                   </Space>
                 </div>
                 <LivePreview ref={livePreviewRef} />
               </div>
               <div className={styles.preview_output_area}>
-                <p>输出</p>
+                <p>{t('classifier.preview.output', '输出')}</p>
                 <ArrowDownOutlined
                   style={{
                     borderRadius: '50%',
@@ -80,7 +84,9 @@ const Preview: React.FC = () => {
               </div>
             </>
           ) : (
-            <p className={styles.output_text}>您必须先在左侧训练模型，然后才可以在此处预览。</p>
+            <p className={styles.output_text}>
+              {t('classifier.preview.attention', '您必须先在左侧训练模型，然后才可以在此处预览。')}
+            </p>
           )}
         </div>
       </div>

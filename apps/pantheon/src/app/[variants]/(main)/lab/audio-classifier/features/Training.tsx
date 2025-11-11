@@ -1,9 +1,10 @@
 'use client';
-import type { CollapseProps } from 'antd';
-
 import { BarChartOutlined } from '@ant-design/icons';
-import { Button, Collapse, message } from 'antd';
+import { useTranslate } from '@tolgee/react';
+import { Button, Collapse, type CollapseProps } from 'antd';
 import React, { useEffect, useState } from 'react';
+
+import { message } from '@/components/AntdStaticMethods';
 
 import styles from '../audio.module.scss';
 import { useAudioStore } from '../stores/audioSlice';
@@ -23,6 +24,7 @@ const Training: React.FC = () => {
   const { trainingOver } = useAudioStore();
   const totalCount = list.reduce((sum, cls) => sum + (cls.images?.length || 0), 0);
   const [currentCount, setCurrentCount] = useState(0);
+  const { t } = useTranslate('lab');
 
   useEffect(() => {
     if (!trainFlag || trainingOver) return;
@@ -40,16 +42,20 @@ const Training: React.FC = () => {
 
   const handleStart = () => {
     if (list.length < 2) {
-      message.warning('至少需要两个训练集');
+      message.error(t('classifier.training.error.least', '至少需要两个训练集'));
       return;
     }
 
     if (list[0]!.images.length < 5) {
-      message.warning(list[0]!.name + '样本数量不足，无法开始训练');
+      message.error(
+        list[0]!.name + t('classifier.training.error.not_enough', '样本数量不足，无法开始训练'),
+      );
       return;
     }
     if (list[1]!.images.length < 5) {
-      message.warning(list[1]!.name + '样本数量不足，无法开始训练');
+      message.error(
+        list[1]!.name + t('classifier.training.error.not_enough', '样本数量不足，无法开始训练'),
+      );
       return;
     }
     // stopPredicting();
@@ -60,11 +66,11 @@ const Training: React.FC = () => {
   const trainingItems: CollapseProps['items'] = [
     {
       key: '1',
-      label: '高级',
+      label: t('classifier.training.options.title', '高级'),
       children: (
         <section className={styles.training_input}>
           <p>
-            深入了解
+            {t('classifier.training.options.description', '深入了解')}
             <BarChartOutlined />
           </p>
           {/* <Input
@@ -86,26 +92,26 @@ const Training: React.FC = () => {
     <div className={styles.audio_training_container}>
       <div className={styles.audio_training_cont}>
         <div className={styles.audio_training_box}>
-          <p className={styles.training_title}>训练</p>
+          <p className={styles.training_title}>{t('classifier.training.title', '训练')}</p>
           {/* <Button type="primary" onClick={handleStart}>开始训练</Button> */}
           {!trainingOver ? (
             <Button onClick={handleStart} type="primary">
-              开始训练
+              {t('classifier.training.start', '开始训练')}
             </Button>
           ) : (
             <Button onClick={handleRetraining} type="primary">
-              重新开始
+              {t('classifier.training.restart', '重新开始')}
             </Button>
           )}
           {trainFlag === true ? (
             <div className={styles.training_progress}>
               {trainingOver === true ? (
-                '已训练'
+                t('classifier.training.finish', '已训练')
               ) : (
                 <p style={{ textAlign: 'center' }}>
-                  {`上传中： ${currentCount} / ${totalCount} 个样本`}
+                  {`${t('classifier.training.uploading', '上传中')}： ${currentCount} / ${totalCount} ${t('classifier.training.unit', '个样本')}`}
                   <br />
-                  训练中...
+                  {t('classifier.training.training', '训练中')}...
                 </p>
               )}
             </div>

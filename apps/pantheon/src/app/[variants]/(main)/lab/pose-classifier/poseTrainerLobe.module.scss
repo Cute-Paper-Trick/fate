@@ -1,12 +1,12 @@
 .container {
-  height: 100vh;
+  height: calc(100vh - 50px);
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.03);
 
   .pose_container {
     // margin-top: 68px;
     background-color: #fbfbfb;
-    min-height: 100vh;
+    min-height: 100%;
     min-width: 1315px;
     // width: 1315px;
     padding: 80px 40px 24px 40px;
@@ -286,6 +286,10 @@
                 opacity: 0;
               }
 
+              img {
+                min-width: 60px;
+              }
+
               &:hover {
                 .close_icon {
                   opacity: 1;
@@ -498,9 +502,9 @@
               justify-content: center;
               flex-direction: column;
               border: none;
-              background-color: #d2e3fc;
+              // background-color: #d2e3fc;
               border-radius: 4px;
-              color: #000;
+              // color: #000;
               font-weight: 500;
               white-space: break-spaces;
               line-height: 1.5;
@@ -682,11 +686,11 @@
                   transition: width 0.1s ease-in-out !important;
                 }
 
-                .ant-progress-inner {
+                :global(.ant-progress-inner) {
                   border-radius: 5px !important;
                 }
 
-                .ant-progress-bg {
+                :global(.ant-progress-bg) {
                   border-radius: 5px !important;
                 }
 
