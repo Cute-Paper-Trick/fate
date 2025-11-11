@@ -4,6 +4,7 @@ import { Button, Form, Input, Modal, Text } from '@lobehub/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslate } from '@tolgee/react';
 import { Steps } from 'antd';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -16,8 +17,13 @@ const VerifyEmail = () => {
   const { refetch } = useSession();
   const user = useUserStore((s) => s.user);
   const [modalVisible, setModalVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    if (pathname === '/verify-email-success') {
+      return;
+    }
+
     if (!user) {
       return;
     }
@@ -26,7 +32,7 @@ const VerifyEmail = () => {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setModalVisible(true);
     }
-  }, [user]);
+  }, [user, pathname]);
 
   const [step, setStep] = useState(0);
 
@@ -37,12 +43,12 @@ const VerifyEmail = () => {
       if (newEmail === user?.email) {
         await authClient.sendVerificationEmail({
           email: newEmail,
-          callbackURL: '/',
+          callbackURL: '/verify-email-success',
         });
         return;
       }
 
-      await authClient.changeEmail({ newEmail });
+      await authClient.changeEmail({ newEmail, callbackURL: '/verify-email-success' });
     },
     onError: (error) => {
       message?.error(error.message || '操作失败，请稍后重试');

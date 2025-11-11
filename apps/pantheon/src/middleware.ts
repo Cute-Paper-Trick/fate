@@ -201,5 +201,6 @@ export const config = {
     '/learning(.*)',
     '/profile(.*)',
     '/discover(.*)',
+    '/verify-email-success(.*)',
   ],
 };

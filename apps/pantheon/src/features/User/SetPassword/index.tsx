@@ -5,6 +5,7 @@ import { Button, Modal, Text } from '@lobehub/ui';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslate } from '@tolgee/react';
 import { Form, Input } from 'antd';
+import { usePathname } from 'next/navigation';
 import { Flexbox } from 'react-layout-kit';
 
 import { message } from '@/components/AntdStaticMethods';
@@ -21,6 +22,8 @@ const SetPassword = () => {
   const userId = useUserStore(userProfileSelectors.userId);
 
   const [form] = Form.useForm();
+
+  const pathname = usePathname();
 
   const changePassword = useMutation({
     mutationFn: async ({
@@ -54,6 +57,10 @@ const SetPassword = () => {
   });
 
   if (data?.need_change !== true) {
+    return null;
+  }
+
+  if (pathname === '/verify-email-success') {
     return null;
   }
 
