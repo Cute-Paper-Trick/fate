@@ -60,9 +60,11 @@ const VerifyEmail = () => {
 
   const emailVerified = useMutation({
     mutationFn: async () => {
-      await refetch();
-      const { data: session } = await authClient.getSession();
+      const { data: session } = await authClient.getSession({
+        query: { disableCookieCache: true },
+      });
       if (session?.user.emailVerified) {
+        await refetch({ query: { disableCookieCache: true } });
         return;
       }
       throw new Error(t('emailVerify.emailVerifyFailed', '邮箱尚未验证成功，请稍后重试'));

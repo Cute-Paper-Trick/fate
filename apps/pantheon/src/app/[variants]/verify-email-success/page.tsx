@@ -20,13 +20,13 @@ export default function VerifyEmailSuccessPage() {
 
   useEffect(() => {
     // Refetch session to ensure we have the latest email verification status
-    refetch();
+    refetch({ query: { disableCookieCache: true } });
   }, [refetch]);
 
   useEffect(() => {
     if (!autoRedirect || countdown <= 0) {
       if (countdown <= 0) {
-        router.push('/');
+        router.replace('/');
       }
       return;
     }
