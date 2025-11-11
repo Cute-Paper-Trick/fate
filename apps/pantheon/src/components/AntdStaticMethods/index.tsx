@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react-hooks/globals */
 // Entry component
 import { App } from 'antd';
