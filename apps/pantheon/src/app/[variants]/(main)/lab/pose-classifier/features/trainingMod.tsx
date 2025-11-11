@@ -2,8 +2,10 @@
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs';
-// import { message } from 'antd';
+import { useTranslate } from '@tolgee/react';
 import { useState } from 'react';
+
+import { message } from '@/components/AntdStaticMethods';
 
 // import type * as poseDetection from "@tensorflow-models/pose-detection";
 import { usePoseStore } from '../stores/poseSlice';
@@ -166,6 +168,7 @@ const flattenPose = (pose: poseDetection.Pose) => {
 };
 
 export const usePoseModel = ({ classList }: PoseModelProps) => {
+  const { t } = useTranslate('lab');
   const {
     poseDetector,
     setPoseDetector,
@@ -184,7 +187,7 @@ export const usePoseModel = ({ classList }: PoseModelProps) => {
       setLoading(true);
       await tf.ready(); // 确保 TF 后端就绪
       await tf.setBackend('webgl');
-      // message.loading("加载模型...", 1);
+      message.loading(t('classifier.model.loading.loading', '加载模型...'), 1);
       const knn = knnClassifier.create();
       setKnnClassifierInstance(knn);
 
@@ -203,10 +206,10 @@ export const usePoseModel = ({ classList }: PoseModelProps) => {
       if (element) {
         element.style.height = 'initial';
       }
-      // message.success('MobileNet + PoseDetector 加载完成！');
+      message.success(t('classifier.model.success.loaded', '模型加载完成！'));
     } catch (error) {
       console.error('初始化失败', error);
-      // message.error('模型加载失败');
+      message.error(t('classifier.model.error.unloaded', '模型加载失败'));
     } finally {
       setLoading(false);
     }
@@ -326,7 +329,12 @@ export const usePoseModel = ({ classList }: PoseModelProps) => {
       }
 
       if (addedSamples === 0) {
-        // message.warning('所有图片都未能成功训练，请检查图片或姿态检测是否正常');
+        message.warning(
+          t(
+            'classifier.model.warning.not_pass',
+            '所有图片都未能成功训练，请检查图片或姿态检测是否正常:',
+          ),
+        );
       }
     } catch (error) {
       console.log(error);
@@ -399,7 +407,7 @@ export const usePoseModel = ({ classList }: PoseModelProps) => {
   // 导出训练好的 KNN 模型
   const exportKNNModel = () => {
     if (!knnClassifierInstance || knnClassifierInstance.getNumClasses() === 0) {
-      // message.error('没有可保存的模型');
+      message.error(t('classifier.model.error.no_save', '没有可保存的模型:'));
       return;
     }
 

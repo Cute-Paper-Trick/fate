@@ -28,11 +28,7 @@ const BriefUseModal: FC = () => {
       <Modal
         centered
         className={styles.briefModal}
-        footer={[
-          <Button key="cancel" onClick={handleCancel}>
-            {t('brief_use.card.btn.cancel')}
-          </Button>,
-        ]}
+        footer={null}
         onCancel={handleCancel}
         open={isModalOpen}
         title={t('brief_use.modal.title')}
@@ -40,34 +36,37 @@ const BriefUseModal: FC = () => {
       >
         <Flex style={{ justifyContent: 'space-between' }}>
           <GuideCard
+            className={styles.item_btn}
             closable={false}
             cover={'/training/training-image.png'}
             desc={t('new_project.image.description')}
             height={300}
             onClick={() => router.push('/lab/image-classifier')}
-            style={{ width: 300 }}
+            style={{ width: 300, cursor: 'pointer' }}
             title={t('new_project.image.title')}
             width={300}
           />
 
           <GuideCard
+            className={styles.item_btn}
             closable={false}
             cover={'/training/training-audio.png'}
             desc={t('new_project.audio.description')}
             height={300}
             onClick={() => router.push('/lab/audio-classifier')}
-            style={{ width: 300 }}
+            style={{ width: 300, cursor: 'pointer' }}
             title={t('new_project.audio.title')}
             width={300}
           />
 
           <GuideCard
+            className={styles.item_btn}
             closable={false}
             cover={'/training/training-pose.png'}
             desc={t('new_project.pose.description')}
             height={300}
             onClick={() => router.push('/lab/audio-classifier')}
-            style={{ width: 300 }}
+            style={{ width: 300, cursor: 'pointer' }}
             title={t('new_project.pose.title')}
             width={300}
           />

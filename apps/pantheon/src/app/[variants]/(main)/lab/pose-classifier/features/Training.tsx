@@ -1,10 +1,10 @@
 'use client';
-import type { CollapseProps } from '@lobehub/ui';
-
 import { BarChartOutlined } from '@ant-design/icons';
-import { Button, Collapse } from '@lobehub/ui';
-// import { message } from 'antd';
+import { Button, Collapse, type CollapseProps } from '@lobehub/ui';
+import { useTranslate } from '@tolgee/react';
 import React from 'react';
+
+import { message } from '@/components/AntdStaticMethods';
 
 import styles from '../poseTrainerLobe.module.scss';
 import { usePoseStore } from '../stores/poseSlice';
@@ -20,6 +20,7 @@ const handleRetraining = () => {
 };
 
 const Training: React.FC<TrainingProps> = ({ videoRef }) => {
+  const { t } = useTranslate('lab');
   const {
     list: classList,
     setTrainingOver,
@@ -39,13 +40,13 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
       await trainKNN(classList);
       for (const i of classList) {
         if (i.poses.length === 0) {
-          // message.warning("训练集不能为空")
+          message.error(t('classifier.training.error.empty', '训练集不能为空'));
           return;
         }
       }
 
       if (classList.length < 2) {
-        // message.warning("至少需要2个训练集")
+        message.error(t('classifier.training.error.least', '至少需要两个训练集'));
         return;
       }
 
@@ -69,11 +70,11 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
   const trainingItems: CollapseProps['items'] = [
     {
       key: '1',
-      label: '高级',
+      label: t('classifier.training.options.title', '高级'),
       children: (
         <section className={styles.training_input}>
           <p>
-            深入了解
+            {t('classifier.training.options.description', '深入了解')}
             <BarChartOutlined />
           </p>
           {/* <Input
@@ -95,7 +96,7 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
     <div className={styles.pose_training_container}>
       <div className={styles.pose_training_cont}>
         <div className={styles.pose_training_box}>
-          <p className={styles.training_title}>训练</p>
+          <p className={styles.training_title}>{t('classifier.training.title', '训练')}</p>
           {/* <Button onClick={() => {handleModelUpload()}}>训练模型</Button> */}
           {/* <Button type="primary" disabled={!loadingOver} onClick={() => {trainKNN(temporaryPoses)}}>开始训练</Button> */}
           {!trainingOver ? (
@@ -106,16 +107,16 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
               }}
               type="primary"
             >
-              开始训练
+              {t('classifier.training.start', '开始训练')}
             </Button>
           ) : (
             <Button onClick={handleRetraining} type="primary">
-              重新开始
+              {t('classifier.training.restart', '重新开始')}
             </Button>
           )}
           {totalPoses !== 0 ? (
             <p className={styles.training_progress}>
-              已训练 {trainedCount} / {totalPoses}
+              {t('classifier.training.finish', '已训练')} {trainedCount} / {totalPoses}
             </p>
           ) : (
             []

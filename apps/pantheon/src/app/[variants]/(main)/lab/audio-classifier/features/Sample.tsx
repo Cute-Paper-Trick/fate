@@ -9,6 +9,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Dropdown, Image, Input, Modal } from '@lobehub/ui';
+import { useTranslate } from '@tolgee/react';
 import { Card, type MenuProps, Space, Upload } from 'antd';
 import React, { useRef, useState } from 'react';
 
@@ -21,6 +22,7 @@ const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
 };
 
 const SampleComponent: React.FC = () => {
+  const { t } = useTranslate('lab');
   const { list } = useAudioStore();
   const { addClass } = useAudioStore();
   const { removeClass } = useAudioStore();
@@ -115,7 +117,7 @@ const SampleComponent: React.FC = () => {
                   }
                 }}
               >
-                删除类别
+                {t('classifier.sample.delete_category', '删除类别')}
               </span>
             ),
             disabled: cls.id === 'class-env',
@@ -128,7 +130,7 @@ const SampleComponent: React.FC = () => {
                   handleRemoveSample(cls.id);
                 }}
               >
-                删除所有样本
+                {t('classifier.sample.delete_all', '删除所有样本')}
               </span>
             ),
           },
@@ -161,7 +163,7 @@ const SampleComponent: React.FC = () => {
             {uploadingMap[cls.id] ? (
               <div className={styles.cardArea}>
                 <div className={styles.cardArea_cont}>
-                  <p>文件</p>
+                  <p>{t('classifier.document.title', '文件')}</p>
                   <Button
                     className={styles.cardArea_close}
                     onClick={() => setUploading(cls.id, false)}
@@ -174,7 +176,10 @@ const SampleComponent: React.FC = () => {
                         className={styles.button_upload}
                         icon={<UploadOutlined style={{ fontSize: '20px' }} />}
                       >
-                        您可以从文件中选择音频，也可以将音频拖放到此处
+                        {t(
+                          'classifier.audio.document.upload',
+                          '您可以从文件中选择音频，也可以将音频拖放到此处',
+                        )}
                       </Button>
                     </Upload>
 
@@ -185,7 +190,8 @@ const SampleComponent: React.FC = () => {
                 </div>
                 <div className={styles.cardArea_cont}>
                   <p style={{ color: '#3C4043' }}>
-                    {(cls.images || []).length} 个音频样本 / 至少需要
+                    {(cls.images || []).length}
+                    {t('classifier.audio.document.count', '个音频样本 / 至少需要')}
                     {cls.id === 'class-env' ? 5 : 5}个
                   </p>
                   <div className={styles.cardArea_preview}>
@@ -218,7 +224,7 @@ const SampleComponent: React.FC = () => {
             ) : selectMap[cls.id] ? (
               <div className={styles.cardArea}>
                 <div className={styles.cardArea_cont}>
-                  <p>麦克风</p>
+                  <p>{t('classifier.audio.collect.title', '麦克风')}</p>
                   <Button
                     className={styles.cardArea_close}
                     onClick={() => setSelect(cls.id, false)}
@@ -238,7 +244,11 @@ const SampleComponent: React.FC = () => {
                           }}
                           style={{ marginTop: '10px', cursor: 'pointer' }}
                         >
-                          <QuestionCircleOutlined /> 如果在录制过程中出现问题，请点击这里
+                          <QuestionCircleOutlined />{' '}
+                          {t(
+                            'classifier.audio.collect.problem',
+                            '如果在录制过程中出现问题，请点击这里',
+                          )}
                         </p>
                         <Modal
                           className={styles.preview_help}
@@ -263,12 +273,18 @@ const SampleComponent: React.FC = () => {
                 </div>
                 <div className={styles.cardArea_cont}>
                   <p style={{ color: '#3C4043' }}>
-                    {(cls.images || []).length} 个音频样本 /{' '}
+                    {(cls.images || []).length} {t('classifier.audio.count', '个音频样本')} /{' '}
                     {(cls.images || []).length >= 5 ? (
-                      <span>至少需要{cls.id === 'class-env' ? 5 : 5}个</span>
+                      <span>
+                        {t('classifier.collect.least', '至少需要')}
+                        {cls.id === 'class-env' ? 5 : 5}
+                        {t('classifier.collect_unit.text', '个')}
+                      </span>
                     ) : (
                       <span style={{ color: 'red' }}>
-                        至少需要{cls.id === 'class-env' ? 5 : 5}个
+                        {t('classifier.collect_least.text', '至少需要')}
+                        {cls.id === 'class-env' ? 5 : 5}
+                        {t('classifier.collect_unit.text', '个')}
                       </span>
                     )}
                   </p>
@@ -285,14 +301,16 @@ const SampleComponent: React.FC = () => {
               </div>
             ) : (
               <div className={styles.card_container}>
-                <p className={styles.card_label}>添加音频样本</p>
+                <p className={styles.card_label}>
+                  {t('classifier.audio.collect.add', '添加音频样本')}
+                </p>
                 <Space>
                   <Button
                     className={styles.button_comn}
                     icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}
                     onClick={() => setSelect(cls.id, true)}
                   >
-                    麦克风
+                    {t('classifier.audio.collect', '麦克风')}
                   </Button>
                   {/* <Button className={styles.button_comn} onClick={() => setUploading(cls.id, true)} icon={<UploadOutlined style={{ fontSize: '20px' }}/>}>上传</Button> */}
                   {cls.images.map((img, i) => (
@@ -326,7 +344,9 @@ const SampleComponent: React.FC = () => {
         );
       })}
       <Button className={styles.button_add} icon={<PlusSquareOutlined />} onClick={handleAddClass}>
-        <span style={{ lineHeight: '100px' }}>添加类别</span>
+        <span style={{ lineHeight: '100px' }}>
+          {t('classifier.sample.add_category', '添加类别')}
+        </span>
       </Button>
     </div>
   );

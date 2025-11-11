@@ -1,7 +1,5 @@
 'use client';
 
-import type { MenuProps } from 'antd';
-
 import {
   CloseOutlined,
   DeleteOutlined,
@@ -15,8 +13,9 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Image as AntdImage, Button, Dropdown, Input, Modal, Select } from '@lobehub/ui';
+import { useTranslate } from '@tolgee/react';
 // import { Image as AntdImage } from 'antd';
-import { Card, Space, Upload } from 'antd';
+import { Card, type MenuProps, Space, Upload } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -46,6 +45,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
     changeClassImages,
   } = useImageStore();
 
+  const { t } = useTranslate('lab');
   const { processImage, init, startCamera, downloadImagesAsZip } = useImageModel({ classList });
   const previewRefMap = useRef<Record<string, HTMLDivElement | null>>({});
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
@@ -286,7 +286,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                   }
                 }}
               >
-                删除类别
+                {t('classifier.sample.delete_category', '删除类别')}
               </span>
             ),
             disabled: cls.id === 'class-env',
@@ -299,7 +299,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                   handleRemoveSample(cls.id);
                 }}
               >
-                删除所有样本
+                {t('classifier.sample.delete_all', '删除所有样本')}
               </span>
             ),
           },
@@ -311,7 +311,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                   handleModelUpload(cls.id);
                 }}
               >
-                下载所有样本
+                {t('classifier.sample.download', '下载所有样本')}
               </span>
             ),
           },
@@ -343,7 +343,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
             {uploadingMap[cls.id] ? (
               <div className={styles.cardArea}>
                 <div className={styles.cardArea_cont}>
-                  <p>文件</p>
+                  <p>{t('classifier.document.title', '文件')}</p>
                   <Button
                     className={styles.cardArea_close}
                     onClick={() => setUploading(cls.id, false)}
@@ -364,8 +364,14 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                         className={styles.button_upload}
                         icon={<UploadOutlined style={{ fontSize: '20px' }} />}
                       >
-                        您可以从文件中选择图片，也可以将图片拖放到此处
-                        <p style={{ margin: 0 }}>仅支持png，jpg</p>
+                        {t(
+                          'classifier.image.document.upload',
+                          '您可以从文件中选择图片，也可以将图片拖放到此处',
+                        )}
+                        <p style={{ margin: 0 }}>
+                          {' '}
+                          {t('classifier.image.document.require', '仅支持png，jpg')}
+                        </p>
                       </Button>
                     </Upload>
 
@@ -375,7 +381,10 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                   </div>
                 </div>
                 <div className={styles.cardArea_cont}>
-                  <p style={{ color: '#3C4043' }}>{cls.images.length}个图片样本</p>
+                  <p style={{ color: '#3C4043' }}>
+                    {cls.images.length}
+                    {t('classifier.image.count', '个图片样本')}
+                  </p>
                   <div className={styles.cardArea_preview}>
                     {cls.images.map((img, i) => (
                       <div
@@ -441,7 +450,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                           onTouchEnd={stopHoldCapture}
                           onTouchStart={() => startHoldCapture(cls.id)}
                         >
-                          按住即可录制
+                          <p>{t('classifier.image.record', '按住即可录制')}</p>
                         </Button>
                         {/* <Button className={styles.button_setting}><SettingOutlined style={{ color: "#3474E0", fontSize: "24px" }} /></Button> */}
                       </div>
@@ -451,18 +460,24 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                       style={{
                         width: 265,
                         height: 265,
-                        color: '#1967D2',
+                        color: '#000',
                         textAlign: 'center',
                         display: 'flex',
                         alignItems: 'center',
                       }}
                     >
-                      打开摄像头时出错。请确保您启用了相关权限，或改为上传图片。
+                      {t(
+                        'classifier.image.collect.error',
+                        '打开摄像头时出错。请确保您启用了相关权限，或改为上传图片。',
+                      )}
                     </div>
                   )}
                 </div>
                 <div className={styles.cardArea_cont}>
-                  <p style={{ color: '#3C4043' }}>{cls.images.length} 个图片样本</p>
+                  <p style={{ color: '#3C4043' }}>
+                    {cls.images.length}
+                    {t('classifier.image.count', '个图片样本')}
+                  </p>
                   <div
                     className={styles.cardArea_preview}
                     ref={(el) => void (previewRefMap.current[cls.id] = el)}
@@ -502,21 +517,23 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
               </div>
             ) : (
               <div className={styles.card_container}>
-                <p className={styles.card_label}>添加图片样本</p>
+                <p className={styles.card_label}>
+                  {t('classifier.image.collect.add', '添加图片样本')}
+                </p>
                 <Space>
                   <Button
                     className={styles.button_comn}
                     icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}
                     onClick={() => setSelect(cls.id, true)}
                   >
-                    拍照
+                    {t('classifier.image.collect.photo', '拍照')}
                   </Button>
                   <Button
                     className={styles.button_comn}
                     icon={<UploadOutlined style={{ fontSize: '20px' }} />}
                     onClick={() => setUploading(cls.id, true)}
                   >
-                    上传
+                    {t('classifier.upload', '上传')}
                   </Button>
                   {cls.images.map((img, i) => (
                     <div
@@ -559,7 +576,9 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
         icon={<PlusSquareOutlined />}
         onClick={() => handleAddClass()}
       >
-        <span style={{ lineHeight: '100px' }}>添加类别</span>
+        <span style={{ lineHeight: '100px' }}>
+          {t('classifier.sample.add_category', '添加类别')}
+        </span>
       </Button>
 
       <Modal

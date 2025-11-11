@@ -75,7 +75,7 @@ interface ClassState {
 // === 创建 vanilla store ===
 export const audioStore = createStore<ClassState>((set) => ({
   list: [
-    { id: 'class-env', name: 'Class env', audios: [], images: [] },
+    { id: 'class-env', name: 'Class background', audios: [], images: [] },
     { id: 'class-2', name: 'Class 2', audios: [], images: [] },
   ],
   temporaryAudios: {},
@@ -140,7 +140,7 @@ export const audioStore = createStore<ClassState>((set) => ({
   clearAudios: () =>
     set({
       list: [
-        { id: 'class-env', name: 'Class env', audios: [], images: [] },
+        { id: 'class-env', name: 'Class background', audios: [], images: [] },
         { id: 'class-2', name: 'Class 2', audios: [], images: [] },
       ],
     }),

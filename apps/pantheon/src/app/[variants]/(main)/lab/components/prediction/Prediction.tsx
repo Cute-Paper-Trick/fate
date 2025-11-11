@@ -46,7 +46,7 @@ const Predictions: React.FC<PredictionsProps> = ({ predictions, classList }) => 
         <div key={predIndex}>
           {Object.keys(pred.confidences).map((k) => {
             const i = parseInt(k);
-            const className = classList[i]?.name || '未定义';
+            const className = classList[i]?.name || '';
             const confidence = pred.confidences[i] || 0;
             const percentage = (confidence * 100).toFixed(1);
 

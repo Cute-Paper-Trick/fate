@@ -2,13 +2,14 @@
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as tf from '@tensorflow/tfjs';
+import { useTranslate } from '@tolgee/react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import { useEffect, useRef, useState } from 'react';
 
-import { useImageStore } from '../stores/imageSlice';
+import { message } from '@/components/AntdStaticMethods';
 
-// import { message } from 'antd'
+import { useImageStore } from '../stores/imageSlice';
 
 type ClassList = {
   classList: ClassItem[];
@@ -47,20 +48,6 @@ const softmax = (values: Float32Array) => {
   const expValues = values.map((v) => Math.exp(v));
   const sum = expValues.reduce((a, b) => a + b, 0);
   return expValues.map((v) => v / sum);
-};
-
-const startCamera = async (videoRef: React.RefObject<HTMLVideoElement | null>) => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    // setVideoReady(true);
-    if (videoRef.current) {
-      videoRef.current.srcObject = stream;
-      videoRef.current.addEventListener('loadedmetadata', () => videoRef.current?.play());
-    }
-  } catch (error) {
-    // setVideoReady(false);
-    console.error('无法访问摄像头:', error);
-  }
 };
 
 //image
@@ -104,6 +91,7 @@ const processImage = (file: File, width: number, height: number): Promise<string
 };
 
 export const useImageModel = ({ classList }: ClassList) => {
+  const { t } = useTranslate('lab');
   const [element, setElement] = useState<HTMLElement | null>(null);
   const [imagenetClasses, setImagenetClasses] = useState<string[]>([]);
   const filteredConfidences = useRef<Record<number, number>>({});
@@ -142,7 +130,7 @@ export const useImageModel = ({ classList }: ClassList) => {
 
   // 模型初始化
   const init = async () => {
-    // message.loading("加载 MobileNet 模型...");
+    message.loading(t('classifier.model.loading.loading', '加载 MobileNet 模型...'));
     if (element) {
       element.style.height = 'initial';
     }
@@ -163,10 +151,25 @@ export const useImageModel = ({ classList }: ClassList) => {
 
       await loadImageNetClasses();
       setLoading(true);
-      // message.success("MobileNet 模型加载完成！");
+      message.success(t('classifier.model.success.loaded', '模型加载完成！'));
     } catch (error) {
-      // message.error("模型加载失败");
+      message.error(t('classifier.model.error.unloaded', '模型加载失败'));
       console.error(error);
+    }
+  };
+
+  const startCamera = async (videoRef: React.RefObject<HTMLVideoElement | null>) => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      // setVideoReady(true);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.addEventListener('loadedmetadata', () => videoRef.current?.play());
+      }
+    } catch (error) {
+      // setVideoReady(false);
+      console.error('无法访问摄像头' + error);
+      message.error(t('classifier.model.error.denied', '无法访问摄像头:'));
     }
   };
 
@@ -375,7 +378,7 @@ export const useImageModel = ({ classList }: ClassList) => {
   // 导出训练好的 KNN 模型;
   const exportKNNModelWithBin = async () => {
     if (!knnClassifierInstance || knnClassifierInstance.getNumClasses() === 0) {
-      // message.error("没有可保存的模型");
+      message.error(t('classifier.model.error.no_save', '没有可保存的模型:'));
       return;
     }
 
@@ -432,7 +435,7 @@ export const useImageModel = ({ classList }: ClassList) => {
       aZip.click();
       URL.revokeObjectURL(zipUrl);
 
-      // message.success("模型已保存为压缩文件（JSON + BIN）");
+      message.success(t('classifier.model.success.save', '模型已保存为压缩文件（JSON + BIN）'));
     } catch (error: unknown) {
       console.error('导出模型失败:', error);
     }
