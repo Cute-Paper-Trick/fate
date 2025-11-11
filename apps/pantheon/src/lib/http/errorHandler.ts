@@ -3,13 +3,15 @@ import { AxiosError } from "axios";
 import { ApiError } from "./error";
 
 function onUnauthorized(error: Error) {
-  // eslint-disable-next-line unicorn/prefer-global-this
-  window.$message?.error("登录状态已过期，请重新登录");
   console.error("登录状态已过期，请重新登录", error);
+  // eslint-disable-next-line unicorn/prefer-global-this
+  if (typeof window !== 'undefined') {
+    globalThis.$message?.error("登录状态已过期，请重新登录");
+  }
   // localStg.remove("token");
   // window.$navigate({ to: "/login" });
   // setTimeout(() => window.location.reload(), 100);
-    
+
 }
 
 const lastErrorTimeMap = new Map<string, number>();
@@ -43,9 +45,11 @@ if (error instanceof ApiError) {
       return;
     }
 
-    // eslint-disable-next-line unicorn/prefer-global-this
-    window.$message?.error(error.message || "请求出错");
     console.error(error.message || "请求出错");
+    // eslint-disable-next-line unicorn/prefer-global-this
+    if (typeof window !== 'undefined') {
+      globalThis.$message?.error(error.message || "请求出错");
+    }
   }
   }
 }
