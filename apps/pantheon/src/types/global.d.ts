@@ -1,11 +1,12 @@
 import type { LobeCustomStylish, LobeCustomToken } from '@lobehub/ui';
+
 import 'antd-style';
 import { AntdToken } from 'antd-style/lib/types/theme';
 
 declare module 'antd-style' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-empty-object-type
   export interface CustomToken extends LobeCustomToken {}
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-empty-object-type
   export interface CustomStylish extends LobeCustomStylish {}
 }
 

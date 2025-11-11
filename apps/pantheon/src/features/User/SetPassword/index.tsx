@@ -7,6 +7,7 @@ import { useTranslate } from '@tolgee/react';
 import { Form, Input } from 'antd';
 import { Flexbox } from 'react-layout-kit';
 
+import { message } from '@/components/AntdStaticMethods';
 import { authClient } from '@/features/cerberus/client';
 import { accountChangePasswordFinish, useAccountNeedChangePassword } from '@/lib/http';
 import { useUserStore } from '@/store/user';
@@ -44,12 +45,10 @@ const SetPassword = () => {
       await accountChangePasswordFinish({ data: { userId: userId! } });
     },
     onError: (error) => {
-      globalThis.window.$message?.error(
-        error.message || t('changePassword.changeFailed', '修改密码失败，请重试'),
-      );
+      message?.error(error.message || t('changePassword.changeFailed', '修改密码失败，请重试'));
     },
     onSuccess: () => {
-      globalThis.window.$message?.success(t('changePassword.changeSuccess', '密码修改成功'));
+      message?.success(t('changePassword.changeSuccess', '密码修改成功'));
       refetch();
     },
   });

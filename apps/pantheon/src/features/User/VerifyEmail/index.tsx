@@ -7,6 +7,7 @@ import { Steps } from 'antd';
 import { useEffect, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import { message } from '@/components/AntdStaticMethods';
 import { authClient, useSession } from '@/features/cerberus/client';
 import { useUserStore } from '@/store/user/store';
 
@@ -44,7 +45,7 @@ const VerifyEmail = () => {
       await authClient.changeEmail({ newEmail });
     },
     onError: (error) => {
-      globalThis.window.$message?.error(error.message || '操作失败，请稍后重试');
+      message?.error(error.message || '操作失败，请稍后重试');
     },
     onSuccess: () => {
       setStep((step) => step + 1);
@@ -61,7 +62,7 @@ const VerifyEmail = () => {
     },
     onSuccess: () => setStep((step) => step + 1),
     onError: (error) => {
-      globalThis.window.$message?.error(error.message || '操作失败，请稍后重试');
+      message?.error(error.message || '操作失败，请稍后重试');
     },
   });
 

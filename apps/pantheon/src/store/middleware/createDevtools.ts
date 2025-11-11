@@ -9,8 +9,8 @@ export const createDevtools =
     let showDevtools = false;
 
     // check url to show devtools
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
+    if (globalThis.window !== undefined) {
+      const url = new URL(globalThis.window.location.href);
       const debug = url.searchParams.get('debug');
       if (debug?.includes(name)) {
         showDevtools = true;

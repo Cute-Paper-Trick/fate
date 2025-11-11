@@ -53,15 +53,11 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
         queryClient.invalidateQueries({ queryKey: ['topic', 'list'] });
       },
       onSuccess: () => {
-        // window.$message.success("创建成功");
         setContent('');
         setTitle('');
         setFileList([]);
         onChange?.('');
         setResetKey((prev) => prev + 1);
-      },
-      onError: () => {
-        // window.$message.error("创建失败");
       },
     },
   });

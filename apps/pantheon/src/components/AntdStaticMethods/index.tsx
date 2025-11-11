@@ -20,12 +20,6 @@ const AntdStaticMethods = memo(() => {
   if (globalThis.window === undefined) {
     return;
   }
-  // eslint-disable-next-line react-hooks/immutability
-  globalThis.window.$message = message;
-  // eslint-disable-next-line react-hooks/immutability
-  globalThis.window.$modal = modal;
-  // eslint-disable-next-line react-hooks/immutability
-  globalThis.window.$notification = notification;
   return null;
 });
 
