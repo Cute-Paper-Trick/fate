@@ -4,12 +4,9 @@ import { Button } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+import { V1TaskUserInfo } from '@/lib/http';
 import { useTaskButtons } from '@/store/learning/helpers';
-import {
-  TaskButtonConfig,
-  TaskButtonGroupProps,
-  V1TaskUserInfo,
-} from '@/store/learning/initialState';
+import { TaskButtonConfig, TaskButtonGroupProps } from '@/store/learning/initialState';
 import { useLearningStore } from '@/store/learning/store';
 
 import styles from './index.module.css';

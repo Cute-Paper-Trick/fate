@@ -1,6 +1,8 @@
 import { useTranslate } from '@tolgee/react';
 
-import { TaskButtonConfig, V1TaskUserInfo } from './initialState';
+import { V1TaskUserInfo } from '@/lib/http';
+
+import { TaskButtonConfig } from './initialState';
 
 /**
  * @title 判断任务是否为核心任务（前置任务已完成）

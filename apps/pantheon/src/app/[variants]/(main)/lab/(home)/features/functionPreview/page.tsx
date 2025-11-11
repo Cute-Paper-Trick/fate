@@ -13,7 +13,7 @@ import POSTTURE_FUNCTION from '@/app/assets/images/brief-introduct-img/posture-f
 import styles from './page.module.css';
 
 const FunctionPreview: FC = () => {
-  const { t } = useTranslate('lab_function_preview');
+  const { t } = useTranslate('lab_tour');
   const data = useMemo(
     () => [
       {

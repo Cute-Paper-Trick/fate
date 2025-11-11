@@ -8,7 +8,7 @@ import BriefUseBtn from './features/brief-use-btn/page';
 import styles from './page.module.css';
 
 const BriefUse: FC = () => {
-  const { t } = useTranslate('lab_brief_use');
+  const { t } = useTranslate('lab_tour');
   return (
     <div className={styles.briefUseBtn}>
       <div className={styles.top}>

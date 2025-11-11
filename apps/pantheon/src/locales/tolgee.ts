@@ -21,10 +21,7 @@ export const createTolgee = (lang?: string) => {
       staticData: {
         'en:betterAuth': () => import('@/localization/betterAuth/en.json'),
         'zh:betterAuth': () => import('@/localization/betterAuth/zh-CN.json'),
-        'zh:lab_tour': () => import('@/localization/lab/example/zh-CN.json'),
-        'zh:lab_function_preview': () => import('@/localization/lab/functionPreview/zh-CN.json'),
-        'zh:lab_help': () => import('@/localization/lab/help/zh-CN.json'),
-        'zh:lab_brief_use': () => import('@/localization/lab/brief-use/zh-CN.json'),
+        'zh:lab_tour': () => import('@/localization/lab/zh-CN.json'),
       },
       language: lang || DEFAULT_LANG,
       apiKey,

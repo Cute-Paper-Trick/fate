@@ -1,23 +1,12 @@
 import { UseQueryResult } from '@tanstack/react-query';
 
-import { V1TaskListReq, V1TaskListRes } from '@/lib/http';
+import { V1TaskUserInfo, V1TaskUserListReq, V1TaskUserListRes } from '@/lib/http';
 
 /**
  * @title slices切片的类型定义
  * @description 下面俩个为slices切片的类型定义
  */
 
-export interface V1TaskUserInfo {
-  id: number;
-  index: number;
-  parent_index: string;
-  title: string;
-  jump: string;
-  category: string;
-  description: string;
-  material: string;
-  status: string;
-}
 export interface TaskListState {
   taskList: V1TaskUserInfo[] | null;
   listDict: Record<number, V1TaskUserInfo>;
@@ -27,7 +16,7 @@ export interface TaskButtonGroupProps {
 }
 
 export interface TaskListActions {
-  useFetchTaskList: (params: V1TaskListReq) => UseQueryResult<V1TaskListRes>;
+  useFetchTaskList: (params: V1TaskUserListReq) => UseQueryResult<V1TaskUserListRes>;
   completeTask: (taskIndex: V1TaskUserDoneReq) => Promise<void>;
 }
 

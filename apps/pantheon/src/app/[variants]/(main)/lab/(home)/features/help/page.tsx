@@ -7,7 +7,7 @@ import { FC, useMemo } from 'react';
 import styles from './page.module.css';
 
 const Example: FC = () => {
-  const { t } = useTranslate('lab_help');
+  const { t } = useTranslate('lab_tour');
   const data = useMemo(
     () => [
       {

@@ -11,7 +11,7 @@ import styles from './page.module.css';
 const BriefUseModal: FC = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useTranslate('lab_brief_use');
+  const { t } = useTranslate('lab_tour');
   const showModal = () => {
     setIsModalOpen(true);
   };
