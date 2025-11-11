@@ -1,29 +1,48 @@
 import { Resend } from 'resend';
 
+import { appEnv } from '@/envs/app';
 import { mailEnv } from '@/envs/mail';
 
-import ResetPassword from './templates/ResetPassword';
+export const resend = new Resend(mailEnv.RESEND_API_KEY);
 
-const resend = new Resend(mailEnv.RESEND_API_KEY);
-
-export const sendResetPasswordEmail = async (to: string, url: string) => {
+export const sendResetPasswordEmail = async ({
+  resetPasswordLink,
+  email,
+}: {
+  resetPasswordLink: string;
+  email: string;
+}) => {
   const res = await resend.emails.send({
-    // from: 'Pantheon<noreply@notify.goood.space>',
-    from: 'GooodSpace <noreply@goood.space>',
-    to,
-    subject: '[Pantheon]：更改 Pantheon 密码的说明',
-    react: ResetPassword({ url, to }),
+    template: {
+      id: '7cb68618-cd30-44aa-8ca9-08ee7d68b296',
+      variables: {
+        email,
+        reset_password_link: resetPasswordLink,
+        app_url: appEnv.APP_URL,
+      },
+    },
+    to: email,
   });
   console.log(res);
 };
 
-export const sendVerificationEmail = async (to: string, url: string) => {
+export const sendVerificationEmail = async ({
+  email,
+  verificationLink,
+}: {
+  email: string;
+  verificationLink: string;
+}) => {
   const res = await resend.emails.send({
-    // from: 'Pantheon<noreply@notify.goood.space>',
-    from: 'GooodSpace <noreply@goood.space>',
-    to,
-    subject: '[Pantheon]：验证您的 GooodSpace 账户',
-    react: ResetPassword({ url, to }),
+    template: {
+      id: 'f1513ab4-60ff-41ee-bfd6-c1c92e7fc853',
+      variables: {
+        email,
+        verify_email_link: verificationLink,
+        app_url: appEnv.APP_URL,
+      },
+    },
+    to: email,
   });
   console.log(res);
 };

@@ -10,4 +10,8 @@ export type V1AccountChangeNicknameRes = {
      * @type string, string
     */
     nickname: string;
+    /**
+     * @type string, string
+    */
+    accountKey: string;
 };

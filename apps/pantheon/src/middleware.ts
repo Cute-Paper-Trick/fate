@@ -15,7 +15,16 @@ import { RouteVariants } from '@/utils/server/routeVariants';
 
 const logDefault = debug('middleware:default');
 
-const isProtectedRoute = createRouteMatcher(['/', '/dashboard(.*)']);
+const isProtectedRoute = createRouteMatcher([
+  '/',
+  '/admin(.*)',
+  '/lab(.*)',
+  '/talk(.*)',
+  '/task(.*)',
+  '/learning(.*)',
+  '/profile(.*)',
+  '/discover(.*)',
+]);
 
 const isAuthRoute = createRouteMatcher(['/auth(.*)']);
 

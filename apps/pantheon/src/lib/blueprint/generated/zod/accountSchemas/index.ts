@@ -1,10 +1,12 @@
 export { accountAvatar200Schema, accountAvatarMutationRequestSchema, accountAvatarMutationResponseSchema } from "./accountAvatarSchema";
 export { accountChangeNickname200Schema, accountChangeNicknameMutationRequestSchema, accountChangeNicknameMutationResponseSchema } from "./accountChangeNicknameSchema";
+export { accountChangePasswordFinish200Schema, accountChangePasswordFinishMutationRequestSchema, accountChangePasswordFinishMutationResponseSchema } from "./accountChangePasswordFinishSchema";
 export { accountChangePassword200Schema, accountChangePasswordMutationRequestSchema, accountChangePasswordMutationResponseSchema } from "./accountChangePasswordSchema";
 export { accountDeviceList200Schema, accountDeviceListQueryResponseSchema } from "./accountDeviceListSchema";
 export { accountGetPermissions200Schema, accountGetPermissionsQueryResponseSchema } from "./accountGetPermissionsSchema";
 export { accountInfo200Schema, accountInfoQueryResponseSchema } from "./accountInfoSchema";
 export { accountLogin200Schema, accountLoginMutationRequestSchema, accountLoginMutationResponseSchema } from "./accountLoginSchema";
 export { accountLogout200Schema, accountLogoutMutationRequestSchema, accountLogoutMutationResponseSchema } from "./accountLogoutSchema";
+export { accountNeedChangePassword200Schema, accountNeedChangePasswordQueryResponseSchema } from "./accountNeedChangePasswordSchema";
 export { accountProfile200Schema, accountProfileQueryResponseSchema } from "./accountProfileSchema";
 export { accountTopicListQueryParamsSchema, accountTopicList200Schema, accountTopicListQueryResponseSchema } from "./accountTopicListSchema";

@@ -15,6 +15,12 @@ export default memo(() => {
   message = staticFunction.message;
   modal = staticFunction.modal;
   notification = staticFunction.notification;
+  // eslint-disable-next-line react-hooks/immutability, unicorn/prefer-global-this
+  window.$message = message;
+  // eslint-disable-next-line react-hooks/immutability, unicorn/prefer-global-this
+  window.$modal = modal;
+  // eslint-disable-next-line react-hooks/immutability, unicorn/prefer-global-this
+  window.$notification = notification;
   return null;
 });
 

@@ -11,6 +11,7 @@ import {
   username,
 } from 'better-auth/plugins';
 
+import { appEnv } from '@/envs/app';
 import { authEnv } from '@/envs/cerberus';
 import { sendResetPasswordEmail, sendVerificationEmail } from '@/lib/email';
 
@@ -22,12 +23,28 @@ export const auth = betterAuth({
     provider: 'pg',
     usePlural: true,
   }),
+  databaseHooks: {
+    user: {
+      update: {
+        after: async (user) => {
+          fetch(`${appEnv.NEXT_PUBLIC_BACKEND_URL}/api/account/change_nickname`, {
+            method: 'POST',
+            body: JSON.stringify({
+              accountKey: user.id,
+              nickname: user.name || user.displayName,
+              code: appEnv.BACKEND_SECRET_CODE,
+            }),
+          });
+        },
+      },
+    },
+  },
   user: {
     changeEmail: {
       enabled: true,
-      // sendChangeEmailVerification: async ({ user, newEmail, url }) => {
-      //   await sendVerificationEmail(newEmail, url);
-      // },
+      sendChangeEmailVerification: async ({ newEmail, url }) => {
+        await sendVerificationEmail({ email: newEmail, verificationLink: url });
+      },
       sendOnSignIn: true,
     },
   },
@@ -47,7 +64,10 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       console.log('Sending verification email to:', user.email, 'with url:', url);
-      await sendVerificationEmail(user.email, url);
+      await sendVerificationEmail({
+        email: user.email,
+        verificationLink: url,
+      });
     },
     sendOnSignIn: true,
   },
@@ -56,7 +76,7 @@ export const auth = betterAuth({
     // requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       console.log('Sending reset password email to:', user.email, 'with url:', url);
-      await sendResetPasswordEmail(user.email, url);
+      await sendResetPasswordEmail({ email: user.email, resetPasswordLink: url });
     },
   },
   session: {

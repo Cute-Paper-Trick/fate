@@ -6,6 +6,7 @@ export const appEnv = createEnv({
     APP_URL: z.url(),
     MIDDLEWARE_REWRITE_THROUGH_LOCAL: z.boolean().default(true),
     CERBERUS_URL: z.url().optional(),
+    BACKEND_SECRET_CODE: z.string(),
   },
   client: {
     NEXT_PUBLIC_CERBERUS_URL: z.url().optional(),
@@ -13,6 +14,7 @@ export const appEnv = createEnv({
     NEXT_PUBLIC_ENABLE_TRANS_TOOLS: z.boolean().optional(),
   },
   runtimeEnv: {
+    BACKEND_SECRET_CODE: process.env.BACKEND_SECRET_CODE,
     APP_URL: process.env.APP_URL || 'http://localhost:5090',
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
     MIDDLEWARE_REWRITE_THROUGH_LOCAL: process.env.MIDDLEWARE_REWRITE_THROUGH_LOCAL === '1',

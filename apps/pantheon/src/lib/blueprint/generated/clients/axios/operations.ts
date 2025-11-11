@@ -18,6 +18,10 @@ export const operations = {
     "path": "/api/account/change_password",
     "method": "post"
   },
+  "account_change_password_finish": {
+    "path": "/api/account/change_password_finish",
+    "method": "post"
+  },
   "account_device_list": {
     "path": "/api/account/device_list",
     "method": "get"
@@ -37,6 +41,10 @@ export const operations = {
   "account_logout": {
     "path": "/api/account/logout",
     "method": "post"
+  },
+  "account_need_change_password": {
+    "path": "/api/account/need_change_password",
+    "method": "get"
   },
   "account_profile": {
     "path": "/api/account/profile",

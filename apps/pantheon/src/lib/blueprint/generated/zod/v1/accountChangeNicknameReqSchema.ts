@@ -8,5 +8,7 @@ import type { V1AccountChangeNicknameReq } from "../../types/v1/AccountChangeNic
 import { z } from "zod/v4";
 
 export const v1AccountChangeNicknameReqSchema = z.object({
-    "nickname": z.string()
+    "nickname": z.string(),
+"code": z.string(),
+"accountKey": z.string()
     }) as unknown as z.ZodType<V1AccountChangeNicknameReq>

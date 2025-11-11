@@ -124,7 +124,7 @@
   "INVALID_NAME_LENGTH": "名称长度过大或过小。",
   "INVALID_OAUTH_CONFIGURATION": "OAuth 配置无效",
   "INVALID_OTP": "验证码无效",
-  "INVALID_PASSWORD": "密码无效",
+  "INVALID_PASSWORD": "旧密码错误",
   "INVALID_PHONE_NUMBER": "手机号无效",
   "INVALID_PHONE_NUMBER_OR_PASSWORD": "手机号或密码无效",
   "INVALID_PREFIX_LENGTH": "前缀长度过大或过小。",

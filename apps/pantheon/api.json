@@ -26,9 +26,17 @@
           "nickname": {
             "format": "string",
             "type": "string"
+          },
+          "code": {
+            "format": "string",
+            "type": "string"
+          },
+          "accountKey": {
+            "format": "string",
+            "type": "string"
           }
         },
-        "required": ["nickname"],
+        "required": ["nickname", "code", "accountKey"],
         "type": "object"
       },
       "v1.AccountChangeNicknameRes": {
@@ -36,9 +44,13 @@
           "nickname": {
             "format": "string",
             "type": "string"
+          },
+          "accountKey": {
+            "format": "string",
+            "type": "string"
           }
         },
-        "required": ["nickname"],
+        "required": ["nickname", "accountKey"],
         "type": "object"
       },
       "v1.AccountChangePasswordReq": {
@@ -56,6 +68,14 @@
         "type": "object"
       },
       "v1.AccountChangePasswordRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountChangePasswordFinishReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountChangePasswordFinishRes": {
         "properties": {},
         "type": "object"
       },
@@ -251,6 +271,20 @@
       },
       "v1.AccountLogoutRes": {
         "properties": {},
+        "type": "object"
+      },
+      "v1.AccountNeedChangePasswordReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AccountNeedChangePasswordRes": {
+        "properties": {
+          "need_change": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["need_change"],
         "type": "object"
       },
       "v1.AccountProfileReq": {
@@ -2862,6 +2896,36 @@
         "tags": ["account"]
       }
     },
+    "/api/account/change_password_finish": {
+      "post": {
+        "operationId": "account_change_password_finish",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountChangePasswordFinishReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountChangePasswordFinishRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "完成修改密码",
+        "tags": ["account"]
+      }
+    },
     "/api/account/device_list": {
       "get": {
         "operationId": "account_device_list",
@@ -2980,6 +3044,26 @@
           }
         },
         "summary": "登出",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/need_change_password": {
+      "get": {
+        "operationId": "account_need_change_password",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountNeedChangePasswordRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "是否需要修改密码",
         "tags": ["account"]
       }
     },

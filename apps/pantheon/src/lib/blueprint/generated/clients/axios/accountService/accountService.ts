@@ -7,14 +7,16 @@
 import { accountAvatar } from "./accountAvatar";
 import { accountChangeNickname } from "./accountChangeNickname";
 import { accountChangePassword } from "./accountChangePassword";
+import { accountChangePasswordFinish } from "./accountChangePasswordFinish";
 import { accountDeviceList } from "./accountDeviceList";
 import { accountGetPermissions } from "./accountGetPermissions";
 import { accountInfo } from "./accountInfo";
 import { accountLogin } from "./accountLogin";
 import { accountLogout } from "./accountLogout";
+import { accountNeedChangePassword } from "./accountNeedChangePassword";
 import { accountProfile } from "./accountProfile";
 import { accountTopicList } from "./accountTopicList";
 
 export function accountService() {
-  return { accountAvatar, accountChangeNickname, accountChangePassword, accountDeviceList, accountGetPermissions, accountInfo, accountLogin, accountLogout, accountProfile, accountTopicList }
+  return { accountAvatar, accountChangeNickname, accountChangePassword, accountChangePasswordFinish, accountDeviceList, accountGetPermissions, accountInfo, accountLogin, accountLogout, accountNeedChangePassword, accountProfile, accountTopicList }
 }

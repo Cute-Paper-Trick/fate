@@ -10,4 +10,12 @@ export type V1AccountChangeNicknameReq = {
      * @type string, string
     */
     nickname: string;
+    /**
+     * @type string, string
+    */
+    code: string;
+    /**
+     * @type string, string
+    */
+    accountKey: string;
 };

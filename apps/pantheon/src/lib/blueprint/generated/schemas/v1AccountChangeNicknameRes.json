@@ -1,1 +1,1 @@
-{"properties":{"nickname":{"format":"string","type":"string"}},"required":["nickname"],"type":"object","x-readme-ref-name":"v1.AccountChangeNicknameRes"}
+{"properties":{"nickname":{"format":"string","type":"string"},"accountKey":{"format":"string","type":"string"}},"required":["nickname","accountKey"],"type":"object","x-readme-ref-name":"v1.AccountChangeNicknameRes"}

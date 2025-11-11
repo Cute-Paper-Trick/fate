@@ -9,10 +9,6 @@ export type V1TaskInfo = {
     /**
      * @type integer, int
     */
-    id: number;
-    /**
-     * @type integer, int
-    */
     index: number;
     /**
      * @type string, string
@@ -38,8 +34,4 @@ export type V1TaskInfo = {
      * @type string, string
     */
     material: string;
-    /**
-     * @type string, string
-    */
-    status: string;
 };

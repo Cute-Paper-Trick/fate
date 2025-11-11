@@ -1,11 +1,13 @@
 export { accountAvatar } from "./accountService/accountAvatar";
 export { accountChangeNickname } from "./accountService/accountChangeNickname";
 export { accountChangePassword } from "./accountService/accountChangePassword";
+export { accountChangePasswordFinish } from "./accountService/accountChangePasswordFinish";
 export { accountDeviceList } from "./accountService/accountDeviceList";
 export { accountGetPermissions } from "./accountService/accountGetPermissions";
 export { accountInfo } from "./accountService/accountInfo";
 export { accountLogin } from "./accountService/accountLogin";
 export { accountLogout } from "./accountService/accountLogout";
+export { accountNeedChangePassword } from "./accountService/accountNeedChangePassword";
 export { accountProfile } from "./accountService/accountProfile";
 export { accountService } from "./accountService/accountService";
 export { accountTopicList } from "./accountService/accountTopicList";

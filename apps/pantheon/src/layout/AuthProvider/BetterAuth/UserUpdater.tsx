@@ -7,7 +7,7 @@ import { useSession } from '@/features/cerberus/client';
 import { useUserStore } from '@/store/user';
 
 const UserUpdater = () => {
-  const { data: session, isPending: isLoading } = useSession();
+  const { data: session } = useSession();
 
   const isSignedIn = (!!session && !!session.user) || false;
 
