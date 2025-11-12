@@ -28,7 +28,7 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
           <AppNavigationDrawer />
           <Flexbox
             direction="vertical"
-            height={'100%'}
+            height={'100vh'}
             id="desktop-main-container"
             style={{ position: 'relative', overflowY: 'auto' }}
             width="100%"

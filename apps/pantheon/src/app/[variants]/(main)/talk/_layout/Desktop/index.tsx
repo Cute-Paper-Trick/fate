@@ -11,7 +11,12 @@ const TalkLayout = memo<PropsWithChildren>(({ children }) => {
       style={{ height: '100vh', position: 'relative', borderTop: undefined }}
       width={'100%'}
     >
-      <Flexbox direction="vertical" height={'100%'} style={{ position: 'relative' }} width="100%">
+      <Flexbox
+        direction="vertical"
+        height={'100%'}
+        style={{ alignItems: 'center', position: 'relative' }}
+        width="100%"
+      >
         {children}
       </Flexbox>
     </Flexbox>

@@ -4,12 +4,13 @@ import { Editor, useEditor } from '@lobehub/editor/react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslate } from '@tolgee/react';
 import OSS from 'ali-oss';
-import { Button, GetProp, Image, Space, Upload, type UploadFile, UploadProps, message } from 'antd';
+import { Button, GetProp, Image, Space, Upload, type UploadFile, UploadProps } from 'antd';
 import { Plus } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { v4 as uuid } from 'uuid';
 
+import { message } from '@/components/AntdStaticMethods';
 import { commonService, useTaskTopicAdd } from '@/lib/http';
 import { queryClient } from '@/lib/query';
 
@@ -49,15 +50,13 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
 
   const createTopicMutation = useTaskTopicAdd({
     mutation: {
-      onMutate: () => {
-        queryClient.invalidateQueries({ queryKey: ['topic', 'list'] });
-      },
       onSuccess: () => {
         setContent('');
         setTitle('');
         setFileList([]);
         onChange?.('');
         setResetKey((prev) => prev + 1);
+        queryClient.invalidateQueries({ queryKey: ['topic', 'list'] });
       },
     },
   });
@@ -137,7 +136,7 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
         const res = await ossStsQuery.refetch();
         _sts = res.data;
         if (!_sts) {
-          message.error('获取OSS STS失败，请稍后再试');
+          message.error(t('talk.create.error.catch_fail', '获取OSS STS失败，请稍后再试'));
           return;
         }
       }
@@ -269,7 +268,7 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
             onClick={onPost}
             type="primary"
           >
-            发布
+            {t('talk.create.publish', '发布')}
           </Button>
         </Space>
       </div>

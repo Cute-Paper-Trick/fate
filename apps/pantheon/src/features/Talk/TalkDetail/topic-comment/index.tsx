@@ -1,6 +1,7 @@
 'use client';
 import { Icon } from '@lobehub/ui';
 import { InfiniteData, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { useTranslate } from '@tolgee/react';
 import { Avatar, Button, Form, Input } from 'antd';
 import clsx from 'clsx';
 import { Heart } from 'lucide-react';
@@ -61,6 +62,7 @@ const useRefreshTopic = (topicId: number) => {
 function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
   // const parentId = comment.comment_id;
   // const parent = commentDict[parentId];
+  const { t } = useTranslate('talk');
   const rootId = comment.root_comment_id || comment.comment_id || comment.id;
 
   const [likeCount, setLikeCount] = useState(comment.extra?.like_count || 0);
@@ -170,7 +172,7 @@ function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
             onClick={() => setShowComment((show) => !show)}
           >
             {/* <Icon icon={MessageSquare} /> */}
-            回复
+            {t('comment.reply.title', '回复')}
           </a>
           {/* {" · "} */}
           {/* <a className={styles.comment_action}>举报</a> */}
@@ -188,13 +190,13 @@ function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
                     <Input.TextArea
                       autoSize={{ minRows: 1, maxRows: 8 }}
                       className={styles.talk_input}
-                      placeholder="有什么想说的..."
+                      placeholder={t('comment.reply.description', '有什么想说的...')}
                     />
                   </Form.Item>
                 </Form>
               </div>
               <Button className={styles.comment_send} onClick={sendComment}>
-                回复
+                {t('comment.reply.title', '回复')}
               </Button>
             </div>
           </div>
@@ -220,7 +222,7 @@ export function TopicComments({
   commentCount: number;
 }) {
   // const user = useStore(appStore, (state) => state.user);
-
+  const { t } = useTranslate('talk');
   const profileQuery = useQuery({
     queryKey: ['/api/account/proifle'],
     queryFn: async () => await accountService().accountProfile(),
@@ -291,19 +293,21 @@ export function TopicComments({
                   <Input.TextArea
                     autoSize={{ minRows: 1, maxRows: 8 }}
                     className={styles.talk_input}
-                    placeholder="有什么想说的..."
+                    placeholder={t('comment.reply.description', '有什么想说的...')}
                   />
                 </Form.Item>
               </Form>
             </div>
             <Button className={styles.comment_send} onClick={sendComment}>
-              发送
+              {t('comment.reply.send', '发送')}
             </Button>
           </div>
         </div>
 
         <p className={styles.comment_tabs}>
-          <span>共 {commentCount} 条评论</span>
+          <span>
+            {t('comment.reply.all', '共')} {commentCount} {t('comment.reply.unit', '条评论')}
+          </span>
           <span />
         </p>
       </div>
@@ -321,7 +325,9 @@ export function TopicComments({
           style={{ color: commentQuery.hasNextPage ? 'orange' : 'grey' }}
           type="link"
         >
-          {commentQuery.hasNextPage ? '点击加载更多' : '没有更多了'}
+          {commentQuery.hasNextPage
+            ? t('comment.loading.more', '点击加载更多')
+            : t('comment.loading.end', '没有更多了')}
         </Button>
       </div>
     </>

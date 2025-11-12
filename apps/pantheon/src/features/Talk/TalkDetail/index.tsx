@@ -1,6 +1,7 @@
 'use client';
-import { Grid, Icon } from '@lobehub/ui';
+import { Grid } from '@lobehub/ui';
 import { InfiniteData, useMutation, useQuery } from '@tanstack/react-query';
+import { useTranslate } from '@tolgee/react';
 import { Button, Card, Typography } from 'antd';
 import clsx from 'clsx';
 import { Heart, MessageSquare } from 'lucide-react';
@@ -27,7 +28,7 @@ type ListData = InfiniteData<V1TaskTopicListRes, unknown>;
 export function TopicDetail({ id, topic }: TopicDetailProps) {
   const [showComments, setShowComments] = useState(false);
   const { signature } = useOSS();
-
+  const { t } = useTranslate('talk');
   const topicLike = useMutation({
     mutationFn: () => topicLikeService().topicLikeLike({ topic_id: topic.id }),
     onSuccess: (data) => {
@@ -134,7 +135,7 @@ export function TopicDetail({ id, topic }: TopicDetailProps) {
         <span
           className={styles.height_text}
           key={`topic-${index}`}
-          title={`点击查看话题: ${match[1]}`}
+          title={`${t('talk.info.check', '点击查看话题')}: ${match[1]}`}
           // onClick={() => router.push(`/topic/${part.slice(1, -1)}`)}
         >
           {fullMatch}
@@ -180,7 +181,7 @@ export function TopicDetail({ id, topic }: TopicDetailProps) {
               className={clsx(styles.comment_btn, {
                 [styles.commented as string]: showComments,
               })}
-              icon={<Icon className={styles.action_icon} icon={MessageSquare} size="middle" />}
+              icon={<MessageSquare className={styles.action_icon} size="16" strokeWidth={1} />}
               onClick={() => setShowComments((show) => !show)}
               type="text"
             >
@@ -191,7 +192,7 @@ export function TopicDetail({ id, topic }: TopicDetailProps) {
               className={clsx(styles.like_btn, {
                 [styles.liked as string]: topic.extra_account?.like_status,
               })}
-              icon={<Icon className={styles.action_icon} icon={Heart} size="middle" />}
+              icon={<Heart className={styles.action_icon} size="16" strokeWidth={1} />}
               onClick={handleLike}
               type="text"
             >

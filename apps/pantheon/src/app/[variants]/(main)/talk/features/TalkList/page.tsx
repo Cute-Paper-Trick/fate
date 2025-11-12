@@ -1,10 +1,11 @@
 'use client';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useTranslate } from '@tolgee/react';
 import { Divider, List, Skeleton, Tabs, type TabsProps } from 'antd';
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import AppNavigationDrawer from '@/app/[variants]/(main)/talk/features/TopicSideMenu';
+// import AppNavigationDrawer from '@/app/[variants]/(main)/talk/features/TopicSideMenu';
 // import { talkSelectors } from '@/store/talk/selectors';
 // import { useTalkStore } from '@/store/talk/store';
 import { TopicCreateInner } from '@/features/Talk/TalkCreate/topic-create-inner';
@@ -89,6 +90,7 @@ export default function TopicList() {
   //   },
   // });
   // const { data: topicListNew } = usetopicList({ page: 1, size: 20 });
+  const { t } = useTranslate('talk');
 
   const useProfile = useQuery({
     queryKey: ['profile'],
@@ -129,7 +131,7 @@ export default function TopicList() {
   const items: TabsProps['items'] = [
     {
       key: '1',
-      label: '畅聊',
+      label: t('talk.list.chat.title', '畅聊'),
       children: (
         <>
           <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
@@ -137,7 +139,7 @@ export default function TopicList() {
           <section className={styles.content_wrapper}>
             <InfiniteScroll
               dataLength={topicList.length}
-              endMessage={<Divider plain>没有更多了</Divider>}
+              endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
               hasMore={hasMore}
               loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
               next={handleNextFetch}
@@ -160,7 +162,7 @@ export default function TopicList() {
     },
     {
       key: '2',
-      label: '文本任务',
+      label: t('talk.list.chat.text_mission', '文本任务'),
       children: (
         <>
           <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
@@ -168,7 +170,7 @@ export default function TopicList() {
           <section className={styles.content_wrapper}>
             <InfiniteScroll
               dataLength={topicList.length}
-              endMessage={<Divider plain>没有更多了</Divider>}
+              endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
               hasMore={hasMore}
               loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
               next={handleNextFetch}
@@ -191,7 +193,7 @@ export default function TopicList() {
     },
     {
       key: '3',
-      label: '音频任务',
+      label: t('talk.list.chat.vocal_mission', '音频任务'),
       children: (
         <>
           <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
@@ -199,7 +201,7 @@ export default function TopicList() {
           <section className={styles.content_wrapper}>
             <InfiniteScroll
               dataLength={topicList.length}
-              endMessage={<Divider plain>没有更多了</Divider>}
+              endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
               hasMore={hasMore}
               loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
               next={handleNextFetch}
@@ -222,7 +224,7 @@ export default function TopicList() {
     },
     {
       key: '4',
-      label: '视频任务',
+      label: t('talk.list.chat.video_mission', '视频任务'),
       children: (
         <>
           <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
@@ -230,7 +232,46 @@ export default function TopicList() {
           <section className={styles.content_wrapper}>
             <InfiniteScroll
               dataLength={topicList.length}
-              endMessage={<Divider plain>没有更多了</Divider>}
+              endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
+              hasMore={hasMore}
+              loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
+              next={handleNextFetch}
+              scrollableTarget="scrollableDiv"
+              // scrollThreshold="90%"
+            >
+              <List
+                className={styles.topic_list}
+                dataSource={topicList}
+                renderItem={(item) => (
+                  <List.Item key={item.id} style={{ padding: '0' }}>
+                    <TopicDetail id={item.id} topic={item} />
+                  </List.Item>
+                )}
+              />
+            </InfiniteScroll>
+          </section>
+        </>
+      ),
+    },
+    {
+      key: '5',
+      label: (
+        <span
+          onClick={() => {
+            handleTabChange('mine');
+          }}
+        >
+          {t('talk.list.chat.mine', '我的')}
+        </span>
+      ),
+      children: (
+        <>
+          <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
+
+          <section className={styles.content_wrapper}>
+            <InfiniteScroll
+              dataLength={topicList.length}
+              endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
               hasMore={hasMore}
               loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
               next={handleNextFetch}
@@ -255,15 +296,15 @@ export default function TopicList() {
 
   return (
     <div className={styles.topic_list_box}>
-      <section className={styles.topic_side}>
-        {/* <Menu
+      {/* <section className={styles.topic_side}>
+        <Menu
           {...options}
           items={groupItems}
           onClick={({ key }) => setActiveKey(key)}
           selectedKeys={activeKey ? [activeKey] : undefined}
-        /> */}
+        />
         <AppNavigationDrawer currentTab={activeTab} onTabChange={handleTabChange} />
-      </section>
+      </section> */}
 
       <section className={styles.topic_main} id="scrollableDiv">
         <Tabs defaultActiveKey="1" items={items} />

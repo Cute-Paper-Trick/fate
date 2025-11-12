@@ -3,6 +3,7 @@
   display: flex;
   background-color: #f9fafb;
   border-top: 1px solid #e5e7eb;
+  // max-width: 1200px;
   width: 100%;
   .topic_side {
     min-width: 155px;
@@ -24,6 +25,12 @@
     height: calc(100vh - 50px);
     padding: 1.5rem;
     overflow-y: auto;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    > div {
+      max-width: 640px;
+    }
   }
   .topic_box {
     background-color: #fff;
@@ -128,4 +135,15 @@
   line-height: 1.25rem;
   color: #4f46e5;
   cursor: pointer;
+}
+
+.topic_list_right {
+  margin-top: 10px;
+  position: absolute;
+  right: 10px;
+  min-width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
 }

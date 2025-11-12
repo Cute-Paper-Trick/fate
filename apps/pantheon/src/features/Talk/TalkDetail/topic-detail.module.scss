@@ -1,5 +1,5 @@
 .topic_wrapper {
-  max-width: 1400px;
+  // max-width: 640px;
   width: 100%;
   margin: 6px auto;
   padding: 16px;
@@ -12,6 +12,7 @@
 
 .topic {
   background-color: #fff;
+  max-width: 640px;
   .talk_head {
     margin-left: 56px;
     flex: 1 1 0;
@@ -25,6 +26,9 @@
       }
     }
   }
+  // :global(.ant-list-item){
+  //   justify-content: flex-start;
+  // }
 }
 
 .talk_author {
@@ -77,7 +81,7 @@
 
 .topic_actions {
   padding-bottom: 1rem;
-  margin: 0 0 0 -64px;
+  margin: 0 0 0 -56px;
 
   .comment_btn {
     max-width: 170px;

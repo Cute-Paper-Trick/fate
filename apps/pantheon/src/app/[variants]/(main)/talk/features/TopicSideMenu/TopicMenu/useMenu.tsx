@@ -24,12 +24,12 @@ export const useMenu = ({ mobile }: UseMenuOptions = {}) => {
         {
           icon: <Icon icon={House} size={'middle'} />,
           key: '1',
-          label: '首页',
+          label: t('talk.home.title', '首页'),
         },
         {
           icon: <Icon icon={User} size={'middle'} />,
           key: '2',
-          label: '我的',
+          label: t('talk.mine.title', '我的'),
           style: { height: '40px' },
         },
       ].filter(Boolean) as MenuProps['items'],
