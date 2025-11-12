@@ -10,7 +10,8 @@ import { z } from "zod/v4";
 
 export const taskTopicListQueryParamsSchema = z.object({
     "page": z.coerce.number().int(),
-"size": z.coerce.number().int()
+"size": z.coerce.number().int(),
+"topic": z.optional(z.string().describe("话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）"))
     }) as unknown as z.ZodType<TaskTopicListQueryParams>
 
 export const taskTopicList200Schema = v1TaskTopicListResSchema as unknown as z.ZodType<TaskTopicList200>

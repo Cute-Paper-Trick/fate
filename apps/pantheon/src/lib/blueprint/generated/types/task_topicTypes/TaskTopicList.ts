@@ -15,6 +15,11 @@ export type TaskTopicListQueryParams = {
      * @type integer, int
     */
     size: number;
+    /**
+     * @description 话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）
+     * @type string | undefined, string
+    */
+    topic?: string | undefined;
 };
 
 export type TaskTopicList200 = V1TaskTopicListRes;
