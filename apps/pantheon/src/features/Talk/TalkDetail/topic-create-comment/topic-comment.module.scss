@@ -1,0 +1,26 @@
+.comments_input_container {
+  display: flex;
+  margin: 8px 0;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .talk_input {
+    min-height: 50px !important;
+  }
+
+  .comment_send {
+    margin-top: 5px;
+    height: 40px !important;
+    border-radius: 36px;
+  }
+
+  .avatar {
+    margin-right: 1.066rem;
+  }
+
+  .input_wrapper {
+    // width: 100%;
+    flex: 1;
+    margin-right: 1.066rem;
+  }
+}

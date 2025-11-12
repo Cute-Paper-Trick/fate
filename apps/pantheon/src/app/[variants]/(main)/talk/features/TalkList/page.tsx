@@ -168,99 +168,6 @@ export default function TopicList() {
         </>
       ),
     },
-    // {
-    //   key: '2',
-    //   label: t('talk.list.chat.text_mission', '文本任务'),
-    //   children: (
-    //     <>
-    //       <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
-
-    //       <section className={styles.content_wrapper}>
-    //         <InfiniteScroll
-    //           dataLength={topicList.length}
-    //           endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
-    //           hasMore={hasMore}
-    //           loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
-    //           next={handleNextFetch}
-    //           scrollableTarget="scrollableDiv"
-    //           // scrollThreshold="90%"
-    //         >
-    //           <List
-    //             className={styles.topic_list}
-    //             dataSource={topicList}
-    //             renderItem={(item) => (
-    //               <List.Item key={item.id} style={{ padding: '0' }}>
-    //                 <TopicDetail id={item.id} topic={item} />
-    //               </List.Item>
-    //             )}
-    //           />
-    //         </InfiniteScroll>
-    //       </section>
-    //     </>
-    //   ),
-    // },
-    // {
-    //   key: '3',
-    //   label: t('talk.list.chat.vocal_mission', '音频任务'),
-    //   children: (
-    //     <>
-    //       <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
-
-    //       <section className={styles.content_wrapper}>
-    //         <InfiniteScroll
-    //           dataLength={topicList.length}
-    //           endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
-    //           hasMore={hasMore}
-    //           loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
-    //           next={handleNextFetch}
-    //           scrollableTarget="scrollableDiv"
-    //           // scrollThreshold="90%"
-    //         >
-    //           <List
-    //             className={styles.topic_list}
-    //             dataSource={topicList}
-    //             renderItem={(item) => (
-    //               <List.Item key={item.id} style={{ padding: '0' }}>
-    //                 <TopicDetail id={item.id} topic={item} />
-    //               </List.Item>
-    //             )}
-    //           />
-    //         </InfiniteScroll>
-    //       </section>
-    //     </>
-    //   ),
-    // },
-    // {
-    //   key: '4',
-    //   label: t('talk.list.chat.video_mission', '视频任务'),
-    //   children: (
-    //     <>
-    //       <TopicCreateInner onCreated={() => setCreateVisible(false)} open={createVisible} />
-
-    //       <section className={styles.content_wrapper}>
-    //         <InfiniteScroll
-    //           dataLength={topicList.length}
-    //           endMessage={<Divider plain>{t('comment.loading.end', '没有更多了')}</Divider>}
-    //           hasMore={hasMore}
-    //           loader={<Skeleton active avatar paragraph={{ rows: 1 }} />}
-    //           next={handleNextFetch}
-    //           scrollableTarget="scrollableDiv"
-    //           // scrollThreshold="90%"
-    //         >
-    //           <List
-    //             className={styles.topic_list}
-    //             dataSource={topicList}
-    //             renderItem={(item) => (
-    //               <List.Item key={item.id} style={{ padding: '0' }}>
-    //                 <TopicDetail id={item.id} topic={item} />
-    //               </List.Item>
-    //             )}
-    //           />
-    //         </InfiniteScroll>
-    //       </section>
-    //     </>
-    //   ),
-    // },
     {
       key: '5',
       label: (
@@ -304,16 +211,6 @@ export default function TopicList() {
 
   return (
     <div className={styles.topic_list_box}>
-      {/* <section className={styles.topic_side}>
-        <Menu
-          {...options}
-          items={groupItems}
-          onClick={({ key }) => setActiveKey(key)}
-          selectedKeys={activeKey ? [activeKey] : undefined}
-        />
-        <AppNavigationDrawer currentTab={activeTab} onTabChange={handleTabChange} />
-      </section> */}
-
       <section className={styles.topic_main} id="scrollableDiv">
         <Tabs defaultActiveKey="1" items={items} />
       </section>

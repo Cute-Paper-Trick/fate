@@ -19,6 +19,7 @@ import {
 import { queryClient } from '@/lib/query';
 
 import { getNextPageParam } from '../components/useInfiniteList';
+import { CommentInput } from '../topic-create-comment';
 import { TopicInfo } from '../topic-info';
 import styles from './topic-comment.module.scss';
 
@@ -282,7 +283,7 @@ export function TopicComments({
   return (
     <>
       <div className={styles.comments}>
-        <div className={styles.talk}>
+        {/* <div className={styles.talk}>
           <div className={styles.comments_input_container}>
             <Avatar className={styles.avatar} size={40} src={profileQuery?.data?.avatar}>
               {profileQuery?.data?.account}
@@ -302,7 +303,14 @@ export function TopicComments({
               {t('comment.reply.send', '发送')}
             </Button>
           </div>
-        </div>
+        </div> */}
+
+        <CommentInput
+          buttonText={t('comment.reply.send', '发送')}
+          form={commentForm}
+          onSubmit={sendComment}
+          profile={profileQuery.data}
+        />
 
         <p className={styles.comment_tabs}>
           <span>
