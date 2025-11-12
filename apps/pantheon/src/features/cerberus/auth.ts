@@ -59,6 +59,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     authEnv.APP_URL,
     'http://localhost:5090',
+    'http://localhost:3010',
     'https://dev-daily-backend.goood.space',
   ],
   emailVerification: {
