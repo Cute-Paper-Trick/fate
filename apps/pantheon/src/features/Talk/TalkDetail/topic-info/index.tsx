@@ -1,4 +1,4 @@
-import { Avatar } from 'antd';
+import { Avatar } from '@lobehub/ui';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
 
@@ -16,7 +16,11 @@ interface TopicDetailProps {
 export function TopicInfo({ topic }: TopicDetailProps) {
   return (
     <div className={styles.topic_info}>
-      <Avatar size={42} src={topic.avatar || null} style={{ minWidth: '42px' }}>
+      <Avatar
+        size={40}
+        src={topic.avatar || null}
+        style={{ minWidth: '42px', backgroundColor: '#bbb' }}
+      >
         {topic.account}
       </Avatar>
       <div className={clsx(styles.talk_author)}>

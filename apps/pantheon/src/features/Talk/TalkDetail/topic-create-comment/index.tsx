@@ -1,8 +1,10 @@
 'use client';
 
 import { useTranslate } from '@tolgee/react';
-import { Avatar, Button, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { FC } from 'react';
+
+import UserAvatar from '@/features/User/UserAvatar';
 
 import styles from './topic-comment.module.scss';
 
@@ -16,21 +18,17 @@ interface CommentInputProps {
 }
 
 export const CommentInput: FC<CommentInputProps> = ({
-  profile,
   form,
   onSubmit,
   buttonText,
   placeholder,
-  avatarSize = 40,
 }) => {
   const { t } = useTranslate('talk');
 
   return (
     <div className={styles.talk}>
       <div className={styles.comments_input_container}>
-        <Avatar className={styles.avatar} size={avatarSize} src={profile?.avatar}>
-          {profile?.account}
-        </Avatar>
+        <UserAvatar className={styles.avatar} size={40} />
         <div className={styles.input_wrapper}>
           <Form form={form}>
             <Form.Item name="content" noStyle>

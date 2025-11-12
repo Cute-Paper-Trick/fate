@@ -2,11 +2,12 @@
 import { Icon } from '@lobehub/ui';
 import { InfiniteData, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { useTranslate } from '@tolgee/react';
-import { Avatar, Button, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import clsx from 'clsx';
 import { Heart } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
+import UserAvatar from '@/features/User/UserAvatar';
 import {
   V1TaskTopicListRes,
   V1TopicCommentInfo,
@@ -119,10 +120,10 @@ function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
     },
   });
 
-  const profileQuery = useQuery({
-    queryKey: ['/api/account/proifle'],
-    queryFn: async () => await accountService().accountProfile(),
-  });
+  // const profileQuery = useQuery({
+  //   queryKey: ['/api/account/proifle'],
+  //   queryFn: async () => await accountService().accountProfile(),
+  // });
 
   return (
     <li className={clsx(styles.comment, 'w-full')}>
@@ -182,9 +183,10 @@ function Comment({ comment, commentDict }: CommentProps | SubCommentProps) {
         {showComment && (
           <div className={clsx(styles.talk, 'w-full')}>
             <div className={styles.comments_input_container}>
-              <Avatar className={styles.avatar} size={45}>
+              {/* <Avatar className={styles.avatar} size={45}>
                 {profileQuery?.data?.account}
-              </Avatar>
+              </Avatar> */}
+              <UserAvatar className={styles.avatar} />
               <div className={styles.input_wrapper}>
                 <Form form={commentForm}>
                   <Form.Item name="content" noStyle>
@@ -283,28 +285,6 @@ export function TopicComments({
   return (
     <>
       <div className={styles.comments}>
-        {/* <div className={styles.talk}>
-          <div className={styles.comments_input_container}>
-            <Avatar className={styles.avatar} size={40} src={profileQuery?.data?.avatar}>
-              {profileQuery?.data?.account}
-            </Avatar>
-            <div className={styles.input_wrapper}>
-              <Form form={commentForm}>
-                <Form.Item name="content" noStyle>
-                  <Input.TextArea
-                    autoSize={{ minRows: 1, maxRows: 8 }}
-                    className={styles.talk_input}
-                    placeholder={t('comment.reply.description', '有什么想说的...')}
-                  />
-                </Form.Item>
-              </Form>
-            </div>
-            <Button className={styles.comment_send} onClick={sendComment}>
-              {t('comment.reply.send', '发送')}
-            </Button>
-          </div>
-        </div> */}
-
         <CommentInput
           buttonText={t('comment.reply.send', '发送')}
           form={commentForm}

@@ -57,7 +57,7 @@ const UserAvatar = forwardRef<HTMLDivElement, UserAvatarProps>(
       <Avatar
         alt={isSignedIn && Boolean(username) ? username : 'Guest'}
         avatar={avatar}
-        background={isSignedIn && avatar ? background : 'transparent'}
+        background={isSignedIn && avatar ? background : '#bbbbbb'}
         className={cx({ [styles.clickable]: clickable }, className)}
         ref={ref}
         size={size}
