@@ -25,11 +25,10 @@
     height: calc(100vh - 50px);
     padding: 1.5rem;
     overflow-y: auto;
-    width: 100%;
     justify-content: center;
     display: flex;
     > div {
-      max-width: 640px;
+      width: 640px;
     }
   }
   .topic_box {
