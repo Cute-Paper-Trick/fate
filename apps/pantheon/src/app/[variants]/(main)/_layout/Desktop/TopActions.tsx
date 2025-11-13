@@ -14,16 +14,7 @@ import Link from 'next/link';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-// import { useGlobalStore } from '@/store/global';
 import { AppTab } from '@/store/global/initialState';
-
-// import { SidebarTabKey } from '@/store/global/initialState';
-// import { featureFlagsSelectors, useServerConfigStore } from '@/store/serverConfig';
-// import { useSessionStore } from '@/store/session';
-// import { useUserStore } from '@/store/user';
-
-// import { settingsSelectors } from '@/store/user/selectors';
-// import { HotkeyEnum } from '@/types/hotkey';
 
 const ICON_SIZE: ActionIconProps['size'] = {
   blockSize: 40,

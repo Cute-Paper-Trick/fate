@@ -11,7 +11,7 @@ import { authSelectors } from '@/store/user/selectors';
 
 import UserLogin from '../Login';
 import UserInfo from '../UserInfo';
-import LangButton from './LangButton';
+// import LangButton from './LangButton';
 // import ThemeButton from './ThemeButton';
 import { useMenu } from './useMenu';
 
@@ -66,7 +66,7 @@ const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
         {/* <BrandWatermark /> */}
         {/* )} */}
         <Flexbox align={'center'} flex={'none'} gap={2} horizontal>
-          <LangButton />
+          {/* <LangButton /> */}
           {/* <ThemeButton /> */}
         </Flexbox>
       </Flexbox>
