@@ -495,15 +495,12 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
                       <div className={styles.video_button_area}>
                         <Button
                           className={styles.button_hold}
-                          color="danger"
                           onMouseDown={() => startHoldCapture(cls.id)}
                           onMouseLeave={() => stopHoldCapture()}
                           onMouseUp={() => stopHoldCapture()}
                           onTouchCancel={() => stopHoldCapture()}
                           onTouchEnd={() => stopHoldCapture()}
                           onTouchStart={() => startHoldCapture(cls.id)}
-                          type="primary"
-                          variant="dashed"
                         >
                           <p>{t('classifier.image.record', '按住即可录制')}</p>
                         </Button>

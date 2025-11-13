@@ -44,7 +44,7 @@ const LivePreview = forwardRef((_, ref) => {
       const analyser = analyserRef.current;
       if (!canvas || !analyser || isPaused) return; // 如果暂停了就不绘制
 
-      const ctx = canvas.getContext('2d')!;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
       const bufferLength = analyser.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
       const sampleRate = audioContextRef.current!.sampleRate;

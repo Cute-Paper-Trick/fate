@@ -54,6 +54,7 @@ interface ClassState {
   predictions: Prediction[];
   speechCommands: TransferRecognizer;
   transferRefCurrent: { current: TransferRecognizer };
+  activeRecorderId: string | null;
 
   // Actions
   clearTemporaryAudios: () => void;
@@ -70,6 +71,7 @@ interface ClassState {
   setPredictions: (predictions: Prediction[]) => void;
   setSpeechCommands: (ref: TransferRecognizer) => void;
   setTransferRefCurrent: (transferRefCurrent: TransferRecognizer) => void;
+  setActiveRecorder: (id: string | null) => void;
 }
 
 // === 创建 vanilla store ===
@@ -88,6 +90,7 @@ export const audioStore = createStore<ClassState>((set) => ({
   predictions: [],
   speechCommands: {} as TransferRecognizer,
   transferRefCurrent: { current: {} as TransferRecognizer },
+  activeRecorderId: null,
 
   setRecording: (isRecording, classId) => set({ isRecording, activeClassId: classId }),
 
@@ -151,6 +154,7 @@ export const audioStore = createStore<ClassState>((set) => ({
   setTransferRefCurrent: (transferRefCurrent) =>
     set({ transferRefCurrent: { current: transferRefCurrent } }),
   setPredictionResult: (result) => set({ predictionResult: result }),
+  setActiveRecorder: (id) => set({ activeRecorderId: id }),
 }));
 
 // === React hook 用于订阅状态 ===

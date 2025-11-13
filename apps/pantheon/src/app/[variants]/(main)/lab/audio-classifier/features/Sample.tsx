@@ -15,13 +15,22 @@ import React, { useRef, useState } from 'react';
 
 import styles from '../audio.module.scss';
 import { useAudioStore } from '../stores/audioSlice';
-import LiveSpectrogram from './Record';
+import LiveSpectrogram, { LiveSpectrogramRef } from './Record';
 
 const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
   e.target.select(); // 全选内容
 };
 
 const SampleComponent: React.FC = () => {
+  const spectrogramRefs = useRef<Map<string, LiveSpectrogramRef>>(new Map());
+  const [activeRecordingId, setActiveRecordingId] = useState<string | null>(null);
+  const setSpectrogramRef = (classId: string) => (ref: LiveSpectrogramRef | null) => {
+    if (ref) {
+      spectrogramRefs.current.set(classId, ref);
+    } else {
+      spectrogramRefs.current.delete(classId);
+    }
+  };
   const { t } = useTranslate('lab');
   const { list } = useAudioStore();
   const { addClass } = useAudioStore();
@@ -98,6 +107,27 @@ const SampleComponent: React.FC = () => {
 
       return newSelect;
     });
+  };
+
+  const stopAllOtherRecordings = (currentId: string) => {
+    spectrogramRefs.current.forEach((ref, id) => {
+      if (id !== currentId) {
+        ref.stopMinimalCleanup();
+      }
+    });
+    setActiveRecordingId(null);
+  };
+
+  const handleStartRecording = (classId: string) => {
+    stopAllOtherRecordings(classId);
+    setActiveRecordingId(classId);
+    setSelect(classId, true);
+  };
+
+  const handleRecordingStopped = (classId: string) => {
+    if (activeRecordingId === classId) {
+      setActiveRecordingId(null);
+    }
   };
 
   return (
@@ -235,7 +265,11 @@ const SampleComponent: React.FC = () => {
                     {audioUrl && (
                       <div ref={waveformRef} style={{ width: '200px', height: '100px' }} />
                     )}
-                    <LiveSpectrogram classId={cls.id} />
+                    <LiveSpectrogram
+                      classId={cls.id}
+                      onRecordingStopped={handleRecordingStopped}
+                      ref={setSpectrogramRef(cls.id)}
+                    />
                     {cls.id === 'class-env' ? (
                       <>
                         <p
@@ -308,7 +342,7 @@ const SampleComponent: React.FC = () => {
                   <Button
                     className={styles.button_comn}
                     icon={<VideoCameraOutlined style={{ fontSize: '20px' }} />}
-                    onClick={() => setSelect(cls.id, true)}
+                    onClick={() => handleStartRecording(cls.id)}
                   >
                     {t('classifier.audio.collect', '麦克风')}
                   </Button>
