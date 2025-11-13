@@ -1,12 +1,11 @@
 'use client';
 
-import { AudioFilled, FileImageFilled, SmileFilled } from '@ant-design/icons';
+import { FileImageFilled, SmileFilled } from '@ant-design/icons';
 import { useTranslate } from '@tolgee/react';
 import { Col, Row } from 'antd';
 import Image from 'next/image';
 import { FC, useMemo } from 'react';
 
-import AUDIO_FUNCTION from '@/app/assets/images/brief-introduct-img/audio-function.png';
 import IMAGE_FUNCTION from '@/app/assets/images/brief-introduct-img/image-function.png';
 import POSTTURE_FUNCTION from '@/app/assets/images/brief-introduct-img/posture-function.png';
 
@@ -39,33 +38,11 @@ const FunctionPreview: FC = () => {
         ],
       },
       {
-        title: t('音频项目教程'),
-        icon: <AudioFilled />,
-        img: AUDIO_FUNCTION,
-        src: '/audio-training.html',
-        imagePosition: 'left',
-        detail: t('preview.audio.detail'),
-        stepList: [
-          {
-            title: t('preview.audio.step_1.title'),
-            context: t('preview.audio.step_1.context'),
-          },
-          {
-            title: t('preview.audio.step_2.title'),
-            context: t('preview.audio.step_2.context'),
-          },
-          {
-            title: t('preview.audio.step_3.title'),
-            context: t('preview.audio.step_3.context'),
-          },
-        ],
-      },
-      {
         title: t('preview.posture.title'),
         icon: <SmileFilled />,
         img: POSTTURE_FUNCTION,
         src: 'pose-detection.html',
-        imagePosition: 'right',
+        imagePosition: 'left',
         detail: t('preview.posture.detail'),
         stepList: [
           {

@@ -2,6 +2,7 @@
 
 import { OpenAIOutlined } from '@ant-design/icons';
 import { useTranslate } from '@tolgee/react';
+import { Col, Row } from 'antd';
 import { type FC } from 'react';
 
 import BriefUseBtn from './features/brief-use-btn/page';
@@ -18,12 +19,23 @@ const BriefUse: FC = () => {
         </div>
       </div>
       <div className={styles.card}>
-        <div className={styles.cardTitle}>
-          <OpenAIOutlined />
-          {t('brief_use.card.title')}
-        </div>
-        <div className={styles.cardDes}>{t('brief_use.card.detail')}</div>
-        <BriefUseBtn />
+        <Row gutter={[20, 20]} style={{ flex: 1 }}>
+          <Col md={12} style={{ display: 'flex' }} xs={24}>
+            <div className={styles.cardLeft}>
+              <div className={styles.cardTitle}>
+                <OpenAIOutlined />
+                {t('brief_use.card.title')}
+              </div>
+              <div className={styles.cardDes}>{t('brief_use.card.detail')}</div>
+              <BriefUseBtn />
+            </div>
+          </Col>
+          <Col md={12} style={{ display: 'flex' }} xs={24}>
+            <div className={styles.cardRight}>
+              <video autoPlay loop muted playsInline src="/cca1ca3a771bf69acbf506730e38b536.mov" />
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );
