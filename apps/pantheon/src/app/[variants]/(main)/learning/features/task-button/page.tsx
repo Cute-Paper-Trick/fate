@@ -1,9 +1,10 @@
 'use client';
 
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+import { TopicCreateInner } from '@/features/Talk/TalkCreate/topic-create-inner';
 import { V1TaskUserInfo } from '@/lib/http';
 import { useTaskButtons } from '@/store/learning/helpers';
 import { TaskButtonConfig, TaskButtonGroupProps } from '@/store/learning/initialState';
@@ -36,15 +37,17 @@ export const TaskButtonGroup: React.FC<TaskButtonGroupProps> = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { listDict, completeTask } = useLearningStore();
   const { getTaskButtons } = useTaskButtons();
+  const [createVisible, setCreateVisible] = useState(false);
+  const [taskIndex, setTaskIndex] = useState<any>(null);
   const handleButtonClick = (config: TaskButtonConfig) => {
     if (config?.action === 'challenge') {
       goComplete(item, router); // 跳转页面
     } else if (config?.action === 'complete') {
-      setIsModalOpen(true); // TODO: 显示去完成弹框 后续对接 下面是完成接口
+      setIsModalOpen(true); // 显示去完成弹框
+      setCreateVisible(true); // 显示TopicCreateInner
       if (config?.taskIndex) {
-        completeTask(config.taskIndex);
+        setTaskIndex(config.taskIndex);
       }
-      console.log('状态', isModalOpen);
     }
   };
 
@@ -75,7 +78,26 @@ export const TaskButtonGroup: React.FC<TaskButtonGroupProps> = ({ item }) => {
           {config.text}
         </Button>
       ))}
-      {/* TODO: 此处为后续弹框调用 */}
+      {/* 用弹框包裹TopicCreateInner */}
+      <Modal
+        footer={null}
+        onCancel={() => {
+          setIsModalOpen(false);
+          setCreateVisible(false);
+        }}
+        open={isModalOpen}
+        width={800}
+      >
+        <TopicCreateInner
+          onCreated={() => {
+            setCreateVisible(false);
+            setIsModalOpen(false);
+            completeTask(taskIndex);
+            setTaskIndex(null);
+          }}
+          open={createVisible}
+        />
+      </Modal>
     </div>
   );
 };
