@@ -1,0 +1,176 @@
+---
+title: 图像识别
+description:
+tags:
+  - 图像识别
+---
+
+# 图像识别
+
+<font size="6">📸AI视觉魔法师：图像分类挑战！</font>
+
+<font size="4">`图像识别` `深度学习` `实时预测` `迁移学习`</font>
+
+手把手教你创建一个机器学习模型，用来识别物体。探索AI是如何"看懂"世界的
+
+---
+
+<font size="6">开启AI视觉之旅</font>
+
+你好！欢迎来到图像模型训练教程。在本教程中，我将手把手带你创建一个机器学习模型，用来识别一个物体是苏打水还是番茄罐头。当然，你完全可以替换成任何两种或多种不同的物体，我只是恰好手边有它们而已！
+
+**核心理念：** 对于计算机来说，图像只是一堆数字和像素的排列组合。你并没有真正教会计算机什么是"番茄罐头"，你只是教会了它：这个特定形状、特定颜色的物体（在某个背景下）被标记为"番茄罐头"——对计算机来说，它看到的仅仅是像素而已。
+
+---
+
+<font size="6">如何训练模型：从零开始构建你的分类器</font>
+<font size="5">**1. 创建项目与类别**</font>
+首先，我们需要创建一个新的<font color="blue">图片项目</font>
+要开始训练，我们首先需要创建不同的<font color="red">​类别（classes）</font>
+，也就是我们想让机器学会识别的目标。在这里，我将创建三个类别：
+
+- ✨ **苏打水**
+- ✨ **番茄罐头**
+- ✨ **Nothing (无物体)**
+
+💡 **小贴士：** 最后一个"Nothing"类别非常重要!它能告诉模型当画面中没有任何目标物体时应该如何判断，避免误报。
+
+![创建类别](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/1.png)
+
+---
+
+<font size="5">**2. 收集学习样本**</font>
+
+创建好类别后，我们需要为每个类别提供学习样本。在本项目中，这些样本就是我们用摄像头拍摄的图像。
+
+#### 2.1 收集"苏打水"样本
+
+我们先从"苏打水"类别开始。打开摄像头，录制一些不同角度、不同光线下的苏打水画面。
+
+![苏打水样本](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/2.gif)
+
+---
+
+#### 2.2 收集"番茄罐头"样本
+
+接着，我们用同样的方式，为"番茄罐头"类别提供样本。尽量多角度、多场景地拍摄，让模型学习到更多特征。
+
+![番茄罐头样本](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/3.gif)
+
+---
+
+#### 2.3 收集"Nothing"样本
+
+最后，是"Nothing"类别。我会录制一些没有任何目标物体，只有我的手或背景的画面。
+
+**特别注意：** 我会特意在画面中展示我的手。这样做的目的是让模型学会，​"手"的存在并不等同于"苏打水"或"番茄罐头"。它需要明确区分，只有当苏打水或番茄罐头出现时，才将其归入相应的类别。
+
+![Nothing样本](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/4.gif)
+
+---
+
+<font size="5">**3. 开始训练模型**</font>
+
+现在所有类别的样本都准备好了！点击"开始训练"按钮。 ![开始训练](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/5.gif)
+
+点击训练按钮后，系统会开始准备训练数据并进行训练。请不要切换浏览器标签页。 训练完成后，在右侧的"预览"窗口，你就可以实时测试模型的效果咯！
+
+![训练过程](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/6.gif)
+
+🎉 **训练完成后，在右侧的"预览“窗口，你就可以实时测试模型的效果啦!**
+
+---
+
+<font size="6">值得尝试的事：探索模型的局限性</font>
+
+现在模型可以工作了，你可以测试它的效果——更有趣的是，去​<font color="red">​**找到它无法正常工作的边界**​</font>。尝试找到机器学习的极限所在！
+
+**思考一下：** 对于计算机来说，图像只是一堆数字和像素的排列组合。所以，你并没有真正教会计算机什么是"番茄罐头"，你只是教会了它：这个特定形状、特定颜色的物体（在某个背景下）被标记为"番茄罐头"——对计算机来说，它看到的仅仅是像素而已。
+
+<div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 2rem; flex-wrap: wrap;">
+  <div style="text-align: center;">
+    <img
+      src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/7.jpg"
+      alt="实时预览界面"
+      style="width: 300px; border-radius: 0.5rem; border: 1px solid #333333; transition: all 0.3s ease;"
+      onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.2)'"
+      onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'"
+    />
+    <br></br>
+  </div>
+</div>
+
+<div style="text-align: center;">
+  <img
+    src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/7.1.png"
+    alt="识别结果"
+    style="width: 300px; height: 300px; border-radius: 0.5rem; border: 1px solid #333333; transition: all 0.3s ease;"
+    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.2)'"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'"
+  />
+  <br />
+</div>
+
+---
+
+正因如此，模型在很多情况下都可能被混淆。让我们来看几个例子：
+
+### 案例1：两个物体同时出现
+
+比如，如果你同时举起苏打水和番茄罐头，模型在训练时从未见过这样的样本，所以它可能会感到困惑，无法准确识别。
+
+![两个物体](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/8.gif)
+
+---
+
+### 案例2：不同背景和光线挑战
+
+- 尝试在不同的背景下评估你的模型，它还能正常工作吗？
+- 在新的背景下，模型可能会对某些类别的判断产生一些混淆。比如，如果新背景的某些特征和训练时的物体特征相似，就可能发生误判。
+
+![背景挑战](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/9.gif)
+
+💡 **解决方案：** 为了让模型更稳健，你可以在不同的环境中为苏打水和番茄罐头添加更多的图像样本。
+
+![补充样本](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/10.gif)
+
+在不同的背景下补充了一些样本后，识别效果明显好多了！
+
+![改进效果](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/11.gif)
+
+### 案例3：尝试"欺骗"模型！
+
+你还可以尝试上传网上的苏打水或番茄罐头照片，或者一个外观相似的玩具，甚至是一幅画。
+
+- 看看模型对这些不同图像的反应如何，是否会被轻易"骗过"？
+- 思考你是否能找到一种方法来训练它，让它不被混淆。
+- 如果你举起一张苏打水的照片，或者一个看起来很像番茄罐头的玩具，模型会如何反应呢？你又是否能找到一种方法来训练它，让它不会混淆呢？
+
+---
+
+<font size="6">你能用它做什么？</font>
+
+你可以导出你训练好的模型，用它来做一些有趣的事情！
+
+> 我制作了一个[实时分类器](/classifier/index.html)，可以导入模型进行实时预测！
+
+---
+
+## 恭喜你！成为AI视觉魔法师！ ✨
+
+通过这个教程，你已经亲身体验了：
+
+✨创建和管理不同的图像类别✨收集高质量的训练样本数据✨训练自己的图像分类模型✨探索模型的边界和局限性
+
+### 现在做什么？
+
+- **立刻开始创建你自己的图像识别模型吧！** 探索人工智能的奥秘！
+- 或者，你也可以阅读我们的其他教程：
+  - [如何制作声音模型教程](/audio-training.html)
+  - [如何制作姿势模型教程](/pose-detection.html)
+
+🌟 **祝你AI探索之旅收获满满！**
+
+---
+
+[返回主页](/)

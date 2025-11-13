@@ -9,6 +9,8 @@
   "tutorial.categories.game.name": "游戏",
   "tutorial.categories.posture.description": "姿态识别",
   "tutorial.categories.posture.name": "姿态",
+  "tutorial.categories.rag.description": "知识库",
+  "tutorial.categories.rag.name": "RAG",
   "tutorial.categories.video.description": "视频识别",
   "tutorial.categories.video.name": "视频"
 }

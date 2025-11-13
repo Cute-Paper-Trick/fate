@@ -33,6 +33,8 @@ export enum AppTab {
   Lab = 'lab',
   Settings = 'settings',
   Discover = 'discover',
+  File = 'files',
+  aiImage = 'image',
 }
 
 export const initialState: GlobalState = {

@@ -9,6 +9,8 @@
   "tutorial.categories.game.name": "Game",
   "tutorial.categories.posture.description": "Posture Recognition",
   "tutorial.categories.posture.name": "Posture",
+  "tutorial.categories.rag.description": "RAG",
+  "tutorial.categories.rag.name": "RAG",
   "tutorial.categories.video.description": "Video Recognition",
   "tutorial.categories.video.name": "Video"
 }

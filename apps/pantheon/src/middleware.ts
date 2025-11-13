@@ -13,6 +13,8 @@ import { Locales } from '@/locales/resources';
 import { parseBrowserLanguage } from '@/utils/locale';
 import { RouteVariants } from '@/utils/server/routeVariants';
 
+import { authEnv } from './envs/cerberus';
+
 const logDefault = debug('middleware:default');
 
 const isProtectedRoute = createRouteMatcher([
@@ -138,7 +140,12 @@ const middleware = async (request: NextRequest) => {
 
   // 如果有 session cookie，尝试获取 session
   if (sessionCookie) {
-    session = await getCookieCache(request, { cookiePrefix: 'fate' });
+    session = await getCookieCache(request, {
+      cookieName: 'session_data',
+      cookiePrefix: 'fate',
+      isSecure: true,
+      secret: authEnv.BETTER_AUTH_SECRET,
+    });
 
     // 如果缓存中没有 session，则从数据库获取
     if (!session) {
@@ -171,16 +178,6 @@ const middleware = async (request: NextRequest) => {
   // 访问管理员页面
   if (isAdminRoute(request) && session?.user.role !== 'admin') {
     console.log('非管理员用户，重定向到未授权页面');
-    // 需要先进行 variantRewrite，然后 redirect 到带 variants 的 unauthorized 页面
-    // const theme = getTheme(request);
-    // const { locale } = getLocale(request);
-    // const device = getDevice(request);
-    // const route = RouteVariants.serializeVariants({
-    //   isMobile: device.type === 'mobile',
-    //   locale,
-    //   theme,
-    // });
-    // const unauthorizedPath = `/${route}/unauthorized`;
     return NextResponse.redirect(new URL('/unauthorized', request.url));
   }
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { AxiosError } from 'axios';
 
 import { message } from '@/components/AntdStaticMethods';

@@ -34,58 +34,25 @@ const useStyles = createStyles(({ css, token }) => {
 
 const Header = memo<{ inModal?: boolean; mobile?: boolean }>(({ mobile: isMobile, inModal }) => {
   const { t } = useTranslate('discover');
-  const {
-    title,
-    date,
-    id,
-    // description,
-    // image,
-    author,
-    category,
-    // isFeatured,
-    isOfficial,
-  } = useDetailContext();
+  const { title, date, id, description, author, category, isOfficial } = useDetailContext();
 
   const identifier = id;
 
   const { styles, theme } = useStyles();
   const { mobile = isMobile } = useResponsive();
 
-  // const recommendedDeployment = getRecommendedDeployment(deploymentOptions);
   const categories = useCategory();
   const cate = categories.find((c) => c.key === category);
 
-  // const scores = (
-  //   <Scores
-  //     deploymentOptions={deploymentOptions}
-  //     github={github}
-  //     identifier={identifier as string}
-  //     isClaimed={isClaimed}
-  //     isValidated={isValidated}
-  //     overview={overview}
-  //     promptsCount={promptsCount}
-  //     resourcesCount={resourcesCount}
-  //     toolsCount={toolsCount}
-  //   />
-  // );
-
   const cateButton = (
-    // <Link
-    //   href={qs.stringifyUrl({
-    //     query: { category: cate?.key },
-    //     url: '/discover/mcp',
-    //   })}
-    // >
     <Button icon={cate?.icon} size={'middle'} variant={'outlined'}>
       {cate?.label}
     </Button>
-    // </Link>
   );
 
   return (
     <Flexbox gap={12}>
       <Flexbox align={'flex-start'} gap={16} horizontal width={'100%'}>
-        {/* <Avatar avatar={icon} size={mobile ? 48 : 64} /> */}
         <Flexbox flex={1} gap={4} style={{ overflow: 'hidden' }}>
           <Flexbox
             align={'center'}
@@ -115,16 +82,6 @@ const Header = memo<{ inModal?: boolean; mobile?: boolean }>(({ mobile: isMobile
                 </Tooltip>
               )}
             </Flexbox>
-            <Flexbox align={'center'} gap={6} horizontal>
-              {/* {recommendedDeployment?.installationMethod && (
-                <InstallationIcon type={recommendedDeployment.installationMethod} />
-              )} */}
-              {/* {github?.url && (
-                <Link href={github.url} onClick={(e) => e.stopPropagation()} target={'_blank'}>
-                  <ActionIcon fill={theme.colorTextDescription} icon={Github} />
-                </Link>
-              )} */}
-            </Flexbox>
           </Flexbox>
           <Flexbox align={'center'} gap={4} horizontal>
             {author && (
@@ -150,38 +107,9 @@ const Header = memo<{ inModal?: boolean; mobile?: boolean }>(({ mobile: isMobile
         }}
         wrap={'wrap'}
       >
-        {/* {mobile && scores} */}
         {!mobile && cateButton}
         <Flexbox align={'center'} gap={mobile ? 12 : 24} horizontal wrap={'wrap'}>
-          {/* {Boolean(github?.language) && (
-            <Flexbox align={'center'} gap={6} horizontal>
-              <Icon
-                color={theme.colorFillTertiary}
-                fill={getLanguageColor(github?.language)}
-                icon={CircleIcon}
-                size={12}
-              />
-              {github?.language}
-            </Flexbox>
-          )} */}
-          {/* {Boolean(github?.license) && (
-            <Flexbox align={'center'} gap={6} horizontal>
-              <Icon icon={ScaleIcon} size={14} />
-              {github?.license}
-            </Flexbox>
-          )} */}
-          {/* {Boolean(installCount) && (
-            <Flexbox align={'center'} gap={6} horizontal>
-              <Icon icon={DownloadIcon} size={14} />
-              {installCount}
-            </Flexbox>
-          )} */}
-          {/* {Boolean(github?.stars) && (
-            <Flexbox align={'center'} gap={6} horizontal>
-              <Icon icon={StarIcon} size={14} />
-              {github?.stars}
-            </Flexbox>
-          )} */}
+          {description}
         </Flexbox>
       </Flexbox>
     </Flexbox>

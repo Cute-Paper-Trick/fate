@@ -1,8 +1,6 @@
-// import dayjs from 'dayjs';
 import matter from 'gray-matter';
 import { template } from 'lodash-es';
 import { markdownToTxt } from 'markdown-to-txt';
-// import semver from 'semver';
 import urlJoin from 'url-join';
 
 import { FetchCacheTag } from '@/const/cacheControl';
@@ -10,24 +8,11 @@ import { appEnv } from '@/envs/app';
 import { Locales } from '@/locales/resources';
 import { TutorialIndexItem } from '@/types/discover';
 
-// const URL_TEMPLATE = 'https://dev-daily-backend.goood.space/public/{{path}}';
-// const URL_TEMPLATE = 'https://raw.githubusercontent.com/{{user}}/{{repo}}/{{branch}}/{{path}}';
 const LAST_MODIFIED = new Date().toISOString();
-
-// const docCdnPrefix = process.env.DOC_S3_PUBLIC_DOMAIN || '';
 
 export interface ContentConfig {
   urlTemplate: string;
-  // path: string;
-  // branch: string;
-  // cdnPath: string;
-  // changelogPath: string;
   docsPath: string;
-  // majorVersion: number;
-  // repo: string;
-  // type: 'cloud' | 'community';
-  // urlTemplate: string;
-  // user: string;
 }
 
 export class ContentService {
@@ -37,15 +22,6 @@ export class ContentService {
   config: ContentConfig = {
     urlTemplate: `${appEnv.APP_URL}/public/tutorial/{{path}}`,
     docsPath: '',
-    // branch: process.env.DOCS_BRANCH || 'main',
-    // cdnPath: 'docs/.cdn.cache.json',
-    // changelogPath: 'changelog',
-    // docsPath: 'docs/changelog',
-    // majorVersion: 1,
-    // repo: 'lobe-chat',
-    // type: 'cloud',
-    // urlTemplate: process.env.CHANGELOG_URL_TEMPLATE || URL_TEMPLATE,
-    // user: 'lobehub',
   };
 
   async getIndex(): Promise<TutorialIndexItem[]> {
@@ -108,16 +84,6 @@ export class ContentService {
         description = matches[1] ? matches[1].trim() : '';
       }
 
-      // if (docCdnPrefix) {
-      //   const images = this.extractHttpsLinks(content);
-      //   for (const url of images) {
-      //     const cdnUrl = this.replaceCdnUrl(url);
-      //     if (cdnUrl && url !== cdnUrl) {
-      //       description = description.replaceAll(url, cdnUrl);
-      //     }
-      //   }
-      // }
-
       return {
         ...post,
         date: post?.date
@@ -142,80 +108,10 @@ export class ContentService {
     }
   }
 
-  // private mergeChangelogs(
-  //   cloud: ChangelogIndexItem[],
-  //   community: ChangelogIndexItem[],
-  // ): ChangelogIndexItem[] {
-  //   if (this.config.type === 'community') {
-  //     return community;
-  //   }
-
-  //   const merged = [...community];
-
-  //   for (const cloudItem of cloud) {
-  //     const index = merged.findIndex((item) => item.id === cloudItem.id);
-  //     if (index !== -1) {
-  //       merged[index] = cloudItem;
-  //     } else {
-  //       merged.push(cloudItem);
-  //     }
-  //   }
-
-  //   return merged
-  //     .map((item) => ({
-  //       ...item,
-  //       date: dayjs(item.date).format('YYYY-MM-DD'),
-  //       versionRange: this.formatVersionRange(item.versionRange),
-  //     }))
-  //     .sort((a, b) => semver.rcompare(a.versionRange[0], b.versionRange[0]));
-  // }
-
-  // private formatVersionRange(range: string[]): string[] {
-  //   if (range.length === 1) {
-  //     return range;
-  //   }
-
-  //   const [v1, v2]: any = range.map((v) => semver.parse(v)?.toString());
-
-  //   const minVersion = semver.lt(v1, v2) ? v1 : v2;
-  //   const maxVersion = semver.gt(v1, v2) ? v1 : v2;
-
-  //   return [minVersion, maxVersion];
-  // }
-
   private genUrl(path: string) {
     // 自定义分隔符为 {{}}
     const compiledTemplate = template(this.config.urlTemplate, { interpolate: /{{([\S\s]+?)}}/g });
 
     return compiledTemplate({ ...this.config, path });
   }
-
-  private extractHttpsLinks(text: string) {
-    const regex = /https:\/\/[^\s"')>]+/g;
-    const links = text.match(regex);
-    return links || [];
-  }
-
-  // private async cdnInit() {
-  //   if (!docCdnPrefix) return;
-  //   if (Object.keys(this.cdnUrls).length === 0) {
-  //     try {
-  //       const url = this.genUrl(this.config.cdnPath);
-  //       const res = await fetch(url);
-  //       const data = await res.json();
-  //       if (data) {
-  //         this.cdnUrls = data;
-  //       }
-  //     } catch (error) {
-  //       console.error('Error getting changelog cdn cache:', error);
-  //     }
-  //   }
-  // }
-
-  // private replaceCdnUrl(url: string) {
-  //   if (!docCdnPrefix || !this.cdnUrls?.[url]) {
-  //     return url;
-  //   }
-  //   return urlJoin(docCdnPrefix, this.cdnUrls[url]);
-  // }
 }

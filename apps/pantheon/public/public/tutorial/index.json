@@ -10,6 +10,16 @@
       "category": "rag",
       "isFeatured": false,
       "isOfficial": true
+    },
+    {
+      "image": "",
+      "title": "图像识别",
+      "date": "2025-11-10",
+      "description": "",
+      "id": "image-recognition",
+      "category": "image",
+      "isFeatured": false,
+      "isOfficial": true
     }
   ]
 }

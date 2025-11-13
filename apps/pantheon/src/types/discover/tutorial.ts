@@ -5,6 +5,7 @@ export enum TutorialCategory {
   Posture = 'posture',
   Game = 'game',
   Chat = 'chat',
+  RAG = 'rag',
 }
 
 export interface TutorialIndexItem {
