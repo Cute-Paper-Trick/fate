@@ -22,6 +22,7 @@ export const createTolgee = (lang?: string) => {
         'en:betterAuth': () => import('@/localization/betterAuth/en.json'),
         'zh:betterAuth': () => import('@/localization/betterAuth/zh-CN.json'),
         'zh:lab_tour': () => import('@/localization/lab/zh-CN.json'),
+        'zh:talk': () => import('@/localization/talk/zh-CN.json'),
       },
       language: lang || DEFAULT_LANG,
       apiKey,

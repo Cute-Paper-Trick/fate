@@ -6,6 +6,7 @@ import { Flexbox } from 'react-layout-kit';
 
 const useStyles = createStyles(({ css }) => ({
   main: css`
+    width: 100%;
     overflow: auto;
     background-color: #f9fafb;
     color: #333;
@@ -15,6 +16,7 @@ const useStyles = createStyles(({ css }) => ({
   `,
   mainContainer: css`
     width: 100%;
+    max-width: 1300px;
   `,
 }));
 const DesktopBriefIntroduct = memo<PropsWithChildren>(({ children }) => {

@@ -1,0 +1,7 @@
+{
+  "message.modal.close": "关闭",
+  "message.modal.title": "消息详情",
+  "message.type.comment": "对我的话题发表了评论",
+  "message.type.like": "点赞了我的话题",
+  "message.type.reply": "回复了我的评论"
+}

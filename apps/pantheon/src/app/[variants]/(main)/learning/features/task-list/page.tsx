@@ -20,7 +20,7 @@ const TaskList: FC = () => {
         dataSource={taskList?.list || []}
         itemLayout="horizontal"
         loading={!taskList}
-        pagination={{ position: 'bottom', align: 'center' }}
+        pagination={{ position: 'bottom', align: 'end' }}
         renderItem={(item) => (
           <List.Item
             actions={[<TaskButtonGroup item={item} key="button-group" />]}
