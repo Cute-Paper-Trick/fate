@@ -10,6 +10,7 @@ const trustedOrigins = new Set([
   'http://localhost:3010',
   'http://localhost:3001',
   'https://dev-daily-backend.goood.space',
+  'https://chat-daily.goood.space',
 ]);
 
 // 添加 CORS headers 的辅助函数
