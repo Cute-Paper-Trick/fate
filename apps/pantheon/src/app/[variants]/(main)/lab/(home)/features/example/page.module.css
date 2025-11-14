@@ -16,6 +16,7 @@
     border-radius: 6px;
     margin-bottom: 64px;
     padding: 2rem;
+    cursor: pointer;
     .cardTitle {
       font-size: 1.25rem;
       line-height: 1.75rem;
