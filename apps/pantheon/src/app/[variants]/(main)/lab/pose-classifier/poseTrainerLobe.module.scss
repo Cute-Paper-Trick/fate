@@ -471,6 +471,7 @@
         box-sizing: border-box;
         display: flex;
         align-items: center;
+        overflow-y: scroll;
 
         .pose_preview_box {
           display: flex;
