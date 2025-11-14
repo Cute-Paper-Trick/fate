@@ -5,6 +5,7 @@ import {
   CameraIcon,
   FolderIcon,
   Gamepad2Icon,
+  ImageIcon,
   LayoutPanelTopIcon,
   PersonStandingIcon,
 } from 'lucide-react';
@@ -27,6 +28,12 @@ export const useCategory = () => {
         key: TutorialCategory.Game,
         label: t('tutorial.categories.game.name'),
         title: t('tutorial.categories.game.description'),
+      },
+      {
+        icon: ImageIcon,
+        key: TutorialCategory.Image,
+        label: t('tutorial.categories.image.name'),
+        title: t('tutorial.categories.image.description'),
       },
       {
         icon: CameraIcon,

@@ -4,6 +4,7 @@ import { Button, Icon, Text, Tooltip } from '@lobehub/ui';
 import { useTranslate } from '@tolgee/react';
 import { createStyles, useResponsive } from 'antd-style';
 import { DotIcon } from 'lucide-react';
+import Link from 'next/link';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -82,6 +83,9 @@ const Header = memo<{ inModal?: boolean; mobile?: boolean }>(({ mobile: isMobile
                 </Tooltip>
               )}
             </Flexbox>
+            <Link href={`/discover/tutorial`}>
+              <Button>{t('tab.tutorial', { ns: 'common' })}</Button>
+            </Link>
           </Flexbox>
           <Flexbox align={'center'} gap={4} horizontal>
             {author && (

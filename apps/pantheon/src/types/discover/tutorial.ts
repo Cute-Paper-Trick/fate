@@ -1,5 +1,6 @@
 export enum TutorialCategory {
   All = 'all',
+  Image = 'image',
   Video = 'video',
   Audio = 'audio',
   Posture = 'posture',

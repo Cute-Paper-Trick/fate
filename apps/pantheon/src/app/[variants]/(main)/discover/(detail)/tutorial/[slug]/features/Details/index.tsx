@@ -11,7 +11,6 @@ const Details = memo<{ mobile?: boolean }>(({ mobile: isMobile }) => {
   const { mobile = isMobile } = useResponsive();
 
   const { content } = useDetailContext();
-  console.log(content);
 
   return (
     <Flexbox gap={24}>

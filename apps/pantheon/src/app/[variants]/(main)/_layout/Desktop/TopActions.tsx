@@ -77,7 +77,7 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
           tooltipProps={{ placement: 'right' }}
         />
       </Link>
-      <Link aria-label={t('tab.lab')} href={'/brief-introduct'}>
+      <Link aria-label={t('tab.lab')} href={'/lab'}>
         <ActionIcon
           active={isLabActice}
           icon={FlaskConical}

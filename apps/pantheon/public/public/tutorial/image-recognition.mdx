@@ -1,21 +1,16 @@
 ---
-title: 图像识别
-description:
-tags:
-  - 图像识别
+id: image-recognition
+title: 视觉识别引擎
+description: 罐头还是苏打水
 ---
 
-# 图像识别
-
-<font size="6">📸AI视觉魔法师：图像分类挑战！</font>
-
-<font size="4">`图像识别` `深度学习` `实时预测` `迁移学习`</font>
+# 📸AI视觉魔法师：图像分类挑战！
 
 手把手教你创建一个机器学习模型，用来识别物体。探索AI是如何"看懂"世界的
 
 ---
 
-<font size="6">开启AI视觉之旅</font>
+## 开启AI视觉之旅
 
 你好！欢迎来到图像模型训练教程。在本教程中，我将手把手带你创建一个机器学习模型，用来识别一个物体是苏打水还是番茄罐头。当然，你完全可以替换成任何两种或多种不同的物体，我只是恰好手边有它们而已！
 
@@ -23,11 +18,11 @@ tags:
 
 ---
 
-<font size="6">如何训练模型：从零开始构建你的分类器</font>
-<font size="5">**1. 创建项目与类别**</font>
-首先，我们需要创建一个新的<font color="blue">图片项目</font>
-要开始训练，我们首先需要创建不同的<font color="red">​类别（classes）</font>
-，也就是我们想让机器学会识别的目标。在这里，我将创建三个类别：
+## 如何训练模型：从零开始构建你的分类器
+
+### **1. 创建项目与类别**
+
+首先，我们需要创建一个新的<font color="blue">图片项目</font> 要开始训练，我们首先需要创建不同的<font color="red">类别（classes）</font>，也就是我们想让机器学会识别的目标。在这里，我将创建三个类别：
 
 - ✨ **苏打水**
 - ✨ **番茄罐头**
@@ -39,7 +34,7 @@ tags:
 
 ---
 
-<font size="5">**2. 收集学习样本**</font>
+### **2. 收集学习样本**
 
 创建好类别后，我们需要为每个类别提供学习样本。在本项目中，这些样本就是我们用摄像头拍摄的图像。
 
@@ -63,13 +58,13 @@ tags:
 
 最后，是"Nothing"类别。我会录制一些没有任何目标物体，只有我的手或背景的画面。
 
-**特别注意：** 我会特意在画面中展示我的手。这样做的目的是让模型学会，​"手"的存在并不等同于"苏打水"或"番茄罐头"。它需要明确区分，只有当苏打水或番茄罐头出现时，才将其归入相应的类别。
+**特别注意：** 我会特意在画面中展示我的手。这样做的目的是让模型学会，"手"的存在并不等同于"苏打水"或"番茄罐头"。它需要明确区分，只有当苏打水或番茄罐头出现时，才将其归入相应的类别。
 
 ![Nothing样本](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/4.gif)
 
 ---
 
-<font size="5">**3. 开始训练模型**</font>
+### **3. 开始训练模型**
 
 现在所有类别的样本都准备好了！点击"开始训练"按钮。 ![开始训练](https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/5.gif)
 
@@ -81,34 +76,33 @@ tags:
 
 ---
 
-<font size="6">值得尝试的事：探索模型的局限性</font>
+## 值得尝试的事：探索模型的局限性
 
-现在模型可以工作了，你可以测试它的效果——更有趣的是，去​<font color="red">​**找到它无法正常工作的边界**​</font>。尝试找到机器学习的极限所在！
+现在模型可以工作了，你可以测试它的效果——更有趣的是，去<font color="red">**找到它无法正常工作的边界**</font>。尝试找到机器学习的极限所在！
 
 **思考一下：** 对于计算机来说，图像只是一堆数字和像素的排列组合。所以，你并没有真正教会计算机什么是"番茄罐头"，你只是教会了它：这个特定形状、特定颜色的物体（在某个背景下）被标记为"番茄罐头"——对计算机来说，它看到的仅仅是像素而已。
 
 <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 2rem; flex-wrap: wrap;">
-  <div style="text-align: center;">
-    <img
-      src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/7.jpg"
-      alt="实时预览界面"
-      style="width: 300px; border-radius: 0.5rem; border: 1px solid #333333; transition: all 0.3s ease;"
-      onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.2)'"
-      onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'"
-    />
-    <br></br>
-  </div>
-</div>
+    <div style="text-align: center;">
+        <img src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/7.jpg" 
+             alt="实时预览界面" 
+             style="width: 300px; border-radius: 0.5rem; border: 1px solid #333333; transition: all 0.3s ease;"
+             onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.2)'"
+             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'" />
+        <br/>
+    </div>
 
+```
 <div style="text-align: center;">
-  <img
-    src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/7.1.png"
-    alt="识别结果"
-    style="width: 300px; height: 300px; border-radius: 0.5rem; border: 1px solid #333333; transition: all 0.3s ease;"
-    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.2)'"
-    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'"
-  />
-  <br />
+    <img src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/md/image/7.1.png"
+         alt="识别结果"
+         style="width: 300px; height: 300px; border-radius: 0.5rem; border: 1px solid #333333; transition: all 0.3s ease;"
+         onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.2)'"
+         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+    <br>
+</div>
+```
+
 </div>
 
 ---
@@ -148,29 +142,10 @@ tags:
 
 ---
 
-<font size="6">你能用它做什么？</font>
-
-你可以导出你训练好的模型，用它来做一些有趣的事情！
-
-> 我制作了一个[实时分类器](/classifier/index.html)，可以导入模型进行实时预测！
-
----
-
 ## 恭喜你！成为AI视觉魔法师！ ✨
 
 通过这个教程，你已经亲身体验了：
 
 ✨创建和管理不同的图像类别✨收集高质量的训练样本数据✨训练自己的图像分类模型✨探索模型的边界和局限性
 
-### 现在做什么？
-
-- **立刻开始创建你自己的图像识别模型吧！** 探索人工智能的奥秘！
-- 或者，你也可以阅读我们的其他教程：
-  - [如何制作声音模型教程](/audio-training.html)
-  - [如何制作姿势模型教程](/pose-detection.html)
-
 🌟 **祝你AI探索之旅收获满满！**
-
----
-
-[返回主页](/)

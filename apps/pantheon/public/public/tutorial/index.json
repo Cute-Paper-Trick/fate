@@ -12,12 +12,32 @@
       "isOfficial": true
     },
     {
-      "image": "",
-      "title": "图像识别",
+      "image": "https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/model_icon/icon_vision.png",
+      "title": "视觉识别引擎",
       "date": "2025-11-10",
-      "description": "",
+      "description": "罐头还是苏打水",
       "id": "image-recognition",
       "category": "image",
+      "isFeatured": false,
+      "isOfficial": true
+    },
+    {
+      "image": "https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/model_icon/icon_sound.png",
+      "title": "音频分析系统",
+      "date": "2025-11-10",
+      "description": "啊呜 拍拍手",
+      "id": "image-recognition",
+      "category": "audio",
+      "isFeatured": false,
+      "isOfficial": true
+    },
+    {
+      "image": "https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/model_icon/icon_action.png",
+      "title": "行为识别模块",
+      "date": "2025-11-10",
+      "description": "向左还是向右",
+      "id": "pose-recognition",
+      "category": "posture",
       "isFeatured": false,
       "isOfficial": true
     }
