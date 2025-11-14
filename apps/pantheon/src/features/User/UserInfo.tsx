@@ -37,9 +37,9 @@ const UserInfo = memo<UserInfoProps>(({ avatarProps, onClick, ...rest }) => {
     <Flexbox
       align="center"
       gap={12}
-      onClick={onClick}
       horizontal
       justify="space-between"
+      onClick={onClick}
       paddingBlock={12}
       paddingInline={12}
       {...rest}

@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  ChangeEmailCard,
-  UpdateAvatarCard,
-  UpdateNameCard,
-  UpdateUsernameCard,
-} from '@daveyplate/better-auth-ui';
+import { UpdateAvatarCard, UpdateNameCard } from '@daveyplate/better-auth-ui';
 import { Skeleton } from 'antd';
 import { memo } from 'react';
 
@@ -25,9 +20,7 @@ const Client = memo<{ mobile?: boolean }>(({ mobile }) => {
   return (
     <>
       <UpdateAvatarCard localization={{}} />
-      <UpdateUsernameCard />
       <UpdateNameCard />
-      <ChangeEmailCard />
     </>
   );
 });

@@ -12,6 +12,12 @@ import { message } from '@/components/AntdStaticMethods';
 import { authClient, useSession } from '@/features/cerberus/client';
 import { useUserStore } from '@/store/user/store';
 
+// 邮箱验证
+const isValidEmail = (email: string | undefined | null): boolean => {
+  if (!email) return false;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 const VerifyEmail = () => {
   const { t } = useTranslate('auth');
   const { refetch } = useSession();
@@ -86,7 +92,6 @@ const VerifyEmail = () => {
       message?.error(error.message || '操作失败，请稍后重试');
     },
   });
-
   return (
     <Modal
       closable={false}
@@ -110,7 +115,10 @@ const VerifyEmail = () => {
       {step === 0 && (
         <>
           <Flexbox gap={8}>
-            <Form form={form} initialValues={{ email: user?.email }}>
+            <Form
+              form={form}
+              initialValues={{ email: isValidEmail(user?.email) ? user?.email : '' }}
+            >
               <Form.Item
                 label={t('emailVerify.emailAddress', '邮箱地址')}
                 layout="vertical"
