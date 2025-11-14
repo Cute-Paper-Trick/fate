@@ -1,16 +1,14 @@
 import { toNextJsHandler } from 'better-auth/next-js';
 import { NextRequest } from 'next/server';
 
+import { appEnv } from '@/envs/app';
 import { auth } from '@/features/cerberus/auth';
 
 // 获取 trustedOrigins 配置
 const trustedOrigins = new Set([
-  'http://localhost:5090',
-  'http://localhost:3000',
-  'http://localhost:3010',
-  'http://localhost:3001',
-  'https://dev-daily-backend.goood.space',
-  'https://chat-daily.goood.space',
+  appEnv.APP_URL,
+  appEnv.NEXT_PUBLIC_BACKEND_URL,
+  appEnv.NEXT_PUBLIC_CHAT_APP_URL,
 ]);
 
 // 添加 CORS headers 的辅助函数

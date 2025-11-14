@@ -104,7 +104,7 @@ const McpItem = memo<TutorialIndexItem>(
           </Flexbox>
         </Flexbox>
         <Flexbox flex={1} gap={12} paddingInline={16}>
-          {image && <Image alt={title} src={image} />}
+          {image && <Image alt={title} preview={false} src={image} />}
           <Text as={'p'} className={styles.desc} ellipsis={{ rows: 3 }}>
             {description}
           </Text>
