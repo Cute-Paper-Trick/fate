@@ -1,6 +1,8 @@
 'use client';
 
 import { TolgeeProvider } from '@tolgee/react';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
 import { PropsWithChildren, memo, useEffect, useState } from 'react';
 
 import BrandTextLoading from '@/components/Loading/BrandTextLoading';
@@ -23,9 +25,20 @@ const Locale = memo(({ children, defaultLang }: LocaleLayoutProps) => {
     return () => unsubscribe();
   }, [tolgee]);
 
+  const getAntdLocale = () => {
+    switch (lang) {
+      case 'zh': {
+        return zhCN;
+      }
+      default: {
+        return undefined;
+      } // 默认英文
+    }
+  };
+
   return (
     <TolgeeProvider fallback={<BrandTextLoading />} ssr={{ language: lang }} tolgee={tolgee}>
-      {children}
+      <ConfigProvider locale={getAntdLocale()}>{children}</ConfigProvider>
     </TolgeeProvider>
   );
 });
