@@ -26,7 +26,13 @@ const TalkEditor = memo<TalkEditorProps>(({ onChange, content = '' }) => {
       as="section"
       paddingBlock={8}
       paddingInline={8}
-      style={{ border: '1px solid #eee', minHeight: 100, borderRadius: 8 }}
+      style={{
+        border: '1px solid #f9f9f9',
+        minHeight: 100,
+        borderRadius: 10,
+        marginBottom: '22px',
+        backgroundColor: '#f0f1f4',
+      }}
       width={'100%'}
     >
       <Editor

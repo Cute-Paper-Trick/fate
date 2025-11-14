@@ -26,7 +26,6 @@ const isProtectedRoute = createRouteMatcher([
   '/learning(.*)',
   '/profile(.*)',
   '/discover(.*)',
-  '/messageCenter(.*)',
 ]);
 
 const isAuthRoute = createRouteMatcher(['/auth/sign-in']);
@@ -205,6 +204,5 @@ export const config = {
     '/profile(.*)',
     '/discover(.*)',
     '/verify-email-success(.*)',
-    '/messageCenter(.*)',
   ],
 };
