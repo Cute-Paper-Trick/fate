@@ -53,7 +53,7 @@ export const auth = betterAuth({
     cookiePrefix: 'fate',
     crossSubDomainCookies: {
       enabled: true,
-      domain: '.goood.space', // 使用 domain (单数) 强制所有子域使用 .goood.space
+      domain: appEnv.COOKIE_DOMAIN,
     },
   },
   trustedOrigins: [appEnv.APP_URL, appEnv.NEXT_PUBLIC_BACKEND_URL, appEnv.NEXT_PUBLIC_CHAT_APP_URL],

@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import { appEnv } from '@/envs/app';
 import { AppTab } from '@/store/global/initialState';
 
 const ICON_SIZE: ActionIconProps['size'] = {
@@ -37,13 +38,13 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
   const isLearningActive = tab === AppTab.Learning;
   const isTutorialActive = tab === AppTab.Discover;
 
-  const CHAT_APP_HOST = 'http://localhost:3010';
+  const CHAT_APP_URL = appEnv.NEXT_PUBLIC_CHAT_APP_URL;
 
   return (
     <Flexbox gap={8}>
       <Link
         aria-label={t('tab.chat')}
-        href={`${CHAT_APP_HOST}/chat`}
+        href={`${CHAT_APP_URL}/chat`}
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -88,7 +89,7 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
       </Link>
       <Link
         aria-label={t('tab.files')}
-        href={`${CHAT_APP_HOST}/files`}
+        href={`${CHAT_APP_URL}/files`}
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -101,7 +102,7 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
       </Link>
       <Link
         aria-label={t('tab.aiImage')}
-        href={`${CHAT_APP_HOST}/image`}
+        href={`${CHAT_APP_URL}/image`}
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -114,7 +115,7 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
       </Link>
       <Link
         aria-label={t('tab.discover')}
-        href={`${CHAT_APP_HOST}/discover`}
+        href={`${CHAT_APP_URL}/discover`}
         rel="noopener noreferrer"
         target="_blank"
       >
