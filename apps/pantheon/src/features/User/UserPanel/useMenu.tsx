@@ -1,7 +1,7 @@
 import { Icon } from '@lobehub/ui';
 import { useTranslate } from '@tolgee/react';
 import { ItemType } from 'antd/es/menu/interface';
-import { Book, CircleUserRound, Feather, FileClockIcon, LogOut, Mail } from 'lucide-react';
+import { Book, CircleUserRound, Feather, FileClockIcon, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
 import { MenuProps } from '@/components/Menu';
@@ -19,13 +19,6 @@ export const useMenu = () => {
       icon: <Icon icon={CircleUserRound} />,
       key: 'profile',
       label: <Link href={'/profile'}>{t('userPanel.profile')}</Link>,
-    },
-  ];
-  const messageCenter: MenuProps['items'] = [
-    {
-      icon: <Icon icon={Mail} />,
-      key: 'messageCenter',
-      label: <Link href={'/messageCenter'}>{t('userPanel.messageCenter', '消息中心')}</Link>,
     },
   ];
 
@@ -72,7 +65,6 @@ export const useMenu = () => {
   const mainItems = [
     { type: 'divider' },
     ...(isLogin ? profile : []),
-    ...(isLogin ? messageCenter : []),
     ...(enableHelp ? helps : []),
   ].filter(Boolean) as MenuProps['items'];
 

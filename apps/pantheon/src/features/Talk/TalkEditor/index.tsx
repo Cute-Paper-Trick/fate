@@ -45,7 +45,7 @@ const TalkEditor = memo<TalkEditorProps>(({ onChange, content = '' }) => {
           onChange(text);
         }}
         onInit={handleInit}
-        placeholder={t('editor.placeholder')}
+        placeholder={t('publish.title', '分享你的想法...')}
         plugins={[ReactCodeblockPlugin]}
         type="text"
         variant="chat"

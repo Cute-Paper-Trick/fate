@@ -29,6 +29,16 @@ const nextConfig: NextConfig = {
     return rewrites;
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/lab',
+        permanent: true,
+      },
+    ];
+  },
+
   turbopack: {
     resolveAlias: {
       'fs': './turbopack-empty-module.js',

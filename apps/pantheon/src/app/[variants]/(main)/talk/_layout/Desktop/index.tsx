@@ -5,9 +5,6 @@ import { useResponsive } from 'antd-style';
 import { ReactNode, memo, useRef } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import Footer from '@/features/Setting/Footer';
-import SettingContainer from '@/features/Setting/SettingContainer';
-
 import Header from '../../../profile/_layout/Desktop/Header';
 import SideBar from '../../../profile/_layout/Desktop/SideBar';
 
@@ -29,7 +26,10 @@ const TalkLayout = memo<LayoutProps>(({ children, category }) => {
       width={'100%'}
     >
       {md ? (
-        <SideBar desc=" " title={t('topic.sidebar.title', '交流中心')}>
+        <SideBar
+          desc={t('topic.sidebar.description', 'AI 学习交流社区')}
+          title={t('topic.sidebar.title', '交流中心')}
+        >
           {category}
         </SideBar>
       ) : (
@@ -37,7 +37,7 @@ const TalkLayout = memo<LayoutProps>(({ children, category }) => {
           {category}
         </Header>
       )}
-      <SettingContainer addonAfter={<Footer />}>{children}</SettingContainer>
+      {children}
     </Flexbox>
   );
 });
