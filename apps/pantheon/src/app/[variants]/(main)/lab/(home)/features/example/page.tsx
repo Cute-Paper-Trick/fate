@@ -4,6 +4,7 @@ import { AudioFilled, FileImageFilled, SmileFilled } from '@ant-design/icons';
 import { useTranslate } from '@tolgee/react';
 import { Col, Row, Steps } from 'antd';
 import Image from 'next/image';
+import { useRouter } from 'nextjs-toploader/app';
 import { FC, useMemo } from 'react';
 
 import AUDIO_PROJECT from '@/app/assets/images/brief-introduct-img/audio-project.png';
@@ -14,13 +15,14 @@ import styles from './page.module.css';
 
 const Example: FC = () => {
   const { t } = useTranslate('lab_tour');
+  const router = useRouter();
   const data = useMemo(
     () => [
       {
         title: t('tutorial.image.title'),
         icon: <FileImageFilled />,
         img: IMAGE_PROJECT,
-        src: 'image-training.html',
+        src: '/discover/tutorial/image-recognition',
         stepList: [
           {
             title: t('tutorial.image.step_1.title'),
@@ -40,7 +42,7 @@ const Example: FC = () => {
         title: t('tutorial.audio.title'),
         icon: <AudioFilled />,
         img: AUDIO_PROJECT,
-        src: '/audio-training.html',
+        src: '/discover/tutorial/audio-recognition',
         stepList: [
           {
             title: t('tutorial.audio.step_1.title'),
@@ -60,7 +62,7 @@ const Example: FC = () => {
         title: t('tutorial.posture.title'),
         icon: <SmileFilled />,
         img: POSTTURE_PROJECT,
-        src: 'pose-detection.html',
+        src: '/discover/tutorial/pose-recognition',
         stepList: [
           {
             title: t('tutorial.posture.step_1.title'),
@@ -85,7 +87,7 @@ const Example: FC = () => {
         <span>{t('tutorial.title')}</span>
       </div>
       {data.map((item, index) => (
-        <div className={styles.card} key={index}>
+        <div className={styles.card} key={index} onClick={() => router.push(item.src)}>
           <div className={styles.cardTitle}>
             <span className={styles.icon}>{item.icon}</span>
             <span>{item.title}</span>

@@ -40,15 +40,27 @@ const VerifyEmail = () => {
 
   const changeEmail = useMutation({
     mutationFn: async (newEmail: string) => {
+      let data;
       if (newEmail === user?.email) {
-        await authClient.sendVerificationEmail({
+        data = await authClient.sendVerificationEmail({
           email: newEmail,
           callbackURL: '/verify-email-success',
         });
-        return;
+      } else {
+        data = await authClient.changeEmail({ newEmail, callbackURL: '/verify-email-success' });
       }
 
-      await authClient.changeEmail({ newEmail, callbackURL: '/verify-email-success' });
+      if (data?.error) {
+        if (data.error.code === 'COULDNT_UPDATE_YOUR_EMAIL') {
+          throw new Error(t('emailVerify.emailAlreadyInUse', '邮箱已被使用，请更换邮箱'));
+        }
+        if (data.error.code === 'YOU_CAN_ONLY_SEND_A_VERIFICATION_EMAIL_TO_AN_UNVERIFIED_EMAIL') {
+          throw new Error(
+            t('emailVerify.emailHasBeenVerified', '您的邮箱已经通过验证，请刷新页面'),
+          );
+        }
+        throw new Error(data.error.message || '操作失败，请稍后重试');
+      }
     },
     onError: (error) => {
       message?.error(error.message || '操作失败，请稍后重试');

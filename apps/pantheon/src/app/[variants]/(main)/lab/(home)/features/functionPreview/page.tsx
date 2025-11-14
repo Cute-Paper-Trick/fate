@@ -1,103 +1,34 @@
 'use client';
 
-import { FileImageFilled, SmileFilled } from '@ant-design/icons';
 import { useTranslate } from '@tolgee/react';
 import { Col, Row } from 'antd';
-import Image from 'next/image';
-import { FC, useMemo } from 'react';
-
-import IMAGE_FUNCTION from '@/app/assets/images/brief-introduct-img/image-function.png';
-import POSTTURE_FUNCTION from '@/app/assets/images/brief-introduct-img/posture-function.png';
+import { FC } from 'react';
 
 import styles from './page.module.css';
 
 const FunctionPreview: FC = () => {
   const { t } = useTranslate('lab_tour');
-  const data = useMemo(
-    () => [
-      {
-        title: t('preview.image.title'),
-        icon: <FileImageFilled />,
-        img: IMAGE_FUNCTION,
-        src: 'image-training.html',
-        imagePosition: 'right',
-        detail: t('preview.image.detail'),
-        stepList: [
-          {
-            title: t('preview.image.step_1.title'),
-            context: t('preview.image.step_1.context'),
-          },
-          {
-            title: t('preview.image.step_2.title'),
-            context: t('preview.image.step_2.context'),
-          },
-          {
-            title: t('preview.image.step_3.title'),
-            context: t('preview.image.step_3.context'),
-          },
-        ],
-      },
-      {
-        title: t('preview.posture.title'),
-        icon: <SmileFilled />,
-        img: POSTTURE_FUNCTION,
-        src: 'pose-detection.html',
-        imagePosition: 'left',
-        detail: t('preview.posture.detail'),
-        stepList: [
-          {
-            title: t('preview.posture.step_1.title'),
-            context: t('preview.posture.step_1.context'),
-          },
-          {
-            title: t('preview.posture.step_2.title'),
-            context: t('preview.posture.step_2.context'),
-          },
-          {
-            title: t('preview.posture.step_3.title'),
-            context: t('preview.posture.step_3.context'),
-          },
-        ],
-      },
-    ],
-    [t],
-  );
-
   return (
     <div className={styles.experience}>
       <div className={styles.title}>
         <span>{t('preview.title')}</span>
       </div>
-      {data.map((item, index) => (
-        <div className={styles.card} key={index}>
-          <div
-            className={`${styles.cardContent} ${item.imagePosition === 'left' ? styles.cardContent2 : ''}`}
-          >
-            <Row gutter={[20, 20]} style={{ flex: 1 }}>
-              <Col sm={12} style={{ display: 'flex' }} xs={24}>
-                <div className={styles.flow}>
-                  <div className={styles.cardTitle}>
-                    <span className={styles.icon}>{item.icon}</span>
-                    <span>{item.title}</span>
-                  </div>
-                  <div className={styles.cardDetail}>{item.detail}</div>
-                  {item.stepList.map((step, stepIndex) => (
-                    <div className={styles.step} key={stepIndex}>
-                      <span className={styles.stepTitle}>{step.title}</span>
-                      <span className={styles.stepContext}>{step.context}</span>
-                    </div>
-                  ))}
-                </div>
-              </Col>
-              <Col sm={12} style={{ display: 'flex' }} xs={24}>
-                <div className={styles.image}>
-                  <Image alt={item.title} src={item.img} />
-                </div>
-              </Col>
-            </Row>
-          </div>
+      <div className={styles.card}>
+        <div className={`${styles.cardContent}`}>
+          <Row gutter={[20, 20]} style={{ flex: 1 }}>
+            <Col sm={12} style={{ display: 'flex' }} xs={24}>
+              <div className={styles.image}>
+                <video autoPlay loop muted playsInline src="/piano.mp4" />
+              </div>
+            </Col>
+            <Col sm={12} style={{ display: 'flex' }} xs={24}>
+              <div className={styles.image}>
+                <video autoPlay loop muted playsInline src="/rock_paper_scissors.mp4" />
+              </div>
+            </Col>
+          </Row>
         </div>
-      ))}
+      </div>
     </div>
   );
 };
