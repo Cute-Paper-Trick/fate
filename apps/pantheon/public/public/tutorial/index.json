@@ -2,7 +2,7 @@
   "$schema": "https://pantheon-uat.goood.space/public/tutorial/schema.json",
   "tutorial": [
     {
-      "image": "",
+      "image": "https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/model_icon/icon_knowledge.png",
       "title": "知识库系统",
       "date": "2025-11-10",
       "description": "了解知识库功能如何帮助助手更好地理解和利用外部信息，从而实现个性化回答与上下文记忆，并探索知识库的创建、管理和最佳使用实践。学习如何使用知识库来提升助手的知识覆盖面和回答准确度，包括导入文档、组织资料与智能检索。",

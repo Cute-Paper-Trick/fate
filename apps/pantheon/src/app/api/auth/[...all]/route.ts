@@ -9,6 +9,8 @@ const trustedOrigins = new Set([
   appEnv.APP_URL,
   appEnv.NEXT_PUBLIC_BACKEND_URL,
   appEnv.NEXT_PUBLIC_CHAT_APP_URL,
+  'http://localhost:5090',
+  'http://localhost:3010',
 ]);
 
 // 添加 CORS headers 的辅助函数
