@@ -127,9 +127,7 @@ const InteractionList: React.FC = () => {
                     description={
                       <div>
                         {item.content && (
-                          <Paragraph ellipsis={{ rows: 3 }} style={{ margin: '8px 0' }}>
-                            {item.content}
-                          </Paragraph>
+                          <Paragraph ellipsis={{ rows: 3 }} style={{ margin: '8px 0' }} />
                         )}
 
                         <Text style={{ fontSize: '12px' }} type="secondary">
