@@ -148,7 +148,7 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
             </Button>
           </div>
           {isPerviewOpen ? (
-            <>
+            <div className={styles.preview_box}>
               <div className={styles.preview_body_area}>
                 <div className={styles.preview_control_area}>
                   <Space direction="horizontal">
@@ -291,7 +291,7 @@ const Preview: React.FC<PreviewProps> = ({ videoRef }) => {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           ) : (
             <p className={styles.output_text}>
               {t('classifier.preview.attention', '您必须先在左侧训练模型，然后才可以在此处预览。')}
