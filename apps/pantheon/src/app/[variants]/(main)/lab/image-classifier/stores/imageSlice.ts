@@ -37,6 +37,7 @@ interface ClassState {
   kValue: number;
   compareType: string;
   mobilenetModel: mobilenet.MobileNet | null;
+  trainingFlag?: boolean;
 
   // Actions
   addClass: (payload: { id: string; name: string }) => void;
@@ -61,6 +62,7 @@ interface ClassState {
   setMobilenetModel: (mobilenetModel: mobilenet.MobileNet | null) => void;
   stopPredict: () => void;
   reset: () => void;
+  setTrainingFlag: (flag: boolean) => void;
 }
 
 // === 创建 vanilla store ===
@@ -83,6 +85,7 @@ export const useImageStore = create<ClassState>((set) => ({
   kValue: 3,
   compareType: 'video',
   mobilenetModel: null,
+  trainingFlag: false,
 
   clearClassSample: (id) => {
     set((state) => {
@@ -165,6 +168,7 @@ export const useImageStore = create<ClassState>((set) => ({
   setCompareType: (compareType) => set({ compareType }),
   setMobilenetModel: (mobilenetModel) => set({ mobilenetModel }),
   stopPredict: () => set({ isPredicting: false }),
+  setTrainingFlag: (flag) => set({ trainingFlag: flag }),
   reset: () =>
     set({
       predictions: [],

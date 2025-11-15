@@ -43,6 +43,8 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
     imageDelete,
     clearClassSample,
     changeClassImages,
+    trainingFlag,
+    trainingOver,
   } = useImageStore();
 
   const { t } = useTranslate('lab');
@@ -573,6 +575,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
       })}
       <Button
         className={styles.button_add}
+        disabled={trainingFlag || trainingOver}
         icon={<PlusSquareOutlined />}
         onClick={() => handleAddClass()}
       >

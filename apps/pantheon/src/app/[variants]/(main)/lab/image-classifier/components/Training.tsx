@@ -50,6 +50,7 @@ const Training: React.FC = () => {
     setDistanceThreshold,
     filterAlpha, //滤波器系数 (α)
     setFilterAlpha,
+    setTrainingFlag,
   } = useImageStore();
 
   const { extractImageNetTags } = useImageModel({ classList });
@@ -99,6 +100,7 @@ const Training: React.FC = () => {
   const trainKNN = async (classList: ClassItem[]) => {
     const classes: string[] = [];
     let count = 0;
+    setTrainingFlag(true);
 
     for (const i of classList) {
       if (i.images.length === 0) {
