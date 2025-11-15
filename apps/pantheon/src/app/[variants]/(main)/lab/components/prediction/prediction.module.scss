@@ -2,6 +2,8 @@
   color: #000;
   width: 100%;
   padding: 0 18px 18px;
+  max-height: 200px;
+  overflow: scroll;
 
   .prediction_item {
     display: flex;
