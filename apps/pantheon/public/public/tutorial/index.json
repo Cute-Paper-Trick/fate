@@ -40,6 +40,16 @@
       "category": "posture",
       "isFeatured": false,
       "isOfficial": true
+    },
+    {
+      "image": "https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/Tutorial/2025-11-15.png",
+      "title": "DIY AI 项目 —— 互动故事书",
+      "date": "2025-11-10",
+      "description": "欢迎来到“DIY AI 项目 —— 互动故事书”的世界！在这个项目中，我们将探索如何利用图像识别，为你的AI互动故事书注入生命，使其能够超越预设脚本，提供真正个性化、沉浸式的阅读体验。",
+      "id": "storybook",
+      "category": "image",
+      "isFeatured": false,
+      "isOfficial": true
     }
   ]
 }
