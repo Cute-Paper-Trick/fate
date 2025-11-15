@@ -8,6 +8,7 @@ import { useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { message } from '@/components/AntdStaticMethods';
+import { appEnv } from '@/envs/app';
 import { commonService, useTaskTopicAdd } from '@/lib/http';
 import { queryClient } from '@/lib/query';
 
@@ -38,6 +39,7 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
   const [uploading, setUploading] = useState(false);
   const [resetKey, setResetKey] = useState(0);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [uploadError, setUploadError] = useState(false);
 
   const createTopicMutation = useTaskTopicAdd({
     mutation: {
@@ -110,7 +112,7 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
     const suffix = file.name.slice(file.name.lastIndexOf('.'));
 
     // @ts-ignore
-    file.ossKey = `${process.env.NEXT_PUBLIC_OSS_TOPIC_PREFIX}/post/${uuid()}${suffix}`;
+    file.ossKey = `${appEnv.NEXT_PUBLIC_OSS_TOPIC_PREFIX}/post/${uuid()}${suffix}`;
     return file;
   };
 
@@ -157,8 +159,8 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
       onSuccess?.(data);
     } catch (error) {
       setUploading(false);
-
       onError?.(error as any);
+      setUploadError(true);
     }
   };
 
@@ -212,7 +214,10 @@ export function TopicCreate({ onChange }: TalkEditorProps) {
           <Button
             className={styles.postBtn}
             disabled={
-              content.trim() === '' || (fileList.length === 0 && content.trim() === '') || uploading
+              uploadError ||
+              content.trim() === '' ||
+              (fileList.length === 0 && content.trim() === '') ||
+              uploading
             }
             loading={createTopicMutation.isPending}
             onClick={onPost}

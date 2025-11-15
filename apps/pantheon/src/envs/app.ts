@@ -12,6 +12,7 @@ export const appEnv = createEnv({
     NEXT_PUBLIC_BACKEND_URL: z.url(),
     NEXT_PUBLIC_ENABLE_TRANS_TOOLS: z.boolean().optional(),
     NEXT_PUBLIC_CHAT_APP_URL: z.string(),
+    NEXT_PUBLIC_OSS_TOPIC_PREFIX: z.string(),
   },
   runtimeEnv: {
     COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
@@ -21,5 +22,6 @@ export const appEnv = createEnv({
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
     MIDDLEWARE_REWRITE_THROUGH_LOCAL: process.env.MIDDLEWARE_REWRITE_THROUGH_LOCAL === '1',
     NEXT_PUBLIC_ENABLE_TRANS_TOOLS: process.env.NEXT_PUBLIC_ENABLE_TRANS_TOOLS === '1',
+    NEXT_PUBLIC_OSS_TOPIC_PREFIX: process.env.NEXT_PUBLIC_OSS_TOPIC_PREFIX,
   },
 });
