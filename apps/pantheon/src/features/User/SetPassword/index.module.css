@@ -1,0 +1,5 @@
+.setPasswordForm{
+    :global(.ant-form-item-no-colon) {
+        font-weight: bold;
+    }
+}

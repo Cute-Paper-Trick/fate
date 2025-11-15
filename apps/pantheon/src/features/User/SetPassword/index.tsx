@@ -14,6 +14,8 @@ import { accountChangePasswordFinish, useAccountNeedChangePassword } from '@/lib
 import { useUserStore } from '@/store/user';
 import { userProfileSelectors } from '@/store/user/selectors';
 
+import styles from './index.module.css';
+
 const SetPassword = () => {
   const { t } = useTranslate('auth');
 
@@ -75,15 +77,16 @@ const SetPassword = () => {
           labelCol={{ span: 6 }}
           style={{ gap: 0 }}
           disabled={changePassword.isPending}
+          className={styles.setPasswordForm}
         >
           <Form.Item
-            label={
-              <Text style={{ fontWeight: 'bold' }}>
-                {t('changePassword.oldPassword', '旧密码')}
-              </Text>
-            }
+            label={t('changePassword.oldPassword', '旧密码')}
             name="oldPassword"
-            rules={[{ required: true }]}
+            rules={[
+              {
+                required: true,
+              },
+            ]}
             colon={false}
             labelAlign="left"
             required={false}
@@ -91,11 +94,7 @@ const SetPassword = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            label={
-              <Text style={{ fontWeight: 'bold' }}>
-                {t('changePassword.newPassword', '新密码')}
-              </Text>
-            }
+            label={t('changePassword.newPassword', '新密码')}
             name="newPassword"
             rules={[{ required: true, type: 'string', min: 8 }]}
             colon={false}
@@ -109,14 +108,12 @@ const SetPassword = () => {
             required={false}
             labelAlign="left"
             dependencies={['newPassword']}
-            label={
-              <Text style={{ fontWeight: 'bold' }}>
-                {t('changePassword.confirmPassword', '确认密码')}
-              </Text>
-            }
+            label={t('changePassword.confirmPassword', '确认密码')}
             name="confirmPassword"
             rules={[
-              { required: true },
+              {
+                required: true,
+              },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('newPassword') === value) {
