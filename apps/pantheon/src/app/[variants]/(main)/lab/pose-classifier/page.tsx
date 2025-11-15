@@ -1,6 +1,6 @@
 'use client';
 import { ThemeProvider } from '@lobehub/ui';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import Preview from './features/Preview';
 import Sample from './features/Sample';
@@ -9,8 +9,12 @@ import styles from './poseTrainerLobe.module.scss';
 import { usePoseStore } from './stores/poseSlice';
 
 const PoseTrainer: React.FC = () => {
-  const { isPredicting, loading } = usePoseStore();
+  const { reset, isPredicting, loading } = usePoseStore();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    reset();
+  }, []);
 
   return (
     <ThemeProvider>

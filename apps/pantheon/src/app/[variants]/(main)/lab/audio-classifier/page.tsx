@@ -39,7 +39,7 @@ const AudioTrainer: React.FC = () => {
   const recognizerRef = useRef<speechCommands.SpeechCommandRecognizer | null>(null);
   const transferRef = useRef<TransferRecognizer | null>(null);
   const { setTransferRefCurrent } = useAudioStore();
-  const { clearAudios } = useAudioStore();
+  const { reset } = useAudioStore();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslate('lab');
 
@@ -82,12 +82,9 @@ const AudioTrainer: React.FC = () => {
     initModel();
   }, []);
 
-  // 组件卸载时清空 audios
   useEffect(() => {
-    return () => {
-      clearAudios();
-    };
-  }, [clearAudios]);
+    reset();
+  }, []);
 
   return (
     <div className={styles.container}>

@@ -58,6 +58,7 @@ interface ClassState {
   setPoses: (poses: any) => void;
   setAnimationFrameId: (id: number | null) => void;
   stopAnimation: () => void;
+  reset: () => void;
 }
 
 // === 创建 vanilla store ===
@@ -179,4 +180,16 @@ export const usePoseStore = create<ClassState>((set) => ({
       return { animationFrameId: null };
     });
   },
+  reset: () =>
+    set({
+      predictions: [],
+      isPredicting: false,
+      loading: false,
+      trainingOver: false,
+      isPerviewOpen: false,
+      list: [
+        { id: 'class-1', name: 'Class 1', poses: [] },
+        { id: 'class-2', name: 'Class 2', poses: [] },
+      ],
+    }),
 }));

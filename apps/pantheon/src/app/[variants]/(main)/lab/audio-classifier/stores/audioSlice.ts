@@ -65,13 +65,13 @@ interface ClassState {
   removeClass: (id: string) => void;
   renameClass: (payload: { id: string; name: string }) => void;
   setPredictionResult: (result: string) => void;
-  clearAudios: () => void;
   setRecording: (isRecording: boolean, classId: string | null) => void;
   setTrainingOver: (flag: boolean) => void;
   setPredictions: (predictions: Prediction[]) => void;
   setSpeechCommands: (ref: TransferRecognizer) => void;
   setTransferRefCurrent: (transferRefCurrent: TransferRecognizer) => void;
   setActiveRecorder: (id: string | null) => void;
+  reset: () => void;
 }
 
 // === 创建 vanilla store ===
@@ -140,8 +140,10 @@ export const audioStore = createStore<ClassState>((set) => ({
       return { list: [...state.list] };
     }),
 
-  clearAudios: () =>
+  reset: () =>
     set({
+      predictions: [],
+      trainingOver: false,
       list: [
         { id: 'class-env', name: 'Class background', audios: [], images: [] },
         { id: 'class-2', name: 'Class 2', audios: [], images: [] },

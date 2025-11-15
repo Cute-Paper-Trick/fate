@@ -60,6 +60,7 @@ interface ClassState {
   setCompareType: (compareType: string) => void;
   setMobilenetModel: (mobilenetModel: mobilenet.MobileNet | null) => void;
   stopPredict: () => void;
+  reset: () => void;
 }
 
 // === 创建 vanilla store ===
@@ -164,6 +165,14 @@ export const useImageStore = create<ClassState>((set) => ({
   setCompareType: (compareType) => set({ compareType }),
   setMobilenetModel: (mobilenetModel) => set({ mobilenetModel }),
   stopPredict: () => set({ isPredicting: false }),
+  reset: () =>
+    set({
+      predictions: [],
+      isPredicting: false,
+      loading: false,
+      trainingOver: false,
+      isPerviewOpen: false,
+    }),
 }));
 
 // === React hook 用于订阅状态 ===

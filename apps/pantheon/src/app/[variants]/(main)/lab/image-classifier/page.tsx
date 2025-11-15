@@ -10,7 +10,7 @@ import { useImageStore } from './stores/imageSlice';
 
 const ImageTrainer: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const { loading, setLoading, clearImages } = useImageStore();
+  const { reset, loading, setLoading, clearImages } = useImageStore();
 
   useEffect(() => {
     return () => {
@@ -18,6 +18,10 @@ const ImageTrainer: React.FC = () => {
       setLoading(false);
     };
   }, [clearImages]);
+
+  useEffect(() => {
+    reset();
+  }, []);
 
   return (
     <div className={styles.container}>
