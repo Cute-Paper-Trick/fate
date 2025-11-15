@@ -677,6 +677,9 @@
             color: #000;
             width: 100%;
             padding: 0 0 18px;
+            max-height: 16vh;
+            overflow-x: hidden;
+            overflow-y: scroll;
 
             .prediction_item {
               display: flex;
