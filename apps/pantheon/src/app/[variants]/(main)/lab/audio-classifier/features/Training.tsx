@@ -19,15 +19,15 @@ const Training: React.FC = () => {
     trainModel,
     // stopPredicting,
   } = useSpeechTrainer();
-  const [trainFlag, setTrainFlag] = useState(false);
+  // const [training, setTrainingFlag] = useState(false);
   const { list } = useAudioStore();
-  const { trainingOver } = useAudioStore();
+  const { trainingOver, trainingFlag, setTrainingFlag } = useAudioStore();
   const totalCount = list.reduce((sum, cls) => sum + (cls.images?.length || 0), 0);
   const [currentCount, setCurrentCount] = useState(0);
   const { t } = useTranslate('lab');
 
   useEffect(() => {
-    if (!trainFlag || trainingOver) return;
+    if (!trainingFlag || trainingOver) return;
 
     const interval = setInterval(() => {
       setCurrentCount((prev) => {
@@ -38,7 +38,7 @@ const Training: React.FC = () => {
     }, 900);
 
     return () => clearInterval(interval);
-  }, [trainFlag, trainingOver, totalCount]);
+  }, [trainingFlag, trainingOver, totalCount]);
 
   const handleStart = () => {
     if (list.length < 2) {
@@ -60,7 +60,7 @@ const Training: React.FC = () => {
     }
     // stopPredicting();
     trainModel();
-    setTrainFlag(true);
+    setTrainingFlag(true);
   };
 
   const trainingItems: CollapseProps['items'] = [
@@ -103,7 +103,7 @@ const Training: React.FC = () => {
               {t('classifier.training.restart', '重新开始')}
             </Button>
           )}
-          {trainFlag === true ? (
+          {trainingFlag === true ? (
             <div className={styles.training_progress}>
               {trainingOver === true ? (
                 t('classifier.training.finish', '已训练')

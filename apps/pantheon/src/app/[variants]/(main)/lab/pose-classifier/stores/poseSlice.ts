@@ -36,6 +36,7 @@ interface ClassState {
   selectMap: Record<string, boolean>;
   poses: any;
   animationFrameId: number | null;
+  trainingFlag: boolean;
 
   // Actions
   addClass: (payload: { id: string; name: string }) => void;
@@ -59,6 +60,7 @@ interface ClassState {
   setAnimationFrameId: (id: number | null) => void;
   stopAnimation: () => void;
   reset: () => void;
+  setTrainingFlag: (flag: boolean) => void;
 }
 
 // === 创建 vanilla store ===
@@ -85,6 +87,7 @@ export const usePoseStore = create<ClassState>((set) => ({
   selectMap: {},
   poses: null,
   animationFrameId: null,
+  trainingFlag: false,
 
   clearClassSample: (id) => {
     set((state) => {
@@ -156,6 +159,7 @@ export const usePoseStore = create<ClassState>((set) => ({
 
   setPoseDetector: (poseDetector) => set({ poseDetector }),
   setTrainingOver: (flag) => set({ trainingOver: flag }),
+  setTrainingFlag: (flag) => set({ trainingFlag: flag }),
   setPredictions: (predictions) => set({ predictions }),
   setIsPredicting: (isPredicting) => set({ isPredicting }),
   setIsPerviewOpen: (isPerviewOpen) => set({ isPerviewOpen }),

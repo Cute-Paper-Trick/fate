@@ -36,7 +36,7 @@ const SampleComponent: React.FC = () => {
   const { addClass } = useAudioStore();
   const { removeClass } = useAudioStore();
   const { renameClass } = useAudioStore();
-  const { clearClassSample } = useAudioStore();
+  const { clearClassSample, trainingFlag, trainingOver } = useAudioStore();
 
   const [selectedClassId, setSelectedClassId] = useState<string>('');
   const [uploadingMap, setUploadingMap] = useState<Record<string, boolean>>({});
@@ -118,6 +118,15 @@ const SampleComponent: React.FC = () => {
     setActiveRecordingId(null);
   };
 
+  const stopAllRecordings = () => {
+    spectrogramRefs.current.forEach((ref) => {
+      console.log(spectrogramRefs.current);
+
+      ref.stopMinimalCleanup();
+    });
+    setActiveRecordingId(null);
+  };
+
   const handleStartRecording = (classId: string) => {
     stopAllOtherRecordings(classId);
     setActiveRecordingId(classId);
@@ -142,8 +151,10 @@ const SampleComponent: React.FC = () => {
                   if (cls.id === 'class-env') {
                     e.preventDefault();
                     e.stopPropagation();
+                    stopAllRecordings();
                   } else {
                     handleRemoveClass(cls.id);
+                    stopAllRecordings();
                   }
                 }}
               >
@@ -158,6 +169,7 @@ const SampleComponent: React.FC = () => {
               <span
                 onClick={() => {
                   handleRemoveSample(cls.id);
+                  stopAllRecordings();
                 }}
               >
                 {t('classifier.sample.delete_all', '删除所有样本')}
@@ -377,7 +389,12 @@ const SampleComponent: React.FC = () => {
           </Card>
         );
       })}
-      <Button className={styles.button_add} icon={<PlusSquareOutlined />} onClick={handleAddClass}>
+      <Button
+        className={styles.button_add}
+        disabled={trainingFlag || trainingOver}
+        icon={<PlusSquareOutlined />}
+        onClick={handleAddClass}
+      >
         <span style={{ lineHeight: '100px' }}>
           {t('classifier.sample.add_category', '添加类别')}
         </span>

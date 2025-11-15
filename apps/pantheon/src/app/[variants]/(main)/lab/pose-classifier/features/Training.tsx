@@ -29,6 +29,7 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
     setIsPredicting,
     setIsPerviewOpen,
     loading,
+    setTrainingFlag,
   } = usePoseStore();
   const { predictFromCapturedPose, trainKNN, totalPoses, trainedCount } = usePoseModel({
     classList,
@@ -36,6 +37,7 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
 
   const handleTraining = async () => {
     setTrainingOver(false);
+    setTrainingFlag(true);
     try {
       await trainKNN(classList);
       for (const i of classList) {

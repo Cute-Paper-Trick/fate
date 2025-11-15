@@ -54,6 +54,8 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
     poseDetector,
     setIsCameraActive,
     clearClassSample,
+    trainingFlag,
+    trainingOver,
   } = usePoseStore();
 
   const { t } = useTranslate('lab');
@@ -625,6 +627,7 @@ const Sample: React.FC<SampleProps> = ({ videoRef }) => {
       })}
       <Button
         className={styles.button_add}
+        disabled={trainingFlag || trainingOver}
         icon={<PlusSquareOutlined />}
         onClick={() => handleAddClass()}
       >

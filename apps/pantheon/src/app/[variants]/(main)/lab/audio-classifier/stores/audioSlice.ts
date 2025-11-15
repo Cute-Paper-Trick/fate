@@ -67,6 +67,7 @@ interface ClassState {
   setPredictionResult: (result: string) => void;
   setRecording: (isRecording: boolean, classId: string | null) => void;
   setTrainingOver: (flag: boolean) => void;
+  setTrainingFlag: (flag: boolean) => void;
   setPredictions: (predictions: Prediction[]) => void;
   setSpeechCommands: (ref: TransferRecognizer) => void;
   setTransferRefCurrent: (transferRefCurrent: TransferRecognizer) => void;
@@ -151,6 +152,7 @@ export const audioStore = createStore<ClassState>((set) => ({
     }),
 
   setTrainingOver: (flag) => set({ trainingOver: flag }),
+  setTrainingFlag: (flag) => set({ trainingFlag: flag }),
   setSpeechCommands: (ref) => set({ speechCommands: ref }),
   setPredictions: (predictions) => set({ predictions }),
   setTransferRefCurrent: (transferRefCurrent) =>
