@@ -1,4 +1,4 @@
-import { DevBackend, FormatSimple, Tolgee } from '@tolgee/web';
+import { BackendFetch, DevBackend, FormatSimple, Tolgee } from '@tolgee/web';
 import { InContextTools } from '@tolgee/web/tools';
 
 import { DEFAULT_LANG } from '@/const/locale';
@@ -29,6 +29,10 @@ export const createTolgee = (lang?: string) => {
       apiUrl,
       projectId: 7,
     });
+
+  if (appEnv.NEXT_PUBLIC_TOLGEE_DELIVERY) {
+    instance.use(BackendFetch({ prefix: appEnv.NEXT_PUBLIC_TOLGEE_DELIVERY }));
+  }
 
   if (appEnv.NEXT_PUBLIC_ENABLE_TRANS_TOOLS) {
     instance.use(
