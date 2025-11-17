@@ -98,7 +98,9 @@ export const auth = betterAuth({
       enableSessionForAPIKeys: true,
       apiKeyHeaders: [authEnv.BETTER_AUTH_API_KEY_HEADER],
     }),
-    username(),
+    username({
+      minUsernameLength: 1,
+    }),
     admin({
       adminRoles: authEnv.BETTER_AUTH_ADMIN_ROLES?.split(',').map((role) => role.trim()),
     }),
