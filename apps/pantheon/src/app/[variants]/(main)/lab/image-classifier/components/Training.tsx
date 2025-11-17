@@ -100,7 +100,6 @@ const Training: React.FC = () => {
   const trainKNN = async (classList: ClassItem[]) => {
     const classes: string[] = [];
     let count = 0;
-    setTrainingFlag(true);
 
     for (const i of classList) {
       if (i.images.length === 0) {
@@ -115,6 +114,7 @@ const Training: React.FC = () => {
 
     if (!knnClassifierInstance || count === 0) return;
 
+    setTrainingFlag(true);
     setTotalImages(count);
     setTrainedCount(0);
     setTrainingOver(false);

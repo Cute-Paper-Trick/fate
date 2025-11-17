@@ -37,7 +37,6 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
 
   const handleTraining = async () => {
     setTrainingOver(false);
-    setTrainingFlag(true);
     try {
       await trainKNN(classList);
       for (const i of classList) {
@@ -52,6 +51,7 @@ const Training: React.FC<TrainingProps> = ({ videoRef }) => {
         return;
       }
 
+      setTrainingFlag(true);
       setIsCameraActive(true);
       setIsPredicting(true);
       // startCamera();
