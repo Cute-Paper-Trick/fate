@@ -100,6 +100,7 @@ export const auth = betterAuth({
     }),
     username({
       minUsernameLength: 1,
+      usernameValidator: (username) => /^[a-zA-Z0-9_.\u4E00-\u9FA5-]{1,30}$/.test(username),
     }),
     admin({
       adminRoles: authEnv.BETTER_AUTH_ADMIN_ROLES?.split(',').map((role) => role.trim()),
