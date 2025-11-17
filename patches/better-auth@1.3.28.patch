@@ -1,0 +1,26 @@
+diff --git a/dist/api/index.cjs b/dist/api/index.cjs
+index 554a590739daadacc41178f4becf58fda3ab0f6a..56dacd1bea8d8c8e2e1f49def4ae6b7f7dbc5b67 100644
+--- a/dist/api/index.cjs
++++ b/dist/api/index.cjs
+@@ -188,7 +188,7 @@ const signUpEmail = () => middleware.createAuthEndpoint(
+     }
+     const body = ctx.body;
+     const { name, email, password, image, callbackURL, rememberMe, ...rest } = body;
+-    const isValidEmail = z__namespace.email().safeParse(email);
++    const isValidEmail = z__namespace.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).safeParse(email);
+     if (!isValidEmail.success) {
+       throw new betterCall.APIError("BAD_REQUEST", {
+         message: error.BASE_ERROR_CODES.INVALID_EMAIL
+diff --git a/dist/api/index.mjs b/dist/api/index.mjs
+index d4266ae7dac9732f53956736ae857af510bd14b8..ba3c40b727ddfa969f4c8d25cc49c6224ab6b457 100644
+--- a/dist/api/index.mjs
++++ b/dist/api/index.mjs
+@@ -176,7 +176,7 @@ const signUpEmail = () => createAuthEndpoint(
+     }
+     const body = ctx.body;
+     const { name, email, password, image, callbackURL, rememberMe, ...rest } = body;
+-    const isValidEmail = z.email().safeParse(email);
++    const isValidEmail = z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).safeParse(email);
+     if (!isValidEmail.success) {
+       throw new APIError("BAD_REQUEST", {
+         message: BASE_ERROR_CODES.INVALID_EMAIL
