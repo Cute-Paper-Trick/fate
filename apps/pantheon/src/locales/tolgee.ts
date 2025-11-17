@@ -18,6 +18,7 @@ export const createTolgee = (lang?: string) => {
     .use(DevBackend()) // 从 Tolgee 平台动态加载翻译数据
     // .use(BackendFetch()) // 从 CDN 加载预编译的翻译文件
     .updateDefaults({
+      defaultNs: 'common',
       staticData: {
         'en:betterAuth': () => import('@/localization/betterAuth/en.json'),
         'zh:betterAuth': () => import('@/localization/betterAuth/zh-CN.json'),
