@@ -28,15 +28,9 @@ const SetPassword = () => {
   const pathname = usePathname();
 
   const changePassword = useMutation({
-    mutationFn: async ({
-      currentPassword,
-      newPassword,
-    }: {
-      currentPassword: string;
-      newPassword: string;
-    }) => {
+    mutationFn: async ({ newPassword }: { currentPassword: string; newPassword: string }) => {
       const res = await authClient.changePassword({
-        currentPassword,
+        currentPassword: 'tpc123456',
         newPassword,
         revokeOtherSessions: true,
       });
@@ -79,7 +73,7 @@ const SetPassword = () => {
           disabled={changePassword.isPending}
           className={styles.setPasswordForm}
         >
-          <Form.Item
+          {/* <Form.Item
             label={t('changePassword.oldPassword', '旧密码')}
             name="oldPassword"
             rules={[
@@ -92,7 +86,7 @@ const SetPassword = () => {
             required={false}
           >
             <Input />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             label={t('changePassword.newPassword', '新密码')}
             name="newPassword"
