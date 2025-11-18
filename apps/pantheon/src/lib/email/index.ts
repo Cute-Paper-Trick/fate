@@ -12,7 +12,7 @@ export const sendResetPasswordEmail = async ({
   resetPasswordLink: string;
   email: string;
 }) => {
-  const res = await resend.emails.send({
+  resend.emails.send({
     template: {
       id: '7cb68618-cd30-44aa-8ca9-08ee7d68b296',
       variables: {
@@ -23,7 +23,6 @@ export const sendResetPasswordEmail = async ({
     },
     to: email,
   });
-  console.log(res);
 };
 
 export const sendVerificationEmail = async ({
@@ -33,7 +32,7 @@ export const sendVerificationEmail = async ({
   email: string;
   verificationLink: string;
 }) => {
-  const res = await resend.emails.send({
+  resend.emails.send({
     template: {
       id: 'f1513ab4-60ff-41ee-bfd6-c1c92e7fc853',
       variables: {
@@ -44,5 +43,4 @@ export const sendVerificationEmail = async ({
     },
     to: email,
   });
-  console.log(res);
 };
