@@ -2,7 +2,7 @@
 
 import { Button, Modal } from 'antd';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { TopicCreateInner } from '@/features/Talk/TalkCreate/topic-create-inner';
 import { V1TaskUserInfo } from '@/lib/http';
@@ -35,7 +35,10 @@ type ButtonType = (typeof validButtonTypes)[number];
 export const TaskButtonGroup: React.FC<TaskButtonGroupProps> = ({ item }) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { listDict, completeTask } = useLearningStore();
+  const { completeTask } = useLearningStore();
+  const useFetchTaskList = useLearningStore((s) => s.useFetchTaskList);
+  const { data: taskList } = useFetchTaskList({});
+
   const { getTaskButtons } = useTaskButtons();
   const [createVisible, setCreateVisible] = useState(false);
   const [taskIndex, setTaskIndex] = useState<any>(null);
@@ -50,6 +53,17 @@ export const TaskButtonGroup: React.FC<TaskButtonGroupProps> = ({ item }) => {
       }
     }
   };
+
+  const listData = useMemo(() => taskList?.list, [taskList?.list]);
+
+  const listDict = useMemo(
+    () =>
+      listData?.reduce(
+        (acc, cur) => ((acc[cur.index] = cur), acc),
+        {} as Record<number, V1TaskUserInfo>,
+      ) || {},
+    [listData],
+  );
 
   const buttonConfigs = getTaskButtons(item, listDict);
 
