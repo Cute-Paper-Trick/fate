@@ -9,6 +9,7 @@ const useStyles = createStyles(({ css }) => ({
     width: 100%;
     padding: 4rem 2rem;
     position: relative;
+    overflow: auto;
   `,
   list: css`
     border-radius: 20px;
