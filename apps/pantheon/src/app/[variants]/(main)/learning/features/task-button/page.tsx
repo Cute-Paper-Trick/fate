@@ -4,6 +4,7 @@ import { Button, Modal } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
 
+import { appEnv } from '@/envs/app';
 import { TopicCreateInner } from '@/features/Talk/TalkCreate/topic-create-inner';
 import { V1TaskUserInfo } from '@/lib/http';
 import { useTaskButtons } from '@/store/learning/helpers';
@@ -15,19 +16,20 @@ import styles from './index.module.css';
 const validButtonTypes = ['primary', 'link', 'text', 'default', 'dashed'] as const;
 const goComplete = (item: V1TaskUserInfo, router: any) => {
   //去挑战
+  console.log('appEnv.NEXT_PUBLIC_CHAT_APP_URL', appEnv.NEXT_PUBLIC_CHAT_APP_URL);
   const { page } = JSON.parse(item.jump) as { page: string };
   if (page === 'chat') {
-    router.push('/chat');
+    window.open(`${appEnv.NEXT_PUBLIC_CHAT_APP_URL}/chat`, '_blank');
     return;
   }
   if (page === 'pose') {
-    router.push('/lab/pose-classifier');
+    router.push('/lab');
   }
   if (page === 'audio') {
-    router.push('/lab/audio-classifier');
+    router.push('/lab');
   }
   if (page === 'image') {
-    router.push('/lab/image-classifier');
+    router.push('/lab');
   }
 };
 type ButtonType = (typeof validButtonTypes)[number];
