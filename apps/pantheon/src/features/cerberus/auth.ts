@@ -31,7 +31,7 @@ export const auth = betterAuth({
             method: 'POST',
             body: JSON.stringify({
               accountKey: user.id,
-              nickname: user.name || user.displayName,
+              nickname: user.displayName || '未设置昵称',
               code: appEnv.BACKEND_SECRET_CODE,
             }),
           });
