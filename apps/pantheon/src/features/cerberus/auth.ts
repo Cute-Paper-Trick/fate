@@ -43,7 +43,8 @@ export const auth = betterAuth({
     changeEmail: {
       enabled: true,
       sendChangeEmailVerification: async ({ newEmail, url }) => {
-        await sendVerificationEmail({ email: newEmail, verificationLink: url });
+        const res = await sendVerificationEmail({ email: newEmail, verificationLink: url });
+        console.log(res);
       },
       sendOnSignIn: true,
     },
@@ -60,10 +61,11 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       console.log('Sending verification email to:', user.email, 'with url:', url);
-      await sendVerificationEmail({
+      const res = await sendVerificationEmail({
         email: user.email,
         verificationLink: url,
       });
+      console.log(res);
     },
     sendOnSignIn: true,
   },

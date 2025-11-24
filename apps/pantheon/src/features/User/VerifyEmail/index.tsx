@@ -10,12 +10,11 @@ import { Flexbox } from 'react-layout-kit';
 
 import { message } from '@/components/AntdStaticMethods';
 import { authClient, useSession } from '@/features/cerberus/client';
-import { useUserStore } from '@/store/user/store';
 
 const VerifyEmail = () => {
   const { t } = useTranslate('auth');
-  const { refetch } = useSession();
-  const user = useUserStore((s) => s.user);
+  const { data, refetch, isRefetching } = useSession();
+  const user = data?.user;
   const [modalVisible, setModalVisible] = useState(false);
   const pathname = usePathname();
 
@@ -125,7 +124,7 @@ const VerifyEmail = () => {
               {t('emailVerify.sendEmail.description', '点击下方按钮发送验证邮件至您的邮箱。')}
             </Text>
             <Button
-              loading={changeEmail.isPending}
+              loading={changeEmail.isPending || isRefetching}
               onClick={async () => {
                 await form.validateFields();
                 changeEmail.mutate(form.getFieldValue('email'));
@@ -156,7 +155,12 @@ const VerifyEmail = () => {
               {t('emailVerify.checkEmail.instruction', '发送验证邮件后，验证成功请点击下方按钮。')}
             </Text>
           </Flexbox>
-          <Button onClick={() => setStep((step) => step - 1)}>
+          <Button
+            onClick={async () => {
+              refetch({ query: { disableCookieCache: true } });
+              setStep((step) => step - 1);
+            }}
+          >
             {t('emailVerify.changeEmail.title', '修改邮箱')}
           </Button>
           <Button
