@@ -19,7 +19,10 @@ function addCorsHeaders(response: Response, origin: string | null): Response {
     response.headers.set('Access-Control-Allow-Origin', origin);
     response.headers.set('Access-Control-Allow-Credentials', 'true');
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie');
+    response.headers.set(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization, Cookie, User-Agent',
+    );
   }
   return response;
 }
