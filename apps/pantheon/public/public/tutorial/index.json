@@ -60,6 +60,16 @@
       "category": "posture",
       "isFeatured": false,
       "isOfficial": true
+    },
+    {
+      "image": "https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/Tutorial/Assistant/Assistant.png",
+      "title": "小助手",
+      "date": "2025-12-03",
+      "description": "还不会用智能小助手？1分钟解锁全套使用秘籍，让你的效率翻倍！",
+      "id": "create-assistant",
+      "category": "chat",
+      "isFeatured": false,
+      "isOfficial": true
     }
   ]
 }
