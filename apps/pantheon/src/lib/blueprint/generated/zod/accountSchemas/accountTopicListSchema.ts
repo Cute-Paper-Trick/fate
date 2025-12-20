@@ -11,7 +11,8 @@ import { z } from "zod/v4";
 export const accountTopicListQueryParamsSchema = z.object({
     "status": z.optional(z.string()),
 "page": z.coerce.number().int(),
-"size": z.coerce.number().int()
+"size": z.coerce.number().int(),
+"topic": z.optional(z.string().describe("话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）"))
     }) as unknown as z.ZodType<AccountTopicListQueryParams>
 
 export const accountTopicList200Schema = v1AccountTopicListResSchema as unknown as z.ZodType<AccountTopicList200>

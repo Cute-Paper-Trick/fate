@@ -1,0 +1,1 @@
+{"properties":{"model":{"format":"string","type":"string"},"provider":{"format":"string","type":"string"}},"required":["model","provider"],"type":"object","x-readme-ref-name":"v1.SearchFCModelInfo"}

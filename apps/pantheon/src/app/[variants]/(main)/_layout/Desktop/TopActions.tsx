@@ -2,9 +2,11 @@ import { ActionIcon, ActionIconProps } from '@lobehub/ui';
 import { useTranslate } from '@tolgee/react';
 import {
   BookOpenCheck,
+  Carrot,
   Compass,
   FlaskConical,
   FolderClosed,
+  Hamburger,
   MessageSquare,
   MessagesSquare,
   NotebookText,
@@ -36,6 +38,8 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
   const isTalkActive = tab === AppTab.Talk;
   const isLabActice = tab === AppTab.Lab;
   const isLearningActive = tab === AppTab.Learning;
+  const isArticleActive = tab === AppTab.Articles;
+  const isCollectionActive = tab === AppTab.Collections;
   const isTutorialActive = tab === AppTab.Discover;
 
   const CHAT_APP_URL = appEnv.NEXT_PUBLIC_CHAT_APP_URL;
@@ -133,6 +137,24 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
           icon={BookOpenCheck}
           size={ICON_SIZE}
           title={t('tab.tutorial')}
+          tooltipProps={{ placement: 'right' }}
+        />
+      </Link>
+      <Link aria-label={t('tab.articles')} href={'/discover/articles'}>
+        <ActionIcon
+          active={isArticleActive}
+          icon={Carrot}
+          size={ICON_SIZE}
+          title={t('tab.articles')}
+          tooltipProps={{ placement: 'right' }}
+        />
+      </Link>
+      <Link aria-label={t('tab.collections')} href={'/discover/collections'}>
+        <ActionIcon
+          active={isCollectionActive}
+          icon={Hamburger}
+          size={ICON_SIZE}
+          title={t('tab.collections')}
           tooltipProps={{ placement: 'right' }}
         />
       </Link>

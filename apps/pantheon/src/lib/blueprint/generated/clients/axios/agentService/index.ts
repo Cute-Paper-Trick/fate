@@ -1,0 +1,9 @@
+export { agentCreate } from "./agentCreate";
+export { agentDelete } from "./agentDelete";
+export { agentDetail } from "./agentDetail";
+export { agentGetBySlug } from "./agentGetBySlug";
+export { agentIndex } from "./agentIndex";
+export { agentList } from "./agentList";
+export { agentSearch } from "./agentSearch";
+export { agentService } from "./agentService";
+export { agentUpdate } from "./agentUpdate";

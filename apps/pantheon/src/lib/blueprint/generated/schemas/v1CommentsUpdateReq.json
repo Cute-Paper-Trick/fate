@@ -1,0 +1,1 @@
+{"properties":{"id":{"description":"评论ID","format":"int64","type":"integer"},"content":{"description":"评论内容","format":"string","type":"string"},"status":{"description":"状态：1-正常, 0-禁用","format":"int","type":"integer"}},"required":["id","content","status"],"type":"object","x-readme-ref-name":"v1.CommentsUpdateReq"}

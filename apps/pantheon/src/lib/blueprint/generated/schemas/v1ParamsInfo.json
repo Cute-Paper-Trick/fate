@@ -1,0 +1,1 @@
+{"properties":{"frequency_penalty":{"format":"int","type":"integer"},"presence_penalty":{"format":"int","type":"integer"},"temperature":{"format":"int","type":"integer"},"top_p":{"format":"int","type":"integer"}},"type":"object","x-readme-ref-name":"v1.ParamsInfo"}

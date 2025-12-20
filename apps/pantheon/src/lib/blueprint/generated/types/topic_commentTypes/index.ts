@@ -1,3 +1,4 @@
 export type { TopicCommentAdd200, TopicCommentAddMutationRequest, TopicCommentAddMutationResponse, TopicCommentAddMutation } from "./TopicCommentAdd";
+export type { TopicCommentDelete200, TopicCommentDeleteMutationRequest, TopicCommentDeleteMutationResponse, TopicCommentDeleteMutation } from "./TopicCommentDelete";
 export type { TopicCommentListQueryParams, TopicCommentList200, TopicCommentListQueryResponse, TopicCommentListQuery } from "./TopicCommentList";
 export type { TopicCommentSubListQueryParams, TopicCommentSubList200, TopicCommentSubListQueryResponse, TopicCommentSubListQuery } from "./TopicCommentSubList";

@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 
-import { ApiError } from "./error";
-import { apiErrorHandler } from "./errorHandler";
+import { ApiError } from './error';
+import { apiErrorHandler } from './errorHandler';
 
 // declare const AXIOS_BASE: string
 // declare const AXIOS_HEADERS: string
@@ -21,7 +21,7 @@ import { apiErrorHandler } from "./errorHandler";
 export const axiosInstance = axios.create({
   baseURL: '/external',
   withCredentials: true,
-})
+});
 
 // 请求拦截器 - 确保携带 cookie 和正确的 headers
 axiosInstance.interceptors.request.use(
@@ -38,7 +38,7 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // 对服务器响应 去掉一层公共结构 App.Service.Response

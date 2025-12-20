@@ -1,0 +1,1 @@
+{"properties":{"collection_id":{"format":"int64","type":"integer"}},"required":["collection_id"],"type":"object","x-readme-ref-name":"v1.CollectionSubscriptionsUnsubscribeReq"}

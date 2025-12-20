@@ -20,7 +20,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@fate/vulcan": ["./src/packages/vulcan"],
+      "@fate/vulcan/*": ["./src/packages/vulcan/*"],
+      "@fate/s3": ["./src/packages/s3"]
     }
   },
   "exclude": ["node_modules", "src/gen/**/*", ".next", "out"],

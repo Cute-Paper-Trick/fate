@@ -1,0 +1,1 @@
+{"properties":{"id":{"format":"string","type":"string"},"slug":{"format":"string","type":"string"}},"required":["id","slug"],"type":"object","x-readme-ref-name":"v1.AgentUpdateRes"}

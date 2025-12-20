@@ -18,12 +18,24 @@ const FunctionPreview: FC = () => {
           <Row gutter={[20, 20]} style={{ flex: 1 }}>
             <Col sm={12} style={{ display: 'flex' }} xs={24}>
               <div className={styles.image}>
-                <video autoPlay loop muted playsInline src="/piano.mp4" />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/piano.mp4"
+                />
               </div>
             </Col>
             <Col sm={12} style={{ display: 'flex' }} xs={24}>
               <div className={styles.image}>
-                <video autoPlay loop muted playsInline src="/rock_paper_scissors.mp4" />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/rock_paper_scissors.mp4"
+                />
               </div>
             </Col>
           </Row>

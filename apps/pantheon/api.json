@@ -186,6 +186,10 @@
           "tag": {
             "format": "string",
             "type": "string"
+          },
+          "account_key": {
+            "format": "string",
+            "type": "string"
           }
         },
         "required": [
@@ -196,7 +200,8 @@
           "expire_in",
           "is_manager",
           "change_password",
-          "tag"
+          "tag",
+          "account_key"
         ],
         "type": "object"
       },
@@ -374,6 +379,11 @@
           "size": {
             "format": "int",
             "type": "integer"
+          },
+          "topic": {
+            "description": "话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）",
+            "format": "string",
+            "type": "string"
           }
         },
         "required": ["page", "size"],
@@ -394,9 +404,9 @@
             "type": "integer"
           },
           "list": {
-            "format": "[]*v1.TopicInfo",
+            "format": "[]*v1.TaskTopicInfo",
             "items": {
-              "$ref": "#/components/schemas/v1.TopicInfo",
+              "$ref": "#/components/schemas/v1.TaskTopicInfo",
               "description": ""
             },
             "type": "array"
@@ -405,9 +415,17 @@
         "required": ["total", "page", "size", "list"],
         "type": "object"
       },
-      "v1.TopicInfo": {
+      "v1.TaskTopicInfo": {
         "properties": {
           "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "task_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "account_id": {
             "format": "int64",
             "type": "integer"
           },
@@ -419,7 +437,850 @@
             "format": "string",
             "type": "string"
           },
-          "status": {
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "account": {
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/v1.TaskTopicExtra",
+            "description": ""
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.TaskTopicExtraAccount",
+            "description": ""
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "task_id",
+          "account_id",
+          "title",
+          "content",
+          "created_at",
+          "account",
+          "extra",
+          "extra_account",
+          "avatar"
+        ],
+        "type": "object"
+      },
+      "v1.TaskTopicExtra": {
+        "properties": {
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "comment_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["like_count", "comment_count"],
+        "type": "object"
+      },
+      "v1.TaskTopicExtraAccount": {
+        "properties": {
+          "like_status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["like_status"],
+        "type": "object"
+      },
+      "v1.AgentCreateReq": {
+        "properties": {
+          "slug": {
+            "format": "string",
+            "type": "string"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "tags": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          },
+          "background_color": {
+            "format": "string",
+            "type": "string"
+          },
+          "chat_config": {
+            "$ref": "#/components/schemas/v1.ChatConfigInfo",
+            "description": ""
+          },
+          "few_shots": {
+            "format": "[]*v1.FewShotItem",
+            "items": {
+              "$ref": "#/components/schemas/v1.FewShotItem",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/v1.ParamsInfo",
+            "description": ""
+          },
+          "provider": {
+            "format": "string",
+            "type": "string"
+          },
+          "system_role": {
+            "format": "string",
+            "type": "string"
+          },
+          "tts": {
+            "$ref": "#/components/schemas/v1.TTSConfig",
+            "description": ""
+          },
+          "opening_message": {
+            "format": "string",
+            "type": "string"
+          },
+          "opening_questions": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "active": {
+            "format": "*bool",
+            "type": "boolean"
+          },
+          "author": {
+            "format": "string",
+            "type": "string"
+          },
+          "homepage": {
+            "format": "string",
+            "type": "string"
+          },
+          "category": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["slug", "chat_config"],
+        "type": "object"
+      },
+      "v1.ChatConfigInfo": {
+        "properties": {
+          "autoCreateTopicThreshold": {
+            "format": "int",
+            "type": "integer"
+          },
+          "displayMode": {
+            "format": "string",
+            "type": "string"
+          },
+          "enableAutoCreateTopic": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "enableCompressHistory": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "enableHistoryCount": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "enableReasoning": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "enableStreaming": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "historyCount": {
+            "format": "int",
+            "type": "integer"
+          },
+          "reasoningBudgetToken": {
+            "format": "int",
+            "type": "integer"
+          },
+          "searchFCModel": {
+            "$ref": "#/components/schemas/v1.SearchFCModelInfo",
+            "description": ""
+          },
+          "searchMode": {
+            "format": "string",
+            "type": "string"
+          },
+          "maxTokens": {
+            "format": "int",
+            "type": "integer"
+          },
+          "temperature": {
+            "format": "int",
+            "type": "integer"
+          },
+          "top_p": {
+            "format": "int",
+            "type": "integer"
+          },
+          "n": {
+            "format": "int",
+            "type": "integer"
+          },
+          "stop": {
+            "format": "string",
+            "type": "string"
+          },
+          "presencePenalty": {
+            "format": "int",
+            "type": "integer"
+          },
+          "frequencyPenalty": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["displayMode", "searchFCModel", "searchMode"],
+        "type": "object"
+      },
+      "v1.SearchFCModelInfo": {
+        "properties": {
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "provider": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["model", "provider"],
+        "type": "object"
+      },
+      "v1.FewShotItem": {
+        "properties": {
+          "role": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1.ParamsInfo": {
+        "properties": {
+          "frequency_penalty": {
+            "format": "int",
+            "type": "integer"
+          },
+          "presence_penalty": {
+            "format": "int",
+            "type": "integer"
+          },
+          "temperature": {
+            "format": "int",
+            "type": "integer"
+          },
+          "top_p": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "v1.TTSConfig": {
+        "properties": {
+          "showAllLocaleVoice": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "sttLocale": {
+            "format": "string",
+            "type": "string"
+          },
+          "ttsService": {
+            "format": "string",
+            "type": "string"
+          },
+          "voice": {
+            "$ref": "#/components/schemas/v1.TTSVoiceConfig",
+            "description": ""
+          }
+        },
+        "type": "object"
+      },
+      "v1.TTSVoiceConfig": {
+        "properties": {
+          "openai": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v1.AgentCreateRes": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "slug": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "slug"],
+        "type": "object"
+      },
+      "v1.AgentDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.AgentDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AgentDetailReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.AgentDetailRes": {
+        "properties": {
+          "agent": {
+            "$ref": "#/components/schemas/v1.AgentDetail",
+            "description": ""
+          }
+        },
+        "required": ["agent"],
+        "type": "object"
+      },
+      "v1.AgentDetail": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "slug": {
+            "format": "string",
+            "type": "string"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "tags": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          },
+          "backgroundColor": {
+            "format": "string",
+            "type": "string"
+          },
+          "plugins": {
+            "format": "[]interface {}",
+            "items": {
+              "$ref": "#/components/schemas/interface",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "clientId": {
+            "format": "string",
+            "type": "string"
+          },
+          "userId": {
+            "format": "string",
+            "type": "string"
+          },
+          "chatConfig": {
+            "$ref": "#/components/schemas/v1.ChatConfigInfo",
+            "description": ""
+          },
+          "fewShots": {
+            "format": "[]*v1.FewShotItem",
+            "items": {
+              "$ref": "#/components/schemas/v1.FewShotItem",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/v1.ParamsInfo",
+            "description": ""
+          },
+          "provider": {
+            "format": "string",
+            "type": "string"
+          },
+          "systemRole": {
+            "format": "string",
+            "type": "string"
+          },
+          "tts": {
+            "$ref": "#/components/schemas/v1.TTSConfig",
+            "description": ""
+          },
+          "openingMessage": {
+            "format": "string",
+            "type": "string"
+          },
+          "openingQuestions": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "active": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "string",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "string",
+            "type": "string"
+          },
+          "accessedAt": {
+            "format": "string",
+            "type": "string"
+          },
+          "files": {
+            "format": "[]interface {}",
+            "items": {
+              "$ref": "#/components/schemas/interface",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "knowledgeBases": {
+            "format": "[]interface {}",
+            "items": {
+              "$ref": "#/components/schemas/interface",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "author": {
+            "format": "string",
+            "type": "string"
+          },
+          "homepage": {
+            "format": "string",
+            "type": "string"
+          },
+          "category": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["provider"],
+        "type": "object"
+      },
+      "interface": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AgentGetBySlugReq": {
+        "properties": {
+          "slug": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["slug"],
+        "type": "object"
+      },
+      "v1.AgentGetBySlugRes": {
+        "properties": {
+          "agent": {
+            "$ref": "#/components/schemas/v1.AgentDetail",
+            "description": ""
+          }
+        },
+        "required": ["agent"],
+        "type": "object"
+      },
+      "v1.AgentIndexReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AgentIndexRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AgentListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.AgentListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.AgentDetail",
+            "items": {
+              "$ref": "#/components/schemas/v1.AgentDetail",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.AgentSearchReq": {
+        "properties": {
+          "keyword": {
+            "format": "string",
+            "type": "string"
+          },
+          "tags": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.AgentSearchRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.AgentDetail",
+            "items": {
+              "$ref": "#/components/schemas/v1.AgentDetail",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.AgentUpdateReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "title": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "tags": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          },
+          "background_color": {
+            "format": "string",
+            "type": "string"
+          },
+          "chat_config": {
+            "$ref": "#/components/schemas/v1.ChatConfigInfo",
+            "description": ""
+          },
+          "few_shots": {
+            "format": "[]*v1.FewShotItem",
+            "items": {
+              "$ref": "#/components/schemas/v1.FewShotItem",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "model": {
+            "format": "string",
+            "type": "string"
+          },
+          "params": {
+            "$ref": "#/components/schemas/v1.ParamsInfo",
+            "description": ""
+          },
+          "provider": {
+            "format": "string",
+            "type": "string"
+          },
+          "system_role": {
+            "format": "string",
+            "type": "string"
+          },
+          "tts": {
+            "$ref": "#/components/schemas/v1.TTSConfig",
+            "description": ""
+          },
+          "opening_message": {
+            "format": "string",
+            "type": "string"
+          },
+          "opening_questions": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "active": {
+            "format": "*bool",
+            "type": "boolean"
+          },
+          "author": {
+            "format": "string",
+            "type": "string"
+          },
+          "homepage": {
+            "format": "string",
+            "type": "string"
+          },
+          "category": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.AgentUpdateRes": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "slug": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "slug"],
+        "type": "object"
+      },
+      "v1.ChangelogAddReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "image": {
+            "format": "string",
+            "type": "string"
+          },
+          "date": {
+            "format": "string",
+            "type": "string"
+          },
+          "version_range": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "active": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["id", "date", "version_range", "content", "active"],
+        "type": "object"
+      },
+      "v1.ChangelogAddRes": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ChangelogDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ChangelogDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChangelogDetailReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ChangelogDetailRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.ChangelogInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.ChangelogInfo": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "image": {
+            "format": "string",
+            "type": "string"
+          },
+          "date": {
+            "format": "string",
+            "type": "string"
+          },
+          "version_range": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "active": {
+            "format": "bool",
+            "type": "boolean"
+          },
+          "created_by": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_by": {
             "format": "string",
             "type": "string"
           },
@@ -430,26 +1291,172 @@
           "updated_at": {
             "format": "string",
             "type": "string"
-          },
-          "reply_count": {
-            "format": "int",
-            "type": "integer"
-          },
-          "like_count": {
-            "format": "int",
-            "type": "integer"
           }
         },
         "required": [
           "id",
-          "title",
+          "date",
+          "version_range",
           "content",
-          "status",
+          "active",
+          "created_by",
+          "updated_by",
           "created_at",
-          "updated_at",
-          "reply_count",
-          "like_count"
+          "updated_at"
         ],
+        "type": "object"
+      },
+      "v1.ChangelogEditReq": {
+        "properties": {
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "image": {
+            "format": "string",
+            "type": "string"
+          },
+          "date": {
+            "format": "string",
+            "type": "string"
+          },
+          "version_range": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "active": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ChangelogEditRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChangelogListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "date": {
+            "format": "string",
+            "type": "string"
+          },
+          "version": {
+            "format": "string",
+            "type": "string"
+          },
+          "active": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.ChangelogListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.ChangelogInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ChangelogInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.ChangelogPublicReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ChangelogPublicRes": {
+        "properties": {
+          "$schema": {
+            "format": "string",
+            "type": "string"
+          },
+          "cloud": {
+            "format": "[]*v1.ChangelogSimpleInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ChangelogSimpleInfo",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "community": {
+            "format": "[]*v1.ChangelogSimpleInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ChangelogSimpleInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["$schema", "cloud", "community"],
+        "type": "object"
+      },
+      "v1.ChangelogSimpleInfo": {
+        "properties": {
+          "image": {
+            "format": "string",
+            "type": "string"
+          },
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "content": {
+            "format": "string",
+            "type": "string"
+          },
+          "date": {
+            "format": "string",
+            "type": "string"
+          },
+          "versionRange": {
+            "format": "[]string",
+            "items": {
+              "format": "string",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": ["id", "content", "date", "versionRange"],
         "type": "object"
       },
       "v1.ChatCompletionsReq": {
@@ -775,6 +1782,318 @@
         "required": ["status"],
         "type": "object"
       },
+      "v1.CollectionSubscriptionsSubscribeReq": {
+        "properties": {
+          "collection_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["collection_id"],
+        "type": "object"
+      },
+      "v1.CollectionSubscriptionsSubscribeRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.CollectionSubscriptionInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.CollectionSubscriptionInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "collection_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "subscriber_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "collection_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "collection_cover": {
+            "format": "string",
+            "type": "string"
+          },
+          "subscriber_name": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "collection_id",
+          "subscriber_id",
+          "created_at",
+          "updated_at",
+          "deleted_at",
+          "collection_name",
+          "collection_cover",
+          "subscriber_name"
+        ],
+        "type": "object"
+      },
+      "v1.CollectionSubscriptionsUnsubscribeReq": {
+        "properties": {
+          "collection_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["collection_id"],
+        "type": "object"
+      },
+      "v1.CollectionSubscriptionsUnsubscribeRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.CollectionSubscriptionInfo",
+            "description": ""
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.CollectionsCreateReq": {
+        "properties": {
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["name", "description", "cover_url", "status"],
+        "type": "object"
+      },
+      "v1.CollectionsCreateRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CollectionsDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CollectionsDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CollectionsDetailReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CollectionsDetailRes": {
+        "properties": {
+          "collection": {
+            "$ref": "#/components/schemas/v1.CollectionInfo",
+            "description": ""
+          }
+        },
+        "required": ["collection"],
+        "type": "object"
+      },
+      "v1.CollectionInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "creator_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "int",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "subscribe_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "content_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "is_subscribed": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description",
+          "cover_url",
+          "creator_id",
+          "creator_name",
+          "status",
+          "created_at",
+          "updated_at",
+          "deleted_at",
+          "subscribe_count",
+          "content_count",
+          "is_subscribed"
+        ],
+        "type": "object"
+      },
+      "v1.CollectionsListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "int",
+            "type": "integer"
+          },
+          "creator_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.CollectionsListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "collections": {
+            "format": "[]*v1.CollectionInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.CollectionInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "collections"],
+        "type": "object"
+      },
+      "v1.CollectionsUpdateReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "format": "string",
+            "type": "string"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CollectionsUpdateRes": {
+        "properties": {},
+        "type": "object"
+      },
       "v1.CommentLikeLikeReq": {
         "properties": {
           "comment_id": {
@@ -915,6 +2234,518 @@
           }
         },
         "required": ["info"],
+        "type": "object"
+      },
+      "v1.CommentsCreateReq": {
+        "properties": {
+          "content": {
+            "description": "评论内容",
+            "format": "string",
+            "type": "string"
+          },
+          "target_id": {
+            "description": "目标ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "parent_id": {
+            "description": "父评论ID，0表示顶级评论",
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_id": {
+            "description": "根评论ID，0表示顶级评论",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_id": {
+            "description": "被回复用户ID，0表示不是回复",
+            "format": "int64",
+            "type": "integer"
+          },
+          "ip_location": {
+            "description": "IP位置",
+            "format": "string",
+            "type": "string"
+          },
+          "client_device": {
+            "description": "客户端设备",
+            "format": "string",
+            "type": "string"
+          },
+          "client_os": {
+            "description": "客户端操作系统",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["content", "target_id", "target_type", "parent_id", "root_id"],
+        "type": "object"
+      },
+      "v1.CommentsCreateRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CommentsDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CommentsDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.CommentsDetailReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CommentsDetailRes": {
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/v1.CommentInfo",
+            "description": ""
+          }
+        },
+        "required": ["comment"],
+        "type": "object"
+      },
+      "v1.CommentInfo": {
+        "properties": {
+          "id": {
+            "description": "评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "description": "评论内容",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_id": {
+            "description": "评论者ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_name": {
+            "description": "评论者名称",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_avatar": {
+            "description": "评论者头像",
+            "format": "string",
+            "type": "string"
+          },
+          "target_id": {
+            "description": "目标ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "parent_id": {
+            "description": "父评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_id": {
+            "description": "根评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_id": {
+            "description": "回复目标用户ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_name": {
+            "description": "回复目标用户名称",
+            "format": "string",
+            "type": "string"
+          },
+          "reply_to_user_avatar": {
+            "description": "回复目标用户头像",
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "description": "状态：1-正常, 0-禁用",
+            "format": "int",
+            "type": "integer"
+          },
+          "created_at": {
+            "description": "创建时间",
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "更新时间",
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "description": "删除时间",
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/v1.CommentExtra",
+            "description": "评论额外信息"
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.CommentExtraAccount",
+            "description": "评论用户额外信息"
+          },
+          "replies": {
+            "description": "回复列表",
+            "format": "[]*v1.CommentReplyInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.CommentReplyInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "content",
+          "creator_id",
+          "creator_name",
+          "creator_avatar",
+          "target_id",
+          "target_type",
+          "parent_id",
+          "root_id",
+          "reply_to_user_id",
+          "reply_to_user_name",
+          "reply_to_user_avatar",
+          "status",
+          "created_at",
+          "updated_at",
+          "deleted_at",
+          "extra",
+          "extra_account",
+          "replies"
+        ],
+        "type": "object"
+      },
+      "v1.CommentReplyInfo": {
+        "properties": {
+          "id": {
+            "description": "回复ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "description": "回复内容",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_id": {
+            "description": "回复者ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_name": {
+            "description": "回复者名称",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_avatar": {
+            "description": "回复者头像",
+            "format": "string",
+            "type": "string"
+          },
+          "target_id": {
+            "description": "目标ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "parent_id": {
+            "description": "父评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_id": {
+            "description": "根评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_id": {
+            "description": "回复目标用户ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_name": {
+            "description": "回复目标用户名称",
+            "format": "string",
+            "type": "string"
+          },
+          "reply_to_user_avatar": {
+            "description": "回复目标用户头像",
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "description": "状态：1-正常, 0-禁用",
+            "format": "int",
+            "type": "integer"
+          },
+          "created_at": {
+            "description": "创建时间",
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "更新时间",
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "description": "删除时间",
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "$ref": "#/components/schemas/v1.CommentExtra",
+            "description": "评论额外信息"
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.CommentExtraAccount",
+            "description": "评论用户额外信息"
+          }
+        },
+        "required": [
+          "id",
+          "content",
+          "creator_id",
+          "creator_name",
+          "creator_avatar",
+          "target_id",
+          "target_type",
+          "parent_id",
+          "root_id",
+          "reply_to_user_id",
+          "reply_to_user_name",
+          "reply_to_user_avatar",
+          "status",
+          "created_at",
+          "updated_at",
+          "deleted_at",
+          "extra",
+          "extra_account"
+        ],
+        "type": "object"
+      },
+      "v1.CommentsListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "format": "int",
+            "type": "integer"
+          },
+          "parent_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "status": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size", "target_id", "target_type"],
+        "type": "object"
+      },
+      "v1.CommentsListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "comments": {
+            "format": "[]*v1.CommentInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.CommentInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "comments"],
+        "type": "object"
+      },
+      "v1.CommentsRefreshReq": {
+        "properties": {
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "format": "int",
+            "type": "integer"
+          },
+          "last_time": {
+            "format": "string",
+            "type": "string"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["target_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.CommentsRefreshRes": {
+        "properties": {
+          "comments": {
+            "format": "[]*v1.CommentInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.CommentInfo",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "has_more": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["comments", "total", "has_more"],
+        "type": "object"
+      },
+      "v1.CommentsRepliesListReq": {
+        "properties": {
+          "parent_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["parent_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.CommentsRepliesListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "replies": {
+            "format": "[]*v1.CommentReplyInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.CommentReplyInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "replies"],
+        "type": "object"
+      },
+      "v1.CommentsUpdateReq": {
+        "properties": {
+          "id": {
+            "description": "评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "description": "评论内容",
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "description": "状态：1-正常, 0-禁用",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["id", "content", "status"],
+        "type": "object"
+      },
+      "v1.CommentsUpdateRes": {
+        "properties": {},
         "type": "object"
       },
       "v1.CommonAddUserReq": {
@@ -1103,6 +2934,624 @@
         "required": ["filename"],
         "type": "object"
       },
+      "v1.ContentOperationLogDetailReq": {
+        "properties": {
+          "id": {
+            "description": "日志ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentOperationLogDetailRes": {
+        "description": "响应元数据",
+        "properties": {
+          "log": {
+            "$ref": "#/components/schemas/v1.ContentOperationLogInfo",
+            "description": "操作日志详情"
+          }
+        },
+        "required": ["log"],
+        "type": "object"
+      },
+      "v1.ContentOperationLogInfo": {
+        "properties": {
+          "id": {
+            "description": "日志ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "contentId": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "operationType": {
+            "description": "操作类型",
+            "format": "string",
+            "type": "string"
+          },
+          "oldData": {
+            "$ref": "#/components/schemas/interface",
+            "description": ""
+          },
+          "newData": {
+            "$ref": "#/components/schemas/interface",
+            "description": ""
+          },
+          "statusBefore": {
+            "description": "操作前状态",
+            "format": "int",
+            "type": "integer"
+          },
+          "statusAfter": {
+            "description": "操作后状态",
+            "format": "int",
+            "type": "integer"
+          },
+          "operatorId": {
+            "description": "操作人ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "operatorName": {
+            "description": "操作人名称",
+            "format": "string",
+            "type": "string"
+          },
+          "remark": {
+            "description": "操作备注",
+            "format": "string",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "操作时间",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "contentId",
+          "operationType",
+          "statusBefore",
+          "statusAfter",
+          "operatorId",
+          "operatorName",
+          "remark",
+          "createdAt"
+        ],
+        "type": "object"
+      },
+      "v1.ContentOperationLogListReq": {
+        "properties": {
+          "contentId": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "description": "页码",
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "description": "每页数量",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["contentId", "page", "size"],
+        "type": "object"
+      },
+      "v1.ContentOperationLogListRes": {
+        "description": "响应元数据",
+        "properties": {
+          "list": {
+            "description": "操作日志列表",
+            "format": "[]*v1.ContentOperationLogInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ContentOperationLogInfo",
+              "description": ""
+            },
+            "type": "array"
+          },
+          "total": {
+            "description": "总记录数",
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "description": "当前页码",
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "description": "每页数量",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["list", "total", "page", "size"],
+        "type": "object"
+      },
+      "v1.ContentsAuditReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "status": {
+            "description": "审核结果：2-已审核, 4-已驳回",
+            "format": "int",
+            "type": "integer"
+          },
+          "remark": {
+            "description": "审核备注",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "status"],
+        "type": "object"
+      },
+      "v1.ContentsAuditRes": {
+        "properties": {
+          "success": {
+            "description": "是否审核成功",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["success"],
+        "type": "object"
+      },
+      "v1.ContentsCreateReq": {
+        "properties": {
+          "title": {
+            "description": "内容标题",
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "description": "内容描述",
+            "format": "string",
+            "type": "string"
+          },
+          "cover_url": {
+            "description": "封面图片URL",
+            "format": "string",
+            "type": "string"
+          },
+          "type": {
+            "description": "类型：1-文章, 2-视频",
+            "format": "int",
+            "type": "integer"
+          },
+          "collection_id": {
+            "description": "所属合集ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "body": {
+            "description": "文章正文（类型为文章时必填）",
+            "format": "string",
+            "type": "string"
+          },
+          "video_url": {
+            "description": "视频链接（类型为视频时必填）",
+            "format": "string",
+            "type": "string"
+          },
+          "duration": {
+            "description": "视频时长(秒)（类型为视频时必填）",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["type"],
+        "type": "object"
+      },
+      "v1.ContentsCreateRes": {
+        "properties": {
+          "id": {
+            "description": "创建的内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsDeleteReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ContentsDetailReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsDetailRes": {
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/v1.ContentInfo",
+            "description": "内容详情信息"
+          }
+        },
+        "required": ["content"],
+        "type": "object"
+      },
+      "v1.ContentInfo": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "description": "内容标题",
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "description": "内容描述",
+            "format": "string",
+            "type": "string"
+          },
+          "body": {
+            "$ref": "#/components/schemas/gjson.Json",
+            "description": "内容正文"
+          },
+          "video_url": {
+            "description": "视频链接",
+            "format": "string",
+            "type": "string"
+          },
+          "duration": {
+            "description": "视频时长(秒)",
+            "format": "int",
+            "type": "integer"
+          },
+          "cover_url": {
+            "description": "封面图片URL",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_id": {
+            "description": "创建者ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_name": {
+            "description": "创建者名称",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_avatar": {
+            "description": "创建者头像",
+            "format": "string",
+            "type": "string"
+          },
+          "collection_id": {
+            "description": "所属合集ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "collection_name": {
+            "description": "所属合集名称",
+            "format": "string",
+            "type": "string"
+          },
+          "status": {
+            "description": "状态：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
+            "format": "int",
+            "type": "integer"
+          },
+          "type": {
+            "description": "类型：1-文章, 2-视频",
+            "format": "int",
+            "type": "integer"
+          },
+          "view_count": {
+            "description": "浏览量",
+            "format": "int",
+            "type": "integer"
+          },
+          "like_count": {
+            "description": "点赞数",
+            "format": "int",
+            "type": "integer"
+          },
+          "comment_count": {
+            "description": "评论数",
+            "format": "int",
+            "type": "integer"
+          },
+          "created_at": {
+            "description": "创建时间",
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "更新时间",
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "description": "删除时间",
+            "format": "string",
+            "type": "string"
+          },
+          "is_liked": {
+            "description": "当前用户是否已点赞",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["status", "type", "view_count", "like_count", "comment_count", "created_at"],
+        "type": "object"
+      },
+      "gjson.Json": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ContentsListReq": {
+        "properties": {
+          "page": {
+            "description": "页码",
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "description": "每页数量",
+            "format": "int",
+            "type": "integer"
+          },
+          "title": {
+            "description": "标题关键词过滤",
+            "format": "string",
+            "type": "string"
+          },
+          "collection_id": {
+            "description": "合集ID过滤",
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_id": {
+            "description": "创建者ID过滤",
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "description": "类型过滤：1-文章, 2-视频",
+            "format": "int",
+            "type": "integer"
+          },
+          "status": {
+            "description": "状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.ContentsListRes": {
+        "properties": {
+          "total": {
+            "description": "总记录数",
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "description": "当前页码",
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "description": "每页数量",
+            "format": "int",
+            "type": "integer"
+          },
+          "contents": {
+            "description": "内容列表",
+            "format": "[]*v1.ContentInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.ContentInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "contents"],
+        "type": "object"
+      },
+      "v1.ContentsPublishReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsPublishRes": {
+        "properties": {
+          "success": {
+            "description": "是否发布成功",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["success"],
+        "type": "object"
+      },
+      "v1.ContentsResubmitReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsResubmitRes": {
+        "properties": {
+          "success": {
+            "description": "是否重新提交成功",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["success"],
+        "type": "object"
+      },
+      "v1.ContentsSubmitForAuditReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsSubmitForAuditRes": {
+        "properties": {
+          "success": {
+            "description": "是否提交成功",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["success"],
+        "type": "object"
+      },
+      "v1.ContentsUnpublishReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsUnpublishRes": {
+        "properties": {
+          "success": {
+            "description": "是否取消发布成功",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["success"],
+        "type": "object"
+      },
+      "v1.ContentsUpdateReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "title": {
+            "description": "内容标题",
+            "format": "string",
+            "type": "string"
+          },
+          "description": {
+            "description": "内容描述",
+            "format": "string",
+            "type": "string"
+          },
+          "cover_url": {
+            "description": "封面图片URL",
+            "format": "string",
+            "type": "string"
+          },
+          "type": {
+            "description": "类型：1-文章, 2-视频",
+            "format": "int",
+            "type": "integer"
+          },
+          "collection_id": {
+            "description": "所属合集ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "body": {
+            "description": "文章正文",
+            "format": "string",
+            "type": "string"
+          },
+          "video_url": {
+            "description": "视频链接",
+            "format": "string",
+            "type": "string"
+          },
+          "duration": {
+            "description": "视频时长(秒)",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsUpdateRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ContentsViewReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsViewRes": {
+        "properties": {
+          "view_count": {
+            "description": "更新后的浏览量",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["view_count"],
+        "type": "object"
+      },
       "v1.GuideListReq": {
         "properties": {},
         "type": "object"
@@ -1151,6 +3600,228 @@
       },
       "v1.GuideReportRes": {
         "properties": {},
+        "type": "object"
+      },
+      "v1.LikesCheckReq": {
+        "properties": {
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["target_id", "target_type"],
+        "type": "object"
+      },
+      "v1.LikesCheckRes": {
+        "properties": {
+          "status": {
+            "description": "状态：1-赞, 0-踩",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["status"],
+        "type": "object"
+      },
+      "v1.LikesCountReq": {
+        "properties": {
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "status": {
+            "description": "状态：1-赞, 0-踩",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["target_id", "target_type", "status"],
+        "type": "object"
+      },
+      "v1.LikesCountRes": {
+        "properties": {
+          "count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["count"],
+        "type": "object"
+      },
+      "v1.LikesCreateReq": {
+        "properties": {
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "status": {
+            "description": "状态：1-赞, 0-踩",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["target_id", "target_type", "status"],
+        "type": "object"
+      },
+      "v1.LikesCreateRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "status": {
+            "description": "状态：1-赞, 0-踩",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["id", "status"],
+        "type": "object"
+      },
+      "v1.LikesDeleteReq": {
+        "properties": {
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["target_id", "target_type"],
+        "type": "object"
+      },
+      "v1.LikesDeleteRes": {
+        "properties": {
+          "status": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["status"],
+        "type": "object"
+      },
+      "v1.LikesListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "status": {
+            "description": "状态：1-赞, 0-踩",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["page", "size", "target_id", "target_type", "status"],
+        "type": "object"
+      },
+      "v1.LikesListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "items": {
+            "format": "[]*v1.LikeInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.LikeInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "items"],
+        "type": "object"
+      },
+      "v1.LikeInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "user_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "target_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "目标类型：1-内容, 2-评论",
+            "format": "int",
+            "type": "integer"
+          },
+          "status": {
+            "description": "状态：1-赞, 0-踩",
+            "format": "int",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "user_id",
+          "user_name",
+          "target_id",
+          "target_type",
+          "status",
+          "created_at",
+          "updated_at",
+          "deleted_at"
+        ],
         "type": "object"
       },
       "v1.ModelListReq": {
@@ -1378,6 +4049,10 @@
           "from_user": {
             "$ref": "#/components/schemas/v1.AccountInfo",
             "description": ""
+          },
+          "topic_id": {
+            "format": "int64",
+            "type": "integer"
           }
         },
         "required": [
@@ -1388,7 +4063,8 @@
           "content",
           "status",
           "created_at",
-          "from_user"
+          "from_user",
+          "topic_id"
         ],
         "type": "object"
       },
@@ -1972,87 +4648,6 @@
         "required": ["info"],
         "type": "object"
       },
-      "v1.TaskTopicInfo": {
-        "properties": {
-          "id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "task_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "account_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "title": {
-            "format": "string",
-            "type": "string"
-          },
-          "content": {
-            "format": "string",
-            "type": "string"
-          },
-          "created_at": {
-            "format": "string",
-            "type": "string"
-          },
-          "account": {
-            "format": "string",
-            "type": "string"
-          },
-          "extra": {
-            "$ref": "#/components/schemas/v1.TaskTopicExtra",
-            "description": ""
-          },
-          "extra_account": {
-            "$ref": "#/components/schemas/v1.TaskTopicExtraAccount",
-            "description": ""
-          },
-          "avatar": {
-            "format": "string",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "task_id",
-          "account_id",
-          "title",
-          "content",
-          "created_at",
-          "account",
-          "extra",
-          "extra_account",
-          "avatar"
-        ],
-        "type": "object"
-      },
-      "v1.TaskTopicExtra": {
-        "properties": {
-          "like_count": {
-            "format": "int",
-            "type": "integer"
-          },
-          "comment_count": {
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["like_count", "comment_count"],
-        "type": "object"
-      },
-      "v1.TaskTopicExtraAccount": {
-        "properties": {
-          "like_status": {
-            "format": "bool",
-            "type": "boolean"
-          }
-        },
-        "required": ["like_status"],
-        "type": "object"
-      },
       "v1.TaskTopicEditReq": {
         "properties": {
           "id": {
@@ -2289,6 +4884,20 @@
           }
         },
         "required": ["id"],
+        "type": "object"
+      },
+      "v1.TopicCommentDeleteReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.TopicCommentDeleteRes": {
+        "properties": {},
         "type": "object"
       },
       "v1.TopicCommentListReq": {
@@ -3121,6 +5730,16 @@
               "format": "int",
               "type": "integer"
             }
+          },
+          {
+            "description": "话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）",
+            "in": "query",
+            "name": "topic",
+            "schema": {
+              "description": "话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）",
+              "format": "string",
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -3138,6 +5757,489 @@
         },
         "summary": "我的主题列表",
         "tags": ["account"]
+      }
+    },
+    "/api/agent/create": {
+      "post": {
+        "operationId": "agent_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AgentCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建Agent (active字段控制是否显示，建议设置为true)",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/delete": {
+      "post": {
+        "operationId": "agent_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AgentDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除Agent",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/detail": {
+      "get": {
+        "operationId": "agent_detail",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取Agent详情",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/get_by_slug": {
+      "get": {
+        "operationId": "agent_get_by_slug",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentGetBySlugRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "根据Slug获取Agent",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/index": {
+      "get": {
+        "operationId": "agent_index",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentIndexRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取Agents索引",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/list": {
+      "get": {
+        "operationId": "agent_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取Agent列表",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/search": {
+      "get": {
+        "operationId": "agent_search",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "keyword",
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "schema": {
+              "format": "[]string",
+              "items": {
+                "format": "string",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentSearchRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "搜索Agent",
+        "tags": ["agent"]
+      }
+    },
+    "/api/agent/update": {
+      "post": {
+        "operationId": "agent_update",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AgentUpdateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AgentUpdateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "更新Agent",
+        "tags": ["agent"]
+      }
+    },
+    "/api/changelog/add": {
+      "post": {
+        "operationId": "changelog_add",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChangelogAddReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChangelogAddRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "新增变更日志 (active字段控制是否显示，建议设置为true)",
+        "tags": ["changelog"]
+      }
+    },
+    "/api/changelog/delete": {
+      "post": {
+        "operationId": "changelog_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChangelogDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChangelogDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除变更日志",
+        "tags": ["changelog"]
+      }
+    },
+    "/api/changelog/detail": {
+      "get": {
+        "operationId": "changelog_detail",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChangelogDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "变更日志详情",
+        "tags": ["changelog"]
+      }
+    },
+    "/api/changelog/edit": {
+      "post": {
+        "operationId": "changelog_edit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ChangelogEditReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChangelogEditRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "编辑变更日志",
+        "tags": ["changelog"]
+      }
+    },
+    "/api/changelog/list": {
+      "get": {
+        "operationId": "changelog_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "date",
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "active",
+            "schema": {
+              "format": "bool",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChangelogListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "变更日志列表",
+        "tags": ["changelog"]
+      }
+    },
+    "/api/changelog/public": {
+      "get": {
+        "operationId": "changelog_public",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ChangelogPublicRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取公共变更日志",
+        "tags": ["changelog"]
       }
     },
     "/api/chat/completions": {
@@ -3354,6 +6456,256 @@
         "tags": ["chat"]
       }
     },
+    "/api/collection_subscriptions/subscribe": {
+      "post": {
+        "operationId": "collection_subscriptions_subscribe",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CollectionSubscriptionsSubscribeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionSubscriptionsSubscribeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "订阅专题",
+        "tags": ["collection_subscriptions"]
+      }
+    },
+    "/api/collection_subscriptions/unsubscribe": {
+      "post": {
+        "operationId": "collection_subscriptions_unsubscribe",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CollectionSubscriptionsUnsubscribeReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionSubscriptionsUnsubscribeRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "取消订阅专题",
+        "tags": ["collection_subscriptions"]
+      }
+    },
+    "/api/collections/create": {
+      "post": {
+        "operationId": "collections_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CollectionsCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionsCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建专题",
+        "tags": ["collections"]
+      }
+    },
+    "/api/collections/delete": {
+      "post": {
+        "operationId": "collections_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CollectionsDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionsDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除专题",
+        "tags": ["collections"]
+      }
+    },
+    "/api/collections/detail": {
+      "get": {
+        "operationId": "collections_detail",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionsDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取专题详情",
+        "tags": ["collections"]
+      }
+    },
+    "/api/collections/list": {
+      "get": {
+        "operationId": "collections_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "creator_id",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionsListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取专题列表",
+        "tags": ["collections"]
+      }
+    },
+    "/api/collections/update": {
+      "post": {
+        "operationId": "collections_update",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CollectionsUpdateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CollectionsUpdateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "更新专题",
+        "tags": ["collections"]
+      }
+    },
     "/api/comment_like/like": {
       "post": {
         "operationId": "comment_like_like",
@@ -3414,6 +6766,334 @@
         },
         "summary": "主题取消点赞",
         "tags": ["comment_like"]
+      }
+    },
+    "/api/comments/create": {
+      "post": {
+        "operationId": "comments_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommentsCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建评论或回复",
+        "tags": ["comments"]
+      }
+    },
+    "/api/comments/delete": {
+      "post": {
+        "operationId": "comments_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommentsDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除评论",
+        "tags": ["comments"]
+      }
+    },
+    "/api/comments/detail": {
+      "get": {
+        "operationId": "comments_detail",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取评论详情",
+        "tags": ["comments"]
+      }
+    },
+    "/api/comments/list": {
+      "get": {
+        "operationId": "comments_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_type",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "parent_id",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "root_id",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "creator_id",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取评论列表",
+        "tags": ["comments"]
+      }
+    },
+    "/api/comments/refresh": {
+      "get": {
+        "operationId": "comments_refresh",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "target_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_type",
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "last_time",
+            "schema": {
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsRefreshRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "刷新评论列表",
+        "tags": ["comments"]
+      }
+    },
+    "/api/comments/replies/list": {
+      "get": {
+        "operationId": "comments_replies_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "parent_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsRepliesListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取评论回复列表",
+        "tags": ["comments"]
+      }
+    },
+    "/api/comments/update": {
+      "post": {
+        "operationId": "comments_update",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommentsUpdateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.CommentsUpdateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "更新评论",
+        "tags": ["comments"]
       }
     },
     "/api/common/add_user": {
@@ -3591,6 +7271,500 @@
         "tags": ["common"]
       }
     },
+    "/api/content_operation_log/detail": {
+      "get": {
+        "operationId": "content_operation_log_detail",
+        "parameters": [
+          {
+            "description": "日志ID",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "日志ID",
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentOperationLogDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": "响应元数据"
+          }
+        },
+        "summary": "获取单个内容操作日志详情",
+        "tags": ["content_operation_log"]
+      }
+    },
+    "/api/content_operation_log/list": {
+      "get": {
+        "operationId": "content_operation_log_list",
+        "parameters": [
+          {
+            "description": "内容ID",
+            "in": "query",
+            "name": "contentId",
+            "required": true,
+            "schema": {
+              "description": "内容ID",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "页码",
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "description": "页码",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "每页数量",
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "description": "每页数量",
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentOperationLogListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": "响应元数据"
+          }
+        },
+        "summary": "获取内容操作日志列表",
+        "tags": ["content_operation_log"]
+      }
+    },
+    "/api/contents/audit": {
+      "post": {
+        "operationId": "contents_audit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsAuditReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsAuditRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "审核内容",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/create": {
+      "post": {
+        "operationId": "contents_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建内容",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/delete": {
+      "post": {
+        "operationId": "contents_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除内容",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/detail": {
+      "get": {
+        "operationId": "contents_detail",
+        "parameters": [
+          {
+            "description": "内容ID",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "内容ID",
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取内容详情",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/list": {
+      "get": {
+        "operationId": "contents_list",
+        "parameters": [
+          {
+            "description": "页码",
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "description": "页码",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "每页数量",
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "description": "每页数量",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "标题关键词过滤",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "description": "标题关键词过滤",
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "description": "合集ID过滤",
+            "in": "query",
+            "name": "collection_id",
+            "schema": {
+              "description": "合集ID过滤",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "创建者ID过滤",
+            "in": "query",
+            "name": "creator_id",
+            "schema": {
+              "description": "创建者ID过滤",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "类型过滤：1-文章, 2-视频",
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "description": "类型过滤：1-文章, 2-视频",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取内容列表",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/publish": {
+      "post": {
+        "operationId": "contents_publish",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsPublishReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsPublishRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "发布内容",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/resubmit": {
+      "post": {
+        "operationId": "contents_resubmit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsResubmitReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsResubmitRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "重新提交审核",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/submit_for_audit": {
+      "post": {
+        "operationId": "contents_submit_for_audit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsSubmitForAuditReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsSubmitForAuditRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "提交内容审核",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/unpublish": {
+      "post": {
+        "operationId": "contents_unpublish",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsUnpublishReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsUnpublishRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "取消发布内容",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/update": {
+      "post": {
+        "operationId": "contents_update",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsUpdateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsUpdateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "更新内容",
+        "tags": ["contents"]
+      }
+    },
+    "/api/contents/view": {
+      "post": {
+        "operationId": "contents_view",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsViewReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsViewRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "增加内容浏览量",
+        "tags": ["contents"]
+      }
+    },
     "/api/guide/list": {
       "get": {
         "operationId": "guide_list",
@@ -3640,6 +7814,232 @@
         },
         "summary": "更新状态",
         "tags": ["guide"]
+      }
+    },
+    "/api/likes/check": {
+      "get": {
+        "operationId": "likes_check",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "target_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_type",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.LikesCheckRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "检查点赞状态",
+        "tags": ["likes"]
+      }
+    },
+    "/api/likes/count": {
+      "get": {
+        "operationId": "likes_count",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "target_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "目标类型：1-内容, 2-评论",
+            "in": "query",
+            "name": "target_type",
+            "required": true,
+            "schema": {
+              "description": "目标类型：1-内容, 2-评论",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "状态：1-赞, 0-踩",
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "description": "状态：1-赞, 0-踩",
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.LikesCountRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取点赞数量",
+        "tags": ["likes"]
+      }
+    },
+    "/api/likes/create": {
+      "post": {
+        "operationId": "likes_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.LikesCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.LikesCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建点赞",
+        "tags": ["likes"]
+      }
+    },
+    "/api/likes/delete": {
+      "post": {
+        "operationId": "likes_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.LikesDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.LikesDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除点赞",
+        "tags": ["likes"]
+      }
+    },
+    "/api/likes/list": {
+      "get": {
+        "operationId": "likes_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "目标类型：1-内容, 2-评论",
+            "in": "query",
+            "name": "target_type",
+            "required": true,
+            "schema": {
+              "description": "目标类型：1-内容, 2-评论",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "状态：1-赞, 0-踩",
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "description": "状态：1-赞, 0-踩",
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.LikesListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取点赞列表",
+        "tags": ["likes"]
       }
     },
     "/api/model/list": {
@@ -4523,6 +8923,37 @@
           }
         },
         "summary": "发布主题评论",
+        "tags": ["topic_comment"]
+      }
+    },
+    "/api/topic_comment/delete": {
+      "post": {
+        "operationId": "topic_comment_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.TopicCommentDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.TopicCommentDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除主题评论",
         "tags": ["topic_comment"]
       }
     },

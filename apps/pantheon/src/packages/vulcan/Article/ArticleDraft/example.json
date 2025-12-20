@@ -1,0 +1,1317 @@
+{
+  "body": [
+    {
+      "id": "a81fe993-62e0-472e-97eb-598f5d7dd64c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "随着“HD-2D”技术日益成熟，《歧路旅人》系列似乎开始步入一种微妙的困境 —— 在玩家开始对这种画面技术所能承载的“情感张力”与“视觉意境”渐渐产生疲倦的同时，那种回归“本格”的JRPG叙事与玩法，在当下越发快节奏的游戏体验下，也似乎显露出了一种“与时代脱节”的错位感。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "2d95e001-fcdb-4144-815c-2dd0b771bf0a",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "1.webp",
+        "url": "/public/test/temp/jlIJFyTFN8mrmusDvuFuV.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "25cec2d2-09cf-45f8-98c0-af76ae6683bf",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "《歧路旅人 0》便在这个背景下诞生。它脱胎于经过现代化改编的手游《歧路旅人：大陆的霸者》，在剥离抽卡付费机制、重构原有已相当完善的成长系统之后，又将系列最擅长、也最具特色的叙事体验充分融入其中。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "aec11598-1167-4763-b3b4-fd7812cb6f9d",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "2.webp",
+        "url": "/public/test/temp/s1tYtxayVovv_54JpnMSg.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "a2ae9dad-08e9-442b-8ce2-fc308f90d483",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "然而《歧路旅人 0》的体量相当庞大，在我决定撰写这篇评测时，自己已经在在游戏中投入约60小时，但剧情进度仅完成约60%，因此这篇评测主要基于这60小时的体验而写成。为了不破坏各位亲自探索的乐趣，本文将避免涉及具体的剧情细节，还请谅解。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "6e108516-c00e-4dd2-8e90-7b2d8ef4d15a",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "先说结论 ——",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "696ac51f-27e9-4f36-9ede-f788a814bad5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "经历近六十小时的游玩后，我越发清晰地意识到：《歧路旅人 0》并非《歧路旅人 2》的延续，也不是《大陆的霸者》的单纯单机移植，而是在两者之间找到了一个极其微妙的平衡点 —— 对喜爱JRPG却又对老旧的游戏系统感到痛苦的玩家而言，它“现代化”的改进体验，会带来足够的惊喜；但同样，对于偏爱系列前作中那种多主角叙事、以及更加细节化的资源管理的玩家，本作的玩法设计可能会让你觉得有些过于“粗糙”。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "b7600e8f-d71b-4f55-97ed-2282a5d64b60",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "3.webp",
+        "url": "/public/test/temp/iVxy0skq5SYLwisl3-nJF.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "f90ed3e5-2e63-486c-9866-58556ad96fdb",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "尽管如此，“0”不仅仅代表故事的起点，也意味着是系列重新出发的原点。《歧路旅人 0》充满诸多新想法、实验性甚至野心，在我看来，那些改变甚至可以称得上有些“冒险”。但幸好，它玩起来依然还是那股熟悉的、经典的JRPG味道。对喜爱这一系列的玩家而言，这或许已经足够令人感到满足了。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "614268d4-99c4-473e-8598-35d2fcc66d6a",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "故事：把“我”作为主角之后，带来的改变",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "2c9cf08c-23c4-4389-9e75-46aa881a9958",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "要说到《歧路旅人 0》最大的改变，其实正是在这次的“自定义主角” —— 或许可以这么说，《歧路旅人 0》的一系列的改变、进化，都是围绕在了这个设计之上。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "478c020f-c7a6-465e-a452-86a4347f45df",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "与前两作聚焦于八位性格迥异的“旅人”这种篇章结构不同，《歧路旅人 0》将故事的中心移入到主人公，也就是玩家自己身上。所以玩家在故事的一开始，就可以自定义主人公的外形、发型、声音、初始道具、被动能力、名字等等，甚至还可以把自己最爱吃的料理设置成游戏中的某个道具名字。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "245316fe-7a77-4be4-935c-0ed6dd6a2420",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "4.webp",
+        "url": "/public/test/temp/mQqxqPnUg-iJUdZyPPhwG.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "1d6eaf00-0881-4ec5-b182-00cdfc5206ad",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "很显然，这次的《歧路旅人 0》在一开始就已经定下了这样的主题基调：这一次游戏要讲述的，是属于玩家自己的故事。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "2273b9c0-4919-408a-a865-f5d3f2c1f7da",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "5.webp",
+        "url": "/public/test/temp/ifdh2hPLxJgJEI825MGTK.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "d69b9d41-dac8-4ca8-b85e-89a2b8ce6d03",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "对《大陆的霸者》的老玩家而言，在刚开始《歧路旅人 0》的旅途时时或许会觉得有些摸不着头脑：《歧路旅人 0》的故事，实际上就是手游的前四节故事；而对于没有玩过手机版的玩家而言，本作的定位更像是完善整个系列的一块“拼图” —— 故事舞台回归了玩家们熟悉的“奥鲁斯特拉”大陆，围绕着掌控 “财富、权力、名声” 的三大暴君与七枚神之戒，主人公与三十位队友展开了一场交织着阴谋诡计、纵横捭阖的王道冒险故事。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "76c1db5f-e073-4d86-8510-2c24c02c46e4",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "6.webp",
+        "url": "/public/test/temp/NrM1Vvd587_0P6eKhBMtF.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "77922003-f8dd-409c-8481-a6eca2d9c584",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "所以本作的故事其实早就没有了什么神秘感，就连BOSS的弱点特性、出招模式都基本上从手游版里原封不动的搬了过来。毫不夸张的说，《大陆的霸者》的攻略甚至可以直接套用在《歧路旅人 0》上。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "6a694f45-bc63-45e0-81de-d26436dd144e",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "不过从全系列的角度来看，虽然《歧路旅人 0》和《大陆的霸者》都讲述了同一时间发生的故事，但两者实际上属于平行世界，互不影响，所以也没有办法将它视为真正意义上的“1代前传”。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8a53c397-5c14-4081-9e2b-50526e627362",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "7.webp",
+        "url": "/public/test/temp/yB8-XyD3gkDIezd_FOt1I.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "7c03fc17-085f-45e5-86ed-58007ba99a26",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "那么，《歧路旅人 0》就只是单纯的《大陆的霸者》单机版吗？并不尽然。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "339f2ba0-7ae8-4eea-b5e3-362a4b6fbfbf",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "以单主角为视点有个好处，那就是上面提到的，《歧路旅人 0》的故事节奏会变得简单、直接而又足够明确：全篇故事一直围绕着“复仇”与“复兴”这两个主题，主人公在可以自由选择推进顺序的同时，又不用担心剧情变得支离破碎。相较于手机版，原本被碎片化的故事章节被重构，而当画面从小屏幕来到放大了数十倍的电视机时，过场镜头、演出节奏的重新优化，也让原本充满意外和翻转的故事桥段，更进一步地提升了情绪感染力。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "e8f8faee-4fd9-49b4-95d3-42dce83ecbb5",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "8.webp",
+        "url": "/public/test/temp/3NXOEta1hQ9bCjlZpcEZ1.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "fb42f406-7d4e-4dea-bbd3-a8d6aad23d20",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "当然，对系列老玩家而言，能够与初代八位主角相遇，还能重访过去的城镇，这已经足够能成为“情怀拉满”；而伴随着故事的不断推进，故乡一点一点实现“复兴”的另一条主线，也是系列作品中所从未有过的全新体验",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "cddc95b4-4db9-414b-84c8-e67f52e71491",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "9.webp",
+        "url": "/public/test/temp/AjV2MxjV3dU5lWHFI8i2C.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "803cc20b-a995-401c-abb6-36be69a46458",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "《歧路旅人 0》的故事水平仍然有一股子系列一贯遵循的“王道”叙事体验。以现在的眼光来看，这种故事里总是会有些经不起推敲的情节设定，还有那些知其一便知其二的后续发展。对我来说有点司空见惯，但好在个别剧情中的精彩反转还是给我留下了非常深刻的印象。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c1118cfb-6da2-4641-a48c-5568b06ec0a6",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "加上更清晰直观的小地图设计，以及任务引导提示、快速传送、水路探索等经典机制的保留，让游戏变得“现代化”了许多，玩起来少了一些前作中的“古早”味道。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "3e4541b2-2d48-4f87-a9de-215b24427b82",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "10.webp",
+        "url": "/public/test/temp/PKNeHOmDyWPZYpell6KOf.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "6398a583-6fe7-4fbe-96f2-f7022996d3e1",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "但我认为《歧路旅人 0》很矛盾的一点是，在拓展了世界观设定，并且加入了30多位可招募的队友之后，角色的塑造也在一定程度上呈现出了“顾此失彼”的问题：比如对于主人公（也就是玩家）的塑造，没有内心活动，没有语音对话，是一个浮于表面的“工具人”形象。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "126c3c77-86d4-44e4-b63d-5992569f3a20",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "我不知道开发团队这样设计主人公的想法是不是想让玩家扮演自己，但话又说回来，剧情又无法依靠不同选项而产生不同的走向，说到底主人公也就是被绑在既定轨道上的一个“小火车头”而已，又何谈“扮演自己”呢？",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "80b75516-4aed-4308-9654-03371c37df33",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "11.webp",
+        "url": "/public/test/temp/QX3aMEauPH1DFcka8DudI.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "7816af1d-ce89-467b-9d0d-5f4370e3eaf8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "而作为推进剧情的NPC们，也因为篇幅问题少了更加深入的刻画：相较于系列之前的作品中八个主角有4章长度的故事，这次《歧路旅人 0》中NPC们的剧情也就三言两语，绝大多数情况下，只要解决一个事件NPC们就会很爽快地加入到队伍中。说是“群像剧”，但因为个人的叙事不足，让大家相互之间有种“君子之交淡如水”的错觉。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "9788d7f3-9845-4333-83d0-15dd262fb2e5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "尤其是在格局被上升到了国家与国家，人类与神话的高度之后，这种浩浩荡荡8个人在地图中结伴而行的画面，更让我觉得像是凑在一起旅游的团队，而主人公，就是为大家“讲解”大陆历史的导游。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "676d1128-b9c5-40c0-82a9-e8785bb2f25e",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "12.webp",
+        "url": "/public/test/temp/s7m0TvQzTnjAoP-8a7GmU.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "59f81c4c-d204-483d-851b-88b06c2380cb",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "所以相较于主机平台上的系列前两作而言，我觉得这样的故事剧情是有些不足之处。但换个角度看，它却又很适合那些没有接触过《歧路旅人》系列的新玩家来欣赏系列中那种非常典型的“日本人讲奇幻故事”式的表达方式 —— 故事节奏更快，剧情也更集中于核心，《歧路旅人 0》的这一改动，想来也确实是挺大胆的。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "20d2e5ed-43a7-48fa-9d4b-5dbfa5cf46db",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "13.webp",
+        "url": "/public/test/temp/L2rYqhUimzCTWsSWgzXD_.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "2f2f1c37-4e2a-487c-81ac-bdadab0b64fe",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "战斗：爽快与策略上的取舍",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "a2cc0832-40b0-4d9c-b377-b345851426d3",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "《歧路旅人 0》的战斗系统实际上也是脱胎自《大陆的霸者》。作为系列的另外一大改变，本作在延续系列核心的 Break & Boost 机制基础上，让战斗中的出战人数从4人拓展至8人（前后排各4人），每回合中可随时切换成员，但一轮仍然只能行动4次；另外还有5个支援角色槽，所以一场战斗中最大可以登场13人。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "f9edc287-72e8-468f-bc41-9aa1b60d4e30",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "13个角色轮番群殴BOSS，这还真是之前从来都没想过的光景。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "cc50e7c7-207a-4eee-967c-4681ca19f3df",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "这一设计最直观的体现，就是战斗变得更爽快了：虽然后排角色无法直接行动，但每回合仍然可以获得1点BP，并恢复一定量的HP/SP。所以BP这个在前作中需要精打细算的资源，在本作中似乎就变的极为“奢侈”：8人队伍不但可以轻松覆盖全武器与属性，还可以通过“前排用BP快速破防 + 后排满BP爆发输出”的战术，让敌人不断陷入到一直处于被破防的“硬直”状态中；另外，由于敌我的行动顺序仅由前排角色速度决定的特性，甚至还可以将高敏捷的盗贼和商人置于前排，后排安排战士、法师等低速职业，以切换角色的方式，用高威力AOE魔法先手秒杀敌人，显著提升了战斗的效率。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "cb30bc7a-b343-41e1-87c6-150d3382926e",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "13.webp",
+        "url": "/public/test/temp/L2rYqhUimzCTWsSWgzXD_.webp",
+        "caption": "",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "927910c7-a76f-476f-b518-131e14707ccb",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "再加上主角获得的戒指必杀技以及其他角色消耗JP获得的必杀技，直观来看，《歧路旅人 0》的战斗难度似乎看起来应该是全系列最低的。确实，因为BP的充裕和“弱点属性”设计没有变化，“破防敌人”的难度有了明显的降低。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "0b77fc1a-4376-4669-94c2-041f2eff1333",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "对此，开发团队却只是在破防之后不断加强敌人护盾层数，而对于前后排的机制设计，也只有限制换位等简单的技能，没有更多的让我感到“眼前一亮”的机制设计。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "41a96d07-10a6-40a8-a8e6-f231b47b89f9",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "9.webp",
+        "url": "/public/test/temp/AjV2MxjV3dU5lWHFI8i2C.webp",
+        "caption": "walalal",
+        "showPreview": true
+      },
+      "children": []
+    },
+    {
+      "id": "65635308-52fd-42bb-97d9-2c1b24b05240",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "在角色的成长方面，《歧路旅人 0》也有了较大幅度的改动：本作中，主人公可以随时转职其他职业，而不用在满地图寻找神殿，自然也就无需担心会出现选择错了初始职业让增加战斗难度的情况；而转职条件也简化成了只要学会三个被动技能即可解锁任意一个其他职业。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c69b044d-d6a4-4b24-9df7-2839b7d7087b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "虽然NPC队友无法转职，但每个角色都有不同的技能倾向以及被动/必杀技，即便是相同的职业，也存在着较大的差异，比如同为神官，就有专注于辅助和专注于长续航的区别，在角色搭配层面上，《歧路旅人 0》可以说有了近乎“无限”的可能性。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "a63057bb-ca7e-467b-96fd-db4c9c74a72d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "而新加入的“技能精粹”系统，则是更进一步地加深了整个游戏的策略性：首先，角色学习自身的技能与前作保持一致，都是消耗JP点来不断解锁，同时根据所学数量解锁可以自由开关的被动技能；其次，当所有技能学完之后，玩家可以用JP点数将已学技能“精粹”出来，交给其他角色装备；除了自身学得的技能以外，每个角色还可以额外装备3个主动和2被动技能，栏位需要用JP点数解锁，基本上与学习技能的花费持平。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "fa1be16a-a6b9-4f9d-8778-3827abbc56d8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "这样一来，玩家就可根据角色的特性，来实现“自由定制”的玩法：举例来说，1代中登场的“特蕾莎”拥有“SP消耗减半”的被动，而把这一被动精粹化后，就可以由魔法使职业进行装备，让原本消耗30多MP的大型魔法直接减半，大幅提升战斗中的续航能力。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "3db4adb9-bcfb-487d-967c-b71c0e0f9c74",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "另外，精粹技能也可以在地图的宝箱或者其他NPC手中获得，比如“遇敌减半”或者“属攻与物攻”互换等能力。通过精粹与搭配，玩家既可以为自己的队伍打造出更丰富可能性，又可以让原本一些角色的特性变得“更加泛用” —— 比如只要把金钱获得量上升精粹出来之后，队伍里就再也不用被迫非要带一个商人了。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "090997e7-4541-4233-8dfb-eae54a85650e",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "不过需要注意的是，精粹系统仍然有一定的限制：例如角色只能装备自己可以使用的武器的技能（但魔法除外），另外装备栏的解锁以及精粹消耗的JP点数需求量并不低，如何要在有限的资源里做出取舍，也是一件颇伤脑细胞的事情。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "a0eaecd6-6d2c-41c9-b408-a5dec2587170",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "在养成系统的深度与广度得到强化之后，《歧路旅人 0》中角色的成长体验一定程度上弥补了战斗系统的简化。这让游戏少了一些“硬核”，多了几分“爽快”。但好在高强度的BOSS战设计，让原本有点乏味的战斗又有了新的乐趣 —— 高伤害、多频次的攻势依然会带来需要精打细算的压力，让我在命悬一线之际拼命挣扎求生；一些BOSS的二阶段、三阶段的形态转换，让我甚至有了种梦回玩初代时那种熟悉的紧张感。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "d753d5b0-074e-45f5-a970-87c7b873ac3f",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "所以，本作从玩法上不但延续了一代与二代中的经典机制与心流体验，并且系统在得到改良之后，没有因“现代化”的调整而受到影响，而是较好地保留了JRPG那种基于“回合制”与“资源管理”而展开的乐趣。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "1a8604f7-c462-4ed5-af62-20ce56d37eab",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "仅就这点而言，即使面对长达上百小时的游戏流程，《歧路旅人 0》的战斗系统也已经具备了足够的深度与支撑力。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8749a6ee-12ef-4940-af55-59e1f7d31bf7",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "其他：一些“现代化”的进步与遗憾",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "cc13ec5a-60e5-4631-a284-72587c23e8ed",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "除了战斗系统的改进以外，在其他玩法上，《歧路旅人 0》也同样做出了不少新的尝试：例如地图中的精英BOSS会用颜色来区别强度，挑战之后可以在其守卫的宝箱中拿到稀有道具，但因为战斗系统的调整，挑战难度还是略逊于系列前作。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "14a36a49-dcd3-4454-8dde-2416b4ccb8a8",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "标志性的 “地图指令” 虽然得以保留，但根据剧情以及角色设计，进行了大幅度的简化：从大方向来看，角色的地图指令可以大致分为付费（雇佣、购买）、对战（赢取、招募）、说服（探查、砍价）等三个维度。而在本作中，角色拥有“权力”“财富”“名望”三个属性，自然，这三个属性的等级将会影响到玩家对NPC的行动成功率。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8f84ccfd-7faf-41ae-b25f-29ebeaa35e52",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "虽然随着游戏进程的推进，地图指令的成功率也会不断上升。但对老玩家而言，用SL大法赌成功率的玩法在本作中仍然得到了保留。虽然有机会能提前获取超强装备的确很诱人，但每次都要回到菜单再读盘进入的设计，真是一点儿都没有变化。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "4466b2bf-2edf-4951-8a6d-f48656fb2c6b",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "此外，作为系列首次引入的核心系统，“城镇建设”在游戏发售前就被官方列为主要宣传点之一。玩家需要通过推进支线剧情、招募NPC、探索地图或在商店中获取材料，逐步重建被毁的故乡维舒贝尔。随着城镇复兴等级的提升，村子中可以建造商店、酒馆、训练所等设施。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "02d1e040-2f64-4186-af86-cea34a66101e",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "训练所能让后备队员获取经验，酒馆可以制作提供增益效果的料理，而商店不仅能够汇集各地物资，还会不定期出售稀有道具。与此同时，定居在村落里的居民会定期赠送各类素材，田地和农场也会稳定产出料理所需的食材。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "f04e3086-8449-4928-9b51-0997e505e1b3",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "通过自定义房屋外观、摆放装饰品，这个对主人公有着重要意义的小村庄，将逐渐成长为一个便捷而温馨的根据地。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c429196a-1f66-4c6a-a0bb-cf479a32cb39",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "诚然，目睹村民陆续归来、废墟逐渐变为整齐新房的过程的确令我有些触动，但在实际体验中，“城镇建设”所展现出来的乐趣并未如我最初期待的那样高：例如建筑无法旋转，前排建筑常常遮挡后排入口；建筑物的升级上限仅为三级，且新建筑必须推进主线才能解锁，高等级建材也需要到游戏后期才能获取。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8858de0e-1f98-4c79-94d4-ff6959c986a2",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "当城镇发展与剧情进程高度绑定后，我才发现这一系统，从我原本想象的“模拟经营”玩法，变成了一个单纯服务于RPG体验的附加内容。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "1e20f013-5c97-42e4-b85a-ba460dc4e084",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "自由度的缺失，让这个原本潜力十足的设计显得有些“浅尝辄止”。如果能在居民配置中加入特殊搭配、提供由村民自主建造的指令，或是增添村落专属任务等，或许就能为这一系统带来远比现在更为丰富的乐趣。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c467fd98-c217-49f4-85ec-41abf9eb765c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "最后，我还是想再提一下系列御用作曲家西木康治所操刀的音乐。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "df8a044d-7c33-461e-8ff8-a2adeb9ed7f6",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "虽然这次没有延续2代中昼夜变换一曲两奏的惊艳设计，但西木康智依然在《歧路旅人 0》中展现出了惊人的才华 —— 初代那首令人熟悉的主旋律，在本作中成为大地图背景音乐。通过交响乐式的多重声部编排，这首早已刻入记忆的旋律被赋予丰富的层次变化，营造出与前两作截然不同的氛围：这一次，它更像是伴随着旅人旅途中的冒险诗篇，充满了活力与希望。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "da7f70f5-9554-4bbe-b1ab-133718859854",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "整体上，《歧路旅人 0》中共包含20至30首全新曲目，同时对前作中的经典旋律又进行了巧妙重构。除了新曲目以外，西木康智甚至还首次为游戏谱写了人声曲目，着实令人惊喜。总的来说，《歧路旅人 0》的音乐仍然属于系列中的顶级水准，又或者说，我认为它应该属于当下JRPG所有作品中的顶级水准才对。",
+          "styles": {
+            "textColor": "rgb(50, 50, 50)",
+            "backgroundColor": "rgb(252, 252, 252)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "7358a30c-6353-4fcb-b5c7-583be25b8fe7",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "结语",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "22a8dc26-fde2-4baa-82a6-5d9f4f39e7f9",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "我认为《歧路旅人 0》并非是《歧路旅人 2》的延续，而是以系列JRPG底蕴为基础，向全新方向拓展的革新之作。如果说二代是“纵向深挖”，在八位主角的叙事框架内做内容填充；那么本作则更偏向“横向扩展” —— 通过采用单主角主线、大幅调整系统、融入家园建造等设计，在延续系列氛围的同时，做出了更贴近玩家的改善与进步。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "d72f9769-0413-4507-9b84-b0211bca2aa5",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "当然，这一转向也带来了鲜明又难以回避的优点和缺点：故事整体更连贯，但队友的剧情存在感有所削弱；战斗节奏更爽快，策略层面却需重新适应；养成更自由，职业特色反而显得模糊；游戏体量依旧充足，但诸如城镇建设等新系统却未能深入展开。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "fad4b33c-adf1-4d8c-b3fb-e4edfbe9cd7d",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "不过，作为“手游改单机”的一次成功实践，《歧路旅人 0》确实印证了这样一个观点：JRPG的生命力不只在于用“HD-2D”技术来复刻“情怀”，更在于通过核心玩法的进化，让玩家在每一次的冒险中，都能够感受到从时代脱胎而出的、全新的游戏魅力。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "42bdea28-e94d-4472-a7d0-dd814d177de2",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "正因如此，这场从“0”开始的旅途，我觉得还是值得尝试一番的吧。",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "8fd89e11-2100-4428-b8cc-c1b5fb52f82a",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "format,webp",
+        "url": "/public/test/temp/AjV2MxjV3dU5lWHFI8i2C.webp?x-oss-process=image/resize,limit_1,m_lfit,w_2000,h_2000/quality,q_90/format,webp",
+        "caption": "",
+        "showPreview": true,
+        "previewWidth": 364
+      },
+      "children": []
+    },
+    {
+      "id": "7ecbc1b6-8211-4436-b6cf-b27cebbe11d5",
+      "type": "codeBlock",
+      "props": {
+        "language": "java"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "public static void main() {\n  printf('hello walalal %s', 666);\n}",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "21cee09d-ebcd-4c03-bdd1-9d7e8527f6d0",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "4549bf73-7bda-4e36-a833-542d177f7cff",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ],
+  "cover_url": "/public/test/temp/yGTcIBw9Co8qrCTzzWVQf.webp",
+  "description": "推荐给所有的JRPG爱好者",
+  "title": "从“原点”重新出发：小评《歧路旅人0》"
+}

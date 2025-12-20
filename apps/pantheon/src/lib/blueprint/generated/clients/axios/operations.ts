@@ -54,6 +54,62 @@ export const operations = {
     "path": "/api/account/topic_list",
     "method": "get"
   },
+  "agent_create": {
+    "path": "/api/agent/create",
+    "method": "post"
+  },
+  "agent_delete": {
+    "path": "/api/agent/delete",
+    "method": "post"
+  },
+  "agent_detail": {
+    "path": "/api/agent/detail",
+    "method": "get"
+  },
+  "agent_get_by_slug": {
+    "path": "/api/agent/get_by_slug",
+    "method": "get"
+  },
+  "agent_index": {
+    "path": "/api/agent/index",
+    "method": "get"
+  },
+  "agent_list": {
+    "path": "/api/agent/list",
+    "method": "get"
+  },
+  "agent_search": {
+    "path": "/api/agent/search",
+    "method": "get"
+  },
+  "agent_update": {
+    "path": "/api/agent/update",
+    "method": "post"
+  },
+  "changelog_add": {
+    "path": "/api/changelog/add",
+    "method": "post"
+  },
+  "changelog_delete": {
+    "path": "/api/changelog/delete",
+    "method": "post"
+  },
+  "changelog_detail": {
+    "path": "/api/changelog/detail",
+    "method": "get"
+  },
+  "changelog_edit": {
+    "path": "/api/changelog/edit",
+    "method": "post"
+  },
+  "changelog_list": {
+    "path": "/api/changelog/list",
+    "method": "get"
+  },
+  "changelog_public": {
+    "path": "/api/changelog/public",
+    "method": "get"
+  },
   "chat_completions": {
     "path": "/api/chat/completions",
     "method": "post"
@@ -82,12 +138,68 @@ export const operations = {
     "path": "/api/chat/token_limit_status",
     "method": "post"
   },
+  "collection_subscriptions_subscribe": {
+    "path": "/api/collection_subscriptions/subscribe",
+    "method": "post"
+  },
+  "collection_subscriptions_unsubscribe": {
+    "path": "/api/collection_subscriptions/unsubscribe",
+    "method": "post"
+  },
+  "collections_create": {
+    "path": "/api/collections/create",
+    "method": "post"
+  },
+  "collections_delete": {
+    "path": "/api/collections/delete",
+    "method": "post"
+  },
+  "collections_detail": {
+    "path": "/api/collections/detail",
+    "method": "get"
+  },
+  "collections_list": {
+    "path": "/api/collections/list",
+    "method": "get"
+  },
+  "collections_update": {
+    "path": "/api/collections/update",
+    "method": "post"
+  },
   "comment_like_like": {
     "path": "/api/comment_like/like",
     "method": "post"
   },
   "comment_like_unlike": {
     "path": "/api/comment_like/unlike",
+    "method": "post"
+  },
+  "comments_create": {
+    "path": "/api/comments/create",
+    "method": "post"
+  },
+  "comments_delete": {
+    "path": "/api/comments/delete",
+    "method": "post"
+  },
+  "comments_detail": {
+    "path": "/api/comments/detail",
+    "method": "get"
+  },
+  "comments_list": {
+    "path": "/api/comments/list",
+    "method": "get"
+  },
+  "comments_refresh": {
+    "path": "/api/comments/refresh",
+    "method": "get"
+  },
+  "comments_replies_list": {
+    "path": "/api/comments/replies/list",
+    "method": "get"
+  },
+  "comments_update": {
+    "path": "/api/comments/update",
     "method": "post"
   },
   "common_add_user": {
@@ -114,6 +226,58 @@ export const operations = {
     "path": "/api/common/upload",
     "method": "post"
   },
+  "content_operation_log_detail": {
+    "path": "/api/content_operation_log/detail",
+    "method": "get"
+  },
+  "content_operation_log_list": {
+    "path": "/api/content_operation_log/list",
+    "method": "get"
+  },
+  "contents_audit": {
+    "path": "/api/contents/audit",
+    "method": "post"
+  },
+  "contents_create": {
+    "path": "/api/contents/create",
+    "method": "post"
+  },
+  "contents_delete": {
+    "path": "/api/contents/delete",
+    "method": "post"
+  },
+  "contents_detail": {
+    "path": "/api/contents/detail",
+    "method": "get"
+  },
+  "contents_list": {
+    "path": "/api/contents/list",
+    "method": "get"
+  },
+  "contents_publish": {
+    "path": "/api/contents/publish",
+    "method": "post"
+  },
+  "contents_resubmit": {
+    "path": "/api/contents/resubmit",
+    "method": "post"
+  },
+  "contents_submit_for_audit": {
+    "path": "/api/contents/submit_for_audit",
+    "method": "post"
+  },
+  "contents_unpublish": {
+    "path": "/api/contents/unpublish",
+    "method": "post"
+  },
+  "contents_update": {
+    "path": "/api/contents/update",
+    "method": "post"
+  },
+  "contents_view": {
+    "path": "/api/contents/view",
+    "method": "post"
+  },
   "guide_list": {
     "path": "/api/guide/list",
     "method": "get"
@@ -121,6 +285,26 @@ export const operations = {
   "guide_report": {
     "path": "/api/guide/report",
     "method": "post"
+  },
+  "likes_check": {
+    "path": "/api/likes/check",
+    "method": "get"
+  },
+  "likes_count": {
+    "path": "/api/likes/count",
+    "method": "get"
+  },
+  "likes_create": {
+    "path": "/api/likes/create",
+    "method": "post"
+  },
+  "likes_delete": {
+    "path": "/api/likes/delete",
+    "method": "post"
+  },
+  "likes_list": {
+    "path": "/api/likes/list",
+    "method": "get"
   },
   "model_list": {
     "path": "/api/model/list",
@@ -236,6 +420,10 @@ export const operations = {
   },
   "topic_comment_add": {
     "path": "/api/topic_comment/add",
+    "method": "post"
+  },
+  "topic_comment_delete": {
+    "path": "/api/topic_comment/delete",
     "method": "post"
   },
   "topic_comment_list": {

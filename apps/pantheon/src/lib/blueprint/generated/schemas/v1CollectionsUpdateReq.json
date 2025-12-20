@@ -1,0 +1,1 @@
+{"properties":{"id":{"format":"int64","type":"integer"},"name":{"format":"string","type":"string"},"description":{"format":"string","type":"string"},"cover_url":{"format":"string","type":"string"},"status":{"format":"int","type":"integer"}},"required":["id"],"type":"object","x-readme-ref-name":"v1.CollectionsUpdateReq"}

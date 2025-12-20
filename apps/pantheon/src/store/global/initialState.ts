@@ -33,6 +33,8 @@ export enum AppTab {
   Lab = 'lab',
   Settings = 'settings',
   Discover = 'discover',
+  Articles = 'discover/articles',
+  Collections = 'discover/collections',
   File = 'files',
   aiImage = 'image',
 }

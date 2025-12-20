@@ -1,0 +1,1 @@
+{"properties":{"success":{"description":"是否审核成功","format":"bool","type":"boolean"}},"required":["success"],"type":"object","x-readme-ref-name":"v1.ContentsAuditRes"}

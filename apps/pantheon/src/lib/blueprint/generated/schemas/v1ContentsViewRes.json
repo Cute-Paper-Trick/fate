@@ -1,0 +1,1 @@
+{"properties":{"view_count":{"description":"更新后的浏览量","format":"int","type":"integer"}},"required":["view_count"],"type":"object","x-readme-ref-name":"v1.ContentsViewRes"}

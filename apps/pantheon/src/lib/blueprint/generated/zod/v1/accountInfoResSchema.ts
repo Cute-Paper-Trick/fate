@@ -15,5 +15,6 @@ export const v1AccountInfoResSchema = z.object({
 "expire_in": z.int(),
 "is_manager": z.boolean(),
 "change_password": z.boolean(),
-"tag": z.string()
+"tag": z.string(),
+"account_key": z.string()
     }) as unknown as z.ZodType<V1AccountInfoRes>

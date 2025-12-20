@@ -39,4 +39,8 @@ export type V1NotificationInfo = {
      * @type object
     */
     from_user: V1AccountInfo;
+    /**
+     * @type integer, int64
+    */
+    topic_id: number;
 };

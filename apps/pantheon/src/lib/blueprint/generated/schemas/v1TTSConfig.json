@@ -1,0 +1,1 @@
+{"properties":{"showAllLocaleVoice":{"format":"bool","type":"boolean"},"sttLocale":{"format":"string","type":"string"},"ttsService":{"format":"string","type":"string"},"voice":{"description":"","properties":{"openai":{"format":"string","type":"string"}},"type":"object","x-readme-ref-name":"v1.TTSVoiceConfig"}},"type":"object","x-readme-ref-name":"v1.TTSConfig"}

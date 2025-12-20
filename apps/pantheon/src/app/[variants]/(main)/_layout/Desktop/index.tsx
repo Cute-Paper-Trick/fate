@@ -21,14 +21,16 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
         <TitleBar />
         <Flexbox height={'calc(100% - 50px)'} horizontal width={'100%'}>
           <Flexbox
-            height={'100vh'}
+            height={'100%'}
             horizontal
             id="desktop-main-container"
-            style={{ position: 'relative', overflowY: 'auto' }}
+            style={{ position: 'relative' }}
             width="100%"
           >
             <SideBar />
-            {children}
+            <Flexbox width={'100%'} style={{ overflow: 'auto' }}>
+              {children}
+            </Flexbox>
           </Flexbox>
         </Flexbox>
       </Flexbox>

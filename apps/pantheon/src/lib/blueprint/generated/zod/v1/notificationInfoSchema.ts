@@ -18,5 +18,6 @@ export const v1NotificationInfoSchema = z.object({
 "created_at": z.string(),
 get "from_user"(){
                 return v1AccountInfoSchema
-              }
+              },
+"topic_id": z.int()
     }) as unknown as z.ZodType<V1NotificationInfo>

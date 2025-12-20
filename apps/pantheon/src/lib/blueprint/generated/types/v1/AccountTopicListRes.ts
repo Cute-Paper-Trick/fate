@@ -4,7 +4,7 @@
 * Do not edit manually.
 */
 
-import type { V1TopicInfo } from "./TopicInfo";
+import type { V1TaskTopicInfo } from "./TaskTopicInfo";
 
 export type V1AccountTopicListRes = {
     /**
@@ -20,7 +20,7 @@ export type V1AccountTopicListRes = {
     */
     size: number;
     /**
-     * @type array, []*v1.TopicInfo
+     * @type array, []*v1.TaskTopicInfo
     */
-    list: V1TopicInfo[];
+    list: V1TaskTopicInfo[];
 };

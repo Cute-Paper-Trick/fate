@@ -5,7 +5,7 @@
 */
 
 import type { V1AccountTopicListRes } from "../../types/v1/AccountTopicListRes";
-import { v1TopicInfoSchema } from "./topicInfoSchema";
+import { v1TaskTopicInfoSchema } from "./taskTopicInfoSchema";
 import { z } from "zod/v4";
 
 export const v1AccountTopicListResSchema = z.object({
@@ -13,6 +13,6 @@ export const v1AccountTopicListResSchema = z.object({
 "page": z.int(),
 "size": z.int(),
 get "list"(){
-                return z.array(v1TopicInfoSchema)
+                return z.array(v1TaskTopicInfoSchema)
               }
     }) as unknown as z.ZodType<V1AccountTopicListRes>

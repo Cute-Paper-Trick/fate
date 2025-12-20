@@ -10,5 +10,6 @@ import { z } from "zod/v4";
 export const v1AccountTopicListReqSchema = z.object({
     "status": z.optional(z.string()),
 "page": z.int(),
-"size": z.int()
+"size": z.int(),
+"topic": z.optional(z.string().describe("话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）"))
     }) as unknown as z.ZodType<V1AccountTopicListReq>

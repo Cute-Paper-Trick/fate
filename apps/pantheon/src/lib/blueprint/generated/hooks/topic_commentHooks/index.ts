@@ -1,9 +1,11 @@
 export type { TopicCommentAddMutationKey } from "./useTopicCommentAdd";
+export type { TopicCommentDeleteMutationKey } from "./useTopicCommentDelete";
 export type { TopicCommentListQueryKey } from "./useTopicCommentList";
 export type { TopicCommentListSuspenseQueryKey } from "./useTopicCommentListSuspense";
 export type { TopicCommentSubListQueryKey } from "./useTopicCommentSubList";
 export type { TopicCommentSubListSuspenseQueryKey } from "./useTopicCommentSubListSuspense";
 export { topicCommentAddMutationKey, topicCommentAddMutationOptions, useTopicCommentAdd } from "./useTopicCommentAdd";
+export { topicCommentDeleteMutationKey, topicCommentDeleteMutationOptions, useTopicCommentDelete } from "./useTopicCommentDelete";
 export { topicCommentListQueryKey, topicCommentListQueryOptions, useTopicCommentList } from "./useTopicCommentList";
 export { topicCommentListSuspenseQueryKey, topicCommentListSuspenseQueryOptions, useTopicCommentListSuspense } from "./useTopicCommentListSuspense";
 export { topicCommentSubListQueryKey, topicCommentSubListQueryOptions, useTopicCommentSubList } from "./useTopicCommentSubList";

@@ -7,13 +7,7 @@ import {
 import { StateCreator } from 'zustand';
 
 import { getNextPageParam } from '@/features/Talk/TalkDetail/components/useInfiniteList';
-import {
-  V1AccountProfileRes,
-  V1TaskTopicInfo,
-  V1TopicInfo,
-  accountService,
-  taskTopicService,
-} from '@/lib/http';
+import { V1AccountProfileRes, V1TaskTopicInfo, accountService, taskTopicService } from '@/lib/http';
 
 export interface TopicAction {
   useTopicList: () => {
@@ -23,7 +17,7 @@ export interface TopicAction {
     fetchNextPage: UseInfiniteQueryResult['fetchNextPage'];
   };
   useTopicMineList: () => {
-    topicListQuery: UseInfiniteQueryResult<V1TopicInfo[], Error>;
+    topicListQuery: UseInfiniteQueryResult<V1TaskTopicInfo[], Error>;
     hasNextPage: boolean;
     isFetching: boolean;
     fetchNextPage: UseInfiniteQueryResult['fetchNextPage'];

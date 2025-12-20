@@ -5,9 +5,10 @@
 */
 
 import { topicCommentAdd } from "./topicCommentAdd";
+import { topicCommentDelete } from "./topicCommentDelete";
 import { topicCommentList } from "./topicCommentList";
 import { topicCommentSubList } from "./topicCommentSubList";
 
 export function topicCommentService() {
-  return { topicCommentAdd, topicCommentList, topicCommentSubList }
+  return { topicCommentAdd, topicCommentDelete, topicCommentList, topicCommentSubList }
 }

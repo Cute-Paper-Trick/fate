@@ -38,4 +38,8 @@ export type V1AccountInfoRes = {
      * @type string, string
     */
     tag: string;
+    /**
+     * @type string, string
+    */
+    account_key: string;
 };

@@ -1,0 +1,1 @@
+{"properties":{"page":{"format":"int","minimum":1,"type":"integer"},"size":{"format":"int","maximum":100,"minimum":1,"type":"integer"},"date":{"format":"string","type":"string"},"version":{"format":"string","type":"string"},"active":{"format":"bool","type":"boolean"}},"required":["page","size"],"type":"object","x-readme-ref-name":"v1.ChangelogListReq"}

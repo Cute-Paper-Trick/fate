@@ -1,0 +1,1 @@
+{"properties":{"id":{"description":"内容ID","format":"int64","type":"integer"}},"required":["id"],"type":"object","x-readme-ref-name":"v1.ContentsSubmitForAuditReq"}

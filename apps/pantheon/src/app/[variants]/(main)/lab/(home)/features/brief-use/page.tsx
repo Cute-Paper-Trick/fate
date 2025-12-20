@@ -32,7 +32,13 @@ const BriefUse: FC = () => {
           </Col>
           <Col md={12} style={{ display: 'flex' }} xs={24}>
             <div className={styles.cardRight}>
-              <video autoPlay loop muted playsInline src="/cca1ca3a771bf69acbf506730e38b536.mov" />
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                src="https://goood-space-assets.oss-cn-beijing.aliyuncs.com/public/cca1ca3a771bf69acbf506730e38b536.mov"
+              />
             </div>
           </Col>
         </Row>
