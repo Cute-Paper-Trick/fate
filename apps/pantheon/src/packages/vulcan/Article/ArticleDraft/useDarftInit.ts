@@ -21,10 +21,7 @@ export const useDarftInit = () => {
   //   select: (res) => res.content,
   // });
 
-  const { data: res, isPending: isLoading } = useContentsDetail(
-    { id: id! },
-    { query: { enabled: !!id } },
-  );
+  const { data: res, isLoading } = useContentsDetail({ id: id! }, { query: { enabled: !!id } });
   const data = res?.content;
 
   // 等待历史草稿数据加载完成后，初始化草稿状态
