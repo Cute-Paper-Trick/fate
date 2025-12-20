@@ -1,8 +1,10 @@
-import OSS from 'ali-oss';
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useStore } from 'zustand';
 
 import { s3Env } from '@/envs/s3';
+
+import { ossStore } from './store';
 
 const signature = (
   name: string,
@@ -25,22 +27,21 @@ const signature = (
 };
 
 export const useS3 = () => {
-  const [client] = useState(
-    new OSS({
-      region: s3Env.NEXT_PUBLIC_S3_REGION,
-      bucket: s3Env.NEXT_PUBLIC_S3_BUCKET,
-      accessKeyId: s3Env.NEXT_PUBLIC_S3_ACCESS_KEY_ID,
-      accessKeySecret: s3Env.NEXT_PUBLIC_S3_ACCESS_KEY_SECRET,
-    }),
-  );
+  const store = useStore(ossStore);
+
+  useEffect(() => {
+    store.refreshSTSToken();
+  }, [store]);
 
   const multipartUpload = async (file: File) => {
+    await store.ensureSTS();
+
     const suffix = file.name.slice(file.name.lastIndexOf('.'));
     const name = `${s3Env.NEXT_PUBLIC_S3_PREFIX}/${nanoid()}${suffix}`;
 
-    const res = await client.multipartUpload(name, file, {});
+    const res = await store.getClient().multipartUpload(name, file, {});
     return res;
   };
 
-  return { client, multipartUpload, signature };
+  return { multipartUpload, signature };
 };
