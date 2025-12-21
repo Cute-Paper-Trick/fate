@@ -31,7 +31,7 @@ export const useS3 = () => {
 
   useEffect(() => {
     store.refreshSTSToken();
-  }, [store]);
+  }, []);
 
   const multipartUpload = async (file: File) => {
     await store.ensureSTS();

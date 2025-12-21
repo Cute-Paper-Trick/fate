@@ -115,7 +115,7 @@ const ArticleCard = memo<ArticleCardProps>(
       cover && signature(cover, ['image', 'resize,limit_1,m_lfit,w_313', 'quality,q_90']);
 
     return (
-      <Link href={`/discover/articles/detail?id=${id}`}>
+      <Link href={`/discover/articles/${id}`}>
         <Flexbox className={cx(styles.card, 'card')}>
           <div className={styles.coverArea} style={{ backgroundImage: `url(${coverPath})` }}>
             <Center className={cx(styles.cover, 'cover')}>
@@ -123,9 +123,7 @@ const ArticleCard = memo<ArticleCardProps>(
             </Center>
           </div>
           <Flexbox className={styles.inner}>
-            <div className={styles.category}>
-              <span>官方活动</span>
-            </div>
+            <div className={styles.category}>{/* <span>官方活动</span> */}</div>
             <span className={styles.title}>{title}</span>
             <Flexbox align="center" className={styles.footer} horizontal justify="space-between">
               <CreatorMeta
