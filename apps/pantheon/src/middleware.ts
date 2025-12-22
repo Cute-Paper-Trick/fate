@@ -41,9 +41,9 @@ const isPublicRoute = createRouteMatcher([
   '/task(.*)',
 ]);
 
-function redirectToLogin(request: NextRequest, callbackUrl?: string) {
-  const loginUrl = new URL('/auth/sign-in', request.url);
-  loginUrl.searchParams.set('callbackUrl', callbackUrl || request.nextUrl.pathname);
+function redirectToLogin(request: NextRequest) {
+  const loginUrl = new URL(`${appEnv.NEXT_PUBLIC_CHAT_APP_URL}/signin`, request.url);
+  // loginUrl.searchParams.set('callbackUrl', callbackUrl || request.nextUrl.pathname);
   return NextResponse.redirect(loginUrl);
 }
 
@@ -176,7 +176,7 @@ const middleware = async (request: NextRequest) => {
   }
 
   if (!session && request.nextUrl.pathname === '/auth/sign-out') {
-    return redirectToLogin(request, '/');
+    return redirectToLogin(request);
   }
 
   // 已登录访问鉴权页面 -> 重定向到首页
