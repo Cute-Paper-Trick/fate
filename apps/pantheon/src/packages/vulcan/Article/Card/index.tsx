@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { memo } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 
-import { useS3 } from '@/packages/s3';
 import { formatNumber } from '@/packages/utils';
 
+import { useCoverUrl } from '../Header/useCoverUrl';
 import CreatorMeta from './CreatorMeta';
 
 const useStyles = createStyles(({ css }) => ({
@@ -108,11 +108,9 @@ interface ArticleCardProps {
 
 const ArticleCard = memo<ArticleCardProps>(
   ({ id, cover, title, description, creator, createAt, viewCount, likeCount, commentCount }) => {
-    const { signature } = useS3();
     const { styles, cx } = useStyles();
 
-    const coverPath =
-      cover && signature(cover, ['image', 'resize,limit_1,m_lfit,w_313', 'quality,q_90']);
+    const coverPath = useCoverUrl(cover, ['image', 'resize,limit_1,m_lfit,w_313', 'quality,q_90']);
 
     return (
       <Link href={`/discover/articles/${id}`}>
