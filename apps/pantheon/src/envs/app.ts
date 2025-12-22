@@ -6,7 +6,10 @@ export const appEnv = createEnv({
     APP_URL: z.url(),
     MIDDLEWARE_REWRITE_THROUGH_LOCAL: z.boolean().default(true),
     BACKEND_SECRET_CODE: z.string(),
+
     COOKIE_DOMAIN: z.string(),
+    COOKIE_SECURE: z.boolean(),
+    COOKIE_PREFIX: z.string(),
   },
   client: {
     NEXT_PUBLIC_BACKEND_URL: z.url(),
@@ -16,7 +19,10 @@ export const appEnv = createEnv({
     NEXT_PUBLIC_TOLGEE_DELIVERY: z.string().optional(),
   },
   runtimeEnv: {
-    COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
+    COOKIE_DOMAIN: process.env.COOKIE_DOMAIN || '',
+    COOKIE_SECURE: process.env.COOKIE_SECURE === '1',
+    COOKIE_PREFIX: process.env.COOKIE_PREFIX,
+
     BACKEND_SECRET_CODE: process.env.BACKEND_SECRET_CODE,
     NEXT_PUBLIC_CHAT_APP_URL: process.env.NEXT_PUBLIC_CHAT_APP_URL,
     APP_URL: process.env.APP_URL,

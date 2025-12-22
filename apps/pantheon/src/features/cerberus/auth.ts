@@ -18,7 +18,9 @@ import { sendResetPasswordEmail, sendVerificationEmail } from '@/lib/email';
 import { db } from './db';
 
 export const auth = betterAuth({
-  baseURL: `${authEnv.APP_URL}/api/auth`,
+  // baseURL: `${authEnv.APP_URL}/api/auth`,
+  // baseURL: 'http://localhost:3010/api/auth',
+  baseURL: authEnv.NEXT_PUBLIC_BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: 'pg',
     usePlural: true,

@@ -8,7 +8,7 @@ import urlJoin from 'url-join';
 import { APP_LOCALE_COOKIE } from '@/const/locale';
 import { APP_THEME_APPEARANCE } from '@/const/theme';
 import { appEnv } from '@/envs/app';
-import { auth } from '@/features/cerberus/auth';
+// import { auth } from '@/features/cerberus/auth';
 import { Locales } from '@/locales/resources';
 import { parseBrowserLanguage } from '@/utils/locale';
 import { RouteVariants } from '@/utils/server/routeVariants';
@@ -149,8 +149,20 @@ const middleware = async (request: NextRequest) => {
 
     // 如果缓存中没有 session，则从数据库获取
     if (!session) {
-      console.log('缓存中未找到 session，正在从数据库获取...');
-      session = await auth.api.getSession(request);
+      console.log('缓存中未找到 session，正在从 lobechat 获取...');
+
+      const prefix = [appEnv.COOKIE_SECURE ? '__Secure' : '', appEnv.COOKIE_PREFIX]
+        .filter(Boolean)
+        .join('-');
+
+      const res = await fetch(`${authEnv.NEXT_PUBLIC_BETTER_AUTH_URL}/get-session`, {
+        headers: {
+          cookie: `${prefix}.session_token=${sessionCookie}`,
+        },
+      });
+      if (res.ok) {
+        session = await res.json();
+      }
     }
   }
 

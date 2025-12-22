@@ -2,9 +2,9 @@ import { useTheme } from 'antd-style';
 import { ReactNode, memo } from 'react';
 import { DivProps, Flexbox } from 'react-layout-kit';
 
+import Divider from './components/Divider';
 import PantheonLogo from './PantheonLogo';
 import PantheonText from './PantheonText';
-import Divider from './components/Divider';
 import { useStyles } from './style';
 
 export interface PantheonProps extends DivProps {
@@ -25,14 +25,8 @@ const Pantheon = memo<PantheonProps>(({ type, size = 32, style, extra, className
       logoComponent = <PantheonLogo size={size} {...rest} />;
       break;
     }
-    case 'flat': {
-      // logoComponent = <LogoFlat size={size} style={style} />;
-      // break;
-    }
-    case 'mono': {
-      // logoComponent = <LogoMono size={size} style={style} />;
-      // break;
-    }
+    case 'flat':
+    case 'mono':
     case 'text': {
       logoComponent = (
         <PantheonText className={className} size={size} style={style} {...(rest as any)} />
