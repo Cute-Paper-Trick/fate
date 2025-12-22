@@ -91,7 +91,7 @@ const ArticleDarft = memo(() => {
               if (url.startsWith('http')) {
                 return url;
               }
-              return s3.signature(url);
+              return await s3.signature(url);
             }}
             uploadFile={async (file) => {
               const uploaded = await s3.multipartUpload(file);

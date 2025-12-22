@@ -2,7 +2,6 @@ import OSS from 'ali-oss';
 import { DateTime } from 'luxon';
 import { createStore } from 'zustand/vanilla';
 
-import { s3Env } from '@/envs/s3';
 import { V1CommonSignStsRes, commonService } from '@/lib/http';
 
 interface OssState {
@@ -55,11 +54,11 @@ export const ossStore = createStore<OssStore>((set, get) => ({
     }
 
     return new OSS({
-      region: s3Env.NEXT_PUBLIC_S3_REGION || sts.region,
+      region: 'oss-cn-beijing',
       accessKeyId: sts.accessKeyId,
       accessKeySecret: sts.accessKeySecret,
       stsToken: sts.stsToken,
-      bucket: s3Env.NEXT_PUBLIC_S3_BUCKET || sts.bucket,
+      bucket: 'pantheon-code',
       secure: sts.secure,
       refreshSTSToken: get().refreshSTSToken,
     });
@@ -72,15 +71,15 @@ export const ossStore = createStore<OssStore>((set, get) => ({
     }
   },
 
-  // async signature(key: string, process?: string) {
-  //   const sts = get().sts;
+  async signature(key: string, process?: string) {
+    const sts = get().sts;
 
-  //   if (!sts?.expiration || DateTime.fromISO(sts.expiration) < DateTime.now()) {
-  //     await get().refreshSTSToken();
-  //   }
+    if (!sts?.expiration || DateTime.fromISO(sts.expiration) < DateTime.now()) {
+      await get().refreshSTSToken();
+    }
 
-  //   const url = get().getClient().signatureUrl(key, { process });
+    const url = get().getClient().signatureUrl(key, { process });
 
-  //   return url;
-  // },
+    return url;
+  },
 }));

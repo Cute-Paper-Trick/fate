@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { useS3 } from '@/packages/s3';
+import { useCoverUrl } from '../Article/Header/useCoverUrl';
 
 const useStyles = createStyles(({ css }) => ({
   card: css`
@@ -45,9 +45,8 @@ interface CollectionCardProps {
 
 const CollectionCard = memo<CollectionCardProps>(({ id, title, cover }) => {
   const { styles } = useStyles();
-  const { signature } = useS3();
 
-  const coverUrl = signature(cover, [
+  const coverUrl = useCoverUrl(cover, [
     'image',
     'resize,limit_1,m_lfit,w_262',
     'quality,q_90',
@@ -58,7 +57,7 @@ const CollectionCard = memo<CollectionCardProps>(({ id, title, cover }) => {
     <Flexbox className={styles.card}>
       <span className={styles.id}>{id}</span>
       <Link className={styles.cover} href={`/discover/collections/detail?collectionId=${id}`}>
-        <img src={coverUrl} alt={title} />
+        <img alt={title} src={coverUrl} />
       </Link>
     </Flexbox>
   );

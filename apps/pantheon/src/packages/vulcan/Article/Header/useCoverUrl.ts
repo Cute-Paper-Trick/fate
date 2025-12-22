@@ -1,10 +1,21 @@
-import { s3Env } from '@/envs/s3';
+import { useEffect, useState } from 'react';
 
-export const useCoverUrl = (coverKey?: string) => {
-  const endpoint = s3Env.NEXT_PUBLIC_S3_ENDPOINT;
-  const process = 'image/resize,limit_1,m_lfit,w_2000,h_2000/quality,q_90/format,webp';
+import { useS3 } from '@/packages/s3';
 
-  if (!coverKey) return undefined;
+export const useCoverUrl = (coverKey?: string, process?: string[]) => {
+  const [url, setUrl] = useState<string | undefined>(undefined);
+  const { signature } = useS3();
 
-  return `${endpoint}${coverKey}?x-oss-process=${process}`;
+  useEffect(() => {
+    if (coverKey) {
+      signature(
+        coverKey,
+        process ?? ['image', 'resize,limit_1,m_lfit,w_2000,h_2000', 'quality,q_90', 'format,webp'],
+      ).then((signedUrl) => {
+        setUrl(signedUrl);
+      });
+    }
+  }, [coverKey, process, signature]);
+
+  return url;
 };

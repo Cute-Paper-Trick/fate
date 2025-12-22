@@ -6,26 +6,6 @@ import { s3Env } from '@/envs/s3';
 
 import { ossStore } from './store';
 
-const signature = (
-  name: string,
-  process: string[] = [
-    'image',
-    'resize,limit_1,m_lfit,w_2000,h_2000',
-    'quality,q_90',
-    'format,webp',
-  ],
-) => {
-  const endpoint = s3Env.NEXT_PUBLIC_S3_ENDPOINT;
-
-  if (!name) return '';
-
-  if (process.length) {
-    return `${endpoint}${name}?x-oss-process=${process.join('/')}`;
-  }
-
-  return `${endpoint}${name}`;
-};
-
 export const useS3 = () => {
   const store = useStore(ossStore);
 
@@ -41,6 +21,21 @@ export const useS3 = () => {
 
     const res = await store.getClient().multipartUpload(name, file, {});
     return res;
+  };
+
+  const signature = async (
+    name: string,
+    process: string[] = [
+      'image',
+      'resize,limit_1,m_lfit,w_2000,h_2000',
+      'quality,q_90',
+      'format,webp',
+    ],
+  ) => {
+    await store.ensureSTS();
+
+    const processStr = process.length ? process.join('/') : '';
+    return store.getClient().signatureUrl(name, { process: processStr });
   };
 
   return { multipartUpload, signature };
