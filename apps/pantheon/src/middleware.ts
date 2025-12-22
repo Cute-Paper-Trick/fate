@@ -137,6 +137,7 @@ const middleware = async (request: NextRequest) => {
   const cookiePrefix = [appEnv.COOKIE_SECURE ? '__Secure' : '', appEnv.COOKIE_PREFIX]
     .filter(Boolean)
     .join('-');
+  console.log('使用的 cookie 前缀：', cookiePrefix);
   const sessionCookie = getSessionCookie(request, { cookiePrefix: cookiePrefix });
   let session = null;
 
