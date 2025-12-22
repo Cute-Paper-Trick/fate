@@ -134,8 +134,10 @@ function variantRewrite(request: NextRequest) {
 const backendApiEndpoints = ['/api', '/trpc', '/webapi'];
 
 const middleware = async (request: NextRequest) => {
-  const sessionCookie = getSessionCookie(request, { cookiePrefix: 'fate' });
-
+  const cookiePrefix = [appEnv.COOKIE_SECURE ? '__Secure' : '', appEnv.COOKIE_PREFIX]
+    .filter(Boolean)
+    .join('-');
+  const sessionCookie = getSessionCookie(request, { cookiePrefix: cookiePrefix });
   let session = null;
 
   // 如果有 session cookie，尝试获取 session
@@ -151,17 +153,14 @@ const middleware = async (request: NextRequest) => {
     if (!session) {
       console.log('缓存中未找到 session，正在从 lobechat 获取...');
 
-      const prefix = [appEnv.COOKIE_SECURE ? '__Secure' : '', appEnv.COOKIE_PREFIX]
-        .filter(Boolean)
-        .join('-');
-
       const res = await fetch(`${authEnv.NEXT_PUBLIC_BETTER_AUTH_URL}/get-session`, {
         headers: {
-          cookie: `${prefix}.session_token=${sessionCookie}`,
+          cookie: `${cookiePrefix}.session_token=${sessionCookie}`,
         },
       });
       if (res.ok) {
         session = await res.json();
+        console.log('从 lobechat 获取到 session：', session);
       }
     }
   }

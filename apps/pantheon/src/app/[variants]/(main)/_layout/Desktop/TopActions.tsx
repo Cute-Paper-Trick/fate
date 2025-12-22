@@ -64,36 +64,9 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
           tooltipProps={{ placement: 'right' }}
         />
       </Link>
-      <Link aria-label={t('tab.talk')} href={'/talk'}>
-        <ActionIcon
-          active={isTalkActive}
-          icon={MessagesSquare}
-          size={ICON_SIZE}
-          title={t('tab.talk')}
-          tooltipProps={{ placement: 'right' }}
-        />
-      </Link>
-      <Link aria-label={t('tab.learning')} href={'/learning'}>
-        <ActionIcon
-          active={isLearningActive}
-          icon={NotebookText}
-          size={ICON_SIZE}
-          title={t('tab.learning')}
-          tooltipProps={{ placement: 'right' }}
-        />
-      </Link>
-      <Link aria-label={t('tab.lab')} href={'/lab'}>
-        <ActionIcon
-          active={isLabActice}
-          icon={FlaskConical}
-          size={ICON_SIZE}
-          title={t('tab.lab')}
-          tooltipProps={{ placement: 'right' }}
-        />
-      </Link>
       <Link
         aria-label={t('tab.files')}
-        href={`${CHAT_APP_URL}/files`}
+        href={`${CHAT_APP_URL}/knowledge`}
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -131,6 +104,34 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
           tooltipProps={{ placement: 'right' }}
         />
       </Link>
+      <Link aria-label={t('tab.talk')} href={'/talk'}>
+        <ActionIcon
+          active={isTalkActive}
+          icon={MessagesSquare}
+          size={ICON_SIZE}
+          title={t('tab.talk')}
+          tooltipProps={{ placement: 'right' }}
+        />
+      </Link>
+      <Link aria-label={t('tab.learning')} href={'/learning'}>
+        <ActionIcon
+          active={isLearningActive}
+          icon={NotebookText}
+          size={ICON_SIZE}
+          title={t('tab.learning')}
+          tooltipProps={{ placement: 'right' }}
+        />
+      </Link>
+      <Link aria-label={t('tab.lab')} href={'/lab'}>
+        <ActionIcon
+          active={isLabActice}
+          icon={FlaskConical}
+          size={ICON_SIZE}
+          title={t('tab.lab')}
+          tooltipProps={{ placement: 'right' }}
+        />
+      </Link>
+
       <Link aria-label={t('tab.tutorial')} href={'/discover'}>
         <ActionIcon
           active={isTutorialActive}
