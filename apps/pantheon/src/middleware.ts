@@ -144,8 +144,8 @@ const middleware = async (request: NextRequest) => {
   if (sessionCookie) {
     session = await getCookieCache(request, {
       cookieName: 'session_data',
-      cookiePrefix: 'fate',
-      isSecure: true,
+      cookiePrefix: appEnv.COOKIE_PREFIX,
+      isSecure: appEnv.COOKIE_SECURE,
       secret: authEnv.BETTER_AUTH_SECRET,
     });
 
