@@ -3,9 +3,8 @@
 import { PropsWithChildren, memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import SetPassword from '@/features/User/SetPassword';
-import VerifyEmail from '@/features/User/VerifyEmail';
-
+// import SetPassword from '@/features/User/SetPassword';
+// import VerifyEmail from '@/features/User/VerifyEmail';
 import SideBar from './SideBar';
 import TitleBar from './TitleBar';
 
@@ -28,14 +27,14 @@ const Layout = memo<PropsWithChildren>(({ children }) => {
             width="100%"
           >
             <SideBar />
-            <Flexbox width={'100%'} style={{ overflow: 'auto' }}>
+            <Flexbox style={{ overflow: 'auto' }} width={'100%'}>
               {children}
             </Flexbox>
           </Flexbox>
         </Flexbox>
       </Flexbox>
-      <VerifyEmail />
-      <SetPassword />
+      {/* <VerifyEmail /> */}
+      {/* <SetPassword /> */}
     </>
   );
 });

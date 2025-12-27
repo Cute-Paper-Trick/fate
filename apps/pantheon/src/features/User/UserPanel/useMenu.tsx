@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { MenuProps } from '@/components/Menu';
 import { DOCUMENTS_REFER_URL, GITHUB_ISSUES } from '@/const/url';
+import { appEnv } from '@/envs/app';
 import { useUserStore } from '@/store/user';
 import { authSelectors } from '@/store/user/selectors';
 
@@ -18,7 +19,12 @@ export const useMenu = () => {
     {
       icon: <Icon icon={CircleUserRound} />,
       key: 'profile',
-      label: <Link href={'/profile'}>{t('userPanel.profile')}</Link>,
+      // label: <Link href={'/profile'}>{t('userPanel.profile')}</Link>,
+      label: (
+        <Link href={`${appEnv.NEXT_PUBLIC_CHAT_APP_URL}/profile`} target={'_blank'}>
+          {t('userPanel.profile')}
+        </Link>
+      ),
     },
   ];
 
