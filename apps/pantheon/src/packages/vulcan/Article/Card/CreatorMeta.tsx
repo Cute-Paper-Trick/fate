@@ -3,6 +3,7 @@ import { createStyles } from 'antd-style';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import { RemoteWrapper } from '@/packages/pithos';
 import { formatRelativeTime } from '@/packages/utils';
 
 const useStyles = createStyles(({ css }) => ({
@@ -33,7 +34,9 @@ const CreatorMeta = memo<CreatorMetaProps>(({ creatorName, creatorAvatar, create
 
   return (
     <Flexbox align="center" gap={6} horizontal justify="start">
-      <Avatar size={36} src={creatorAvatar} />
+      <RemoteWrapper path={creatorAvatar ? `lobe-goood-space/${creatorAvatar}` : ''}>
+        {(realSrc) => <Avatar size={36} src={realSrc} />}
+      </RemoteWrapper>
       <Flexbox align="start">
         <span className={styles.name}>{creatorName}</span>
         <span className={styles.createdAt}>{formatRelativeTime(createdAt ?? '')}</span>

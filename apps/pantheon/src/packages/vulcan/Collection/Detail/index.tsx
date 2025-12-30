@@ -4,6 +4,7 @@ import { parseAsInteger, useQueryState } from 'nuqs';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import { useSession } from '@/features/cerberus/client';
 import { useCollectionsDetail } from '@/lib/http';
 
 import ArticleList from '../../Article/List';
@@ -14,6 +15,9 @@ import Section from '../../Section';
 import Header from './Header';
 
 const CollectionDetail = memo(() => {
+  const { data: sessionData } = useSession();
+  const editable = sessionData?.user.role === 'creator';
+
   const [collectionId] = useQueryState('collectionId', parseAsInteger);
 
   const { data, isPending } = useCollectionsDetail(
@@ -32,7 +36,7 @@ const CollectionDetail = memo(() => {
       <PageContainer>
         <Container>
           <Section title={title}>
-            <ArticleList />
+            <ArticleList status={editable ? undefined : 'published'} />
           </Section>
         </Container>
       </PageContainer>

@@ -4,6 +4,7 @@ import { Avatar, type AvatarProps } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { forwardRef } from 'react';
 
+import { RemoteWrapper } from '@/packages/pithos';
 import { useUserStore } from '@/store/user';
 import { authSelectors, userProfileSelectors } from '@/store/user/selectors';
 
@@ -54,17 +55,21 @@ const UserAvatar = forwardRef<HTMLDivElement, UserAvatarProps>(
     const isSignedIn = useUserStore((s) => authSelectors.isLogin(s));
 
     return (
-      <Avatar
-        alt={isSignedIn && Boolean(username) ? username : 'Guest'}
-        avatar={avatar}
-        background={isSignedIn && avatar ? background : '#bbbbbb'}
-        className={cx({ [styles.clickable]: clickable }, className)}
-        ref={ref}
-        size={size}
-        style={{ flex: 'none', ...style }}
-        unoptimized
-        {...rest}
-      />
+      <RemoteWrapper path={avatar?.replace?.('/webapi', '/lobe-goood-space') ?? ''}>
+        {(realSrc) => (
+          <Avatar
+            alt={isSignedIn && Boolean(username) ? username : 'Guest'}
+            avatar={realSrc}
+            background={isSignedIn && avatar ? background : '#bbbbbb'}
+            className={cx({ [styles.clickable]: clickable }, className)}
+            ref={ref}
+            size={size}
+            style={{ flex: 'none', ...style }}
+            unoptimized
+            {...rest}
+          />
+        )}
+      </RemoteWrapper>
     );
   },
 );
