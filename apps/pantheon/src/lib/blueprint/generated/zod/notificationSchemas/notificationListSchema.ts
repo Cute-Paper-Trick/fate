@@ -11,8 +11,8 @@ import { z } from "zod/v4";
 export const notificationListQueryParamsSchema = z.object({
     "page": z.coerce.number().int(),
 "size": z.coerce.number().int(),
-"type": z.optional(z.string()),
-"status": z.optional(z.string())
+"type": z.optional(z.enum(["like", "reply", "system"])),
+"status": z.optional(z.enum(["read", "unread"]))
     }) as unknown as z.ZodType<NotificationListQueryParams>
 
 export const notificationList200Schema = v1NotificationListResSchema as unknown as z.ZodType<NotificationList200>

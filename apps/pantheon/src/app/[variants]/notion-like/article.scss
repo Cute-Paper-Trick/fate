@@ -1,0 +1,72 @@
+@import './variables.scss';
+
+.articleActions {
+  border-radius: var(--radius-large);
+  padding: 0;
+  padding-bottom: 0;
+  background: var(--body-bg);
+  display: grid;
+  grid-gap: var(--su-6);
+  gap: var(--su-6);
+  position: sticky;
+  box-shadow: none;
+  justify-content: stretch;
+  top: calc(var(--header-height) + var(--layout-padding) + 6vh);
+  z-index: var(--z-elevate);
+
+  .articleActionsInner {
+    display: grid;
+    gap: var(--su-4);
+    justify-content: stretch;
+  }
+}
+
+.reaction {
+  --reaction-color: #3d3d3d;
+  --reaction-border: inset 0 0 0 0 transparent;
+  --reaction-bg: transparent;
+
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+
+  background-origin: padding-box;
+  padding: 1px 6px;
+
+  .reactionIcon {
+    flex-shrink: 0;
+
+    width: 40px;
+    height: 40px;
+    display: block;
+
+    padding: 8px;
+
+    :global(.lucide) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .reactionCount {
+    color: var(--base-70);
+    font-size: var(--fs-s);
+    display: inline-flex;
+    margin-left: var(--su-1);
+    min-width: var(--su-6);
+  }
+}
+
+@media (min-width: 768px) {
+  .reaction {
+    flex-direction: column;
+  }
+
+  .reactionCount {
+    min-width: auto;
+    margin-left: 0;
+    display: block;
+  }
+}

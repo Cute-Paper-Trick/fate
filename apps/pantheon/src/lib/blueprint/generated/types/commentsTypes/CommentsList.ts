@@ -6,6 +6,13 @@
 
 import type { V1CommentsListRes } from "../v1/CommentsListRes";
 
+export const commentsListQueryParamsTargetTypeEnum = {
+    "article": "article",
+    "comment": "comment"
+} as const;
+
+export type CommentsListQueryParamsTargetTypeEnumKey = (typeof commentsListQueryParamsTargetTypeEnum)[keyof typeof commentsListQueryParamsTargetTypeEnum];
+
 export type CommentsListQueryParams = {
     /**
      * @type integer, int
@@ -20,9 +27,10 @@ export type CommentsListQueryParams = {
     */
     target_id: number;
     /**
-     * @type integer, int
+     * @description 类型：article-文章, comment-评论
+     * @type string, consts.CommentType
     */
-    target_type: number;
+    target_type: CommentsListQueryParamsTargetTypeEnumKey;
     /**
      * @type integer | undefined, int64
     */
@@ -35,10 +43,6 @@ export type CommentsListQueryParams = {
      * @type integer | undefined, int64
     */
     creator_id?: number | undefined;
-    /**
-     * @type integer | undefined, int
-    */
-    status?: number | undefined;
 };
 
 export type CommentsList200 = V1CommentsListRes;

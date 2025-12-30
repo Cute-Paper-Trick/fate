@@ -10,11 +10,11 @@ import { z } from "zod/v4";
 
 export const v1NotificationInfoSchema = z.object({
     "id": z.int(),
-"type": z.string(),
+"type": z.enum(["like", "reply", "system"]),
 "related_id": z.int(),
 "title": z.string(),
 "content": z.string(),
-"status": z.string(),
+"status": z.enum(["read", "unread"]),
 "created_at": z.string(),
 get "from_user"(){
                 return v1AccountInfoSchema

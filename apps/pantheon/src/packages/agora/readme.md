@@ -1,0 +1,21 @@
+Agora (阿哥拉)
+背景： 古希腊的集市和公共广场，人们在此发表演讲、交流思想。
+寓意： 内容创作就是为了交流，这里是思想碰撞的广场。
+
+```
+pnpm dlx @tiptap/cli@latest add simple-editor
+pnpm dlx @tiptap/cli@latest add code-block-button \
+  color-highlight-popover \
+  image-upload-button \
+  list-button \
+  list-dropdown-menu \
+  mark-button \
+  floating-element \
+  suggestion-menu \
+  blockquote-node \
+  code-block-node \
+  heading-node \
+  horizontal-rule-node \
+  image-node \
+  image-upload-node
+```

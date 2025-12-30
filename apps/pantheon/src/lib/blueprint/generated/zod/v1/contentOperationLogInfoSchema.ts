@@ -18,8 +18,8 @@ get "oldData"(){
 get "newData"(){
                 return interfaceSchema.optional()
               },
-"statusBefore": z.int().describe("操作前状态"),
-"statusAfter": z.int().describe("操作后状态"),
+"statusBefore": z.enum(["draft", "published"]).describe("操作前状态"),
+"statusAfter": z.enum(["draft", "published"]).describe("操作后状态"),
 "operatorId": z.int().describe("操作人ID"),
 "operatorName": z.string().describe("操作人名称"),
 "remark": z.string().describe("操作备注"),

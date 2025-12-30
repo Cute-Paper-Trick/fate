@@ -10,6 +10,6 @@ import { z } from "zod/v4";
 export const v1TaskTopicAddReqSchema = z.object({
     "task_id": z.optional(z.int()),
 "title": z.optional(z.string()),
-"status": z.optional(z.string()),
+"status": z.optional(z.enum(["draft", "published"])),
 "content": z.string()
     }) as unknown as z.ZodType<V1TaskTopicAddReq>

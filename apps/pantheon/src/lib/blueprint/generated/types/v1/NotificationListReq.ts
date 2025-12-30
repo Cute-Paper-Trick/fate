@@ -5,6 +5,21 @@
 */
 
 
+export const v1NotificationListReqTypeEnum = {
+    "like": "like",
+    "reply": "reply",
+    "system": "system"
+} as const;
+
+export type V1NotificationListReqTypeEnumKey = (typeof v1NotificationListReqTypeEnum)[keyof typeof v1NotificationListReqTypeEnum];
+
+export const v1NotificationListReqStatusEnum = {
+    "read": "read",
+    "unread": "unread"
+} as const;
+
+export type V1NotificationListReqStatusEnumKey = (typeof v1NotificationListReqStatusEnum)[keyof typeof v1NotificationListReqStatusEnum];
+
 export type V1NotificationListReq = {
     /**
      * @type integer, int
@@ -17,9 +32,9 @@ export type V1NotificationListReq = {
     /**
      * @type string | undefined, consts.NotificationType
     */
-    type?: string | undefined;
+    type?: V1NotificationListReqTypeEnumKey | undefined;
     /**
      * @type string | undefined, consts.NotificationStatus
     */
-    status?: string | undefined;
+    status?: V1NotificationListReqStatusEnumKey | undefined;
 };

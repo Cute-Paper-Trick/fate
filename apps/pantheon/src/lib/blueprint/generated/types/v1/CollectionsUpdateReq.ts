@@ -5,6 +5,13 @@
 */
 
 
+export const v1CollectionsUpdateReqStatusEnum = {
+    "disabled": "disabled",
+    "normal": "normal"
+} as const;
+
+export type V1CollectionsUpdateReqStatusEnumKey = (typeof v1CollectionsUpdateReqStatusEnum)[keyof typeof v1CollectionsUpdateReqStatusEnum];
+
 export type V1CollectionsUpdateReq = {
     /**
      * @type integer, int64
@@ -23,7 +30,8 @@ export type V1CollectionsUpdateReq = {
     */
     cover_url?: string | undefined;
     /**
-     * @type integer | undefined, int
+     * @description 状态过滤：normal-正常, disabled-禁用
+     * @type string | undefined, consts.CollectionStatus
     */
-    status?: number | undefined;
+    status?: V1CollectionsUpdateReqStatusEnumKey | undefined;
 };

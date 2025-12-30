@@ -4,14 +4,13 @@
 * Do not edit manually.
 */
 
-import { commentsCreate } from "./commentsCreate";
 import { commentsDelete } from "./commentsDelete";
 import { commentsDetail } from "./commentsDetail";
 import { commentsList } from "./commentsList";
-import { commentsRefresh } from "./commentsRefresh";
-import { commentsRepliesList } from "./commentsRepliesList";
+import { commentsReplay } from "./commentsReplay";
+import { commentsReplies } from "./commentsReplies";
 import { commentsUpdate } from "./commentsUpdate";
 
 export function commentsService() {
-  return { commentsCreate, commentsDelete, commentsDetail, commentsList, commentsRefresh, commentsRepliesList, commentsUpdate }
+  return { commentsDelete, commentsDetail, commentsList, commentsReplay, commentsReplies, commentsUpdate }
 }

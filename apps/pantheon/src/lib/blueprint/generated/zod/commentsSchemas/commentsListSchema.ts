@@ -12,11 +12,10 @@ export const commentsListQueryParamsSchema = z.object({
     "page": z.coerce.number().int(),
 "size": z.coerce.number().int(),
 "target_id": z.coerce.number().int(),
-"target_type": z.coerce.number().int(),
+"target_type": z.enum(["article", "comment"]).describe("类型：article-文章, comment-评论"),
 "parent_id": z.optional(z.coerce.number().int()),
 "root_id": z.optional(z.coerce.number().int()),
-"creator_id": z.optional(z.coerce.number().int()),
-"status": z.optional(z.coerce.number().int())
+"creator_id": z.optional(z.coerce.number().int())
     }) as unknown as z.ZodType<CommentsListQueryParams>
 
 export const commentsList200Schema = v1CommentsListResSchema as unknown as z.ZodType<CommentsList200>

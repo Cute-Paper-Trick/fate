@@ -11,5 +11,5 @@ export const v1CollectionsCreateReqSchema = z.object({
     "name": z.string(),
 "description": z.string(),
 "cover_url": z.string(),
-"status": z.int()
+"status": z.optional(z.enum(["disabled", "normal"]).describe("状态过滤：normal-正常, disabled-禁用"))
     }) as unknown as z.ZodType<V1CollectionsCreateReq>

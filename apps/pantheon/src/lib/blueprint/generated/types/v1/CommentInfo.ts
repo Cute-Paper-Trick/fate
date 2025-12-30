@@ -4,9 +4,16 @@
 * Do not edit manually.
 */
 
-import type { V1CommentExtra } from "./CommentExtra";
-import type { V1CommentExtraAccount } from "./CommentExtraAccount";
-import type { V1CommentReplyInfo } from "./CommentReplyInfo";
+import type { V1CommentInfoExtra } from "./CommentInfoExtra";
+import type { V1CommentInfoExtraAccount } from "./CommentInfoExtraAccount";
+import type { V1CommentInfoReply } from "./CommentInfoReply";
+
+export const v1CommentInfoTargetTypeEnum = {
+    "article": "article",
+    "comment": "comment"
+} as const;
+
+export type V1CommentInfoTargetTypeEnumKey = (typeof v1CommentInfoTargetTypeEnum)[keyof typeof v1CommentInfoTargetTypeEnum];
 
 export type V1CommentInfo = {
     /**
@@ -40,10 +47,10 @@ export type V1CommentInfo = {
     */
     target_id: number;
     /**
-     * @description 目标类型：1-内容, 2-评论
-     * @type integer, int
+     * @description 状态：article-文章, comment-评论
+     * @type string, consts.CommentType
     */
-    target_type: number;
+    target_type: V1CommentInfoTargetTypeEnumKey;
     /**
      * @description 父评论ID
      * @type integer, int64
@@ -70,11 +77,6 @@ export type V1CommentInfo = {
     */
     reply_to_user_avatar: string;
     /**
-     * @description 状态：1-正常, 0-禁用
-     * @type integer, int
-    */
-    status: number;
-    /**
      * @description 创建时间
      * @type string, string
     */
@@ -93,15 +95,15 @@ export type V1CommentInfo = {
      * @description 评论额外信息
      * @type object
     */
-    extra: V1CommentExtra;
+    redundant: V1CommentInfoExtra;
     /**
      * @description 评论用户额外信息
      * @type object
     */
-    extra_account: V1CommentExtraAccount;
+    extra_account: V1CommentInfoExtraAccount;
     /**
      * @description 回复列表
-     * @type array, []*v1.CommentReplyInfo
+     * @type array, []*v1.CommentInfoReply
     */
-    replies: V1CommentReplyInfo[];
+    replies: V1CommentInfoReply[];
 };

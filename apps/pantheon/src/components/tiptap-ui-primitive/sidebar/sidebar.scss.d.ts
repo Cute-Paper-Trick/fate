@@ -1,0 +1,11 @@
+export declare const dark: string;
+export declare const sidebar: string;
+export declare const sidebarContainer: string;
+export declare const sidebarContent: string;
+export declare const sidebarFooter: string;
+export declare const sidebarGap: string;
+export declare const sidebarHeader: string;
+export declare const sidebarInset: string;
+export declare const sidebarMain: string;
+export declare const sidebarRail: string;
+export declare const sidebarWrapper: string;

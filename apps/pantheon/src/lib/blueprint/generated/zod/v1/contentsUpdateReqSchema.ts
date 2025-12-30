@@ -12,6 +12,7 @@ export const v1ContentsUpdateReqSchema = z.object({
 "title": z.optional(z.string().describe("内容标题")),
 "description": z.optional(z.string().describe("内容描述")),
 "cover_url": z.optional(z.string().describe("封面图片URL")),
+"thumb": z.optional(z.string().describe("缩略图URL")),
 "type": z.optional(z.int().describe("类型：1-文章, 2-视频")),
 "collection_id": z.optional(z.int().describe("所属合集ID")),
 "body": z.optional(z.string().describe("文章正文")),

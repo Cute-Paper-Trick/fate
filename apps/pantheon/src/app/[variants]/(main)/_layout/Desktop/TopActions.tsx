@@ -17,6 +17,7 @@ import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { appEnv } from '@/envs/app';
+import { useSession } from '@/features/cerberus/client';
 import { AppTab } from '@/store/global/initialState';
 
 const ICON_SIZE: ActionIconProps['size'] = {
@@ -32,6 +33,9 @@ export interface TopActionProps {
 
 const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
   const { t } = useTranslate('common');
+  const { data: sessionData } = useSession();
+
+  const isCreator = sessionData?.user.role === 'creator';
 
   const isChatActive = tab === AppTab.Chat && !isPinned;
   const isDiscoverActive = false;
@@ -141,15 +145,17 @@ const TopActions = memo<TopActionProps>(({ tab, isPinned }) => {
           tooltipProps={{ placement: 'right' }}
         />
       </Link>
-      <Link aria-label={t('tab.articles')} href={'/discover/articles'}>
-        <ActionIcon
-          active={isArticleActive}
-          icon={Carrot}
-          size={ICON_SIZE}
-          title={t('tab.articles')}
-          tooltipProps={{ placement: 'right' }}
-        />
-      </Link>
+      {isCreator && (
+        <Link aria-label={t('tab.articles')} href={'/discover/articles'}>
+          <ActionIcon
+            active={isArticleActive}
+            icon={Carrot}
+            size={ICON_SIZE}
+            title={t('tab.articles')}
+            tooltipProps={{ placement: 'right' }}
+          />
+        </Link>
+      )}
       <Link aria-label={t('tab.collections')} href={'/discover/collections'}>
         <ActionIcon
           active={isCollectionActive}

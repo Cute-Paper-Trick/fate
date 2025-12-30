@@ -12,7 +12,7 @@ export const collectionsListQueryParamsSchema = z.object({
     "page": z.coerce.number().int(),
 "size": z.coerce.number().int(),
 "name": z.optional(z.string()),
-"status": z.optional(z.coerce.number().int()),
+"status": z.optional(z.string()),
 "creator_id": z.optional(z.coerce.number().int())
     }) as unknown as z.ZodType<CollectionsListQueryParams>
 

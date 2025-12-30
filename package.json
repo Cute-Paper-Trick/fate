@@ -2,6 +2,13 @@
   "name": "fate",
   "version": "0.1.0",
   "private": true,
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+      "csstype": "3.1.3"
+    }
+  },
   "scripts": {
     "prepare": "husky",
     "type-check": "pnpm -F pantheon type-check"

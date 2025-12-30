@@ -6,6 +6,8 @@ import '@/styles/globals.css';
 import { DynamicLayoutProps } from '@/types/next';
 import { RouteVariants } from '@/utils/server/routeVariants';
 
+import '../globals.css';
+
 interface RootLayoutProps extends DynamicLayoutProps {
   children: ReactNode;
   modal?: ReactNode;

@@ -4,18 +4,15 @@
 * Do not edit manually.
 */
 
-import { contentsAudit } from "./contentsAudit";
 import { contentsCreate } from "./contentsCreate";
 import { contentsDelete } from "./contentsDelete";
 import { contentsDetail } from "./contentsDetail";
 import { contentsList } from "./contentsList";
 import { contentsPublish } from "./contentsPublish";
-import { contentsResubmit } from "./contentsResubmit";
-import { contentsSubmitForAudit } from "./contentsSubmitForAudit";
 import { contentsUnpublish } from "./contentsUnpublish";
 import { contentsUpdate } from "./contentsUpdate";
 import { contentsView } from "./contentsView";
 
 export function contentsService() {
-  return { contentsAudit, contentsCreate, contentsDelete, contentsDetail, contentsList, contentsPublish, contentsResubmit, contentsSubmitForAudit, contentsUnpublish, contentsUpdate, contentsView }
+  return { contentsCreate, contentsDelete, contentsDetail, contentsList, contentsPublish, contentsUnpublish, contentsUpdate, contentsView }
 }

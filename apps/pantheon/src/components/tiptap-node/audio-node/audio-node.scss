@@ -1,0 +1,104 @@
+:root {
+  --tiptap-audio-bg: var(--tt-gray-light-50);
+  --tiptap-audio-border: var(--tt-gray-light-a-300);
+  --tiptap-audio-selected-border: var(--tt-brand-color-500);
+  --tiptap-audio-progress-bg: var(--tt-gray-light-a-200);
+  --tiptap-audio-progress-fill: var(--tt-brand-color-500);
+  --tiptap-audio-button-color: var(--tt-gray-light-a-700);
+  --tiptap-audio-time-color: var(--tt-gray-light-a-600);
+}
+
+.dark {
+  --tiptap-audio-bg: var(--tt-gray-dark-100);
+  --tiptap-audio-border: var(--tt-gray-dark-a-300);
+  --tiptap-audio-selected-border: var(--tt-brand-color-400);
+  --tiptap-audio-progress-bg: var(--tt-gray-dark-a-300);
+  --tiptap-audio-progress-fill: var(--tt-brand-color-400);
+  --tiptap-audio-button-color: var(--tt-gray-dark-a-700);
+  --tiptap-audio-time-color: var(--tt-gray-dark-a-600);
+}
+
+.tiptap-audio {
+  margin: 1rem 0;
+  width: 100%;
+
+  &[data-selected="true"] {
+    .tiptap-audio-container {
+      outline: 2px solid var(--tiptap-audio-selected-border);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.tiptap-audio-container {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--tiptap-audio-bg);
+  border: 1px solid var(--tiptap-audio-border);
+
+  .rhap_container {
+    background: transparent;
+    box-shadow: none;
+    padding: 0.75rem 1rem;
+  }
+
+  .rhap_main {
+    flex-direction: row-reverse;
+  }
+
+  .rhap_progress-section {
+    flex: 1;
+  }
+
+  .rhap_controls-section {
+    flex: 0 0 auto;
+    margin-right: 0.75rem;
+  }
+
+  .rhap_main-controls-button {
+    color: var(--tiptap-audio-button-color);
+
+    &:hover {
+      color: var(--tiptap-audio-progress-fill);
+    }
+  }
+
+  .rhap_play-pause-button {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .rhap_progress-bar {
+    background: var(--tiptap-audio-progress-bg);
+    height: 0.375rem;
+    border-radius: 0.25rem;
+  }
+
+  .rhap_progress-filled {
+    background: var(--tiptap-audio-progress-fill);
+    border-radius: 0.25rem;
+  }
+
+  .rhap_progress-indicator {
+    background: var(--tiptap-audio-progress-fill);
+    width: 0.875rem;
+    height: 0.875rem;
+    top: -0.25rem;
+    margin-left: -0.4375rem;
+  }
+
+  .rhap_time {
+    color: var(--tiptap-audio-time-color);
+    font-size: 0.75rem;
+  }
+
+  .rhap_download-progress {
+    background: var(--tiptap-audio-progress-bg);
+  }
+}

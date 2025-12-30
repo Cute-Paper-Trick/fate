@@ -6,6 +6,21 @@
 
 import type { V1NotificationListRes } from "../v1/NotificationListRes";
 
+export const notificationListQueryParamsTypeEnum = {
+    "like": "like",
+    "reply": "reply",
+    "system": "system"
+} as const;
+
+export type NotificationListQueryParamsTypeEnumKey = (typeof notificationListQueryParamsTypeEnum)[keyof typeof notificationListQueryParamsTypeEnum];
+
+export const notificationListQueryParamsStatusEnum = {
+    "read": "read",
+    "unread": "unread"
+} as const;
+
+export type NotificationListQueryParamsStatusEnumKey = (typeof notificationListQueryParamsStatusEnum)[keyof typeof notificationListQueryParamsStatusEnum];
+
 export type NotificationListQueryParams = {
     /**
      * @type integer, int
@@ -18,11 +33,11 @@ export type NotificationListQueryParams = {
     /**
      * @type string | undefined, consts.NotificationType
     */
-    type?: string | undefined;
+    type?: NotificationListQueryParamsTypeEnumKey | undefined;
     /**
      * @type string | undefined, consts.NotificationStatus
     */
-    status?: string | undefined;
+    status?: NotificationListQueryParamsStatusEnumKey | undefined;
 };
 
 export type NotificationList200 = V1NotificationListRes;

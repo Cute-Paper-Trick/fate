@@ -6,6 +6,13 @@
 
 import type { GjsonJson } from "../gjson/Json";
 
+export const v1ContentInfoStatusEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type V1ContentInfoStatusEnumKey = (typeof v1ContentInfoStatusEnum)[keyof typeof v1ContentInfoStatusEnum];
+
 export type V1ContentInfo = {
     /**
      * @description 内容ID
@@ -43,6 +50,11 @@ export type V1ContentInfo = {
     */
     cover_url?: string | undefined;
     /**
+     * @description 缩略图URL
+     * @type string | undefined, string
+    */
+    thumb?: string | undefined;
+    /**
      * @description 创建者ID
      * @type integer | undefined, int64
     */
@@ -68,10 +80,10 @@ export type V1ContentInfo = {
     */
     collection_name?: string | undefined;
     /**
-     * @description 状态：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回
-     * @type integer, int
+     * @description 状态：draft-草稿, published-已发布
+     * @type string, consts.ContentStatus
     */
-    status: number;
+    status: V1ContentInfoStatusEnumKey;
     /**
      * @description 类型：1-文章, 2-视频
      * @type integer, int

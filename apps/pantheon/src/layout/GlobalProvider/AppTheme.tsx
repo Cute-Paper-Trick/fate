@@ -86,17 +86,19 @@ const AppTheme = memo<AppThemeProps>(({ children }) => {
         },
       }}
     >
-      <GlobalStyle />
-      <AntdStaticMethods />
-      <ConfigProvider
-        config={{
-          aAs: Link,
-          imgAs: Image,
-          imgUnoptimized: true,
-        }}
-      >
-        {children}
-      </ConfigProvider>
+      <>
+        <GlobalStyle />
+        <AntdStaticMethods />
+        <ConfigProvider
+          config={{
+            aAs: Link,
+            imgAs: Image,
+            imgUnoptimized: true,
+          }}
+        >
+          {children}
+        </ConfigProvider>
+      </>
     </ThemeProvider>
   );
 });

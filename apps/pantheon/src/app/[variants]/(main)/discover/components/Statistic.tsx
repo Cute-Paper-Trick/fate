@@ -50,12 +50,12 @@ const Statistic = memo<StatisticProps>(
     const { cx, styles } = useStyles();
     const isTop = valuePlacement === 'top';
     const valueContent = (
-      <Text className={styles.number} ellipsis={{ rows: 1 }} style={valueStyle}>
+      <Text className={styles.number} ellipsis={{ rows: 1 }} style={valueStyle as any}>
         {value}
       </Text>
     );
     const titleContent = (
-      <Text className={styles.title} ellipsis={{ rows: 1 }} style={titleStyle}>
+      <Text className={styles.title} ellipsis={{ rows: 1 }} style={titleStyle as any}>
         {title}
         {tooltip && <Icon icon={HelpCircleIcon} style={{ marginLeft: '0.4em' }} />}
       </Text>

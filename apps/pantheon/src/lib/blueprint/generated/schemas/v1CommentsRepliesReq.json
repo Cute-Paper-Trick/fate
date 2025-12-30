@@ -1,0 +1,1 @@
+{"properties":{"comment_id":{"description":"评论ID","format":"int64","type":"integer"},"page":{"description":"页码","format":"int","type":"integer"},"size":{"description":"每页数量","format":"int","type":"integer"}},"required":["comment_id","page","size"],"type":"object","x-readme-ref-name":"v1.CommentsRepliesReq"}

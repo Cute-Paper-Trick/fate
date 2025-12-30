@@ -11,9 +11,8 @@ export const v1CommentsListReqSchema = z.object({
     "page": z.int(),
 "size": z.int(),
 "target_id": z.int(),
-"target_type": z.int(),
+"target_type": z.enum(["article", "comment"]).describe("类型：article-文章, comment-评论"),
 "parent_id": z.optional(z.int()),
 "root_id": z.optional(z.int()),
-"creator_id": z.optional(z.int()),
-"status": z.optional(z.int())
+"creator_id": z.optional(z.int())
     }) as unknown as z.ZodType<V1CommentsListReq>

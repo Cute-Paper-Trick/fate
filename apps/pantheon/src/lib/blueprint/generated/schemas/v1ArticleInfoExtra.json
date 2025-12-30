@@ -1,0 +1,1 @@
+{"properties":{"like_count":{"format":"int","type":"integer"},"unlike_count":{"format":"int","type":"integer"},"reply_count":{"format":"int","type":"integer"}},"required":["like_count","unlike_count","reply_count"],"type":"object","x-readme-ref-name":"v1.ArticleInfoExtra"}

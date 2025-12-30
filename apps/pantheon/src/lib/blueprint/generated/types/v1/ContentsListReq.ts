@@ -5,6 +5,13 @@
 */
 
 
+export const v1ContentsListReqStatusEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type V1ContentsListReqStatusEnumKey = (typeof v1ContentsListReqStatusEnum)[keyof typeof v1ContentsListReqStatusEnum];
+
 export type V1ContentsListReq = {
     /**
      * @description 页码
@@ -37,8 +44,8 @@ export type V1ContentsListReq = {
     */
     type?: number | undefined;
     /**
-     * @description 状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回
-     * @type integer | undefined, int
+     * @description 状态过滤：draft-草稿, published-已发布
+     * @type string | undefined, consts.ContentStatus
     */
-    status?: number | undefined;
+    status?: V1ContentsListReqStatusEnumKey | undefined;
 };

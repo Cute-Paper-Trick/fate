@@ -1,12 +1,11 @@
 import { createStyles } from 'antd-style';
 import { Eye, MessageCircle, ThumbsUp } from 'lucide-react';
-import Link from 'next/link';
 import { memo } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 
+import { RemoteWrapper } from '@/packages/pithos';
 import { formatNumber } from '@/packages/utils';
 
-import { useCoverUrl } from '../Header/useCoverUrl';
 import CreatorMeta from './CreatorMeta';
 
 const useStyles = createStyles(({ css }) => ({
@@ -19,6 +18,7 @@ const useStyles = createStyles(({ css }) => ({
     overflow: hidden;
     width: 100%;
     position: relative;
+    height: 100%;
   `,
   coverArea: css`
     background-color: #f6f6f6;
@@ -27,7 +27,7 @@ const useStyles = createStyles(({ css }) => ({
     background-size: cover;
     color: #fff;
     display: block;
-    padding-bottom: 46.8518518519%;
+    padding-bottom: 56.25%; /* 16:9 */
     position: relative;
   `,
   cover: css`
@@ -82,7 +82,8 @@ const useStyles = createStyles(({ css }) => ({
     color: #323232;
   `,
   footer: css`
-    margin-top: 2.125rem;
+    // margin-top: 2.125rem;
+    margin-top: 0.25rem;
   `,
   action: css`
     color: #8e8e93;
@@ -104,47 +105,61 @@ interface ArticleCardProps {
   viewCount: number;
   likeCount: number;
   commentCount: number;
+
+  extra?: React.ReactNode;
 }
 
 const ArticleCard = memo<ArticleCardProps>(
-  ({ id, cover, title, description, creator, createAt, viewCount, likeCount, commentCount }) => {
+  ({ cover, title, description, creator, createAt, viewCount, likeCount, commentCount, extra }) => {
     const { styles, cx } = useStyles();
 
-    const coverPath = useCoverUrl(cover, ['image', 'resize,limit_1,m_lfit,w_313', 'quality,q_90']);
-
     return (
-      <Link href={`/discover/articles/${id}`}>
-        <Flexbox className={cx(styles.card, 'card')}>
-          <div className={styles.coverArea} style={{ backgroundImage: `url(${coverPath})` }}>
-            <Center className={cx(styles.cover, 'cover')}>
-              <span className={styles.desc}>{description}</span>
-            </Center>
-          </div>
-          <Flexbox className={styles.inner}>
-            <div className={styles.category}>{/* <span>官方活动</span> */}</div>
-            <span className={styles.title}>{title}</span>
-            <Flexbox align="center" className={styles.footer} horizontal justify="space-between">
+      <Flexbox className={cx(styles.card, 'card')}>
+        <RemoteWrapper
+          path={cover || ''}
+          process={['image', 'resize,limit_1,m_lfit,w_313', 'quality,q_90']}
+        >
+          {(realSrc) => (
+            <div className={styles.coverArea} style={{ backgroundImage: `url(${realSrc})` }}>
+              <Center className={cx(styles.cover, 'cover')}>
+                <span className={styles.desc}>{description}</span>
+              </Center>
+            </div>
+          )}
+        </RemoteWrapper>
+        <Flexbox className={styles.inner}>
+          <div className={styles.category}>{/* <span>官方活动</span> */}</div>
+          <span className={styles.title}>{title}</span>
+          <Flexbox align="center" className={styles.footer} horizontal justify="space-between">
+            {creator ? (
               <CreatorMeta
                 createdAt={createAt}
                 creatorAvatar={creator?.avatar}
                 creatorName={creator?.name}
               />
-              <Flexbox gap={10} horizontal>
+            ) : null}
+            <Flexbox gap={10} horizontal>
+              {likeCount > 0 && (
                 <Flexbox className={styles.action} gap={2} horizontal>
                   <ThumbsUp color="#8e8e93" size={16} strokeWidth={1} /> {formatNumber(likeCount)}
                 </Flexbox>
+              )}
+              {commentCount > 0 && (
                 <Flexbox className={styles.action} gap={2} horizontal>
                   <MessageCircle color="#8e8e93" size={16} strokeWidth={1} />{' '}
                   {formatNumber(commentCount)}
                 </Flexbox>
+              )}
+              {viewCount > 0 && (
                 <Flexbox className={styles.action} gap={2} horizontal>
                   <Eye color="#8e8e93" size={16} strokeWidth={1} /> {formatNumber(viewCount)}
                 </Flexbox>
-              </Flexbox>
+              )}
             </Flexbox>
           </Flexbox>
         </Flexbox>
-      </Link>
+        {extra}
+      </Flexbox>
     );
   },
 );

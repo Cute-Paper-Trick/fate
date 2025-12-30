@@ -1,0 +1,10 @@
+export declare const dark: string;
+export declare const proseMirror: string;
+export declare const tiptap: string;
+export declare const tiptapAiPromptInput: string;
+export declare const tiptapAiPromptInputContent: string;
+export declare const tiptapAiPromptInputPlaceholder: string;
+export declare const tiptapAiPromptInputPlaceholderContent: string;
+export declare const tiptapAiPromptInputPlaceholderIcon: string;
+export declare const tiptapAiPromptInputPlaceholderText: string;
+export declare const tiptapAiPromptInputToolbar: string;

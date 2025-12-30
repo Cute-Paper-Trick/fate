@@ -5,6 +5,13 @@
 */
 
 
+export const v1CollectionInfoStatusEnum = {
+    "disabled": "disabled",
+    "normal": "normal"
+} as const;
+
+export type V1CollectionInfoStatusEnumKey = (typeof v1CollectionInfoStatusEnum)[keyof typeof v1CollectionInfoStatusEnum];
+
 export type V1CollectionInfo = {
     /**
      * @type integer, int64
@@ -31,9 +38,10 @@ export type V1CollectionInfo = {
     */
     creator_name: string;
     /**
-     * @type integer, int
+     * @description 状态过滤：normal-正常, disabled-禁用
+     * @type string, consts.CollectionStatus
     */
-    status: number;
+    status: V1CollectionInfoStatusEnumKey;
     /**
      * @type string, string
     */

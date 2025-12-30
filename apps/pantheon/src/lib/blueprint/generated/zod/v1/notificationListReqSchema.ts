@@ -10,6 +10,6 @@ import { z } from "zod/v4";
 export const v1NotificationListReqSchema = z.object({
     "page": z.int(),
 "size": z.int(),
-"type": z.optional(z.string()),
-"status": z.optional(z.string())
+"type": z.optional(z.enum(["like", "reply", "system"])),
+"status": z.optional(z.enum(["read", "unread"]))
     }) as unknown as z.ZodType<V1NotificationListReq>

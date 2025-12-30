@@ -5,11 +5,18 @@
 */
 
 
+export const v1AccountTopicListReqStatusEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type V1AccountTopicListReqStatusEnumKey = (typeof v1AccountTopicListReqStatusEnum)[keyof typeof v1AccountTopicListReqStatusEnum];
+
 export type V1AccountTopicListReq = {
     /**
      * @type string | undefined, consts.TopicStatus
     */
-    status?: string | undefined;
+    status?: V1AccountTopicListReqStatusEnumKey | undefined;
     /**
      * @type integer, int
     */

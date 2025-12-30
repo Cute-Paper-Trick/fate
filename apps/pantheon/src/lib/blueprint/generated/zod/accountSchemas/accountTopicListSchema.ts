@@ -9,7 +9,7 @@ import { v1AccountTopicListResSchema } from "../v1/accountTopicListResSchema";
 import { z } from "zod/v4";
 
 export const accountTopicListQueryParamsSchema = z.object({
-    "status": z.optional(z.string()),
+    "status": z.optional(z.enum(["draft", "published"])),
 "page": z.coerce.number().int(),
 "size": z.coerce.number().int(),
 "topic": z.optional(z.string().describe("话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）"))

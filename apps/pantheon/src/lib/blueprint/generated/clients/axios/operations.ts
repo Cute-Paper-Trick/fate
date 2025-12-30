@@ -86,6 +86,14 @@ export const operations = {
     "path": "/api/agent/update",
     "method": "post"
   },
+  "articles_replay": {
+    "path": "/api/articles/replay",
+    "method": "post"
+  },
+  "articles_replies": {
+    "path": "/api/articles/replies",
+    "method": "get"
+  },
   "changelog_add": {
     "path": "/api/changelog/add",
     "method": "post"
@@ -174,10 +182,6 @@ export const operations = {
     "path": "/api/comment_like/unlike",
     "method": "post"
   },
-  "comments_create": {
-    "path": "/api/comments/create",
-    "method": "post"
-  },
   "comments_delete": {
     "path": "/api/comments/delete",
     "method": "post"
@@ -190,12 +194,12 @@ export const operations = {
     "path": "/api/comments/list",
     "method": "get"
   },
-  "comments_refresh": {
-    "path": "/api/comments/refresh",
-    "method": "get"
+  "comments_replay": {
+    "path": "/api/comments/replay",
+    "method": "post"
   },
-  "comments_replies_list": {
-    "path": "/api/comments/replies/list",
+  "comments_replies": {
+    "path": "/api/comments/replies",
     "method": "get"
   },
   "comments_update": {
@@ -234,10 +238,6 @@ export const operations = {
     "path": "/api/content_operation_log/list",
     "method": "get"
   },
-  "contents_audit": {
-    "path": "/api/contents/audit",
-    "method": "post"
-  },
   "contents_create": {
     "path": "/api/contents/create",
     "method": "post"
@@ -256,14 +256,6 @@ export const operations = {
   },
   "contents_publish": {
     "path": "/api/contents/publish",
-    "method": "post"
-  },
-  "contents_resubmit": {
-    "path": "/api/contents/resubmit",
-    "method": "post"
-  },
-  "contents_submit_for_audit": {
-    "path": "/api/contents/submit_for_audit",
     "method": "post"
   },
   "contents_unpublish": {
@@ -285,26 +277,6 @@ export const operations = {
   "guide_report": {
     "path": "/api/guide/report",
     "method": "post"
-  },
-  "likes_check": {
-    "path": "/api/likes/check",
-    "method": "get"
-  },
-  "likes_count": {
-    "path": "/api/likes/count",
-    "method": "get"
-  },
-  "likes_create": {
-    "path": "/api/likes/create",
-    "method": "post"
-  },
-  "likes_delete": {
-    "path": "/api/likes/delete",
-    "method": "post"
-  },
-  "likes_list": {
-    "path": "/api/likes/list",
-    "method": "get"
   },
   "model_list": {
     "path": "/api/model/list",
@@ -356,6 +328,14 @@ export const operations = {
   },
   "points_findPointTypeList": {
     "path": "/api/points/findPointTypeList",
+    "method": "post"
+  },
+  "reactions_create": {
+    "path": "/api/reactions/create",
+    "method": "post"
+  },
+  "reactions_delete": {
+    "path": "/api/reactions/delete",
     "method": "post"
   },
   "session_create": {

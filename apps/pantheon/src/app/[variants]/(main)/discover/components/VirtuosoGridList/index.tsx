@@ -13,7 +13,7 @@ export const VirtuosoList = memo<VirtuosoGridProps<any, any>>(({ data, ...rest }
       components={{
         List: forwardRef<HTMLDivElement, DivProps>((props, ref) => (
           <Flexbox gap={16} ref={ref} {...props} />
-        )),
+        )) as any,
       }}
       customScrollParent={scrollParent}
       data={data}
@@ -37,7 +37,7 @@ const VirtuosoGridList = memo<VirtuosoGridProps<any, any>>(
         components={{
           List: forwardRef<HTMLDivElement, DivProps>((props, ref) => (
             <Grid gap={16} maxItemWidth={280} ref={ref} rows={rows} {...props} />
-          )),
+          )) as any,
         }}
         customScrollParent={scrollParent}
         data={data}

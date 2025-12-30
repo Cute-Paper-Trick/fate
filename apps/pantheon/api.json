@@ -369,6 +369,7 @@
       "v1.AccountTopicListReq": {
         "properties": {
           "status": {
+            "enum": ["draft", "published"],
             "format": "consts.TopicStatus",
             "type": "string"
           },
@@ -1168,6 +1169,244 @@
         "required": ["id", "slug"],
         "type": "object"
       },
+      "v1.ArticlesReplayReq": {
+        "properties": {
+          "article_id": {
+            "description": "文章ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "description": "回复内容",
+            "format": "string",
+            "type": "string"
+          },
+          "extra": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/interface",
+              "description": ""
+            },
+            "description": "额外信息",
+            "format": "map[string]interface {}",
+            "type": "object"
+          }
+        },
+        "required": ["article_id", "content", "extra"],
+        "type": "object"
+      },
+      "v1.ArticlesReplayRes": {
+        "properties": {
+          "id": {
+            "description": "回复ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ArticlesRepliesReq": {
+        "properties": {
+          "article_id": {
+            "description": "文章ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "description": "页码",
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "description": "每页数量",
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["article_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.ArticlesRepliesRes": {
+        "properties": {
+          "total": {
+            "description": "总数",
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "description": "页码",
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "description": "每页数量",
+            "format": "int",
+            "type": "integer"
+          },
+          "replies": {
+            "description": "回复列表",
+            "format": "[]*v1.ArticleInfoReply",
+            "items": {
+              "$ref": "#/components/schemas/v1.ArticleInfoReply",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "replies"],
+        "type": "object"
+      },
+      "v1.ArticleInfoReply": {
+        "properties": {
+          "id": {
+            "description": "回复ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "content": {
+            "description": "回复内容",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_id": {
+            "description": "回复者ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "creator_name": {
+            "description": "回复者名称",
+            "format": "string",
+            "type": "string"
+          },
+          "creator_avatar": {
+            "description": "回复者头像",
+            "format": "string",
+            "type": "string"
+          },
+          "target_id": {
+            "description": "目标ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "target_type": {
+            "description": "类型：article-文章, comment-评论",
+            "format": "string",
+            "type": "string"
+          },
+          "parent_id": {
+            "description": "父评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "root_id": {
+            "description": "根评论ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_id": {
+            "description": "回复目标用户ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reply_to_user_name": {
+            "description": "回复目标用户名称",
+            "format": "string",
+            "type": "string"
+          },
+          "reply_to_user_avatar": {
+            "description": "回复目标用户头像",
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "创建时间",
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "更新时间",
+            "format": "string",
+            "type": "string"
+          },
+          "deleted_at": {
+            "description": "删除时间",
+            "format": "string",
+            "type": "string"
+          },
+          "redundant": {
+            "$ref": "#/components/schemas/v1.ArticleInfoExtra",
+            "description": "评论额外信息"
+          },
+          "extra_account": {
+            "$ref": "#/components/schemas/v1.ArticleInfoExtraAccount",
+            "description": "评论用户额外信息"
+          }
+        },
+        "required": [
+          "id",
+          "content",
+          "creator_id",
+          "creator_name",
+          "creator_avatar",
+          "target_id",
+          "target_type",
+          "parent_id",
+          "root_id",
+          "reply_to_user_id",
+          "reply_to_user_name",
+          "reply_to_user_avatar",
+          "created_at",
+          "updated_at",
+          "deleted_at",
+          "redundant",
+          "extra_account"
+        ],
+        "type": "object"
+      },
+      "v1.ArticleInfoExtra": {
+        "properties": {
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "unlike_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "reply_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["like_count", "unlike_count", "reply_count"],
+        "type": "object"
+      },
+      "v1.ArticleInfoExtraAccount": {
+        "properties": {
+          "like_status": {
+            "description": "点赞/踩状态：thumb_down-踩, thumb_up-点赞",
+            "format": "string",
+            "type": "string"
+          },
+          "is_liked": {
+            "description": "当前用户是否点赞",
+            "format": "bool",
+            "type": "boolean"
+          },
+          "is_unliked": {
+            "description": "当前用户是否踩",
+            "format": "bool",
+            "type": "boolean"
+          },
+          "is_self_comment": {
+            "description": "是否是作者自己的评论",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["like_status", "is_liked", "is_unliked", "is_self_comment"],
+        "type": "object"
+      },
       "v1.ChangelogAddReq": {
         "properties": {
           "id": {
@@ -1889,11 +2128,13 @@
             "type": "string"
           },
           "status": {
-            "format": "int",
-            "type": "integer"
+            "description": "状态过滤：normal-正常, disabled-禁用",
+            "enum": ["disabled", "normal"],
+            "format": "consts.CollectionStatus",
+            "type": "string"
           }
         },
-        "required": ["name", "description", "cover_url", "status"],
+        "required": ["name", "description", "cover_url"],
         "type": "object"
       },
       "v1.CollectionsCreateRes": {
@@ -1967,8 +2208,10 @@
             "type": "string"
           },
           "status": {
-            "format": "int",
-            "type": "integer"
+            "description": "状态过滤：normal-正常, disabled-禁用",
+            "enum": ["disabled", "normal"],
+            "format": "consts.CollectionStatus",
+            "type": "string"
           },
           "created_at": {
             "format": "string",
@@ -2027,8 +2270,8 @@
             "type": "string"
           },
           "status": {
-            "format": "int",
-            "type": "integer"
+            "format": "string",
+            "type": "string"
           },
           "creator_id": {
             "format": "int64",
@@ -2083,8 +2326,10 @@
             "type": "string"
           },
           "status": {
-            "format": "int",
-            "type": "integer"
+            "description": "状态过滤：normal-正常, disabled-禁用",
+            "enum": ["disabled", "normal"],
+            "format": "consts.CollectionStatus",
+            "type": "string"
           }
         },
         "required": ["id"],
@@ -2236,67 +2481,6 @@
         "required": ["info"],
         "type": "object"
       },
-      "v1.CommentsCreateReq": {
-        "properties": {
-          "content": {
-            "description": "评论内容",
-            "format": "string",
-            "type": "string"
-          },
-          "target_id": {
-            "description": "目标ID",
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
-          },
-          "parent_id": {
-            "description": "父评论ID，0表示顶级评论",
-            "format": "int64",
-            "type": "integer"
-          },
-          "root_id": {
-            "description": "根评论ID，0表示顶级评论",
-            "format": "int64",
-            "type": "integer"
-          },
-          "reply_to_user_id": {
-            "description": "被回复用户ID，0表示不是回复",
-            "format": "int64",
-            "type": "integer"
-          },
-          "ip_location": {
-            "description": "IP位置",
-            "format": "string",
-            "type": "string"
-          },
-          "client_device": {
-            "description": "客户端设备",
-            "format": "string",
-            "type": "string"
-          },
-          "client_os": {
-            "description": "客户端操作系统",
-            "format": "string",
-            "type": "string"
-          }
-        },
-        "required": ["content", "target_id", "target_type", "parent_id", "root_id"],
-        "type": "object"
-      },
-      "v1.CommentsCreateRes": {
-        "properties": {
-          "id": {
-            "format": "int64",
-            "type": "integer"
-          }
-        },
-        "required": ["id"],
-        "type": "object"
-      },
       "v1.CommentsDeleteReq": {
         "properties": {
           "id": {
@@ -2364,9 +2548,10 @@
             "type": "integer"
           },
           "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
+            "description": "状态：article-文章, comment-评论",
+            "enum": ["article", "comment"],
+            "format": "consts.CommentType",
+            "type": "string"
           },
           "parent_id": {
             "description": "父评论ID",
@@ -2393,11 +2578,6 @@
             "format": "string",
             "type": "string"
           },
-          "status": {
-            "description": "状态：1-正常, 0-禁用",
-            "format": "int",
-            "type": "integer"
-          },
           "created_at": {
             "description": "创建时间",
             "format": "string",
@@ -2413,19 +2593,19 @@
             "format": "string",
             "type": "string"
           },
-          "extra": {
-            "$ref": "#/components/schemas/v1.CommentExtra",
+          "redundant": {
+            "$ref": "#/components/schemas/v1.CommentInfoExtra",
             "description": "评论额外信息"
           },
           "extra_account": {
-            "$ref": "#/components/schemas/v1.CommentExtraAccount",
+            "$ref": "#/components/schemas/v1.CommentInfoExtraAccount",
             "description": "评论用户额外信息"
           },
           "replies": {
             "description": "回复列表",
-            "format": "[]*v1.CommentReplyInfo",
+            "format": "[]*v1.CommentInfoReply",
             "items": {
-              "$ref": "#/components/schemas/v1.CommentReplyInfo",
+              "$ref": "#/components/schemas/v1.CommentInfoReply",
               "description": ""
             },
             "type": "array"
@@ -2444,17 +2624,61 @@
           "reply_to_user_id",
           "reply_to_user_name",
           "reply_to_user_avatar",
-          "status",
           "created_at",
           "updated_at",
           "deleted_at",
-          "extra",
+          "redundant",
           "extra_account",
           "replies"
         ],
         "type": "object"
       },
-      "v1.CommentReplyInfo": {
+      "v1.CommentInfoExtra": {
+        "properties": {
+          "like_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "unlike_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "reply_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["like_count", "unlike_count", "reply_count"],
+        "type": "object"
+      },
+      "v1.CommentInfoExtraAccount": {
+        "properties": {
+          "like_status": {
+            "description": "点赞/踩状态：thumb_down-踩, thumb_up-点赞",
+            "enum": ["thumb_down", "thumb_up"],
+            "format": "consts.LikeStatus",
+            "type": "string"
+          },
+          "is_liked": {
+            "description": "当前用户是否点赞",
+            "format": "bool",
+            "type": "boolean"
+          },
+          "is_disliked": {
+            "description": "当前用户是否踩",
+            "format": "bool",
+            "type": "boolean"
+          },
+          "is_self_comment": {
+            "description": "是否是作者自己的评论",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["like_status", "is_liked", "is_disliked", "is_self_comment"],
+        "type": "object"
+      },
+      "v1.CommentInfoReply": {
         "properties": {
           "id": {
             "description": "回复ID",
@@ -2487,9 +2711,10 @@
             "type": "integer"
           },
           "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
+            "description": "类型：article-文章, comment-评论",
+            "enum": ["article", "comment"],
+            "format": "consts.CommentType",
+            "type": "string"
           },
           "parent_id": {
             "description": "父评论ID",
@@ -2516,11 +2741,6 @@
             "format": "string",
             "type": "string"
           },
-          "status": {
-            "description": "状态：1-正常, 0-禁用",
-            "format": "int",
-            "type": "integer"
-          },
           "created_at": {
             "description": "创建时间",
             "format": "string",
@@ -2536,12 +2756,12 @@
             "format": "string",
             "type": "string"
           },
-          "extra": {
-            "$ref": "#/components/schemas/v1.CommentExtra",
+          "redundant": {
+            "$ref": "#/components/schemas/v1.CommentInfoExtra",
             "description": "评论额外信息"
           },
           "extra_account": {
-            "$ref": "#/components/schemas/v1.CommentExtraAccount",
+            "$ref": "#/components/schemas/v1.CommentInfoExtraAccount",
             "description": "评论用户额外信息"
           }
         },
@@ -2558,11 +2778,10 @@
           "reply_to_user_id",
           "reply_to_user_name",
           "reply_to_user_avatar",
-          "status",
           "created_at",
           "updated_at",
           "deleted_at",
-          "extra",
+          "redundant",
           "extra_account"
         ],
         "type": "object"
@@ -2582,8 +2801,10 @@
             "type": "integer"
           },
           "target_type": {
-            "format": "int",
-            "type": "integer"
+            "description": "类型：article-文章, comment-评论",
+            "enum": ["article", "comment"],
+            "format": "consts.CommentType",
+            "type": "string"
           },
           "parent_id": {
             "format": "int64",
@@ -2595,10 +2816,6 @@
           },
           "creator_id": {
             "format": "int64",
-            "type": "integer"
-          },
-          "status": {
-            "format": "int",
             "type": "integer"
           }
         },
@@ -2631,90 +2848,85 @@
         "required": ["total", "page", "size", "comments"],
         "type": "object"
       },
-      "v1.CommentsRefreshReq": {
+      "v1.CommentsReplayReq": {
         "properties": {
-          "target_id": {
+          "comment_id": {
+            "description": "评论ID",
             "format": "int64",
             "type": "integer"
           },
-          "target_type": {
-            "format": "int",
-            "type": "integer"
-          },
-          "last_time": {
+          "content": {
+            "description": "回复内容",
             "format": "string",
             "type": "string"
           },
-          "page": {
-            "format": "int",
-            "type": "integer"
-          },
-          "size": {
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["target_id", "page", "size"],
-        "type": "object"
-      },
-      "v1.CommentsRefreshRes": {
-        "properties": {
-          "comments": {
-            "format": "[]*v1.CommentInfo",
-            "items": {
-              "$ref": "#/components/schemas/v1.CommentInfo",
+          "extra": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/interface",
               "description": ""
             },
-            "type": "array"
-          },
-          "total": {
-            "format": "int",
-            "type": "integer"
-          },
-          "has_more": {
-            "format": "bool",
-            "type": "boolean"
+            "description": "额外信息",
+            "format": "map[string]interface {}",
+            "type": "object"
           }
         },
-        "required": ["comments", "total", "has_more"],
+        "required": ["comment_id", "content", "extra"],
         "type": "object"
       },
-      "v1.CommentsRepliesListReq": {
+      "v1.CommentsReplayRes": {
         "properties": {
-          "parent_id": {
+          "id": {
+            "description": "回复ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.CommentsRepliesReq": {
+        "properties": {
+          "comment_id": {
+            "description": "评论ID",
             "format": "int64",
             "type": "integer"
           },
           "page": {
+            "description": "页码",
             "format": "int",
             "type": "integer"
           },
           "size": {
+            "description": "每页数量",
             "format": "int",
             "type": "integer"
           }
         },
-        "required": ["parent_id", "page", "size"],
+        "required": ["comment_id", "page", "size"],
         "type": "object"
       },
-      "v1.CommentsRepliesListRes": {
+      "v1.CommentsRepliesRes": {
         "properties": {
           "total": {
+            "description": "总数",
             "format": "int",
             "type": "integer"
           },
           "page": {
+            "description": "页码",
             "format": "int",
             "type": "integer"
           },
           "size": {
+            "description": "每页数量",
             "format": "int",
             "type": "integer"
           },
           "replies": {
-            "format": "[]*v1.CommentReplyInfo",
+            "description": "回复列表",
+            "format": "[]*v1.CommentInfoReply",
             "items": {
-              "$ref": "#/components/schemas/v1.CommentReplyInfo",
+              "$ref": "#/components/schemas/v1.CommentInfoReply",
               "description": ""
             },
             "type": "array"
@@ -2735,13 +2947,17 @@
             "format": "string",
             "type": "string"
           },
-          "status": {
-            "description": "状态：1-正常, 0-禁用",
-            "format": "int",
-            "type": "integer"
+          "extra": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/interface",
+              "description": ""
+            },
+            "description": "额外信息",
+            "format": "map[string]interface {}",
+            "type": "object"
           }
         },
-        "required": ["id", "content", "status"],
+        "required": ["id", "content", "extra"],
         "type": "object"
       },
       "v1.CommentsUpdateRes": {
@@ -2983,13 +3199,15 @@
           },
           "statusBefore": {
             "description": "操作前状态",
-            "format": "int",
-            "type": "integer"
+            "enum": ["draft", "published"],
+            "format": "consts.ContentStatus",
+            "type": "string"
           },
           "statusAfter": {
             "description": "操作后状态",
-            "format": "int",
-            "type": "integer"
+            "enum": ["draft", "published"],
+            "format": "consts.ContentStatus",
+            "type": "string"
           },
           "operatorId": {
             "description": "操作人ID",
@@ -3077,38 +3295,6 @@
         "required": ["list", "total", "page", "size"],
         "type": "object"
       },
-      "v1.ContentsAuditReq": {
-        "properties": {
-          "id": {
-            "description": "内容ID",
-            "format": "int64",
-            "type": "integer"
-          },
-          "status": {
-            "description": "审核结果：2-已审核, 4-已驳回",
-            "format": "int",
-            "type": "integer"
-          },
-          "remark": {
-            "description": "审核备注",
-            "format": "string",
-            "type": "string"
-          }
-        },
-        "required": ["id", "status"],
-        "type": "object"
-      },
-      "v1.ContentsAuditRes": {
-        "properties": {
-          "success": {
-            "description": "是否审核成功",
-            "format": "bool",
-            "type": "boolean"
-          }
-        },
-        "required": ["success"],
-        "type": "object"
-      },
       "v1.ContentsCreateReq": {
         "properties": {
           "title": {
@@ -3123,6 +3309,11 @@
           },
           "cover_url": {
             "description": "封面图片URL",
+            "format": "string",
+            "type": "string"
+          },
+          "thumb": {
+            "description": "缩略图URL",
             "format": "string",
             "type": "string"
           },
@@ -3238,6 +3429,11 @@
             "format": "string",
             "type": "string"
           },
+          "thumb": {
+            "description": "缩略图URL",
+            "format": "string",
+            "type": "string"
+          },
           "creator_id": {
             "description": "创建者ID",
             "format": "int64",
@@ -3264,9 +3460,10 @@
             "type": "string"
           },
           "status": {
-            "description": "状态：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
-            "format": "int",
-            "type": "integer"
+            "description": "状态：draft-草稿, published-已发布",
+            "enum": ["draft", "published"],
+            "format": "consts.ContentStatus",
+            "type": "string"
           },
           "type": {
             "description": "类型：1-文章, 2-视频",
@@ -3349,9 +3546,10 @@
             "type": "integer"
           },
           "status": {
-            "description": "状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
-            "format": "int",
-            "type": "integer"
+            "description": "状态过滤：draft-草稿, published-已发布",
+            "enum": ["draft", "published"],
+            "format": "consts.ContentStatus",
+            "type": "string"
           }
         },
         "required": ["page", "size"],
@@ -3409,50 +3607,6 @@
         "required": ["success"],
         "type": "object"
       },
-      "v1.ContentsResubmitReq": {
-        "properties": {
-          "id": {
-            "description": "内容ID",
-            "format": "int64",
-            "type": "integer"
-          }
-        },
-        "required": ["id"],
-        "type": "object"
-      },
-      "v1.ContentsResubmitRes": {
-        "properties": {
-          "success": {
-            "description": "是否重新提交成功",
-            "format": "bool",
-            "type": "boolean"
-          }
-        },
-        "required": ["success"],
-        "type": "object"
-      },
-      "v1.ContentsSubmitForAuditReq": {
-        "properties": {
-          "id": {
-            "description": "内容ID",
-            "format": "int64",
-            "type": "integer"
-          }
-        },
-        "required": ["id"],
-        "type": "object"
-      },
-      "v1.ContentsSubmitForAuditRes": {
-        "properties": {
-          "success": {
-            "description": "是否提交成功",
-            "format": "bool",
-            "type": "boolean"
-          }
-        },
-        "required": ["success"],
-        "type": "object"
-      },
       "v1.ContentsUnpublishReq": {
         "properties": {
           "id": {
@@ -3494,6 +3648,11 @@
           },
           "cover_url": {
             "description": "封面图片URL",
+            "format": "string",
+            "type": "string"
+          },
+          "thumb": {
+            "description": "缩略图URL",
             "format": "string",
             "type": "string"
           },
@@ -3600,228 +3759,6 @@
       },
       "v1.GuideReportRes": {
         "properties": {},
-        "type": "object"
-      },
-      "v1.LikesCheckReq": {
-        "properties": {
-          "target_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["target_id", "target_type"],
-        "type": "object"
-      },
-      "v1.LikesCheckRes": {
-        "properties": {
-          "status": {
-            "description": "状态：1-赞, 0-踩",
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["status"],
-        "type": "object"
-      },
-      "v1.LikesCountReq": {
-        "properties": {
-          "target_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
-          },
-          "status": {
-            "description": "状态：1-赞, 0-踩",
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["target_id", "target_type", "status"],
-        "type": "object"
-      },
-      "v1.LikesCountRes": {
-        "properties": {
-          "count": {
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["count"],
-        "type": "object"
-      },
-      "v1.LikesCreateReq": {
-        "properties": {
-          "target_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
-          },
-          "status": {
-            "description": "状态：1-赞, 0-踩",
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["target_id", "target_type", "status"],
-        "type": "object"
-      },
-      "v1.LikesCreateRes": {
-        "properties": {
-          "id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "status": {
-            "description": "状态：1-赞, 0-踩",
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["id", "status"],
-        "type": "object"
-      },
-      "v1.LikesDeleteReq": {
-        "properties": {
-          "target_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["target_id", "target_type"],
-        "type": "object"
-      },
-      "v1.LikesDeleteRes": {
-        "properties": {
-          "status": {
-            "format": "bool",
-            "type": "boolean"
-          }
-        },
-        "required": ["status"],
-        "type": "object"
-      },
-      "v1.LikesListReq": {
-        "properties": {
-          "page": {
-            "format": "int",
-            "type": "integer"
-          },
-          "size": {
-            "format": "int",
-            "type": "integer"
-          },
-          "target_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
-          },
-          "status": {
-            "description": "状态：1-赞, 0-踩",
-            "format": "int",
-            "type": "integer"
-          }
-        },
-        "required": ["page", "size", "target_id", "target_type", "status"],
-        "type": "object"
-      },
-      "v1.LikesListRes": {
-        "properties": {
-          "total": {
-            "format": "int",
-            "type": "integer"
-          },
-          "page": {
-            "format": "int",
-            "type": "integer"
-          },
-          "size": {
-            "format": "int",
-            "type": "integer"
-          },
-          "items": {
-            "format": "[]*v1.LikeInfo",
-            "items": {
-              "$ref": "#/components/schemas/v1.LikeInfo",
-              "description": ""
-            },
-            "type": "array"
-          }
-        },
-        "required": ["total", "page", "size", "items"],
-        "type": "object"
-      },
-      "v1.LikeInfo": {
-        "properties": {
-          "id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "user_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "user_name": {
-            "format": "string",
-            "type": "string"
-          },
-          "target_id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "target_type": {
-            "description": "目标类型：1-内容, 2-评论",
-            "format": "int",
-            "type": "integer"
-          },
-          "status": {
-            "description": "状态：1-赞, 0-踩",
-            "format": "int",
-            "type": "integer"
-          },
-          "created_at": {
-            "format": "string",
-            "type": "string"
-          },
-          "updated_at": {
-            "format": "string",
-            "type": "string"
-          },
-          "deleted_at": {
-            "format": "string",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "user_id",
-          "user_name",
-          "target_id",
-          "target_type",
-          "status",
-          "created_at",
-          "updated_at",
-          "deleted_at"
-        ],
         "type": "object"
       },
       "v1.ModelListReq": {
@@ -3975,10 +3912,12 @@
             "type": "integer"
           },
           "type": {
+            "enum": ["like", "reply", "system"],
             "format": "consts.NotificationType",
             "type": "string"
           },
           "status": {
+            "enum": ["read", "unread"],
             "format": "consts.NotificationStatus",
             "type": "string"
           }
@@ -4023,6 +3962,7 @@
             "type": "integer"
           },
           "type": {
+            "enum": ["like", "reply", "system"],
             "format": "consts.NotificationType",
             "type": "string"
           },
@@ -4039,6 +3979,7 @@
             "type": "string"
           },
           "status": {
+            "enum": ["read", "unread"],
             "format": "consts.NotificationStatus",
             "type": "string"
           },
@@ -4383,6 +4324,118 @@
         "required": ["id", "type", "value", "remarks", "createdAt"],
         "type": "object"
       },
+      "v1.ReactionsCreateReq": {
+        "properties": {
+          "reactable_id": {
+            "description": "反应对象ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reactable_type": {
+            "description": "反应对象类型：article-文章, comment-评论",
+            "enum": ["article", "comment"],
+            "format": "consts.CommentType",
+            "type": "string"
+          },
+          "category": {
+            "description": "反应类型：like-点赞, unlike-踩",
+            "enum": ["like", "unlike"],
+            "format": "consts.ReactionsCategory",
+            "type": "string"
+          }
+        },
+        "required": ["reactable_id", "reactable_type", "category"],
+        "type": "object"
+      },
+      "v1.ReactionsCreateRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.ReactionsInfo",
+            "description": "反应信息"
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
+      "v1.ReactionsInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "reactable_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "reactable_type": {
+            "format": "string",
+            "type": "string"
+          },
+          "category": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_by": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "updated_by": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "deleted_at": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "user_id", "reactable_id", "reactable_type", "category", "created_at"],
+        "type": "object"
+      },
+      "v1.ReactionsDeleteReq": {
+        "properties": {
+          "reactable_id": {
+            "description": "反应对象ID",
+            "format": "int64",
+            "type": "integer"
+          },
+          "reactable_type": {
+            "description": "反应对象类型：article-文章, comment-评论",
+            "enum": ["article", "comment"],
+            "format": "consts.CommentType",
+            "type": "string"
+          },
+          "category": {
+            "description": "反应类型：like-点赞, unlike-踩",
+            "enum": ["like", "unlike"],
+            "format": "consts.ReactionsCategory",
+            "type": "string"
+          }
+        },
+        "required": ["reactable_id", "reactable_type", "category"],
+        "type": "object"
+      },
+      "v1.ReactionsDeleteRes": {
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/v1.ReactionsInfo",
+            "description": "反应信息"
+          }
+        },
+        "required": ["info"],
+        "type": "object"
+      },
       "v1.SessionCreateReq": {
         "properties": {
           "name": {
@@ -4593,6 +4646,7 @@
             "type": "string"
           },
           "status": {
+            "enum": ["draft", "published"],
             "format": "consts.TopicStatus",
             "type": "string"
           },
@@ -4659,6 +4713,7 @@
             "type": "string"
           },
           "status": {
+            "enum": ["draft", "published"],
             "format": "consts.TopicStatus",
             "type": "string"
           },
@@ -4794,7 +4849,7 @@
             "type": "string"
           },
           "category": {
-            "enum": ["stage_four", "stage_one", "stage_three", "stage_two"],
+            "enum": ["stage_4", "stage_1", "stage_3", "stage_2"],
             "format": "consts.TaskCategory",
             "type": "string"
           },
@@ -5709,6 +5764,7 @@
             "in": "query",
             "name": "status",
             "schema": {
+              "enum": ["draft", "published"],
               "format": "consts.TopicStatus",
               "type": "string"
             }
@@ -6032,6 +6088,92 @@
         },
         "summary": "更新Agent",
         "tags": ["agent"]
+      }
+    },
+    "/api/articles/replay": {
+      "post": {
+        "operationId": "articles_replay",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ArticlesReplayReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ArticlesReplayRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "回复文章评论",
+        "tags": ["articles"]
+      }
+    },
+    "/api/articles/replies": {
+      "get": {
+        "operationId": "articles_replies",
+        "parameters": [
+          {
+            "description": "文章ID",
+            "in": "query",
+            "name": "article_id",
+            "required": true,
+            "schema": {
+              "description": "文章ID",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "页码",
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "description": "页码",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "每页数量",
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "description": "每页数量",
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ArticlesRepliesRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取文章回复列表",
+        "tags": ["articles"]
       }
     },
     "/api/changelog/add": {
@@ -6645,8 +6787,8 @@
             "in": "query",
             "name": "status",
             "schema": {
-              "format": "int",
-              "type": "integer"
+              "format": "string",
+              "type": "string"
             }
           },
           {
@@ -6768,37 +6910,6 @@
         "tags": ["comment_like"]
       }
     },
-    "/api/comments/create": {
-      "post": {
-        "operationId": "comments_create",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.CommentsCreateReq",
-                "description": ""
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.CommentsCreateRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "创建评论或回复",
-        "tags": ["comments"]
-      }
-    },
     "/api/comments/delete": {
       "post": {
         "operationId": "comments_delete",
@@ -6893,12 +7004,15 @@
             }
           },
           {
+            "description": "类型：article-文章, comment-评论",
             "in": "query",
             "name": "target_type",
             "required": true,
             "schema": {
-              "format": "int",
-              "type": "integer"
+              "description": "类型：article-文章, comment-评论",
+              "enum": ["article", "comment"],
+              "format": "consts.CommentType",
+              "type": "string"
             }
           },
           {
@@ -6924,14 +7038,6 @@
               "format": "int64",
               "type": "integer"
             }
-          },
-          {
-            "in": "query",
-            "name": "status",
-            "schema": {
-              "format": "int",
-              "type": "integer"
-            }
           }
         ],
         "responses": {
@@ -6951,60 +7057,26 @@
         "tags": ["comments"]
       }
     },
-    "/api/comments/refresh": {
-      "get": {
-        "operationId": "comments_refresh",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "target_id",
-            "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "target_type",
-            "schema": {
-              "format": "int",
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "last_time",
-            "schema": {
-              "format": "string",
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "page",
-            "required": true,
-            "schema": {
-              "format": "int",
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "size",
-            "required": true,
-            "schema": {
-              "format": "int",
-              "type": "integer"
+    "/api/comments/replay": {
+      "post": {
+        "operationId": "comments_replay",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.CommentsReplayReq",
+                "description": ""
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/v1.CommentsRefreshRes",
+                  "$ref": "#/components/schemas/v1.CommentsReplayRes",
                   "description": ""
                 }
               }
@@ -7012,37 +7084,43 @@
             "description": ""
           }
         },
-        "summary": "刷新评论列表",
+        "summary": "回复评论信息",
         "tags": ["comments"]
       }
     },
-    "/api/comments/replies/list": {
+    "/api/comments/replies": {
       "get": {
-        "operationId": "comments_replies_list",
+        "operationId": "comments_replies",
         "parameters": [
           {
+            "description": "评论ID",
             "in": "query",
-            "name": "parent_id",
+            "name": "comment_id",
             "required": true,
             "schema": {
+              "description": "评论ID",
               "format": "int64",
               "type": "integer"
             }
           },
           {
+            "description": "页码",
             "in": "query",
             "name": "page",
             "required": true,
             "schema": {
+              "description": "页码",
               "format": "int",
               "type": "integer"
             }
           },
           {
+            "description": "每页数量",
             "in": "query",
             "name": "size",
             "required": true,
             "schema": {
+              "description": "每页数量",
               "format": "int",
               "type": "integer"
             }
@@ -7053,7 +7131,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/v1.CommentsRepliesListRes",
+                  "$ref": "#/components/schemas/v1.CommentsRepliesRes",
                   "description": ""
                 }
               }
@@ -7359,37 +7437,6 @@
         "tags": ["content_operation_log"]
       }
     },
-    "/api/contents/audit": {
-      "post": {
-        "operationId": "contents_audit",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.ContentsAuditReq",
-                "description": ""
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.ContentsAuditRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "审核内容",
-        "tags": ["contents"]
-      }
-    },
     "/api/contents/create": {
       "post": {
         "operationId": "contents_create",
@@ -7552,13 +7599,14 @@
             }
           },
           {
-            "description": "状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
+            "description": "状态过滤：draft-草稿, published-已发布",
             "in": "query",
             "name": "status",
             "schema": {
-              "description": "状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回",
-              "format": "int",
-              "type": "integer"
+              "description": "状态过滤：draft-草稿, published-已发布",
+              "enum": ["draft", "published"],
+              "format": "consts.ContentStatus",
+              "type": "string"
             }
           }
         ],
@@ -7607,68 +7655,6 @@
           }
         },
         "summary": "发布内容",
-        "tags": ["contents"]
-      }
-    },
-    "/api/contents/resubmit": {
-      "post": {
-        "operationId": "contents_resubmit",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.ContentsResubmitReq",
-                "description": ""
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.ContentsResubmitRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "重新提交审核",
-        "tags": ["contents"]
-      }
-    },
-    "/api/contents/submit_for_audit": {
-      "post": {
-        "operationId": "contents_submit_for_audit",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.ContentsSubmitForAuditReq",
-                "description": ""
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.ContentsSubmitForAuditRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "提交内容审核",
         "tags": ["contents"]
       }
     },
@@ -7816,232 +7802,6 @@
         "tags": ["guide"]
       }
     },
-    "/api/likes/check": {
-      "get": {
-        "operationId": "likes_check",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "target_id",
-            "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "target_type",
-            "required": true,
-            "schema": {
-              "format": "int",
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.LikesCheckRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "检查点赞状态",
-        "tags": ["likes"]
-      }
-    },
-    "/api/likes/count": {
-      "get": {
-        "operationId": "likes_count",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "target_id",
-            "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "目标类型：1-内容, 2-评论",
-            "in": "query",
-            "name": "target_type",
-            "required": true,
-            "schema": {
-              "description": "目标类型：1-内容, 2-评论",
-              "format": "int",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "状态：1-赞, 0-踩",
-            "in": "query",
-            "name": "status",
-            "required": true,
-            "schema": {
-              "description": "状态：1-赞, 0-踩",
-              "format": "int",
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.LikesCountRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "获取点赞数量",
-        "tags": ["likes"]
-      }
-    },
-    "/api/likes/create": {
-      "post": {
-        "operationId": "likes_create",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.LikesCreateReq",
-                "description": ""
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.LikesCreateRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "创建点赞",
-        "tags": ["likes"]
-      }
-    },
-    "/api/likes/delete": {
-      "post": {
-        "operationId": "likes_delete",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1.LikesDeleteReq",
-                "description": ""
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.LikesDeleteRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "删除点赞",
-        "tags": ["likes"]
-      }
-    },
-    "/api/likes/list": {
-      "get": {
-        "operationId": "likes_list",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "page",
-            "required": true,
-            "schema": {
-              "format": "int",
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "size",
-            "required": true,
-            "schema": {
-              "format": "int",
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "target_id",
-            "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "目标类型：1-内容, 2-评论",
-            "in": "query",
-            "name": "target_type",
-            "required": true,
-            "schema": {
-              "description": "目标类型：1-内容, 2-评论",
-              "format": "int",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "状态：1-赞, 0-踩",
-            "in": "query",
-            "name": "status",
-            "required": true,
-            "schema": {
-              "description": "状态：1-赞, 0-踩",
-              "format": "int",
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1.LikesListRes",
-                  "description": ""
-                }
-              }
-            },
-            "description": ""
-          }
-        },
-        "summary": "获取点赞列表",
-        "tags": ["likes"]
-      }
-    },
     "/api/model/list": {
       "get": {
         "operationId": "model_list",
@@ -8119,6 +7879,7 @@
             "in": "query",
             "name": "type",
             "schema": {
+              "enum": ["like", "reply", "system"],
               "format": "consts.NotificationType",
               "type": "string"
             }
@@ -8127,6 +7888,7 @@
             "in": "query",
             "name": "status",
             "schema": {
+              "enum": ["read", "unread"],
               "format": "consts.NotificationStatus",
               "type": "string"
             }
@@ -8430,6 +8192,68 @@
         },
         "summary": "查找积分类型",
         "tags": ["points"]
+      }
+    },
+    "/api/reactions/create": {
+      "post": {
+        "operationId": "reactions_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ReactionsCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ReactionsCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建反应动作",
+        "tags": ["reactions"]
+      }
+    },
+    "/api/reactions/delete": {
+      "post": {
+        "operationId": "reactions_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ReactionsDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ReactionsDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除反应动作",
+        "tags": ["reactions"]
       }
     },
     "/api/session/create": {

@@ -5,6 +5,13 @@
 */
 
 
+export const v1TaskTopicEditReqStatusEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type V1TaskTopicEditReqStatusEnumKey = (typeof v1TaskTopicEditReqStatusEnum)[keyof typeof v1TaskTopicEditReqStatusEnum];
+
 export type V1TaskTopicEditReq = {
     /**
      * @type integer, int64
@@ -17,7 +24,7 @@ export type V1TaskTopicEditReq = {
     /**
      * @type string | undefined, consts.TopicStatus
     */
-    status?: string | undefined;
+    status?: V1TaskTopicEditReqStatusEnumKey | undefined;
     /**
      * @type string | undefined, string
     */

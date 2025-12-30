@@ -1,0 +1,14 @@
+export declare const dark: string;
+export declare const rhapContainer: string;
+export declare const rhapControlsSection: string;
+export declare const rhapDownloadProgress: string;
+export declare const rhapMain: string;
+export declare const rhapMainControlsButton: string;
+export declare const rhapPlayPauseButton: string;
+export declare const rhapProgressBar: string;
+export declare const rhapProgressFilled: string;
+export declare const rhapProgressIndicator: string;
+export declare const rhapProgressSection: string;
+export declare const rhapTime: string;
+export declare const tiptapAudio: string;
+export declare const tiptapAudioContainer: string;

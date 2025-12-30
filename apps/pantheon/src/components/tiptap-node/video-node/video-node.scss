@@ -1,0 +1,31 @@
+.tiptap.ProseMirror {
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  > video {
+    margin: 2rem 0;
+    outline: 0.125rem solid transparent;
+    border-radius: var(--tt-radius-xs, 0.25rem);
+  }
+
+  video.ProseMirror-selectednode {
+    outline-color: var(--tt-brand-color-500);
+  }
+
+  // Thread video handling
+  .tiptap-thread:has(> video) {
+    margin: 2rem 0;
+
+    video {
+      outline: 0.125rem solid transparent;
+      border-radius: var(--tt-radius-xs, 0.25rem);
+    }
+  }
+
+  .tiptap-thread video {
+    margin: 0;
+  }
+}

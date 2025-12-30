@@ -15,7 +15,6 @@ const fetchImage = async (url: string) => {
     base64,
     metadata: { height, width },
   } = await getPlaiceholder(buffer, { format: ['webp'] });
-  console.log({ height, url, width });
   return {
     base64,
     height: (DEFAULT_WIDTH / width) * height,

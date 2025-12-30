@@ -11,6 +11,6 @@ export const v1CollectionsListReqSchema = z.object({
     "page": z.int(),
 "size": z.int(),
 "name": z.optional(z.string()),
-"status": z.optional(z.int()),
+"status": z.optional(z.string()),
 "creator_id": z.optional(z.int())
     }) as unknown as z.ZodType<V1CollectionsListReq>

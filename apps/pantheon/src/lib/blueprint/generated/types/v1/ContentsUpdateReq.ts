@@ -27,6 +27,11 @@ export type V1ContentsUpdateReq = {
     */
     cover_url?: string | undefined;
     /**
+     * @description 缩略图URL
+     * @type string | undefined, string
+    */
+    thumb?: string | undefined;
+    /**
      * @description 类型：1-文章, 2-视频
      * @type integer | undefined, int
     */

@@ -6,6 +6,21 @@
 
 import type { V1AccountInfo } from "./AccountInfo";
 
+export const v1NotificationInfoTypeEnum = {
+    "like": "like",
+    "reply": "reply",
+    "system": "system"
+} as const;
+
+export type V1NotificationInfoTypeEnumKey = (typeof v1NotificationInfoTypeEnum)[keyof typeof v1NotificationInfoTypeEnum];
+
+export const v1NotificationInfoStatusEnum = {
+    "read": "read",
+    "unread": "unread"
+} as const;
+
+export type V1NotificationInfoStatusEnumKey = (typeof v1NotificationInfoStatusEnum)[keyof typeof v1NotificationInfoStatusEnum];
+
 export type V1NotificationInfo = {
     /**
      * @type integer, int64
@@ -14,7 +29,7 @@ export type V1NotificationInfo = {
     /**
      * @type string, consts.NotificationType
     */
-    type: string;
+    type: V1NotificationInfoTypeEnumKey;
     /**
      * @type integer, int64
     */
@@ -30,7 +45,7 @@ export type V1NotificationInfo = {
     /**
      * @type string, consts.NotificationStatus
     */
-    status: string;
+    status: V1NotificationInfoStatusEnumKey;
     /**
      * @type string, string
     */

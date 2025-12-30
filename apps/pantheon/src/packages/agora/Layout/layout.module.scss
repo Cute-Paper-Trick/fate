@@ -1,0 +1,29 @@
+:root {
+  --site-width: 1200px;
+  --layout-gap: 1rem;
+  --layout-padding: 1rem;
+  --fs-base: 1rem;
+
+  --layout-gap: 1rem;
+  --layout-sidebar-left-width: 4rem;
+  --layout-content-width: 7fr;
+  --layout-sidebar-right-width: 3fr;
+
+  --layout-sidebar-left-row-end: initial;
+
+  --layout: var(--layout-sidebar-left-width) var(--layout-content-width)
+    var(--layout-sidebar-right-width);
+}
+
+.layout {
+  height: 100%;
+  width: 100%;
+  max-width: var(--site-width);
+  transform: translateX(20px);
+  margin: 0 auto;
+  padding: var(--layout-padding);
+  gap: var(--layout-gap);
+  display: grid;
+  grid-template-columns: var(--layout);
+  font-size: var(--fs-base);
+}

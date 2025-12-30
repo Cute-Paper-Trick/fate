@@ -205,6 +205,8 @@ export default middleware;
 export const config = {
   matcher: [
     '/',
+    '/agora(.*)',
+    '/notion-like(.*)',
     '/unauthorized',
     '/auth(.*)',
     '/dashboard(.*)',

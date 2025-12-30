@@ -1,0 +1,10 @@
+export declare const dark: string;
+export declare const fadeIn: string;
+export declare const fadeOut: string;
+export declare const slideFromBottom: string;
+export declare const slideFromLeft: string;
+export declare const slideFromRight: string;
+export declare const slideFromTop: string;
+export declare const tiptapDropdownMenu: string;
+export declare const zoomIn: string;
+export declare const zoomOut: string;

@@ -6,10 +6,10 @@
 
 
 export const v1TaskUserInfoCategoryEnum = {
-    "stage_four": "stage_four",
-    "stage_one": "stage_one",
-    "stage_three": "stage_three",
-    "stage_two": "stage_two"
+    "stage_4": "stage_4",
+    "stage_1": "stage_1",
+    "stage_3": "stage_3",
+    "stage_2": "stage_2"
 } as const;
 
 export type V1TaskUserInfoCategoryEnumKey = (typeof v1TaskUserInfoCategoryEnum)[keyof typeof v1TaskUserInfoCategoryEnum];

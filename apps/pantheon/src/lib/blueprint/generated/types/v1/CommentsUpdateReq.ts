@@ -4,6 +4,7 @@
 * Do not edit manually.
 */
 
+import type { Interface } from "../Interface";
 
 export type V1CommentsUpdateReq = {
     /**
@@ -17,8 +18,10 @@ export type V1CommentsUpdateReq = {
     */
     content: string;
     /**
-     * @description 状态：1-正常, 0-禁用
-     * @type integer, int
+     * @description 额外信息
+     * @type object, map[string]interface {}
     */
-    status: number;
+    extra: {
+        [key: string]: Interface;
+    };
 };

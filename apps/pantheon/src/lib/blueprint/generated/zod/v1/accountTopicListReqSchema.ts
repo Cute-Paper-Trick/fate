@@ -8,7 +8,7 @@ import type { V1AccountTopicListReq } from "../../types/v1/AccountTopicListReq";
 import { z } from "zod/v4";
 
 export const v1AccountTopicListReqSchema = z.object({
-    "status": z.optional(z.string()),
+    "status": z.optional(z.enum(["draft", "published"])),
 "page": z.int(),
 "size": z.int(),
 "topic": z.optional(z.string().describe("话题名称，非必填，用于筛选关联该话题的主题（支持模糊匹配）"))

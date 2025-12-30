@@ -5,10 +5,13 @@
 */
 
 import type { V1CommentsUpdateReq } from "../../types/v1/CommentsUpdateReq";
+import { interfaceSchema } from "../interfaceSchema";
 import { z } from "zod/v4";
 
 export const v1CommentsUpdateReqSchema = z.object({
     "id": z.int().describe("评论ID"),
 "content": z.string().describe("评论内容"),
-"status": z.int().describe("状态：1-正常, 0-禁用")
+"extra": z.object({
+    
+    }).catchall(z.lazy(() => interfaceSchema)).describe("额外信息")
     }) as unknown as z.ZodType<V1CommentsUpdateReq>

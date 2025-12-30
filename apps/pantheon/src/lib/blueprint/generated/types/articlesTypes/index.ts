@@ -1,0 +1,2 @@
+export type { ArticlesReplay200, ArticlesReplayMutationRequest, ArticlesReplayMutationResponse, ArticlesReplayMutation } from "./ArticlesReplay";
+export type { ArticlesRepliesQueryParams, ArticlesReplies200, ArticlesRepliesQueryResponse, ArticlesRepliesQuery } from "./ArticlesReplies";

@@ -15,6 +15,7 @@ import Header from './Header';
 
 const CollectionDetail = memo(() => {
   const [collectionId] = useQueryState('collectionId', parseAsInteger);
+
   const { data, isPending } = useCollectionsDetail(
     { id: collectionId as any as number },
     { query: { enabled: !!collectionId } },

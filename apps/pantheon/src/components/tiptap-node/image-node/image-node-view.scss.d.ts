@@ -1,0 +1,13 @@
+export declare const dark: string;
+export declare const proseMirror: string;
+export declare const proseMirrorSelectednode: string;
+export declare const proseMirrorTrailingBreak: string;
+export declare const tiptap: string;
+export declare const tiptapImage: string;
+export declare const tiptapImageCaption: string;
+export declare const tiptapImageContainer: string;
+export declare const tiptapImageContent: string;
+export declare const tiptapImageHandle: string;
+export declare const tiptapImageHandleLeft: string;
+export declare const tiptapImageHandleRight: string;
+export declare const tiptapImageImg: string;

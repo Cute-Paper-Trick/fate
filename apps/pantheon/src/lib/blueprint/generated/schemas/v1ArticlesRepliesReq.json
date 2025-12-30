@@ -1,0 +1,1 @@
+{"properties":{"article_id":{"description":"文章ID","format":"int64","type":"integer"},"page":{"description":"页码","format":"int","type":"integer"},"size":{"description":"每页数量","format":"int","type":"integer"}},"required":["article_id","page","size"],"type":"object","x-readme-ref-name":"v1.ArticlesRepliesReq"}

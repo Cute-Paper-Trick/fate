@@ -1,0 +1,11 @@
+export declare const dark: string;
+export declare const selected: string;
+export declare const tiptapButton: string;
+export declare const tiptapTableColumnIcon: string;
+export declare const tiptapTableGrid: string;
+export declare const tiptapTableGridCell: string;
+export declare const tiptapTableRowIcon: string;
+export declare const tiptapTableSizeIndicator: string;
+export declare const tiptapTableSizeIndicatorDelimiter: string;
+export declare const tiptapTableSizeIndicatorItem: string;
+export declare const tiptapTableSizeIndicatorText: string;

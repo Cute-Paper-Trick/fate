@@ -246,8 +246,9 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
-    'src/lib/blueprint/generated/*',
+    'src/lib/blueprint/generated/**',
     '**/*.generated.*',
+    'src/components/tiptap-ui/**',
   ]),
 ]);
 

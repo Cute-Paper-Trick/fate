@@ -8,9 +8,9 @@ import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { useCollectionsDetail } from '@/lib/http';
-import { useS3 } from '@/packages/s3';
+import { RemoteWrapper } from '@/packages/pithos';
 
-import Subscription from './Subscription';
+// import Subscription from './Subscription';
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
   header: css`
@@ -93,12 +93,11 @@ const process = [
   'resize,limit_1,m_fixed,w_100,h_100',
   'quality,q_90',
   'format,jpg',
-  'blur,r_50,s_50',
+  'blur,r_5,s_5',
 ];
 
 const CollectionHeader = memo(() => {
   const { styles, cx } = useStyles();
-  const { signature } = useS3();
 
   const [collectionId] = useQueryState('collectionId', parseAsInteger);
   const [cate, setCate] = useQueryState('cate', { ...parseAsString, defaultValue: 'all' });
@@ -128,12 +127,16 @@ const CollectionHeader = memo(() => {
       }}
     >
       <Flexbox className={styles.header}>
-        <div
-          className={styles.bg}
-          style={{
-            backgroundImage: `url(${signature(cover, process)})`,
-          }}
-        />
+        <RemoteWrapper path={cover} process={process}>
+          {(real_src) => (
+            <div
+              className={cx(styles.bg, 'bg')}
+              style={{
+                backgroundImage: `url(${real_src})`,
+              }}
+            />
+          )}
+        </RemoteWrapper>
         <div className={styles.cover} />
         <div className={styles.inner}>
           <div className={styles.body}>
@@ -153,9 +156,9 @@ const CollectionHeader = memo(() => {
                 ]}
                 onChange={(activeKey) => setCate(activeKey)}
               />
-              <Flexbox className={styles.actions}>
+              {/* <Flexbox className={styles.actions}>
                 <Subscription />
-              </Flexbox>
+              </Flexbox> */}
             </Flexbox>
           </div>
         </div>

@@ -1,1 +1,0 @@
-{"properties":{"id":{"description":"内容ID","format":"int64","type":"integer"},"status":{"description":"审核结果：2-已审核, 4-已驳回","format":"int","type":"integer"},"remark":{"description":"审核备注","format":"string","type":"string"}},"required":["id","status"],"type":"object","x-readme-ref-name":"v1.ContentsAuditReq"}

@@ -1,1 +1,0 @@
-{"properties":{"target_id":{"format":"int64","type":"integer"},"target_type":{"description":"目标类型：1-内容, 2-评论","format":"int","type":"integer"},"status":{"description":"状态：1-赞, 0-踩","format":"int","type":"integer"}},"required":["target_id","target_type","status"],"type":"object","x-readme-ref-name":"v1.LikesCountReq"}

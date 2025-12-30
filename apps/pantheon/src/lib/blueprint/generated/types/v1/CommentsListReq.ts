@@ -5,6 +5,13 @@
 */
 
 
+export const v1CommentsListReqTargetTypeEnum = {
+    "article": "article",
+    "comment": "comment"
+} as const;
+
+export type V1CommentsListReqTargetTypeEnumKey = (typeof v1CommentsListReqTargetTypeEnum)[keyof typeof v1CommentsListReqTargetTypeEnum];
+
 export type V1CommentsListReq = {
     /**
      * @type integer, int
@@ -19,9 +26,10 @@ export type V1CommentsListReq = {
     */
     target_id: number;
     /**
-     * @type integer, int
+     * @description 类型：article-文章, comment-评论
+     * @type string, consts.CommentType
     */
-    target_type: number;
+    target_type: V1CommentsListReqTargetTypeEnumKey;
     /**
      * @type integer | undefined, int64
     */
@@ -34,8 +42,4 @@ export type V1CommentsListReq = {
      * @type integer | undefined, int64
     */
     creator_id?: number | undefined;
-    /**
-     * @type integer | undefined, int
-    */
-    status?: number | undefined;
 };

@@ -5,6 +5,13 @@
 */
 
 
+export const v1CollectionsCreateReqStatusEnum = {
+    "disabled": "disabled",
+    "normal": "normal"
+} as const;
+
+export type V1CollectionsCreateReqStatusEnumKey = (typeof v1CollectionsCreateReqStatusEnum)[keyof typeof v1CollectionsCreateReqStatusEnum];
+
 export type V1CollectionsCreateReq = {
     /**
      * @type string, string
@@ -19,7 +26,8 @@ export type V1CollectionsCreateReq = {
     */
     cover_url: string;
     /**
-     * @type integer, int
+     * @description 状态过滤：normal-正常, disabled-禁用
+     * @type string | undefined, consts.CollectionStatus
     */
-    status: number;
+    status?: V1CollectionsCreateReqStatusEnumKey | undefined;
 };

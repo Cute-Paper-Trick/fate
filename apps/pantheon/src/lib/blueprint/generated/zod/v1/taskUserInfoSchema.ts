@@ -12,7 +12,7 @@ export const v1TaskUserInfoSchema = z.object({
 "index": z.int(),
 "parent_index": z.string(),
 "title": z.string(),
-"category": z.enum(["stage_four", "stage_one", "stage_three", "stage_two"]),
+"category": z.enum(["stage_4", "stage_1", "stage_3", "stage_2"]),
 "jump": z.string(),
 "description": z.string(),
 "material": z.string(),

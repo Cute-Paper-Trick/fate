@@ -12,5 +12,5 @@ export const v1CollectionsUpdateReqSchema = z.object({
 "name": z.optional(z.string()),
 "description": z.optional(z.string()),
 "cover_url": z.optional(z.string()),
-"status": z.optional(z.int())
+"status": z.optional(z.enum(["disabled", "normal"]).describe("状态过滤：normal-正常, disabled-禁用"))
     }) as unknown as z.ZodType<V1CollectionsUpdateReq>

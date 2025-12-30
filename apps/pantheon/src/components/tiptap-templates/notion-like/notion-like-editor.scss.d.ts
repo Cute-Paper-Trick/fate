@@ -1,0 +1,12 @@
+export declare const app: string;
+export declare const dark: string;
+export declare const notionLikeEditor: string;
+export declare const notionLikeEditorContent: string;
+export declare const notionLikeEditorWrapper: string;
+export declare const proseMirror: string;
+export declare const root: string;
+export declare const spin: string;
+export declare const spinnerContainer: string;
+export declare const spinnerContent: string;
+export declare const spinnerLoadingText: string;
+export declare const tiptap: string;

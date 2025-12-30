@@ -14,7 +14,7 @@ export const v1CollectionInfoSchema = z.object({
 "cover_url": z.string(),
 "creator_id": z.int(),
 "creator_name": z.string(),
-"status": z.int(),
+"status": z.enum(["disabled", "normal"]).describe("状态过滤：normal-正常, disabled-禁用"),
 "created_at": z.string(),
 "updated_at": z.string(),
 "deleted_at": z.string(),

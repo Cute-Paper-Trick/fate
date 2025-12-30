@@ -5,9 +5,9 @@
 */
 
 import type { V1CommentInfo } from "../../types/v1/CommentInfo";
-import { v1CommentExtraAccountSchema } from "./commentExtraAccountSchema";
-import { v1CommentExtraSchema } from "./commentExtraSchema";
-import { v1CommentReplyInfoSchema } from "./commentReplyInfoSchema";
+import { v1CommentInfoExtraAccountSchema } from "./commentInfoExtraAccountSchema";
+import { v1CommentInfoExtraSchema } from "./commentInfoExtraSchema";
+import { v1CommentInfoReplySchema } from "./commentInfoReplySchema";
 import { z } from "zod/v4";
 
 export const v1CommentInfoSchema = z.object({
@@ -17,23 +17,22 @@ export const v1CommentInfoSchema = z.object({
 "creator_name": z.string().describe("评论者名称"),
 "creator_avatar": z.string().describe("评论者头像"),
 "target_id": z.int().describe("目标ID"),
-"target_type": z.int().describe("目标类型：1-内容, 2-评论"),
+"target_type": z.enum(["article", "comment"]).describe("状态：article-文章, comment-评论"),
 "parent_id": z.int().describe("父评论ID"),
 "root_id": z.int().describe("根评论ID"),
 "reply_to_user_id": z.int().describe("回复目标用户ID"),
 "reply_to_user_name": z.string().describe("回复目标用户名称"),
 "reply_to_user_avatar": z.string().describe("回复目标用户头像"),
-"status": z.int().describe("状态：1-正常, 0-禁用"),
 "created_at": z.string().describe("创建时间"),
 "updated_at": z.string().describe("更新时间"),
 "deleted_at": z.string().describe("删除时间"),
-get "extra"(){
-                return v1CommentExtraSchema.describe("评论额外信息")
+get "redundant"(){
+                return v1CommentInfoExtraSchema.describe("评论额外信息")
               },
 get "extra_account"(){
-                return v1CommentExtraAccountSchema.describe("评论用户额外信息")
+                return v1CommentInfoExtraAccountSchema.describe("评论用户额外信息")
               },
 get "replies"(){
-                return z.array(v1CommentReplyInfoSchema).describe("回复列表")
+                return z.array(v1CommentInfoReplySchema).describe("回复列表")
               }
     }) as unknown as z.ZodType<V1CommentInfo>

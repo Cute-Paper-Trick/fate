@@ -20,9 +20,9 @@ export type CollectionsListQueryParams = {
     */
     name?: string | undefined;
     /**
-     * @type integer | undefined, int
+     * @type string | undefined, string
     */
-    status?: number | undefined;
+    status?: string | undefined;
     /**
      * @type integer | undefined, int64
     */

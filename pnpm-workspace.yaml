@@ -2,5 +2,5 @@ packages:
   - packages/*
   - apps/*
 
-patchedDependencies:
-  better-auth@1.3.28: patches/better-auth@1.3.28.patch
+# patchedDependencies:
+#   better-auth@1.3.28: patches/better-auth@1.3.28.patch

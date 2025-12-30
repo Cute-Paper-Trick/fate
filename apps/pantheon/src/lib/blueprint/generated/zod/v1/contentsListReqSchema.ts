@@ -14,5 +14,5 @@ export const v1ContentsListReqSchema = z.object({
 "collection_id": z.optional(z.int().describe("合集ID过滤")),
 "creator_id": z.optional(z.int().describe("创建者ID过滤")),
 "type": z.optional(z.int().describe("类型过滤：1-文章, 2-视频")),
-"status": z.optional(z.int().describe("状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回"))
+"status": z.optional(z.enum(["draft", "published"]).describe("状态过滤：draft-草稿, published-已发布"))
     }) as unknown as z.ZodType<V1ContentsListReq>

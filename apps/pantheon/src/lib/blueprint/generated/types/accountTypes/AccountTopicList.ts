@@ -6,11 +6,18 @@
 
 import type { V1AccountTopicListRes } from "../v1/AccountTopicListRes";
 
+export const accountTopicListQueryParamsStatusEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type AccountTopicListQueryParamsStatusEnumKey = (typeof accountTopicListQueryParamsStatusEnum)[keyof typeof accountTopicListQueryParamsStatusEnum];
+
 export type AccountTopicListQueryParams = {
     /**
      * @type string | undefined, consts.TopicStatus
     */
-    status?: string | undefined;
+    status?: AccountTopicListQueryParamsStatusEnumKey | undefined;
     /**
      * @type integer, int
     */

@@ -6,6 +6,20 @@
 
 import type { Interface } from "../Interface";
 
+export const v1ContentOperationLogInfoStatusBeforeEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type V1ContentOperationLogInfoStatusBeforeEnumKey = (typeof v1ContentOperationLogInfoStatusBeforeEnum)[keyof typeof v1ContentOperationLogInfoStatusBeforeEnum];
+
+export const v1ContentOperationLogInfoStatusAfterEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type V1ContentOperationLogInfoStatusAfterEnumKey = (typeof v1ContentOperationLogInfoStatusAfterEnum)[keyof typeof v1ContentOperationLogInfoStatusAfterEnum];
+
 export type V1ContentOperationLogInfo = {
     /**
      * @description 日志ID
@@ -32,14 +46,14 @@ export type V1ContentOperationLogInfo = {
     newData?: Interface | undefined;
     /**
      * @description 操作前状态
-     * @type integer, int
+     * @type string, consts.ContentStatus
     */
-    statusBefore: number;
+    statusBefore: V1ContentOperationLogInfoStatusBeforeEnumKey;
     /**
      * @description 操作后状态
-     * @type integer, int
+     * @type string, consts.ContentStatus
     */
-    statusAfter: number;
+    statusAfter: V1ContentOperationLogInfoStatusAfterEnumKey;
     /**
      * @description 操作人ID
      * @type integer, int64

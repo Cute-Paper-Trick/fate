@@ -1,0 +1,18 @@
+.commentEditor {
+  .is-empty.with-slash[data-placeholder]:has(> .ProseMirror-trailingBreak:only-child)::before {
+    content: '你想说点啥...';
+    font-style: italic;
+  }
+
+  .notion-like-editor-content .tiptap.ProseMirror.notion-like-editor {
+    padding: 1rem 1.5rem 2rem 1.5rem;
+  }
+
+  .notion-like-editor-content {
+    max-width: 100%;
+  }
+}
+
+.commentEditor.borderless {
+  box-shadow: none;
+}

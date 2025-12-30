@@ -6,6 +6,13 @@
 
 import type { V1ContentsListRes } from "../v1/ContentsListRes";
 
+export const contentsListQueryParamsStatusEnum = {
+    "draft": "draft",
+    "published": "published"
+} as const;
+
+export type ContentsListQueryParamsStatusEnumKey = (typeof contentsListQueryParamsStatusEnum)[keyof typeof contentsListQueryParamsStatusEnum];
+
 export type ContentsListQueryParams = {
     /**
      * @description 页码
@@ -38,10 +45,10 @@ export type ContentsListQueryParams = {
     */
     type?: number | undefined;
     /**
-     * @description 状态过滤：0-草稿, 1-待审核, 2-已审核, 3-已发布, 4-已驳回
-     * @type integer | undefined, int
+     * @description 状态过滤：draft-草稿, published-已发布
+     * @type string | undefined, consts.ContentStatus
     */
-    status?: number | undefined;
+    status?: ContentsListQueryParamsStatusEnumKey | undefined;
 };
 
 export type ContentsList200 = V1ContentsListRes;
