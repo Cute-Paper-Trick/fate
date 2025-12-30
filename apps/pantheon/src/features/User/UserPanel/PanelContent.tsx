@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -20,7 +20,7 @@ interface PannelContentProps {
 }
 
 const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const isLoginWithAuth = useUserStore((s) => authSelectors.isLogin(s));
 
@@ -34,8 +34,10 @@ const PannelContent = memo<PannelContentProps>(({ closePopover }) => {
     try {
       await authClient.signOut({
         fetchOptions: {
-          onSuccess: () => {
-            router.replace('/auth/sign-in');
+          onSuccess: async () => {
+            authClient.signOut();
+            // globalThis.location.href = '/';
+            // router.replace('/auth/sign-in');
           },
         },
       });
