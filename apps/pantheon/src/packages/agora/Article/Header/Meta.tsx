@@ -3,6 +3,7 @@ import { createStyles } from 'antd-style';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import { RemoteWrapper } from '@/packages/pithos';
 import { formatRelativeTime } from '@/packages/utils';
 
 import ReactionsEngagement from '../Reaction/Engagement';
@@ -47,7 +48,9 @@ const ArticleMeta = memo<ArticleMetaProps>(
     return (
       <div className={styles.meta}>
         <Flexbox horizontal style={{ marginBottom: '1.25rem' }} width="100%">
-          <Avatar size={40} src={authorAvatar} />
+          <RemoteWrapper path={authorAvatar ? `lobe-goood-space/${authorAvatar}` : ''}>
+            {(realSrc) => <Avatar size={40} src={realSrc} />}
+          </RemoteWrapper>
           <Flexbox className={styles.content}>
             <span className={styles.author}>{authorName}</span>
             <time className={styles.createdAt} dateTime={createdAt}>
