@@ -1,4 +1,6 @@
-import { Suspense, memo } from 'react';
+'use client';
+
+import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import UserAvatar from '@/features/User/UserAvatar';
@@ -12,17 +14,17 @@ const Avatar = memo(() => {
     userProfileSelectors.username(s),
   ]);
   const content = (
-    <Suspense fallback={<UserAvatar />}>
-      <UserPanel>
-        <Flexbox align="center" gap={8} horizontal justify="center">
-          <Flexbox align="end" direction="vertical">
-            <span style={{ fontSize: '13px', fontWeight: 'bold' }}>{nickname}</span>
-            <span style={{ fontSize: '12px', color: '#8b8b8b' }}>{username}</span>
-          </Flexbox>
-          <UserAvatar clickable />
+    // <Suspense fallback={<UserAvatar />}>
+    <UserPanel>
+      <Flexbox align="center" gap={8} horizontal justify="center">
+        <Flexbox align="end" direction="vertical">
+          <span style={{ fontSize: '13px', fontWeight: 'bold' }}>{nickname}</span>
+          <span style={{ fontSize: '12px', color: '#8b8b8b' }}>{username}</span>
         </Flexbox>
-      </UserPanel>
-    </Suspense>
+        <UserAvatar clickable />
+      </Flexbox>
+    </UserPanel>
+    // </Suspense>
   );
 
   return content;

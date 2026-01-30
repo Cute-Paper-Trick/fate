@@ -110,6 +110,7 @@ export const RemoteWrapper = memo<RemoteWrapperProps>(({ path, process, children
     }
 
     setLoading(true);
+
     signature(realSrc, process, true).then((url) => {
       setRealSrc(url);
       setLoading(false);
