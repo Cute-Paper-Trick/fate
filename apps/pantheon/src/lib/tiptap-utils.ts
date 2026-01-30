@@ -1,12 +1,13 @@
 import type { Node as PMNode } from '@tiptap/pm/model';
 import type { Transaction } from '@tiptap/pm/state';
+
 import { AllSelection, NodeSelection, Selection, TextSelection } from '@tiptap/pm/state';
 import { CellSelection, cellAround } from '@tiptap/pm/tables';
 import { type Editor, type NodeWithPos, findParentNodeClosestToPos } from '@tiptap/react';
 
 export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 export const MAX_VIDEO_FILE_SIZE = 500 * 1024 * 1024; // 500MB
-export const MAX_AUDIO_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+export const MAX_AUDIO_FILE_SIZE = 150 * 1024 * 1024; // 150MB
 
 export const MAC_SYMBOLS: Record<string, string> = {
   mod: '⌘',
@@ -483,7 +484,7 @@ export function isAllowedUri(uri: string | undefined, protocols?: ProtocolConfig
 
   return (
     !uri ||
-    uri.replace(ATTR_WHITESPACE, '').match(
+    uri.replaceAll(ATTR_WHITESPACE, '').match(
       new RegExp(
         // eslint-disable-next-line no-useless-escape
         `^(?:(?:${allowedProtocols.join('|')}):|[^a-z]|[a-z0-9+.\-]+(?:[^a-z+.\-:]|$))`,
