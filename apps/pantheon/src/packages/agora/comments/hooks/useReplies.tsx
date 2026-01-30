@@ -4,11 +4,12 @@ import { articlesReplies, commentsReplies } from '@/lib/http';
 
 interface UseRepliesOptions {
   commentId?: number;
+  hasReply?: boolean;
 }
 
-export const useCommentReplies = ({ commentId }: UseRepliesOptions) => {
+export const useCommentReplies = ({ commentId, hasReply }: UseRepliesOptions) => {
   return useInfiniteQuery({
-    enabled: !!commentId,
+    enabled: !!commentId && hasReply,
     queryKey: ['commentReplies', commentId],
     queryFn: async ({ pageParam = 1 }) => {
       return commentsReplies({ comment_id: commentId!, page: pageParam, size: 10 });

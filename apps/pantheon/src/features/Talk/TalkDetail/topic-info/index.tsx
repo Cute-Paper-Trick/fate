@@ -8,6 +8,7 @@ import { Flexbox } from 'react-layout-kit';
 import { modal } from '@/components/AntdStaticMethods';
 import { useTaskTopicDelete } from '@/lib/http';
 import { queryClient } from '@/lib/query';
+import { RemoteWrapper } from '@/packages/pithos';
 
 import styles from './topic-info.module.scss';
 
@@ -41,13 +42,19 @@ export function TopicInfo({ topic }: TopicDetailProps) {
 
   return (
     <div className={styles.topic_info}>
-      <Avatar
-        size={40}
-        src={topic.avatar || null}
-        style={{ minWidth: '42px', backgroundColor: '#bbb' }}
-      >
-        {topic.account}
-      </Avatar>
+      <RemoteWrapper path={topic.avatar ? `lobe-goood-space/${topic.avatar}` : ''}>
+        {(realSrc) => {
+          return (
+            <Avatar
+              size={40}
+              src={realSrc ?? null}
+              style={{ minWidth: '42px', backgroundColor: '#bbb' }}
+            >
+              {topic.account}
+            </Avatar>
+          );
+        }}
+      </RemoteWrapper>
       <div className={clsx(styles.talk_author)}>
         <span className="flex felx-col">
           <div className={styles.avatarText}>

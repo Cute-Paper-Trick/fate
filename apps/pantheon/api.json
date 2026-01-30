@@ -366,6 +366,32 @@
         "required": ["topic_count", "replay_count", "like_count"],
         "type": "object"
       },
+      "v1.AccountSyncReq": {
+        "properties": {
+          "code": {
+            "format": "string",
+            "type": "string"
+          },
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "email": {
+            "format": "string",
+            "type": "string"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["code", "id", "email"],
+        "type": "object"
+      },
+      "v1.AccountSyncRes": {
+        "properties": {},
+        "type": "object"
+      },
       "v1.AccountTopicListReq": {
         "properties": {
           "status": {
@@ -1340,6 +1366,11 @@
           "extra_account": {
             "$ref": "#/components/schemas/v1.ArticleInfoExtraAccount",
             "description": "评论用户额外信息"
+          },
+          "is_deleted": {
+            "description": "是否已删除",
+            "format": "bool",
+            "type": "boolean"
           }
         },
         "required": [
@@ -1359,7 +1390,8 @@
           "updated_at",
           "deleted_at",
           "redundant",
-          "extra_account"
+          "extra_account",
+          "is_deleted"
         ],
         "type": "object"
       },
@@ -1405,6 +1437,244 @@
           }
         },
         "required": ["like_status", "is_liked", "is_unliked", "is_self_comment"],
+        "type": "object"
+      },
+      "v1.AuthorCreateReq": {
+        "properties": {
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "intro": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["user_id"],
+        "type": "object"
+      },
+      "v1.AuthorCreateRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.AuthorDeleteReq": {
+        "properties": {
+          "author_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["author_id"],
+        "type": "object"
+      },
+      "v1.AuthorDeleteRes": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.AuthorDetailReq": {
+        "properties": {
+          "author_id": {
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["author_id"],
+        "type": "object"
+      },
+      "v1.AuthorDetailRes": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "intro": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_by": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_by": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_email": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_phone": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "user_id",
+          "created_by",
+          "created_at",
+          "updated_by",
+          "updated_at",
+          "user_name",
+          "user_email",
+          "user_phone"
+        ],
+        "type": "object"
+      },
+      "v1.AuthorListReq": {
+        "properties": {
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["user_id", "page", "size"],
+        "type": "object"
+      },
+      "v1.AuthorListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.AuthorDetail",
+            "items": {
+              "$ref": "#/components/schemas/v1.AuthorDetail",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "list"],
+        "type": "object"
+      },
+      "v1.AuthorDetail": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "user_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "intro": {
+            "format": "string",
+            "type": "string"
+          },
+          "created_by": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "updated_by": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "updated_at": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_name": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_email": {
+            "format": "string",
+            "type": "string"
+          },
+          "user_phone": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "user_id",
+          "created_by",
+          "created_at",
+          "updated_by",
+          "updated_at",
+          "user_name",
+          "user_email",
+          "user_phone"
+        ],
+        "type": "object"
+      },
+      "v1.AuthorUpdateReq": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "cover_url": {
+            "format": "string",
+            "type": "string"
+          },
+          "intro": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.AuthorUpdateRes": {
+        "properties": {},
         "type": "object"
       },
       "v1.ChangelogAddReq": {
@@ -2549,7 +2819,7 @@
           },
           "target_type": {
             "description": "状态：article-文章, comment-评论",
-            "enum": ["article", "comment"],
+            "enum": ["article", "comment", "like", "reply"],
             "format": "consts.CommentType",
             "type": "string"
           },
@@ -2712,7 +2982,7 @@
           },
           "target_type": {
             "description": "类型：article-文章, comment-评论",
-            "enum": ["article", "comment"],
+            "enum": ["article", "comment", "like", "reply"],
             "format": "consts.CommentType",
             "type": "string"
           },
@@ -2763,6 +3033,11 @@
           "extra_account": {
             "$ref": "#/components/schemas/v1.CommentInfoExtraAccount",
             "description": "评论用户额外信息"
+          },
+          "is_deleted": {
+            "description": "是否已删除",
+            "format": "bool",
+            "type": "boolean"
           }
         },
         "required": [
@@ -2782,7 +3057,8 @@
           "updated_at",
           "deleted_at",
           "redundant",
-          "extra_account"
+          "extra_account",
+          "is_deleted"
         ],
         "type": "object"
       },
@@ -2802,7 +3078,7 @@
           },
           "target_type": {
             "description": "类型：article-文章, comment-评论",
-            "enum": ["article", "comment"],
+            "enum": ["article", "comment", "like", "reply"],
             "format": "consts.CommentType",
             "type": "string"
           },
@@ -2870,7 +3146,7 @@
             "type": "object"
           }
         },
-        "required": ["comment_id", "content", "extra"],
+        "required": ["comment_id", "content"],
         "type": "object"
       },
       "v1.CommentsReplayRes": {
@@ -3504,12 +3780,32 @@
             "description": "当前用户是否已点赞",
             "format": "bool",
             "type": "boolean"
+          },
+          "is_published": {
+            "description": "当前用户是否可以发布",
+            "format": "bool",
+            "type": "boolean"
           }
         },
         "required": ["status", "type", "view_count", "like_count", "comment_count", "created_at"],
         "type": "object"
       },
       "gjson.Json": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.ContentsHardDeleteReq": {
+        "properties": {
+          "id": {
+            "description": "内容ID",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "required": ["id"],
+        "type": "object"
+      },
+      "v1.ContentsHardDeleteRes": {
         "properties": {},
         "type": "object"
       },
@@ -3761,6 +4057,126 @@
         "properties": {},
         "type": "object"
       },
+      "v1.HLSCheckFileExistsReq": {
+        "properties": {
+          "file_path": {
+            "description": "OSS中的文件路径",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["file_path"],
+        "type": "object"
+      },
+      "v1.HLSCheckFileExistsRes": {
+        "properties": {
+          "exists": {
+            "description": "文件是否存在",
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["exists"],
+        "type": "object"
+      },
+      "v1.HLSGeneratePlaylistReq": {
+        "properties": {
+          "file_path": {
+            "description": "OSS中的文件路径",
+            "format": "string",
+            "type": "string"
+          },
+          "start_time": {
+            "description": "起始时间点，单位毫秒，默认为0",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "duration": {
+            "description": "转码时长，单位毫秒，默认为0表示持续到结尾",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "forward_count": {
+            "description": "向前转码的ts文件数量，默认为12",
+            "format": "int",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "slice_duration": {
+            "description": "单个ts文件的切片时长，单位毫秒，默认为10000",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "init_duration": {
+            "description": "初始转码的时长，单位毫秒，默认为30000",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "video_codec": {
+            "description": "视频编码格式，默认为h264",
+            "enum": ["h264", "h265"],
+            "format": "string",
+            "type": "string"
+          },
+          "fps": {
+            "description": "视频帧率，默认与源视频一致",
+            "format": "float64",
+            "minimum": 0,
+            "type": "number"
+          },
+          "fps_option": {
+            "description": "视频帧率选项，0-始终使用目标帧率，1-源视频帧率小于目标帧率时使用源视频帧率，2-源视频帧率小于目标帧率时返回失败，默认为1",
+            "enum": [0, 1, 2],
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["file_path"],
+        "type": "object"
+      },
+      "v1.HLSGeneratePlaylistRes": {
+        "properties": {
+          "playlist_url": {
+            "description": "生成的m3u8播放列表URL",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["playlist_url"],
+        "type": "object"
+      },
+      "v1.HLSGeneratePresignedURLReq": {
+        "properties": {
+          "file_path": {
+            "description": "OSS中的文件路径",
+            "format": "string",
+            "type": "string"
+          },
+          "expiry": {
+            "description": "URL有效期，单位秒，默认为3600",
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": ["file_path"],
+        "type": "object"
+      },
+      "v1.HLSGeneratePresignedURLRes": {
+        "properties": {
+          "presigned_url": {
+            "description": "生成的带签名的文件URL",
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["presigned_url"],
+        "type": "object"
+      },
       "v1.ModelListReq": {
         "properties": {},
         "type": "object"
@@ -3901,6 +4317,170 @@
         ],
         "type": "object"
       },
+      "v1.NoticeListReq": {
+        "properties": {
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "type": {
+            "enum": ["article", "article_comment", "column", "topic", "topic_comment"],
+            "format": "consts.NoticeTargetType",
+            "type": "string"
+          },
+          "action": {
+            "enum": ["comment", "like", "reply", "update"],
+            "format": "consts.NoticeActionType",
+            "type": "string"
+          },
+          "status": {
+            "enum": ["read", "unread"],
+            "format": "consts.NotificationStatus",
+            "type": "string"
+          }
+        },
+        "required": ["page", "size"],
+        "type": "object"
+      },
+      "v1.NoticeListRes": {
+        "properties": {
+          "total": {
+            "format": "int",
+            "type": "integer"
+          },
+          "page": {
+            "format": "int",
+            "type": "integer"
+          },
+          "size": {
+            "format": "int",
+            "type": "integer"
+          },
+          "unread_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "list": {
+            "format": "[]*v1.NoticeInfo",
+            "items": {
+              "$ref": "#/components/schemas/v1.NoticeInfo",
+              "description": ""
+            },
+            "type": "array"
+          }
+        },
+        "required": ["total", "page", "size", "unread_count", "list"],
+        "type": "object"
+      },
+      "v1.NoticeInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": {
+            "enum": ["article", "article_comment", "column", "topic", "topic_comment"],
+            "format": "consts.NoticeTargetType",
+            "type": "string"
+          },
+          "action": {
+            "enum": ["comment", "like", "reply", "update"],
+            "format": "consts.NoticeActionType",
+            "type": "string"
+          },
+          "related_id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "extra_data": {
+            "$ref": "#/components/schemas/gjson.Json",
+            "description": ""
+          },
+          "status": {
+            "enum": ["read", "unread"],
+            "format": "consts.NotificationStatus",
+            "type": "string"
+          },
+          "from_user": {
+            "$ref": "#/components/schemas/v1.AccountInfo",
+            "description": ""
+          },
+          "created_at": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "type", "action", "related_id", "status", "from_user", "created_at"],
+        "type": "object"
+      },
+      "v1.AccountInfo": {
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "nickname": {
+            "format": "string",
+            "type": "string"
+          },
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["id", "nickname", "avatar"],
+        "type": "object"
+      },
+      "v1.NoticeMarkReadReq": {
+        "properties": {
+          "notice_id_list": {
+            "format": "[]int64",
+            "items": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "mark_all": {
+            "format": "bool",
+            "type": "boolean"
+          }
+        },
+        "required": ["notice_id_list", "mark_all"],
+        "type": "object"
+      },
+      "v1.NoticeMarkReadRes": {
+        "properties": {
+          "read_count": {
+            "format": "int",
+            "type": "integer"
+          },
+          "unread_count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["read_count", "unread_count"],
+        "type": "object"
+      },
+      "v1.NoticeUnreadCountReq": {
+        "properties": {},
+        "type": "object"
+      },
+      "v1.NoticeUnreadCountRes": {
+        "properties": {
+          "count": {
+            "format": "int",
+            "type": "integer"
+          }
+        },
+        "required": ["count"],
+        "type": "object"
+      },
       "v1.NotificationListReq": {
         "properties": {
           "page": {
@@ -3912,7 +4492,7 @@
             "type": "integer"
           },
           "type": {
-            "enum": ["like", "reply", "system"],
+            "enum": ["like", "publish", "reply", "system"],
             "format": "consts.NotificationType",
             "type": "string"
           },
@@ -3962,7 +4542,7 @@
             "type": "integer"
           },
           "type": {
-            "enum": ["like", "reply", "system"],
+            "enum": ["like", "publish", "reply", "system"],
             "format": "consts.NotificationType",
             "type": "string"
           },
@@ -4007,24 +4587,6 @@
           "from_user",
           "topic_id"
         ],
-        "type": "object"
-      },
-      "v1.AccountInfo": {
-        "properties": {
-          "id": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "nickname": {
-            "format": "string",
-            "type": "string"
-          },
-          "avatar": {
-            "format": "string",
-            "type": "string"
-          }
-        },
-        "required": ["id", "nickname", "avatar"],
         "type": "object"
       },
       "v1.NotificationMarkReadReq": {
@@ -4333,7 +4895,7 @@
           },
           "reactable_type": {
             "description": "反应对象类型：article-文章, comment-评论",
-            "enum": ["article", "comment"],
+            "enum": ["article", "comment", "like", "reply"],
             "format": "consts.CommentType",
             "type": "string"
           },
@@ -4412,7 +4974,7 @@
           },
           "reactable_type": {
             "description": "反应对象类型：article-文章, comment-评论",
-            "enum": ["article", "comment"],
+            "enum": ["article", "comment", "like", "reply"],
             "format": "consts.CommentType",
             "type": "string"
           },
@@ -5435,6 +5997,46 @@
         "properties": {},
         "type": "object"
       },
+      "v1.UserSyncReq": {
+        "properties": {
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          },
+          "code": {
+            "format": "string",
+            "type": "string"
+          },
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["code", "id"],
+        "type": "object"
+      },
+      "v1.UserSyncRes": {
+        "properties": {
+          "avatar": {
+            "format": "string",
+            "type": "string"
+          },
+          "id": {
+            "format": "string",
+            "type": "string"
+          },
+          "name": {
+            "format": "string",
+            "type": "string"
+          }
+        },
+        "required": ["avatar", "id", "name"],
+        "type": "object"
+      },
       "v1.UserPurchaseDetailReq": {
         "properties": {},
         "type": "object"
@@ -5753,6 +6355,37 @@
           }
         },
         "summary": "获取用户详细信息",
+        "tags": ["account"]
+      }
+    },
+    "/api/account/sync": {
+      "post": {
+        "operationId": "account_sync",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AccountSyncReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AccountSyncRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "同步账号",
         "tags": ["account"]
       }
     },
@@ -6174,6 +6807,161 @@
         },
         "summary": "获取文章回复列表",
         "tags": ["articles"]
+      }
+    },
+    "/api/author/create": {
+      "post": {
+        "operationId": "author_create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AuthorCreateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AuthorCreateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "创建作者",
+        "tags": ["author"]
+      }
+    },
+    "/api/author/delete": {
+      "post": {
+        "operationId": "author_delete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AuthorDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AuthorDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "删除作者",
+        "tags": ["author"]
+      }
+    },
+    "/api/author/detail": {
+      "post": {
+        "operationId": "author_detail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AuthorDetailReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AuthorDetailRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取作者详情",
+        "tags": ["author"]
+      }
+    },
+    "/api/author/list": {
+      "post": {
+        "operationId": "author_list",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AuthorListReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AuthorListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取作者列表",
+        "tags": ["author"]
+      }
+    },
+    "/api/author/update": {
+      "post": {
+        "operationId": "author_update",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.AuthorUpdateReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.AuthorUpdateRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "更新作者",
+        "tags": ["author"]
       }
     },
     "/api/changelog/add": {
@@ -7010,7 +7798,7 @@
             "required": true,
             "schema": {
               "description": "类型：article-文章, comment-评论",
-              "enum": ["article", "comment"],
+              "enum": ["article", "comment", "like", "reply"],
               "format": "consts.CommentType",
               "type": "string"
             }
@@ -7532,6 +8320,37 @@
         "tags": ["contents"]
       }
     },
+    "/api/contents/harddelete": {
+      "post": {
+        "operationId": "contents_harddelete",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.ContentsHardDeleteReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.ContentsHardDeleteRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "物理删除内容",
+        "tags": ["contents"]
+      }
+    },
     "/api/contents/list": {
       "get": {
         "operationId": "contents_list",
@@ -7802,6 +8621,197 @@
         "tags": ["guide"]
       }
     },
+    "/api/hls/check_file_exists": {
+      "get": {
+        "operationId": "hls_check_file_exists",
+        "parameters": [
+          {
+            "description": "OSS中的文件路径",
+            "in": "query",
+            "name": "file_path",
+            "required": true,
+            "schema": {
+              "description": "OSS中的文件路径",
+              "format": "string",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.HLSCheckFileExistsRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "检查文件是否存在",
+        "tags": ["hls"]
+      }
+    },
+    "/api/hls/generate_playlist": {
+      "get": {
+        "operationId": "hls_generate_playlist",
+        "parameters": [
+          {
+            "description": "OSS中的文件路径",
+            "in": "query",
+            "name": "file_path",
+            "required": true,
+            "schema": {
+              "description": "OSS中的文件路径",
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "description": "起始时间点，单位毫秒，默认为0",
+            "in": "query",
+            "name": "start_time",
+            "schema": {
+              "description": "起始时间点，单位毫秒，默认为0",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "转码时长，单位毫秒，默认为0表示持续到结尾",
+            "in": "query",
+            "name": "duration",
+            "schema": {
+              "description": "转码时长，单位毫秒，默认为0表示持续到结尾",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "向前转码的ts文件数量，默认为12",
+            "in": "query",
+            "name": "forward_count",
+            "schema": {
+              "description": "向前转码的ts文件数量，默认为12",
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "单个ts文件的切片时长，单位毫秒，默认为10000",
+            "in": "query",
+            "name": "slice_duration",
+            "schema": {
+              "description": "单个ts文件的切片时长，单位毫秒，默认为10000",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "初始转码的时长，单位毫秒，默认为30000",
+            "in": "query",
+            "name": "init_duration",
+            "schema": {
+              "description": "初始转码的时长，单位毫秒，默认为30000",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "视频编码格式，默认为h264",
+            "in": "query",
+            "name": "video_codec",
+            "schema": {
+              "description": "视频编码格式，默认为h264",
+              "enum": ["h264", "h265"],
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "description": "视频帧率，默认与源视频一致",
+            "in": "query",
+            "name": "fps",
+            "schema": {
+              "description": "视频帧率，默认与源视频一致",
+              "format": "float64",
+              "type": "number"
+            }
+          },
+          {
+            "description": "视频帧率选项，0-始终使用目标帧率，1-源视频帧率小于目标帧率时使用源视频帧率，2-源视频帧率小于目标帧率时返回失败，默认为1",
+            "in": "query",
+            "name": "fps_option",
+            "schema": {
+              "description": "视频帧率选项，0-始终使用目标帧率，1-源视频帧率小于目标帧率时使用源视频帧率，2-源视频帧率小于目标帧率时返回失败，默认为1",
+              "enum": [0, 1, 2],
+              "format": "int",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.HLSGeneratePlaylistRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "生成边转边播播放列表",
+        "tags": ["hls"]
+      }
+    },
+    "/api/hls/generate_presigned_url": {
+      "get": {
+        "operationId": "hls_generate_presigned_url",
+        "parameters": [
+          {
+            "description": "OSS中的文件路径",
+            "in": "query",
+            "name": "file_path",
+            "required": true,
+            "schema": {
+              "description": "OSS中的文件路径",
+              "format": "string",
+              "type": "string"
+            }
+          },
+          {
+            "description": "URL有效期，单位秒，默认为3600",
+            "in": "query",
+            "name": "expiry",
+            "schema": {
+              "description": "URL有效期，单位秒，默认为3600",
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.HLSGeneratePresignedURLRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "生成带签名的文件URL",
+        "tags": ["hls"]
+      }
+    },
     "/api/model/list": {
       "get": {
         "operationId": "model_list",
@@ -7853,6 +8863,124 @@
         "tags": ["model_tools"]
       }
     },
+    "/api/notice/list": {
+      "get": {
+        "operationId": "notice_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "format": "int",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "enum": ["article", "article_comment", "column", "topic", "topic_comment"],
+              "format": "consts.NoticeTargetType",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "action",
+            "schema": {
+              "enum": ["comment", "like", "reply", "update"],
+              "format": "consts.NoticeActionType",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "enum": ["read", "unread"],
+              "format": "consts.NotificationStatus",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.NoticeListRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "通知列表",
+        "tags": ["notice"]
+      }
+    },
+    "/api/notice/mark_read": {
+      "post": {
+        "operationId": "notice_mark_read",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.NoticeMarkReadReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.NoticeMarkReadRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "标记通知已读",
+        "tags": ["notice"]
+      }
+    },
+    "/api/notice/unread_count": {
+      "get": {
+        "operationId": "notice_unread_count",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.NoticeUnreadCountRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "获取未读消息数量",
+        "tags": ["notice"]
+      }
+    },
     "/api/notification/list": {
       "get": {
         "operationId": "notification_list",
@@ -7879,7 +9007,7 @@
             "in": "query",
             "name": "type",
             "schema": {
-              "enum": ["like", "reply", "system"],
+              "enum": ["like", "publish", "reply", "system"],
               "format": "consts.NotificationType",
               "type": "string"
             }
@@ -9134,6 +10262,37 @@
         },
         "summary": "保存训练模型",
         "tags": ["train"]
+      }
+    },
+    "/api/user/sync": {
+      "post": {
+        "operationId": "user_sync",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1.UserSyncReq",
+                "description": ""
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1.UserSyncRes",
+                  "description": ""
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "同步用户信息",
+        "tags": ["user"]
       }
     },
     "/api/user_purchase/detail": {

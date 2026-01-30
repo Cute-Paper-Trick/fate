@@ -1,16 +1,31 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  rt-frontend:
-    image: lobe-v2
-    container_name: lobe-v2
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: fate-postgres
+    environment:
+      POSTGRES_USER: fate
+      POSTGRES_PASSWORD: fate_password
+      POSTGRES_DB: fate_db
     ports:
-      - "3210:3210"
-    env_file:
-      - .env
+      - "5432:5432"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - rt-network
+
+  # rt-frontend:
+  #   image: lobe-v2
+  #   container_name: lobe-v2
+  #   ports:
+  #     - "3210:3210"
+  #   env_file:
+  #     - .env
+  #   restart: unless-stopped
+  #   networks:
+  #     - rt-network
 
 networks:
   rt-network:
