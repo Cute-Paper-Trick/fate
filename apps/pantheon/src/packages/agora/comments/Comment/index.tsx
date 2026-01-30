@@ -158,7 +158,7 @@ const Comment = memo<CommentProps>(({ comment, depth = 0 }) => {
       </summary>
       <div className={styles.commentNode}>
         <Flexbox className={styles.commentInner} gap={'0.5rem'} horizontal>
-          <RemoteWrapper path={creatorAvatar ? `lobe-goood-space/${creatorAvatar}` : ''}>
+          <RemoteWrapper avatar path={creatorAvatar || ''}>
             {(realPath) => (
               <Avatar className={styles.commentAvatar} size={32} src={realPath}>
                 {creatorName}

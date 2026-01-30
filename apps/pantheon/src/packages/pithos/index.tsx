@@ -72,27 +72,49 @@ export const RemoteImage = memo(
 interface RemoteWrapperProps {
   path: string;
   process?: string[];
+  avatar?: boolean;
   children: (src: string, loading: boolean) => React.ReactNode;
 }
 
-export const RemoteWrapper = memo<RemoteWrapperProps>(({ path, process, children }) => {
+const formatPath = (filePath: string, avatar?: boolean) => {
+  let res = filePath;
+  if (res.startsWith('http')) {
+    return res;
+  }
+  // lobe 头像地址转换
+  if (res.startsWith('/webapi') || res.startsWith('webapi')) {
+    res = res.replace?.('webapi', 'lobe-goood-space');
+    return res;
+  }
+
+  if (avatar) {
+    if (res.startsWith('lobe-goood-space') || res.startsWith('/lobe-goood-space')) {
+      return res;
+    }
+    return `lobe-goood-space/${res}`;
+  }
+
+  return res;
+};
+
+export const RemoteWrapper = memo<RemoteWrapperProps>(({ path, process, children, avatar }) => {
   const { signature } = useSignature();
-  const [realSrc, setRealSrc] = useState<string>(path);
+  const [realSrc, setRealSrc] = useState<string>(formatPath(path, avatar));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!path || path.startsWith('http')) {
+    if (!realSrc || realSrc.startsWith('http')) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoading(false);
       return;
     }
 
     setLoading(true);
-    signature(path, process, true).then((url) => {
+    signature(realSrc, process, true).then((url) => {
       setRealSrc(url);
       setLoading(false);
     });
-  }, [path]);
+  }, [realSrc, process]);
 
   if (loading) {
     return <Skeleton />;

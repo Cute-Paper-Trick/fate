@@ -42,7 +42,7 @@ export function TopicInfo({ topic }: TopicDetailProps) {
 
   return (
     <div className={styles.topic_info}>
-      <RemoteWrapper path={topic.avatar ? `lobe-goood-space/${topic.avatar}` : ''}>
+      <RemoteWrapper avatar path={topic.avatar || ''}>
         {(realSrc) => {
           return (
             <Avatar

@@ -55,20 +55,24 @@ const UserAvatar = forwardRef<HTMLDivElement, UserAvatarProps>(
     const isSignedIn = useUserStore((s) => authSelectors.isLogin(s));
 
     return (
-      <RemoteWrapper path={avatar?.replace?.('/webapi', '/lobe-goood-space') ?? ''}>
-        {(realSrc) => (
-          <Avatar
-            alt={isSignedIn && Boolean(username) ? username : 'Guest'}
-            avatar={realSrc}
-            background={isSignedIn && avatar ? background : '#bbbbbb'}
-            className={cx({ [styles.clickable]: clickable }, className)}
-            ref={ref}
-            size={size}
-            style={{ flex: 'none', ...style }}
-            unoptimized
-            {...rest}
-          />
-        )}
+      <RemoteWrapper avatar path={avatar || ''}>
+        {(realSrc) => {
+          return (
+            <Avatar
+              alt={isSignedIn && Boolean(username) ? username : 'Guest'}
+              avatar={realSrc}
+              background={isSignedIn && avatar ? background : '#bbbbbb'}
+              className={cx({ [styles.clickable]: clickable }, className)}
+              ref={ref}
+              size={size}
+              style={{ flex: 'none', ...style }}
+              unoptimized
+              {...rest}
+            >
+              {username}
+            </Avatar>
+          );
+        }}
       </RemoteWrapper>
     );
   },

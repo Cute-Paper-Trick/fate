@@ -34,8 +34,12 @@ const CreatorMeta = memo<CreatorMetaProps>(({ creatorName, creatorAvatar, create
 
   return (
     <Flexbox align="center" gap={6} horizontal justify="start">
-      <RemoteWrapper path={creatorAvatar ? `lobe-goood-space/${creatorAvatar}` : ''}>
-        {(realSrc) => <Avatar size={36} src={realSrc} />}
+      <RemoteWrapper avatar path={creatorAvatar || ''}>
+        {(realSrc) => (
+          <Avatar size={36} src={realSrc}>
+            {creatorName}
+          </Avatar>
+        )}
       </RemoteWrapper>
       <Flexbox align="start">
         <span className={styles.name}>{creatorName}</span>

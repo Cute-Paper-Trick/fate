@@ -48,7 +48,7 @@ const ArticleMeta = memo<ArticleMetaProps>(
     return (
       <div className={styles.meta}>
         <Flexbox horizontal style={{ marginBottom: '1.25rem' }} width="100%">
-          <RemoteWrapper path={authorAvatar ? `lobe-goood-space/${authorAvatar}` : ''}>
+          <RemoteWrapper avatar path={authorAvatar || ''}>
             {(realSrc) => <Avatar size={40} src={realSrc} />}
           </RemoteWrapper>
           <Flexbox className={styles.content}>
